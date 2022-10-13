@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/shengtu0328.github.io\/posts\/jvm\/"
-        },"genre": "posts","wordcount":  223 ,
+        },"genre": "posts","wordcount":  934 ,
         "url": "https:\/\/shengtu0328.github.io\/posts\/jvm\/","datePublished": "2022-10-11T18:23:30+08:00","dateModified": "2022-10-11T18:23:30+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -70,8 +70,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">JVM学习</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-10-11">2022-10-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;223 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;One minute&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-10-11">2022-10-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;934 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -79,30 +79,28 @@
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li>
+    <li><a href="#一什么是jvm">一、什么是JVM</a>
       <ul>
         <li><a href="#定义">定义</a></li>
         <li><a href="#好处">好处</a></li>
       </ul>
     </li>
-  </ul>
-
-  <ul>
-    <li>
+    <li><a href="#二内存结构">二、内存结构</a>
       <ul>
-        <li><a href="#定义1">定义1</a></li>
-        <li><a href="#好处22">好处22</a></li>
+        <li><a href="#1程序计数器">1、程序计数器</a></li>
+        <li><a href="#2虚拟机栈">2、虚拟机栈</a></li>
+        <li><a href="#3本地方法栈">3、本地方法栈</a></li>
       </ul>
     </li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><h1 id="一什么是jvm">一、什么是JVM</h1>
+            </div><div class="content" id="content"><h2 id="一什么是jvm">一、什么是JVM</h2>
 <h3 id="定义">定义</h3>
 <p>Java Virtual Machine，JAVA程序的<strong>运行环境</strong>（JAVA二进制字节码的运行环境）</p>
 <h3 id="好处">好处</h3>
 <ul>
 <li>
-<p>一次编写，到处运行 (屏蔽了字节码和操作系统和的差异，对外提供一致的操作环境，从而可以跨平台，如在windows，linux运行)</p>
+<p>一次编写，到处运行 (屏蔽了字节码和操作系统和的差异，对外提供一致的操作环境，从而可以跨平台，如在windows，linux运行、)</p>
 </li>
 <li>
 <p>自动内存管理，垃圾回收机制 (c,c++之前没有自动垃圾回收)</p>
@@ -122,10 +120,112 @@
         data-sizes="auto"
         alt="01.png"
         title="01.png" /></p>
-<h1 id="二内存结构">二、内存结构</h1>
-<h3 id="定义1">定义1</h3>
-<p>Java Virtual Machine，JAVA程序的<strong>运行环境</strong>（JAVA二进制字节码的运行环境）</p>
-<h3 id="好处22">好处22</h3>
+<h2 id="二内存结构">二、内存结构</h2>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="02.png"
+        data-srcset="02.png, 02.png 1.5x, 02.png 2x"
+        data-sizes="auto"
+        alt="02.png"
+        title="02.png" /></p>
+<ul>
+<li>
+<p>方法区:存放了类</p>
+</li>
+<li>
+<p>堆:存放了对象</p>
+</li>
+<li>
+<p>虚拟机栈&amp;程序器计数器&amp;本地方法栈: 对象调用方法时会用到</p>
+</li>
+<li>
+<p>解释器:每行代码执行</p>
+</li>
+<li>
+<p>即时的编译器:热点代码执行</p>
+</li>
+<li>
+<p>辣鸡回收:回收在堆中不被引用的对象</p>
+</li>
+<li>
+<p>本地方法接口:操作系统的功能方法</p>
+</li>
+</ul>
+<h3 id="1程序计数器">1、程序计数器</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="05.png"
+        data-srcset="05.png, 05.png 1.5x, 05.png 2x"
+        data-sizes="auto"
+        alt="05.png"
+        title="05.png" /></p>
+<h4 id="作用">作用</h4>
+<p>用于保存JVM中下一条所要执行的指令的地址</p>
+<h4 id="特点">特点</h4>
+<ul>
+<li>
+<p>线程私有</p>
+<ul>
+<li>CPU会为每个线程分配时间片，当当前线程的时间片使用完以后，CPU就会去执行另一个线程中的代码</li>
+<li>程序计数器是<strong>每个线程</strong>所<strong>私有</strong>的，每个线程都有自己的程序计数器，当另一个线程的时间片用完，又返回来执行当前线程的代码时，通过程序计数器可以知道应该执行哪一句指令</li>
+</ul>
+</li>
+<li>
+<p>不会存在内存溢出.</p>
+</li>
+</ul>
+<h3 id="2虚拟机栈">2、虚拟机栈</h3>
+<h4 id="定义-1">定义</h4>
+<ul>
+<li>每个<strong>线程</strong>运行需要的内存空间，称为<strong>虚拟机栈</strong></li>
+<li>每个栈由多个<strong>栈帧</strong>组成，对应着每次调用<strong>方法</strong>时所占用的内存</li>
+<li>每个线程只能有<strong>一个活动栈帧</strong>，对应着<strong>当前正在执行的方法</strong></li>
+</ul>
+<h4 id="演示">演示</h4>
+<p>代码</p>
+<pre tabindex="0"><code>public class Main {
+	public static void main(String[] args) {
+		method1();
+	}
+
+	private static void method1() {
+		method2(1, 2);
+	}
+
+	private static int method2(int a, int b) {
+		int c = a + b;
+		return c;
+	}
+}
+</code></pre><p>可以参考idea debug模式下的 Frames</p>
+<h4 id="问题辨析">问题辨析</h4>
+<ul>
+<li>
+<p>垃圾回收是否涉及栈内存？</p>
+<ul>
+<li><strong>不需要</strong>。因为虚拟机栈中是由一个个栈帧组成的，在方法执行完毕后，对应的栈帧就会被弹出栈。所以无需通过垃圾回收机制去回收内存。</li>
+</ul>
+</li>
+<li>
+<p>栈内存的分配越大越好吗？</p>
+<ul>
+<li>不是。因为<strong>物理内存是一定的</strong>，栈内存越大，可以支持更多的递归调用，但是可执行的线程数就会越少。</li>
+<li>线程数=物理内存/栈内存</li>
+<li>-Xss1024k （栈内存JVM默认参数配置，默认大小是1M）</li>
+</ul>
+</li>
+<li>
+<p>方法内的局部变量是否是线程安全的？</p>
+<ul>
+<li>如果方法内<strong>局部变量没有逃离方法的作用范围</strong>，则是<strong>线程安全</strong>的</li>
+<li>如果如果<strong>局部变量引用了对象</strong>或者静态变量，并<strong>逃离了方法的作用范围</strong>，则需要考虑线程安全问题</li>
+</ul>
+</li>
+</ul>
+<h3 id="3本地方法栈">3、本地方法栈</h3>
+<p>一些带有<strong>native关键字</strong>的方法就是需要JAVA去调用本地的C或者C++方法，因为JAVA有时候没法直接和操作系统底层交互，所以需要用到本地方法</p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
