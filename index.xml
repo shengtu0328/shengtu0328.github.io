@@ -4,9 +4,17 @@
         <link>https://shengtu0328.github.io/</link>
         <description>This is my cool site</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1007@qq.com (ricky)</managingEditor>
-            <webMaster>1007@qq.com (ricky)</webMaster><lastBuildDate>Wed, 12 Oct 2022 17:55:52 &#43;0800</lastBuildDate>
+            <webMaster>1007@qq.com (ricky)</webMaster><lastBuildDate>Thu, 13 Oct 2022 11:05:02 &#43;0800</lastBuildDate>
             <atom:link href="https://shengtu0328.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Third_post</title>
+    <link>https://shengtu0328.github.io/posts/third_post/</link>
+    <pubDate>Thu, 13 Oct 2022 11:05:02 &#43;0800</pubDate>
+    <author>ricky</author>
+    <guid>https://shengtu0328.github.io/posts/third_post/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>Second_post</title>
     <link>https://shengtu0328.github.io/posts/second_post/</link>
     <pubDate>Wed, 12 Oct 2022 17:55:52 &#43;0800</pubDate>
