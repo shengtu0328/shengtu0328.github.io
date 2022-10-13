@@ -5,28 +5,28 @@
         <description>All Posts | ricky的网站</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1007@qq.com (ricky)</managingEditor>
             <webMaster>1007@qq.com (ricky)</webMaster><lastBuildDate>Thu, 13 Oct 2022 11:05:02 &#43;0800</lastBuildDate><atom:link href="https://shengtu0328.github.io/posts/" rel="self" type="application/rss+xml" /><item>
-    <title>Third_post</title>
-    <link>https://shengtu0328.github.io/posts/third_post/</link>
+    <title>JUC</title>
+    <link>https://shengtu0328.github.io/posts/juc/</link>
     <pubDate>Thu, 13 Oct 2022 11:05:02 &#43;0800</pubDate>
     <author>ricky</author>
-    <guid>https://shengtu0328.github.io/posts/third_post/</guid>
+    <guid>https://shengtu0328.github.io/posts/juc/</guid>
     <description><![CDATA[]]></description>
 </item>
 <item>
-    <title>Second_post</title>
-    <link>https://shengtu0328.github.io/posts/second_post/</link>
+    <title>Spring</title>
+    <link>https://shengtu0328.github.io/posts/spring/</link>
     <pubDate>Wed, 12 Oct 2022 17:55:52 &#43;0800</pubDate>
     <author>ricky</author>
-    <guid>https://shengtu0328.github.io/posts/second_post/</guid>
+    <guid>https://shengtu0328.github.io/posts/spring/</guid>
     <description><![CDATA[嗨嗨嗨]]></description>
 </item>
 <item>
-    <title>First_post11111</title>
-    <link>https://shengtu0328.github.io/posts/first_post/</link>
+    <title>JVM学习</title>
+    <link>https://shengtu0328.github.io/posts/jvm/</link>
     <pubDate>Tue, 11 Oct 2022 18:23:30 &#43;0800</pubDate>
     <author>ricky</author>
-    <guid>https://shengtu0328.github.io/posts/first_post/</guid>
-    <description><![CDATA[]]></description>
+    <guid>https://shengtu0328.github.io/posts/jvm/</guid>
+    <description><![CDATA[一、什么是JVM 定义 Java Virtual Machine，JAVA程序的运行环境（JAVA二进制字节码的运行环境） 好处 一次编写，到处运行 (屏蔽了字节码和操作系]]></description>
 </item>
 </channel>
 </rss>
