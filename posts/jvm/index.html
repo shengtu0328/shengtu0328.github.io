@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/shengtu0328.github.io\/posts\/jvm\/"
-        },"genre": "posts","wordcount":  934 ,
+        },"genre": "posts","wordcount":  3793 ,
         "url": "https:\/\/shengtu0328.github.io\/posts\/jvm\/","datePublished": "2022-10-11T18:23:30+08:00","dateModified": "2022-10-11T18:23:30+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -70,8 +70,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">JVM学习</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-10-11">2022-10-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;934 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-10-11">2022-10-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3793 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;8 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -87,9 +87,46 @@
     </li>
     <li><a href="#二内存结构">二、内存结构</a>
       <ul>
-        <li><a href="#1程序计数器">1、程序计数器</a></li>
-        <li><a href="#2虚拟机栈">2、虚拟机栈</a></li>
+        <li><a href="#1程序计数器">1、程序计数器</a>
+          <ul>
+            <li><a href="#作用">作用</a></li>
+            <li><a href="#特点">特点</a></li>
+          </ul>
+        </li>
+        <li><a href="#2虚拟机栈">2、虚拟机栈</a>
+          <ul>
+            <li><a href="#定义-1">定义</a></li>
+            <li><a href="#演示">演示</a></li>
+            <li><a href="#问题辨析">问题辨析</a></li>
+            <li><a href="#内存溢出">内存溢出</a></li>
+            <li><a href="#线程运行诊断">线程运行诊断</a></li>
+          </ul>
+        </li>
         <li><a href="#3本地方法栈">3、本地方法栈</a></li>
+        <li><a href="#4堆">4、堆</a>
+          <ul>
+            <li><a href="#定义-2">定义</a></li>
+            <li><a href="#特点-1">特点</a></li>
+            <li><a href="#堆内存溢出">堆内存溢出</a></li>
+            <li><a href="#堆内存诊断">堆内存诊断</a></li>
+          </ul>
+        </li>
+        <li><a href="#5方法区">5、方法区</a>
+          <ul>
+            <li><a href="#内存溢出-1">内存溢出</a></li>
+            <li><a href="#常量池">常量池</a>
+              <ul>
+                <li><a href="#定义-3">定义</a></li>
+                <li><a href="#举例说明">举例说明</a></li>
+              </ul>
+            </li>
+            <li><a href="#stringtable串池">StringTable（串池）</a>
+              <ul>
+                <li><a href="#举例说明-1">举例说明</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>
@@ -115,20 +152,20 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="01.png"
-        data-srcset="01.png, 01.png 1.5x, 01.png 2x"
+        data-src="001.png"
+        data-srcset="001.png, 001.png 1.5x, 001.png 2x"
         data-sizes="auto"
-        alt="01.png"
-        title="01.png" /></p>
+        alt="001.png"
+        title="001.png" /></p>
 <h2 id="二内存结构">二、内存结构</h2>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="02.png"
-        data-srcset="02.png, 02.png 1.5x, 02.png 2x"
+        data-src="002.png"
+        data-srcset="002.png, 002.png 1.5x, 002.png 2x"
         data-sizes="auto"
-        alt="02.png"
-        title="02.png" /></p>
+        alt="002.png"
+        title="002.png" /></p>
 <ul>
 <li>
 <p>方法区:存放了类</p>
@@ -156,11 +193,11 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="05.png"
-        data-srcset="05.png, 05.png 1.5x, 05.png 2x"
+        data-src="005.png"
+        data-srcset="005.png, 005.png 1.5x, 005.png 2x"
         data-sizes="auto"
-        alt="05.png"
-        title="05.png" /></p>
+        alt="005.png"
+        title="005.png" /></p>
 <h4 id="作用">作用</h4>
 <p>用于保存JVM中下一条所要执行的指令的地址</p>
 <h4 id="特点">特点</h4>
@@ -200,6 +237,14 @@
 	}
 }
 </code></pre><p>可以参考idea debug模式下的 Frames</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="008_stack.png"
+        data-srcset="008_stack.png, 008_stack.png 1.5x, 008_stack.png 2x"
+        data-sizes="auto"
+        alt="008_stack.png"
+        title="008_stack.png" /></p>
 <h4 id="问题辨析">问题辨析</h4>
 <ul>
 <li>
@@ -224,9 +269,540 @@
 </ul>
 </li>
 </ul>
+<h4 id="内存溢出">内存溢出</h4>
+<p><strong>Java.lang.stackOverflowError</strong> 栈内存溢出</p>
+<p><strong>发生原因</strong></p>
+<ul>
+<li>
+<p>虚拟机栈中，<strong>栈帧过多</strong>（无限递归，第三方库出现的问题如json序列化对象互相引用）</p>
+</li>
+<li>
+<p>每个栈帧<strong>所占用过大</strong></p>
+<p>可以通过idea中Configurations中设置VM options 设置jvm参数：如-Xss256k</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="012.png"
+        data-srcset="012.png, 012.png 1.5x, 012.png 2x"
+        data-sizes="auto"
+        alt="012.png"
+        title="012.png" /></p>
+</li>
+</ul>
+<h4 id="线程运行诊断">线程运行诊断</h4>
+<p>CPU占用过高</p>
+<ul>
+<li>Linux环境下运行某些程序的时候，可能导致CPU的占用过高，这时需要定位占用CPU过高的线程
+<ul>
+<li>
+<p><strong>top</strong></p>
+<p>查看<strong>进程</strong>的CPU和内存使用情况,会显示进程id(PID),但还定位不到线程，</p>
+</li>
+<li>
+<p><strong>ps H -eo pid,tid,%cpu | grep 我是刚才通过top查到的进程号</strong></p>
+<p>查看<strong>线程</strong>占用CPU和内存使用情况</p>
+<p><strong>H</strong> 是显示进程里所有线程树的意思</p>
+<p><strong>-eo</strong>是输出结果 ，**pid:**进程id，<strong>tid:<strong>线程id，,</strong>%cpu</strong>:cpu占用率</p>
+</li>
+<li>
+<p><strong>jstack 我是一个进程id</strong></p>
+<p>通过查看进程中的线程的id，刚才通过ps命令看到的tid来<strong>对比定位</strong>，注意jstack查找出的线程id是<strong>16进制的</strong>，<strong>需要转换</strong></p>
+</li>
+</ul>
+</li>
+</ul>
 <h3 id="3本地方法栈">3、本地方法栈</h3>
+<p>​    <img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="016_nativeMethod.png"
+        data-srcset="016_nativeMethod.png, 016_nativeMethod.png 1.5x, 016_nativeMethod.png 2x"
+        data-sizes="auto"
+        alt="016_nativeMethod.png"
+        title="016_nativeMethod.png" /></p>
 <p>一些带有<strong>native关键字</strong>的方法就是需要JAVA去调用本地的C或者C++方法，因为JAVA有时候没法直接和操作系统底层交互，所以需要用到本地方法</p>
-</div><div class="post-footer" id="post-footer">
+<h3 id="4堆">4、堆</h3>
+<p>Heap 堆</p>
+<p>​    <img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="017_%e5%a0%86.png"
+        data-srcset="017_%e5%a0%86.png, 017_%e5%a0%86.png 1.5x, 017_%e5%a0%86.png 2x"
+        data-sizes="auto"
+        alt="017_堆.png"
+        title="017_堆.png" /></p>
+<h4 id="定义-2">定义</h4>
+<p>通过new关键字<strong>创建的对象</strong>都会被放在堆内存</p>
+<h4 id="特点-1">特点</h4>
+<ul>
+<li><strong>所有线程共享</strong>，堆内存中的对象都需要<strong>考虑线程安全问题</strong></li>
+<li>有垃圾回收机制</li>
+<li>jvm参数：-Xmx4G   可以通过修改jvm堆内存的参数大小，尽早暴露问题</li>
+</ul>
+<h4 id="堆内存溢出">堆内存溢出</h4>
+<p><strong>java.lang.OutofMemoryError</strong> ：java heap space. 堆内存溢出</p>
+<p>比如一个size很大的list，就会发生堆内存溢出</p>
+<h4 id="堆内存诊断">堆内存诊断</h4>
+<ol>
+<li>jps 工具</li>
+</ol>
+<ul>
+<li>
+<p>查看当前系统中有哪些 java 进程</p>
+</li>
+<li>
+<p>jps</p>
+</li>
+</ul>
+<ol start="2">
+<li>jmap 工具</li>
+</ol>
+<ul>
+<li>
+<p>查看堆内存占用情况 jmap - heap 进程id，只能是某一时刻</p>
+</li>
+<li>
+<p>jmap -heap 5750</p>
+</li>
+</ul>
+<ol start="3">
+<li>jconsole 工具</li>
+</ol>
+<ul>
+<li>
+<p>图形界面的，多功能的监测工具，可以连续监测</p>
+</li>
+<li>
+<p>jconsole</p>
+<p>​    <img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="020_jconsole.png"
+        data-srcset="020_jconsole.png, 020_jconsole.png 1.5x, 020_jconsole.png 2x"
+        data-sizes="auto"
+        alt="020_jconsole.png"
+        title="020_jconsole.png" /></p>
+</li>
+</ul>
+<ol start="4">
+<li>jvisualvm</li>
+</ol>
+<ul>
+<li>
+<p>jvisualvm 图形界面，更加强大，类似idea debug模式下看到的信息</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="021_jvisualvm.png"
+        data-srcset="021_jvisualvm.png, 021_jvisualvm.png 1.5x, 021_jvisualvm.png 2x"
+        data-sizes="auto"
+        alt="021_jvisualvm.png"
+        title="021_jvisualvm.png" /></p>
+</li>
+</ul>
+<h3 id="5方法区">5、方法区</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="022_%e6%96%b9%e6%b3%95%e5%8c%ba.png"
+        data-srcset="022_%e6%96%b9%e6%b3%95%e5%8c%ba.png, 022_%e6%96%b9%e6%b3%95%e5%8c%ba.png 1.5x, 022_%e6%96%b9%e6%b3%95%e5%8c%ba.png 2x"
+        data-sizes="auto"
+        alt="022_方法区.png"
+        title="022_方法区.png" /></p>
+<p><a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-2.html#jvms-2.5.4" target="_blank" rel="noopener noreffer ">https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-2.html#jvms-2.5.4</a></p>
+<p>The Java Virtual Machine has a <em><strong>method area</strong></em> that is <strong>shared among all Java Virtual Machine threads</strong>. The method area is analogous（相似的） to the storage area for compiled code of a conventional language or analogous to the &ldquo;text&rdquo; segment in an operating system process. It stores per-class structures such as the run-time constant pool（<strong>运行时常量池</strong>), field （ ）and method data, and the code for methods(<strong>方法</strong>) and constructors（<strong>构造方法</strong>）, including the special methods (<a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-2.html#jvms-2.9" target="_blank" rel="noopener noreffer ">§2.9</a>) used in class and instance initialization and interface initialization.</p>
+<p>The method area is created on virtual machine start-up. Although the method area is logically part of the heap, simple implementations may choose not to either garbage collect or compact it. This specification does not mandate the location of the method area or the policies used to manage compiled code. The method area may be of a fixed size or may be expanded as required by the computation and may be contracted if a larger method area becomes unnecessary. The memory for the method area does not need to be contiguous.</p>
+<ul>
+<li>
+<p>方法区是所有线程共享的，存储了运行时常量池，类模板。</p>
+</li>
+<li>
+<p>方法区逻辑上定义为在堆中。</p>
+<p>1.8以前叫永久代，用的堆。</p>
+<p>1.8以后用叫元空间，用的操作系统内存。常量池还是在堆中</p>
+</li>
+<li>
+<p>方法区也会内存溢出</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="022_%e6%96%b9%e6%b3%95%e5%8c%ba%e5%ae%9a%e4%b9%89.png"
+        data-srcset="022_%e6%96%b9%e6%b3%95%e5%8c%ba%e5%ae%9a%e4%b9%89.png, 022_%e6%96%b9%e6%b3%95%e5%8c%ba%e5%ae%9a%e4%b9%89.png 1.5x, 022_%e6%96%b9%e6%b3%95%e5%8c%ba%e5%ae%9a%e4%b9%89.png 2x"
+        data-sizes="auto"
+        alt="022_方法区定义.png"
+        title="022_方法区定义.png" /></p>
+</li>
+</ul>
+<h4 id="内存溢出-1">内存溢出</h4>
+<p>jvm参数： -XX:MaxMetaspaceSize=8m</p>
+<p>1.8 以前会导致永久代内存溢出</p>
+<ul>
+<li>演示永久代内存溢出 java.lang.OutOfMemoryError: PermGen space</li>
+<li>-XX:MaxPermSize=8m</li>
+</ul>
+<p>1.8 之后会导致元空间内存溢出</p>
+<ul>
+<li>
+<p>演示元空间内存溢出 java.lang.OutOfMemoryError: Metaspace</p>
+</li>
+<li>
+<p>-XX:MaxMetaspaceSize=8m</p>
+</li>
+</ul>
+<pre tabindex="0"><code>/**
+ * 演示元空间内存溢出 java.lang.OutOfMemoryError: Metaspace
+ * 元空间 大小参数设置
+ * -XX:MaxMetaspaceSize=8m
+ */
+public class Demo1_8 extends ClassLoader { // 可以用来加载类的二进制字节码
+    public static void main(String[] args) {
+        int j = 0;
+        try {
+            Demo1_8 test = new Demo1_8();
+            for (int i = 0; i &lt; 10000; i++, j++) {
+                // ClassWriter 作用是生成类的二进制字节码
+                ClassWriter cw = new ClassWriter(0);
+                //参数定义: 版本号， public， 类名, 包名, 父类， 接口
+                cw.visit(Opcodes.V1_8, Opcodes.ACC_PUBLIC, &quot;Class&quot; + i, null, &quot;java/lang/Object&quot;, null);
+                // 返回 byte[]
+                byte[] code = cw.toByteArray();
+                // 执行了类的加载
+                test.defineClass(&quot;Class&quot; + i, code, 0, code.length); // Class 对象
+            }
+        } finally {
+            System.out.println(j);
+        }
+    }
+}
+</code></pre><p>工作中加载类的场景</p>
+<ul>
+<li>
+<p>spring</p>
+</li>
+<li>
+<p>mybatis</p>
+</li>
+</ul>
+<h4 id="常量池">常量池</h4>
+<h5 id="定义-3">定义</h5>
+<ul>
+<li>
+<p>常量池</p>
+<p>就是一张表（如上图中的constant pool），虚拟机指令根据这张常量表找到要执行的类名、方法名、参数类型、字面量（即参数，字符串，布尔类型，整形）信息</p>
+</li>
+<li>
+<p>运行时常量池
+常量池是*.class文件中的，当该<strong>类被加载以后</strong>，它的常量池信息就会放入运行时常量池，并把里面的符号地址变为真实地址。(即#1，#2变成物理地址)</p>
+</li>
+</ul>
+<h5 id="举例说明">举例说明</h5>
+<p>用java代码反编译举个例子</p>
+<pre tabindex="0"><code> // 二进制字节码（类基本信息，常量池，类方法定义，包含了虚拟机指令）
+ public class HelloWorld {
+     public static void main(String[] args) {
+         System.out.println(&quot;hello world&quot;);
+     }
+ }
+</code></pre><ul>
+<li>
+<p>javap -v HelloWorld.class</p>
+<p>反编译</p>
+</li>
+</ul>
+<pre tabindex="0"><code>========================类基本信息========================
+  Last modified 2022-10-14; size 567 bytes
+  MD5 checksum 8efebdac91aa496515fa1c161184e354
+  Compiled from &quot;HelloWorld.java&quot;
+public class cn.itcast.jvm.t5.HelloWorld
+  minor version: 0
+  major version: 52
+  flags: ACC_PUBLIC, ACC_SUPER
+  
+========================常量池========================
+Constant pool:
+   #1 = Methodref          #6.#20         // java/lang/Object.&quot;&lt;init&gt;&quot;:()V
+   #2 = Fieldref           #21.#22        // java/lang/System.out:Ljava/io/PrintStream;
+   #3 = String             #23            // hello world
+   #4 = Methodref          #24.#25        // java/io/PrintStream.println:(Ljava/lang/String;)V
+   #5 = Class              #26            // cn/itcast/jvm/t5/HelloWorld
+   #6 = Class              #27            // java/lang/Object
+   #7 = Utf8               &lt;init&gt;
+   #8 = Utf8               ()V
+   #9 = Utf8               Code
+  #10 = Utf8               LineNumberTable
+  #11 = Utf8               LocalVariableTable
+  #12 = Utf8               this
+  #13 = Utf8               Lcn/itcast/jvm/t5/HelloWorld;
+  #14 = Utf8               main
+  #15 = Utf8               ([Ljava/lang/String;)V
+  #16 = Utf8               args
+  #17 = Utf8               [Ljava/lang/String;
+  #18 = Utf8               SourceFile
+  #19 = Utf8               HelloWorld.java
+  #20 = NameAndType        #7:#8          // &quot;&lt;init&gt;&quot;:()V
+  #21 = Class              #28            // java/lang/System
+  #22 = NameAndType        #29:#30        // out:Ljava/io/PrintStream;
+  #23 = Utf8               hello world
+  #24 = Class              #31            // java/io/PrintStream
+  #25 = NameAndType        #32:#33        // println:(Ljava/lang/String;)V
+  #26 = Utf8               cn/itcast/jvm/t5/HelloWorld
+  #27 = Utf8               java/lang/Object
+  #28 = Utf8               java/lang/System
+  #29 = Utf8               out
+  #30 = Utf8               Ljava/io/PrintStream;
+  #31 = Utf8               java/io/PrintStream
+  #32 = Utf8               println
+  #33 = Utf8               (Ljava/lang/String;)V
+  
+    
+========================类方法定义========================
+{
+  public cn.itcast.jvm.t5.HelloWorld();       //构造方法
+    descriptor: ()V
+    flags: ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object.&quot;&lt;init&gt;&quot;:()V
+         4: return
+      LineNumberTable:
+        line 4: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lcn/itcast/jvm/t5/HelloWorld;
+
+  public static void main(java.lang.String[]);    //main 方法
+    descriptor: ([Ljava/lang/String;)V
+    flags: ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=2, locals=1, args_size=1
+         0: getstatic     #2                  // 获取System.out这个静态变量
+         3: ldc           #3                  // String hello world 加载一个参数
+         5: invokevirtual #4                  // Method java/io/PrintStream.println:(Ljava/lang/String;)V 虚方法调用
+         8: return
+      LineNumberTable:
+        line 6: 0
+        line 7: 8
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       9     0  args   [Ljava/lang/String;
+}
+SourceFile: &quot;HelloWorld.java&quot;
+
+</code></pre><table>
+<thead>
+<tr>
+<th>翻译下就是</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>getstatic #2</td>
+<td>去常量池(Constant pool）找 #2 的变量,最终找到了System.out这个静态成员变量</td>
+</tr>
+<tr>
+<td></td>
+<td>#2 = Fieldref 是一个成员变量的引用</td>
+</tr>
+<tr>
+<td></td>
+<td>#2-&gt;#21.#22</td>
+</tr>
+<tr>
+<td></td>
+<td>#21 = Class              #28</td>
+</tr>
+<tr>
+<td></td>
+<td>#22 = NameAndType        #29:#30</td>
+</tr>
+<tr>
+<td></td>
+<td>#28 = Utf8               java/lang/System</td>
+</tr>
+<tr>
+<td></td>
+<td>#29 = Utf8               out</td>
+</tr>
+<tr>
+<td></td>
+<td>#30 = Utf8               Ljava/io/PrintStream;</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>ldc           #3</td>
+<td>#3 = String             #23</td>
+</tr>
+<tr>
+<td></td>
+<td>#23 = Utf8               hello world</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>invokevirtual #4</td>
+<td>找到 java/io/PrintStream对象的println方法 参数是:(Ljava/lang/String;)V，并调用</td>
+</tr>
+<tr>
+<td></td>
+<td>#4 = Methodref          #24.#25</td>
+</tr>
+<tr>
+<td></td>
+<td>#24 = Class              #31</td>
+</tr>
+<tr>
+<td></td>
+<td>#25 = NameAndType        #32:#33</td>
+</tr>
+<tr>
+<td></td>
+<td>#31 = Utf8               java/io/PrintStream</td>
+</tr>
+<tr>
+<td></td>
+<td>#32 = Utf8               println</td>
+</tr>
+<tr>
+<td></td>
+<td>#33 = Utf8               (Ljava/lang/String;)V</td>
+</tr>
+</tbody>
+</table>
+<h4 id="stringtable串池">StringTable（串池）</h4>
+<p>常量池-&gt;运行时常量池-&gt; 直到String a=“a” 变成字符串对象-&gt;放入StringTable(串池)，如果没有的话。</p>
+<p>直到用到了该符号，才会创建对应的字符串对象放入字符串常量池</p>
+<h5 id="举例说明-1">举例说明</h5>
+<p>java代码</p>
+<pre tabindex="0"><code>// StringTable [ &quot;a&quot;, &quot;b&quot; ,&quot;ab&quot; ]  hashtable 结构，不能扩容
+public class Demo1_22 {
+    // 常量池中的信息，都会被加载到运行时常量池中， 这时 a b ab 都是常量池中的符号，还没有变为 java 字符串对象
+    // ldc #2 会把 a 符号变为 &quot;a&quot; 字符串对象
+    // ldc #3 会把 b 符号变为 &quot;b&quot; 字符串对象
+    // ldc #4 会把 ab 符号变为 &quot;ab&quot; 字符串对象
+
+    public static void main(String[] args) {
+        String s1 = &quot;a&quot;; // 懒惰的
+        String s2 = &quot;b&quot;;
+        String s3 = &quot;ab&quot;;
+        String s4 = s1 + s2; //实际上是 new StringBuilder().append(&quot;a&quot;).append(&quot;b&quot;).toString() 和  new String(&quot;ab&quot;)
+        System.out.println(s3 == s4);// false  因为s3在串池，s4在堆中
+        String s5 = &quot;a&quot; + &quot;b&quot;;  // javac 在编译期间的优化，结果已经在编译期确定为ab
+        System.out.println(s3 == s5);//true 因为都是在串池
+
+    }
+}
+
+</code></pre><p>java字节码</p>
+<pre tabindex="0"><code>   Last modified 2022-10-14; size 718 bytes
+  MD5 checksum c0a9cc3be31674aeaf714269e8a16e6e
+  Compiled from &quot;Demo1_22.java&quot;
+public class cn.itcast.jvm.t1.stringtable.Demo1_22
+  minor version: 0
+  major version: 52
+  flags: ACC_PUBLIC, ACC_SUPER
+Constant pool:
+   #1 = Methodref          #10.#29        // java/lang/Object.&quot;&lt;init&gt;&quot;:()V
+   #2 = String             #30            // a
+   #3 = String             #31            // b
+   #4 = String             #32            // ab
+   #5 = Class              #33            // java/lang/StringBuilder
+   #6 = Methodref          #5.#29         // java/lang/StringBuilder.&quot;&lt;init&gt;&quot;:()V
+   #7 = Methodref          #5.#34         // java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+   #8 = Methodref          #5.#35         // java/lang/StringBuilder.toString:()Ljava/lang/String;
+   #9 = Class              #36            // cn/itcast/jvm/t1/stringtable/Demo1_22
+  #10 = Class              #37            // java/lang/Object
+  #11 = Utf8               &lt;init&gt;
+  #12 = Utf8               ()V
+  #13 = Utf8               Code
+  #14 = Utf8               LineNumberTable
+  #15 = Utf8               LocalVariableTable
+  #16 = Utf8               this
+  #17 = Utf8               Lcn/itcast/jvm/t1/stringtable/Demo1_22;
+  #18 = Utf8               main
+  #19 = Utf8               ([Ljava/lang/String;)V
+  #20 = Utf8               args
+  #21 = Utf8               [Ljava/lang/String;
+  #22 = Utf8               s1
+  #23 = Utf8               Ljava/lang/String;
+  #24 = Utf8               s2
+  #25 = Utf8               s3
+  #26 = Utf8               s4
+  #27 = Utf8               SourceFile
+  #28 = Utf8               Demo1_22.java
+  #29 = NameAndType        #11:#12        // &quot;&lt;init&gt;&quot;:()V
+  #30 = Utf8               a
+  #31 = Utf8               b
+  #32 = Utf8               ab
+  #33 = Utf8               java/lang/StringBuilder
+  #34 = NameAndType        #38:#39        // append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+  #35 = NameAndType        #40:#41        // toString:()Ljava/lang/String;
+  #36 = Utf8               cn/itcast/jvm/t1/stringtable/Demo1_22
+  #37 = Utf8               java/lang/Object
+  #38 = Utf8               append
+  #39 = Utf8               (Ljava/lang/String;)Ljava/lang/StringBuilder;
+  #40 = Utf8               toString
+  #41 = Utf8               ()Ljava/lang/String;
+{
+  public cn.itcast.jvm.t1.stringtable.Demo1_22();
+    descriptor: ()V
+    flags: ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object.&quot;&lt;init&gt;&quot;:()V
+         4: return
+      LineNumberTable:
+        line 4: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lcn/itcast/jvm/t1/stringtable/Demo1_22;
+
+  public static void main(java.lang.String[]);
+    descriptor: ([Ljava/lang/String;)V
+    flags: ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=2, locals=5, args_size=1
+         0: ldc           #2                  // 去常量池2号位置得到字符串，再把 a 符号变为 &quot;a&quot; 字符串对象
+         2: astore_1													// 存入LocalVariableTable Slot=1的位置
+         3: ldc           #3                  // String b
+         5: astore_2
+         6: ldc           #4                  // String ab
+         8: astore_3
+         9: new           #5                  // class java/lang/StringBuilder
+        12: dup
+        13: invokespecial #6                  // Method java/lang/StringBuilder.&quot;&lt;init&gt;&quot;:()V
+        16: aload_1
+        17: invokevirtual #7                  // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        20: aload_2
+        21: invokevirtual #7                  // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        24: invokevirtual #8                  // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+        27: astore        4
+        29: return
+      LineNumberTable:
+        line 11: 0
+        line 12: 3
+        line 13: 6
+        line 14: 9
+        line 19: 29
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      30     0  args   [Ljava/lang/String;
+            3      27     1    s1   Ljava/lang/String;
+            6      24     2    s2   Ljava/lang/String;
+            9      21     3    s3   Ljava/lang/String;
+           29       1     4    s4   Ljava/lang/String;
+}
+SourceFile: &quot;Demo1_22.java&quot;
+
+
+</code></pre></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">

@@ -4,15 +4,15 @@
         <link>https://shengtu0328.github.io/</link>
         <description>This is my cool site</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1007@qq.com (ricky)</managingEditor>
-            <webMaster>1007@qq.com (ricky)</webMaster><lastBuildDate>Thu, 13 Oct 2022 11:05:02 &#43;0800</lastBuildDate>
+            <webMaster>1007@qq.com (ricky)</webMaster><lastBuildDate>Fri, 14 Oct 2022 10:03:11 &#43;0800</lastBuildDate>
             <atom:link href="https://shengtu0328.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
-    <title>JUC</title>
-    <link>https://shengtu0328.github.io/posts/juc/</link>
-    <pubDate>Thu, 13 Oct 2022 11:05:02 &#43;0800</pubDate>
+    <title>Hugo</title>
+    <link>https://shengtu0328.github.io/posts/hugo/</link>
+    <pubDate>Fri, 14 Oct 2022 10:03:11 &#43;0800</pubDate>
     <author>ricky</author>
-    <guid>https://shengtu0328.github.io/posts/juc/</guid>
-    <description><![CDATA[]]></description>
+    <guid>https://shengtu0328.github.io/posts/hugo/</guid>
+    <description><![CDATA[一级标题 二级标题1 二级标题2 三级标题1 [TOC] 四级标题 三级标题2 四级标题 五级标题 一级标题 二级标题 三级标题 四级标题 五级标题]]></description>
 </item>
 <item>
     <title>Spring</title>
