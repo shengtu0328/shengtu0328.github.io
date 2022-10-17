@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/shengtu0328.github.io\/posts\/jvm\/"
-        },"genre": "posts","wordcount":  3793 ,
+        },"genre": "posts","wordcount":  5699 ,
         "url": "https:\/\/shengtu0328.github.io\/posts\/jvm\/","datePublished": "2022-10-11T18:23:30+08:00","dateModified": "2022-10-11T18:23:30+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -70,8 +70,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">JVM学习</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-10-11">2022-10-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3793 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;8 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-10-11">2022-10-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;5699 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;12 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -122,7 +122,11 @@
             </li>
             <li><a href="#stringtable串池">StringTable（串池）</a>
               <ul>
-                <li><a href="#举例说明-1">举例说明</a></li>
+                <li><a href="#举例说明依据字节码">举例说明(依据字节码)</a></li>
+                <li><a href="#特征">特征</a></li>
+                <li><a href="#intern方法-18">intern方法 1.8</a></li>
+                <li><a href="#intern方法-16">intern方法 1.6</a></li>
+                <li><a href="#stringtable-垃圾回收">StringTable 垃圾回收</a></li>
               </ul>
             </li>
           </ul>
@@ -419,7 +423,7 @@
 <li>
 <p>方法区逻辑上定义为在堆中。</p>
 <p>1.8以前叫永久代，用的堆。</p>
-<p>1.8以后用叫元空间，用的操作系统内存。常量池还是在堆中</p>
+<p>1.8以后用叫元空间，用的操作系统内存。StringTable串池还是在堆中</p>
 </li>
 <li>
 <p>方法区也会内存溢出</p>
@@ -463,11 +467,11 @@ public class Demo1_8 extends ClassLoader { // 可以用来加载类的二进制�
                 // ClassWriter 作用是生成类的二进制字节码
                 ClassWriter cw = new ClassWriter(0);
                 //参数定义: 版本号， public， 类名, 包名, 父类， 接口
-                cw.visit(Opcodes.V1_8, Opcodes.ACC_PUBLIC, &quot;Class&quot; + i, null, &quot;java/lang/Object&quot;, null);
+                cw.visit(Opcodes.V1_8, Opcodes.ACC_PUBLIC, &#34;Class&#34; + i, null, &#34;java/lang/Object&#34;, null);
                 // 返回 byte[]
                 byte[] code = cw.toByteArray();
                 // 执行了类的加载
-                test.defineClass(&quot;Class&quot; + i, code, 0, code.length); // Class 对象
+                test.defineClass(&#34;Class&#34; + i, code, 0, code.length); // Class 对象
             }
         } finally {
             System.out.println(j);
@@ -488,11 +492,11 @@ public class Demo1_8 extends ClassLoader { // 可以用来加载类的二进制�
 <ul>
 <li>
 <p>常量池</p>
-<p>就是一张表（如上图中的constant pool），虚拟机指令根据这张常量表找到要执行的类名、方法名、参数类型、字面量（即参数，字符串，布尔类型，整形）信息</p>
+<p>就是一张表，虚拟机指令根据这张常量表找到要执行的类名、方法名、参数类型、字面量（即参数，字符串，布尔类型，整形）信息</p>
 </li>
 <li>
 <p>运行时常量池
-常量池是*.class文件中的，当该<strong>类被加载以后</strong>，它的常量池信息就会放入运行时常量池，并把里面的符号地址变为真实地址。(即#1，#2变成物理地址)</p>
+常量池是*.class文件中的，当该<strong>类被加载以后</strong>，它的常量池信息就会放入运行时常量池（也就是内存中），并把里面的符号地址变为真实地址。(即#1，#2变成物理地址)</p>
 </li>
 </ul>
 <h5 id="举例说明">举例说明</h5>
@@ -500,7 +504,7 @@ public class Demo1_8 extends ClassLoader { // 可以用来加载类的二进制�
 <pre tabindex="0"><code> // 二进制字节码（类基本信息，常量池，类方法定义，包含了虚拟机指令）
  public class HelloWorld {
      public static void main(String[] args) {
-         System.out.println(&quot;hello world&quot;);
+         System.out.println(&#34;hello world&#34;);
      }
  }
 </code></pre><ul>
@@ -512,7 +516,7 @@ public class Demo1_8 extends ClassLoader { // 可以用来加载类的二进制�
 <pre tabindex="0"><code>========================类基本信息========================
   Last modified 2022-10-14; size 567 bytes
   MD5 checksum 8efebdac91aa496515fa1c161184e354
-  Compiled from &quot;HelloWorld.java&quot;
+  Compiled from &#34;HelloWorld.java&#34;
 public class cn.itcast.jvm.t5.HelloWorld
   minor version: 0
   major version: 52
@@ -520,7 +524,7 @@ public class cn.itcast.jvm.t5.HelloWorld
   
 ========================常量池========================
 Constant pool:
-   #1 = Methodref          #6.#20         // java/lang/Object.&quot;&lt;init&gt;&quot;:()V
+   #1 = Methodref          #6.#20         // java/lang/Object.&#34;&lt;init&gt;&#34;:()V
    #2 = Fieldref           #21.#22        // java/lang/System.out:Ljava/io/PrintStream;
    #3 = String             #23            // hello world
    #4 = Methodref          #24.#25        // java/io/PrintStream.println:(Ljava/lang/String;)V
@@ -539,7 +543,7 @@ Constant pool:
   #17 = Utf8               [Ljava/lang/String;
   #18 = Utf8               SourceFile
   #19 = Utf8               HelloWorld.java
-  #20 = NameAndType        #7:#8          // &quot;&lt;init&gt;&quot;:()V
+  #20 = NameAndType        #7:#8          // &#34;&lt;init&gt;&#34;:()V
   #21 = Class              #28            // java/lang/System
   #22 = NameAndType        #29:#30        // out:Ljava/io/PrintStream;
   #23 = Utf8               hello world
@@ -563,7 +567,7 @@ Constant pool:
     Code:
       stack=1, locals=1, args_size=1
          0: aload_0
-         1: invokespecial #1                  // Method java/lang/Object.&quot;&lt;init&gt;&quot;:()V
+         1: invokespecial #1                  // Method java/lang/Object.&#34;&lt;init&gt;&#34;:()V
          4: return
       LineNumberTable:
         line 4: 0
@@ -587,8 +591,7 @@ Constant pool:
         Start  Length  Slot  Name   Signature
             0       9     0  args   [Ljava/lang/String;
 }
-SourceFile: &quot;HelloWorld.java&quot;
-
+SourceFile: &#34;HelloWorld.java&#34;
 </code></pre><table>
 <thead>
 <tr>
@@ -676,79 +679,99 @@ SourceFile: &quot;HelloWorld.java&quot;
 </tbody>
 </table>
 <h4 id="stringtable串池">StringTable（串池）</h4>
-<p>常量池-&gt;运行时常量池-&gt; 直到String a=“a” 变成字符串对象-&gt;放入StringTable(串池)，如果没有的话。</p>
+<p>常量池-&gt;运行时常量池-</p>
+<p>执行语句 String str = &ldquo;abc&rdquo; 时，首先查看字符串池中是否存在字符串&quot;abc&quot; ，如果存在则直接将&quot;abc&quot;地址赋给str ，如果不存在则先在字符串池中新建一个字符串&quot;abc&quot;，然后再将其赋给str。</p>
+<p>String str = new String(“aa”)：至少会创建一个对象，也有可能创建两个。用到new关键字，肯定会在堆中创建一个String对象，如果字符池中已经存在”abc”,则不会在字符串池中创建一个String对象，如果不存在，则会在字符串常量池中也创建一个对象。</p>
 <p>直到用到了该符号，才会创建对应的字符串对象放入字符串常量池</p>
-<h5 id="举例说明-1">举例说明</h5>
+<h5 id="举例说明依据字节码">举例说明(依据字节码)</h5>
 <p>java代码</p>
-<pre tabindex="0"><code>// StringTable [ &quot;a&quot;, &quot;b&quot; ,&quot;ab&quot; ]  hashtable 结构，不能扩容
+<pre tabindex="0"><code>// StringTable [ &#34;a&#34;, &#34;b&#34; ,&#34;ab&#34; ]  hashtable 结构，不能扩容
 public class Demo1_22 {
     // 常量池中的信息，都会被加载到运行时常量池中， 这时 a b ab 都是常量池中的符号，还没有变为 java 字符串对象
-    // ldc #2 会把 a 符号变为 &quot;a&quot; 字符串对象
-    // ldc #3 会把 b 符号变为 &quot;b&quot; 字符串对象
-    // ldc #4 会把 ab 符号变为 &quot;ab&quot; 字符串对象
+    // ldc #2 会把 a 符号变为 &#34;a&#34; 字符串对象
+    // ldc #3 会把 b 符号变为 &#34;b&#34; 字符串对象
+    // ldc #4 会把 ab 符号变为 &#34;ab&#34; 字符串对象
 
     public static void main(String[] args) {
-        String s1 = &quot;a&quot;; // 懒惰的
-        String s2 = &quot;b&quot;;
-        String s3 = &quot;ab&quot;;
-        String s4 = s1 + s2; //实际上是 new StringBuilder().append(&quot;a&quot;).append(&quot;b&quot;).toString() 和  new String(&quot;ab&quot;)
+        String s1 = &#34;a&#34;; // 懒惰的
+        String s2 = &#34;b&#34;;
+        String s3 = &#34;ab&#34;;
+        String s4 = s1 + s2; //通过字节码可以知道，实际上是 new StringBuilder().append(&#34;a&#34;).append(&#34;b&#34;).toString() 和  new String(&#34;ab&#34;)
         System.out.println(s3 == s4);// false  因为s3在串池，s4在堆中
-        String s5 = &quot;a&quot; + &quot;b&quot;;  // javac 在编译期间的优化，结果已经在编译期确定为ab
+        String s5 = &#34;a&#34; + &#34;b&#34;;  // javac 在编译期间的优化，结果已经在编译期确定为ab
         System.out.println(s3 == s5);//true 因为都是在串池
 
     }
 }
-
 </code></pre><p>java字节码</p>
-<pre tabindex="0"><code>   Last modified 2022-10-14; size 718 bytes
-  MD5 checksum c0a9cc3be31674aeaf714269e8a16e6e
-  Compiled from &quot;Demo1_22.java&quot;
+<pre tabindex="0"><code>Classfile /G:/xrqProjects/jvm/代码/jvm/out/production/jvm/cn/itcast/jvm/t1/stringtable/Demo1_22.class
+  Last modified 2022-10-17; size 1057 bytes
+  MD5 checksum b94bb46c9f03f10beb6d57556ca42557
+  Compiled from &#34;Demo1_22.java&#34;
 public class cn.itcast.jvm.t1.stringtable.Demo1_22
   minor version: 0
   major version: 52
   flags: ACC_PUBLIC, ACC_SUPER
 Constant pool:
-   #1 = Methodref          #10.#29        // java/lang/Object.&quot;&lt;init&gt;&quot;:()V
-   #2 = String             #30            // a
-   #3 = String             #31            // b
-   #4 = String             #32            // ab
-   #5 = Class              #33            // java/lang/StringBuilder
-   #6 = Methodref          #5.#29         // java/lang/StringBuilder.&quot;&lt;init&gt;&quot;:()V
-   #7 = Methodref          #5.#34         // java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
-   #8 = Methodref          #5.#35         // java/lang/StringBuilder.toString:()Ljava/lang/String;
-   #9 = Class              #36            // cn/itcast/jvm/t1/stringtable/Demo1_22
-  #10 = Class              #37            // java/lang/Object
-  #11 = Utf8               &lt;init&gt;
-  #12 = Utf8               ()V
-  #13 = Utf8               Code
-  #14 = Utf8               LineNumberTable
-  #15 = Utf8               LocalVariableTable
-  #16 = Utf8               this
-  #17 = Utf8               Lcn/itcast/jvm/t1/stringtable/Demo1_22;
-  #18 = Utf8               main
-  #19 = Utf8               ([Ljava/lang/String;)V
-  #20 = Utf8               args
-  #21 = Utf8               [Ljava/lang/String;
-  #22 = Utf8               s1
-  #23 = Utf8               Ljava/lang/String;
-  #24 = Utf8               s2
-  #25 = Utf8               s3
-  #26 = Utf8               s4
-  #27 = Utf8               SourceFile
-  #28 = Utf8               Demo1_22.java
-  #29 = NameAndType        #11:#12        // &quot;&lt;init&gt;&quot;:()V
-  #30 = Utf8               a
-  #31 = Utf8               b
-  #32 = Utf8               ab
-  #33 = Utf8               java/lang/StringBuilder
-  #34 = NameAndType        #38:#39        // append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
-  #35 = NameAndType        #40:#41        // toString:()Ljava/lang/String;
-  #36 = Utf8               cn/itcast/jvm/t1/stringtable/Demo1_22
-  #37 = Utf8               java/lang/Object
-  #38 = Utf8               append
-  #39 = Utf8               (Ljava/lang/String;)Ljava/lang/StringBuilder;
-  #40 = Utf8               toString
-  #41 = Utf8               ()Ljava/lang/String;
+   #1 = Methodref          #12.#36        // java/lang/Object.&#34;&lt;init&gt;&#34;:()V
+   #2 = String             #37            // a
+   #3 = String             #38            // b
+   #4 = String             #39            // ab
+   #5 = Class              #40            // java/lang/StringBuilder
+   #6 = Methodref          #5.#36         // java/lang/StringBuilder.&#34;&lt;init&gt;&#34;:()V
+   #7 = Methodref          #5.#41         // java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+   #8 = Methodref          #5.#42         // java/lang/StringBuilder.toString:()Ljava/lang/String;
+   #9 = Fieldref           #43.#44        // java/lang/System.out:Ljava/io/PrintStream;
+  #10 = Methodref          #45.#46        // java/io/PrintStream.println:(Z)V
+  #11 = Class              #47            // cn/itcast/jvm/t1/stringtable/Demo1_22
+  #12 = Class              #48            // java/lang/Object
+  #13 = Utf8               &lt;init&gt;
+  #14 = Utf8               ()V
+  #15 = Utf8               Code
+  #16 = Utf8               LineNumberTable
+  #17 = Utf8               LocalVariableTable
+  #18 = Utf8               this
+  #19 = Utf8               Lcn/itcast/jvm/t1/stringtable/Demo1_22;
+  #20 = Utf8               main
+  #21 = Utf8               ([Ljava/lang/String;)V
+  #22 = Utf8               args
+  #23 = Utf8               [Ljava/lang/String;
+  #24 = Utf8               s1
+  #25 = Utf8               Ljava/lang/String;
+  #26 = Utf8               s2
+  #27 = Utf8               s3
+  #28 = Utf8               s4
+  #29 = Utf8               s5
+  #30 = Utf8               StackMapTable
+  #31 = Class              #23            // &#34;[Ljava/lang/String;&#34;
+  #32 = Class              #49            // java/lang/String
+  #33 = Class              #50            // java/io/PrintStream
+  #34 = Utf8               SourceFile
+  #35 = Utf8               Demo1_22.java
+  #36 = NameAndType        #13:#14        // &#34;&lt;init&gt;&#34;:()V
+  #37 = Utf8               a
+  #38 = Utf8               b
+  #39 = Utf8               ab
+  #40 = Utf8               java/lang/StringBuilder
+  #41 = NameAndType        #51:#52        // append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+  #42 = NameAndType        #53:#54        // toString:()Ljava/lang/String;
+  #43 = Class              #55            // java/lang/System
+  #44 = NameAndType        #56:#57        // out:Ljava/io/PrintStream;
+  #45 = Class              #50            // java/io/PrintStream
+  #46 = NameAndType        #58:#59        // println:(Z)V
+  #47 = Utf8               cn/itcast/jvm/t1/stringtable/Demo1_22
+  #48 = Utf8               java/lang/Object
+  #49 = Utf8               java/lang/String
+  #50 = Utf8               java/io/PrintStream
+  #51 = Utf8               append
+  #52 = Utf8               (Ljava/lang/String;)Ljava/lang/StringBuilder;
+  #53 = Utf8               toString
+  #54 = Utf8               ()Ljava/lang/String;
+  #55 = Utf8               java/lang/System
+  #56 = Utf8               out
+  #57 = Utf8               Ljava/io/PrintStream;
+  #58 = Utf8               println
+  #59 = Utf8               (Z)V
 {
   public cn.itcast.jvm.t1.stringtable.Demo1_22();
     descriptor: ()V
@@ -756,7 +779,7 @@ Constant pool:
     Code:
       stack=1, locals=1, args_size=1
          0: aload_0
-         1: invokespecial #1                  // Method java/lang/Object.&quot;&lt;init&gt;&quot;:()V
+         1: invokespecial #1                  // Method java/lang/Object.&#34;&lt;init&gt;&#34;:()V
          4: return
       LineNumberTable:
         line 4: 0
@@ -768,41 +791,142 @@ Constant pool:
     descriptor: ([Ljava/lang/String;)V
     flags: ACC_PUBLIC, ACC_STATIC
     Code:
-      stack=2, locals=5, args_size=1
-         0: ldc           #2                  // 去常量池2号位置得到字符串，再把 a 符号变为 &quot;a&quot; 字符串对象
-         2: astore_1													// 存入LocalVariableTable Slot=1的位置
+      stack=3, locals=6, args_size=1
+         0: ldc           #2                  // String a
+         2: astore_1
          3: ldc           #3                  // String b
          5: astore_2
-         6: ldc           #4                  // String ab
+         6: ldc           #4                  // String ab  s3 == s5 为true!!!!!!!!!!!!!!!!!!!!!
          8: astore_3
          9: new           #5                  // class java/lang/StringBuilder
         12: dup
-        13: invokespecial #6                  // Method java/lang/StringBuilder.&quot;&lt;init&gt;&quot;:()V
+        13: invokespecial #6                  // Method java/lang/StringBuilder.&#34;&lt;init&gt;&#34;:()V
         16: aload_1
         17: invokevirtual #7                  // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
         20: aload_2
         21: invokevirtual #7                  // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
         24: invokevirtual #8                  // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
         27: astore        4
-        29: return
+        29: getstatic     #9                  // Field java/lang/System.out:Ljava/io/PrintStream;
+        32: aload_3
+        33: aload         4
+        35: if_acmpne     42
+        38: iconst_1
+        39: goto          43
+        42: iconst_0
+        43: invokevirtual #10                 // Method java/io/PrintStream.println:(Z)V
+        46: ldc           #4                  // String ab    s3 == s5 为true!!!!!!!!!!!!!!!!!!!!!
+        48: astore        5
+        50: getstatic     #9                  // Field java/lang/System.out:Ljava/io/PrintStream;
+        53: aload_3
+        54: aload         5
+        56: if_acmpne     63
+        59: iconst_1
+        60: goto          64
+        63: iconst_0
+        64: invokevirtual #10                 // Method java/io/PrintStream.println:(Z)V
+        67: return
       LineNumberTable:
         line 11: 0
         line 12: 3
         line 13: 6
         line 14: 9
-        line 19: 29
+        line 15: 29
+        line 16: 46
+        line 17: 50
+        line 19: 67
       LocalVariableTable:
         Start  Length  Slot  Name   Signature
-            0      30     0  args   [Ljava/lang/String;
-            3      27     1    s1   Ljava/lang/String;
-            6      24     2    s2   Ljava/lang/String;
-            9      21     3    s3   Ljava/lang/String;
-           29       1     4    s4   Ljava/lang/String;
+            0      68     0  args   [Ljava/lang/String;
+            3      65     1    s1   Ljava/lang/String;
+            6      62     2    s2   Ljava/lang/String;
+            9      59     3    s3   Ljava/lang/String;
+           29      39     4    s4   Ljava/lang/String;
+           50      18     5    s5   Ljava/lang/String;
+      StackMapTable: number_of_entries = 4
+        frame_type = 255 /* full_frame */
+          offset_delta = 42
+          locals = [ class &#34;[Ljava/lang/String;&#34;, class java/lang/String, class java/lang/String, class java/lang/String, class java/lang/String ]
+          stack = [ class java/io/PrintStream ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 0
+          locals = [ class &#34;[Ljava/lang/String;&#34;, class java/lang/String, class java/lang/String, class java/lang/String, class java/lang/String ]
+          stack = [ class java/io/PrintStream, int ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 19
+          locals = [ class &#34;[Ljava/lang/String;&#34;, class java/lang/String, class java/lang/String, class java/lang/String, class java/lang/String, class java/lang/String ]
+          stack = [ class java/io/PrintStream ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 0
+          locals = [ class &#34;[Ljava/lang/String;&#34;, class java/lang/String, class java/lang/String, class java/lang/String, class java/lang/String, class java/lang/String ]
+          stack = [ class java/io/PrintStream, int ]
 }
-SourceFile: &quot;Demo1_22.java&quot;
+SourceFile: &#34;Demo1_22.java&#34;
+</code></pre><h5 id="特征">特征</h5>
+<ul>
+<li>常量池中的字符串仅是符号，只有<strong>在被用到时才会转化为对象</strong></li>
+<li>利用串池的机制，来避免重复创建字符串对象</li>
+<li>字符串<strong>变量</strong>拼接的原理是<strong>StringBuilder</strong></li>
+<li>字符串<strong>常量</strong>拼接的原理是<strong>编译器优化</strong></li>
+<li>可以使用<strong>intern方法</strong>，主动将串池中还没有的字符串对象放入串池中</li>
+<li><strong>注意</strong>：无论是串池还是堆里面的字符串，都是对象</li>
+</ul>
+<h5 id="intern方法-18">intern方法 1.8</h5>
+<p>调用字符串对象的intern方法，会将该字符串对象<strong>的引用</strong>尝试放入到串池中</p>
+<ul>
+<li>
+<p>如果串池中没有该字符串对象，则放入</p>
+</li>
+<li>
+<p>如果有该字符串对象，则不会放入</p>
+<p>无论放入是否成功，都会返回<strong>串池中</strong>的字符串对象</p>
+</li>
+</ul>
+<p>JDK 1.7后，intern方法还是会先去查询常量池中是否有已经存在，如果存在，则返回常量池中的引用，这一点与之前没有区别，区别在于，如果在常量池找不到对应的字符串，则不会再将字符串拷贝到常量池，而只是在常量池中生成一个对原字符串的引用。简单的说，就是往常量池放的东西变了：原来在常量池中找不到时，复制一个副本放到常量池，1.7后则是将在堆上的地址引用复制到常量池。</p>
+<pre tabindex="0"><code>例子1：先创建堆字符串
+public static void main(String[] args) {
+    //串池：【&#34;a&#34; &#34;b&#34;】,堆：【new String(&#34;a&#34;)，new String(&#34;b&#34;), new String(&#34;ab&#34;)】
+    String s = new String(&#34;a&#34;) + new String(&#34;b&#34;);
 
+    //调用intern方法，这时串池中没有&#34;ab&#34;，则会将s这个对象引用放入到串池中，此时堆内存与串池中的&#34;ab&#34;是同一个字符串对象的引用
+    String s2 = s.intern();
 
-</code></pre></div><div class="post-footer" id="post-footer">
+    //与串池中的ab对象做比较 返回true
+    System.out.println(s2 == &#34;ab&#34;);
+
+    //比较的是引用 返回true
+    System.out.println(s == &#34;ab&#34;);
+}
+</code></pre><pre tabindex="0"><code>例子2：先创建串池字符串，后创建堆中字符串
+public static void main(String[] args) {
+    //串池：【&#34;ab&#34;】
+    String x = &#34;ab&#34;;
+
+    //串池：【&#34;ab&#34;,&#34;a&#34; &#34;b&#34;】,这一步只是添加了【&#34;a&#34; &#34;b&#34;】
+    //并且在堆中创建了 s对象 ，s和x不是同一个对象，因为是串池中的“ab”先创建，堆中拼接后创建
+    String s = new String(&#34;a&#34;) + new String(&#34;b&#34;);
+
+    //串池中已经有ab了，所以s被没有被放进去，返回的是串池中的对象
+    String s2 = s.intern();
+
+    //s2和x都是串池中的对象 返回true
+    System.out.println(s2 == x);
+
+    //s是堆中的对象 x串池中对象 返回false
+    System.out.println(s == x);
+}
+</code></pre><h5 id="intern方法-16">intern方法 1.6</h5>
+<p>调用字符串对象的intern方法，会将该字符串对象尝试放入到串池中</p>
+<ul>
+<li>如果串池中没有该字符串对象，<strong>会将该字符串对象复制一份</strong>，再放入到串池中</li>
+<li>如果有该字符串对象，则放入失败</li>
+</ul>
+<p>无论放入是否成功，都会返回<strong>串池中</strong>的字符串对象</p>
+<p><strong>注意</strong>：此时无论调用intern方法成功与否，串池中的字符串对象和堆内存中的字符串对象<strong>都不是同一个对象</strong>，上面例子1中  System.out.println(s== &ldquo;ab&rdquo;);返回false</p>
+<h5 id="stringtable-垃圾回收">StringTable 垃圾回收</h5>
+<p>在jvm1.6中，StringTable是常量池的一部分，在jvm1.8开始，StringTable存在了堆中。为什么要变呢？因为永久代是在full gc的时候，才会gc。触发的时间比较慢。导致StringTable 回收效率不高。但StringTable 使用频繁，java程序中会大量使用字符串常量。回收效率不高会占用大量内存。</p>
+<p>常量池是在永久代在内存紧张时，会发生垃圾回收</p>
+</div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
@@ -828,7 +952,7 @@ SourceFile: &quot;Demo1_22.java&quot;
 </div>
 </article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.92.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.105.0-DEV">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
                 </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ricky</a></span></div>
         </div>
     </footer></div>
