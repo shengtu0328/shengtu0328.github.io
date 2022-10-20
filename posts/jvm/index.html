@@ -4,18 +4,18 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>JVM学习 - ricky的网站</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="JVM学习" />
+        <title>JVM学习 - ricky的网站</title><meta name="Description" content="The best time to plant a tree was 10 years ago, the second is now"><meta property="og:title" content="JVM学习" />
 <meta property="og:description" content="一、什么是JVM 定义 Java Virtual Machine，JAVA程序的运行环境（JAVA二进制字节码的运行环境） 好处 一次编写，到处运行 (屏蔽了字节码和操作系" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://shengtu0328.github.io/posts/jvm/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-10-11T18:23:30+08:00" />
-<meta property="article:modified_time" content="2022-10-11T18:23:30+08:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2022-10-11T18:23:30+08:00" /><meta property="og:site_name" content="我的网站" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="JVM学习"/>
 <meta name="twitter:description" content="一、什么是JVM 定义 Java Virtual Machine，JAVA程序的运行环境（JAVA二进制字节码的运行环境） 好处 一次编写，到处运行 (屏蔽了字节码和操作系"/>
-<meta name="application-name" content="My cool site">
-<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+<meta name="application-name" content="我的网站">
+<meta name="apple-mobile-web-app-title" content="我的网站"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://shengtu0328.github.io/posts/jvm/" /><link rel="next" href="https://shengtu0328.github.io/posts/spring/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/shengtu0328.github.io\/posts\/jvm\/"
-        },"genre": "posts","wordcount":  5699 ,
+        },"genre": "posts","wordcount":  6431 ,
         "url": "https:\/\/shengtu0328.github.io\/posts\/jvm\/","datePublished": "2022-10-11T18:23:30+08:00","dateModified": "2022-10-11T18:23:30+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -42,10 +42,21 @@
         <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
     <div class="header-wrapper">
         <div class="header-title">
-            <a href="/" title="ricky的网站">My cool site</a>
+            <a href="/" title="ricky的网站">Ricky’s blog</a>
         </div>
         <div class="menu">
-            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
                     <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
                 </a></div>
         </div>
@@ -54,24 +65,45 @@
     <div class="header-container">
         <div class="header-wrapper">
             <div class="header-title">
-                <a href="/" title="ricky的网站">My cool site</a>
+                <a href="/" title="ricky的网站">Ricky’s blog</a>
             </div>
             <div class="menu-toggle" id="menu-toggle-mobile">
                 <span></span><span></span><span></span>
             </div>
         </div>
-        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
                 <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
             </a></div>
     </div>
-</header><main class="main">
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">Contents</h2>
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">JVM学习</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-10-11">2022-10-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;5699 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;12 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-10-11">2022-10-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;6431 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;13 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -83,6 +115,7 @@
       <ul>
         <li><a href="#定义">定义</a></li>
         <li><a href="#好处">好处</a></li>
+        <li><a href="#jvm参数">jvm参数</a></li>
       </ul>
     </li>
     <li><a href="#二内存结构">二、内存结构</a>
@@ -113,10 +146,11 @@
         </li>
         <li><a href="#5方法区">5、方法区</a>
           <ul>
+            <li><a href="#定义-3">定义</a></li>
             <li><a href="#内存溢出-1">内存溢出</a></li>
             <li><a href="#常量池">常量池</a>
               <ul>
-                <li><a href="#定义-3">定义</a></li>
+                <li><a href="#定义-4">定义</a></li>
                 <li><a href="#举例说明">举例说明</a></li>
               </ul>
             </li>
@@ -126,7 +160,13 @@
                 <li><a href="#特征">特征</a></li>
                 <li><a href="#intern方法-18">intern方法 1.8</a></li>
                 <li><a href="#intern方法-16">intern方法 1.6</a></li>
-                <li><a href="#stringtable-垃圾回收">StringTable 垃圾回收</a></li>
+                <li><a href="#垃圾回收">垃圾回收</a></li>
+                <li><a href="#stringtable调优">StringTable调优</a></li>
+              </ul>
+            </li>
+            <li><a href="#直接内存">直接内存</a>
+              <ul>
+                <li><a href="#释放原理">释放原理</a></li>
               </ul>
             </li>
           </ul>
@@ -161,6 +201,34 @@
         data-sizes="auto"
         alt="001.png"
         title="001.png" /></p>
+<h3 id="jvm参数">jvm参数</h3>
+<ul>
+<li>
+<p>栈内存大小</p>
+<pre tabindex="0"><code>-Xss1024k
+</code></pre></li>
+<li>
+<p>堆内存大小</p>
+<pre tabindex="0"><code>-Xmx4G
+</code></pre></li>
+<li>
+<p>永久代大小 1.8 以前</p>
+<pre tabindex="0"><code>-XX:MaxPermSize=8m
+</code></pre></li>
+<li>
+<p>元空间大小 1.8 以后</p>
+<pre tabindex="0"><code>-XX:MaxMetaspaceSize=8m
+</code></pre></li>
+<li>
+<p>堆空间回收不足开关 +是启用，-是不启用</p>
+<pre tabindex="0"><code>-XX:-UseGCOverheadLimit
+</code></pre><pre tabindex="0"><code>+XX:-UseGCOverheadLimit
+</code></pre></li>
+<li>
+<p>StringTable 桶个数</p>
+<pre tabindex="0"><code>-XX:StringTableSize=20000
+</code></pre></li>
+</ul>
 <h2 id="二内存结构">二、内存结构</h2>
 <p><img
         class="lazyload"
@@ -389,7 +457,7 @@
 </li>
 </ul>
 <ol start="4">
-<li>jvisualvm</li>
+<li>java VisualVm</li>
 </ol>
 <ul>
 <li>
@@ -416,6 +484,7 @@
 <p><a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-2.html#jvms-2.5.4" target="_blank" rel="noopener noreffer ">https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-2.html#jvms-2.5.4</a></p>
 <p>The Java Virtual Machine has a <em><strong>method area</strong></em> that is <strong>shared among all Java Virtual Machine threads</strong>. The method area is analogous（相似的） to the storage area for compiled code of a conventional language or analogous to the &ldquo;text&rdquo; segment in an operating system process. It stores per-class structures such as the run-time constant pool（<strong>运行时常量池</strong>), field （ ）and method data, and the code for methods(<strong>方法</strong>) and constructors（<strong>构造方法</strong>）, including the special methods (<a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-2.html#jvms-2.9" target="_blank" rel="noopener noreffer ">§2.9</a>) used in class and instance initialization and interface initialization.</p>
 <p>The method area is created on virtual machine start-up. Although the method area is logically part of the heap, simple implementations may choose not to either garbage collect or compact it. This specification does not mandate the location of the method area or the policies used to manage compiled code. The method area may be of a fixed size or may be expanded as required by the computation and may be contracted if a larger method area becomes unnecessary. The memory for the method area does not need to be contiguous.</p>
+<h4 id="定义-3">定义</h4>
 <ul>
 <li>
 <p>方法区是所有线程共享的，存储了运行时常量池，类模板。</p>
@@ -467,11 +536,11 @@ public class Demo1_8 extends ClassLoader { // 可以用来加载类的二进制�
                 // ClassWriter 作用是生成类的二进制字节码
                 ClassWriter cw = new ClassWriter(0);
                 //参数定义: 版本号， public， 类名, 包名, 父类， 接口
-                cw.visit(Opcodes.V1_8, Opcodes.ACC_PUBLIC, &#34;Class&#34; + i, null, &#34;java/lang/Object&#34;, null);
+                cw.visit(Opcodes.V1_8, Opcodes.ACC_PUBLIC, &quot;Class&quot; + i, null, &quot;java/lang/Object&quot;, null);
                 // 返回 byte[]
                 byte[] code = cw.toByteArray();
                 // 执行了类的加载
-                test.defineClass(&#34;Class&#34; + i, code, 0, code.length); // Class 对象
+                test.defineClass(&quot;Class&quot; + i, code, 0, code.length); // Class 对象
             }
         } finally {
             System.out.println(j);
@@ -488,7 +557,7 @@ public class Demo1_8 extends ClassLoader { // 可以用来加载类的二进制�
 </li>
 </ul>
 <h4 id="常量池">常量池</h4>
-<h5 id="定义-3">定义</h5>
+<h5 id="定义-4">定义</h5>
 <ul>
 <li>
 <p>常量池</p>
@@ -504,7 +573,7 @@ public class Demo1_8 extends ClassLoader { // 可以用来加载类的二进制�
 <pre tabindex="0"><code> // 二进制字节码（类基本信息，常量池，类方法定义，包含了虚拟机指令）
  public class HelloWorld {
      public static void main(String[] args) {
-         System.out.println(&#34;hello world&#34;);
+         System.out.println(&quot;hello world&quot;);
      }
  }
 </code></pre><ul>
@@ -516,7 +585,7 @@ public class Demo1_8 extends ClassLoader { // 可以用来加载类的二进制�
 <pre tabindex="0"><code>========================类基本信息========================
   Last modified 2022-10-14; size 567 bytes
   MD5 checksum 8efebdac91aa496515fa1c161184e354
-  Compiled from &#34;HelloWorld.java&#34;
+  Compiled from &quot;HelloWorld.java&quot;
 public class cn.itcast.jvm.t5.HelloWorld
   minor version: 0
   major version: 52
@@ -524,7 +593,7 @@ public class cn.itcast.jvm.t5.HelloWorld
   
 ========================常量池========================
 Constant pool:
-   #1 = Methodref          #6.#20         // java/lang/Object.&#34;&lt;init&gt;&#34;:()V
+   #1 = Methodref          #6.#20         // java/lang/Object.&quot;&lt;init&gt;&quot;:()V
    #2 = Fieldref           #21.#22        // java/lang/System.out:Ljava/io/PrintStream;
    #3 = String             #23            // hello world
    #4 = Methodref          #24.#25        // java/io/PrintStream.println:(Ljava/lang/String;)V
@@ -543,7 +612,7 @@ Constant pool:
   #17 = Utf8               [Ljava/lang/String;
   #18 = Utf8               SourceFile
   #19 = Utf8               HelloWorld.java
-  #20 = NameAndType        #7:#8          // &#34;&lt;init&gt;&#34;:()V
+  #20 = NameAndType        #7:#8          // &quot;&lt;init&gt;&quot;:()V
   #21 = Class              #28            // java/lang/System
   #22 = NameAndType        #29:#30        // out:Ljava/io/PrintStream;
   #23 = Utf8               hello world
@@ -567,7 +636,7 @@ Constant pool:
     Code:
       stack=1, locals=1, args_size=1
          0: aload_0
-         1: invokespecial #1                  // Method java/lang/Object.&#34;&lt;init&gt;&#34;:()V
+         1: invokespecial #1                  // Method java/lang/Object.&quot;&lt;init&gt;&quot;:()V
          4: return
       LineNumberTable:
         line 4: 0
@@ -591,7 +660,8 @@ Constant pool:
         Start  Length  Slot  Name   Signature
             0       9     0  args   [Ljava/lang/String;
 }
-SourceFile: &#34;HelloWorld.java&#34;
+SourceFile: &quot;HelloWorld.java&quot;
+
 </code></pre><table>
 <thead>
 <tr>
@@ -685,40 +755,41 @@ SourceFile: &#34;HelloWorld.java&#34;
 <p>直到用到了该符号，才会创建对应的字符串对象放入字符串常量池</p>
 <h5 id="举例说明依据字节码">举例说明(依据字节码)</h5>
 <p>java代码</p>
-<pre tabindex="0"><code>// StringTable [ &#34;a&#34;, &#34;b&#34; ,&#34;ab&#34; ]  hashtable 结构，不能扩容
+<pre tabindex="0"><code>// StringTable [ &quot;a&quot;, &quot;b&quot; ,&quot;ab&quot; ]  hashtable 结构，不能扩容
 public class Demo1_22 {
     // 常量池中的信息，都会被加载到运行时常量池中， 这时 a b ab 都是常量池中的符号，还没有变为 java 字符串对象
-    // ldc #2 会把 a 符号变为 &#34;a&#34; 字符串对象
-    // ldc #3 会把 b 符号变为 &#34;b&#34; 字符串对象
-    // ldc #4 会把 ab 符号变为 &#34;ab&#34; 字符串对象
+    // ldc #2 会把 a 符号变为 &quot;a&quot; 字符串对象
+    // ldc #3 会把 b 符号变为 &quot;b&quot; 字符串对象
+    // ldc #4 会把 ab 符号变为 &quot;ab&quot; 字符串对象
 
     public static void main(String[] args) {
-        String s1 = &#34;a&#34;; // 懒惰的
-        String s2 = &#34;b&#34;;
-        String s3 = &#34;ab&#34;;
-        String s4 = s1 + s2; //通过字节码可以知道，实际上是 new StringBuilder().append(&#34;a&#34;).append(&#34;b&#34;).toString() 和  new String(&#34;ab&#34;)
+        String s1 = &quot;a&quot;; // 懒惰的
+        String s2 = &quot;b&quot;;
+        String s3 = &quot;ab&quot;;
+        String s4 = s1 + s2; //通过字节码可以知道，实际上是 new StringBuilder().append(&quot;a&quot;).append(&quot;b&quot;).toString() 和  new String(&quot;ab&quot;)
         System.out.println(s3 == s4);// false  因为s3在串池，s4在堆中
-        String s5 = &#34;a&#34; + &#34;b&#34;;  // javac 在编译期间的优化，结果已经在编译期确定为ab
+        String s5 = &quot;a&quot; + &quot;b&quot;;  // javac 在编译期间的优化，结果已经在编译期确定为ab
         System.out.println(s3 == s5);//true 因为都是在串池
 
     }
 }
+
 </code></pre><p>java字节码</p>
 <pre tabindex="0"><code>Classfile /G:/xrqProjects/jvm/代码/jvm/out/production/jvm/cn/itcast/jvm/t1/stringtable/Demo1_22.class
   Last modified 2022-10-17; size 1057 bytes
   MD5 checksum b94bb46c9f03f10beb6d57556ca42557
-  Compiled from &#34;Demo1_22.java&#34;
+  Compiled from &quot;Demo1_22.java&quot;
 public class cn.itcast.jvm.t1.stringtable.Demo1_22
   minor version: 0
   major version: 52
   flags: ACC_PUBLIC, ACC_SUPER
 Constant pool:
-   #1 = Methodref          #12.#36        // java/lang/Object.&#34;&lt;init&gt;&#34;:()V
+   #1 = Methodref          #12.#36        // java/lang/Object.&quot;&lt;init&gt;&quot;:()V
    #2 = String             #37            // a
    #3 = String             #38            // b
    #4 = String             #39            // ab
    #5 = Class              #40            // java/lang/StringBuilder
-   #6 = Methodref          #5.#36         // java/lang/StringBuilder.&#34;&lt;init&gt;&#34;:()V
+   #6 = Methodref          #5.#36         // java/lang/StringBuilder.&quot;&lt;init&gt;&quot;:()V
    #7 = Methodref          #5.#41         // java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
    #8 = Methodref          #5.#42         // java/lang/StringBuilder.toString:()Ljava/lang/String;
    #9 = Fieldref           #43.#44        // java/lang/System.out:Ljava/io/PrintStream;
@@ -743,12 +814,12 @@ Constant pool:
   #28 = Utf8               s4
   #29 = Utf8               s5
   #30 = Utf8               StackMapTable
-  #31 = Class              #23            // &#34;[Ljava/lang/String;&#34;
+  #31 = Class              #23            // &quot;[Ljava/lang/String;&quot;
   #32 = Class              #49            // java/lang/String
   #33 = Class              #50            // java/io/PrintStream
   #34 = Utf8               SourceFile
   #35 = Utf8               Demo1_22.java
-  #36 = NameAndType        #13:#14        // &#34;&lt;init&gt;&#34;:()V
+  #36 = NameAndType        #13:#14        // &quot;&lt;init&gt;&quot;:()V
   #37 = Utf8               a
   #38 = Utf8               b
   #39 = Utf8               ab
@@ -779,7 +850,7 @@ Constant pool:
     Code:
       stack=1, locals=1, args_size=1
          0: aload_0
-         1: invokespecial #1                  // Method java/lang/Object.&#34;&lt;init&gt;&#34;:()V
+         1: invokespecial #1                  // Method java/lang/Object.&quot;&lt;init&gt;&quot;:()V
          4: return
       LineNumberTable:
         line 4: 0
@@ -800,7 +871,7 @@ Constant pool:
          8: astore_3
          9: new           #5                  // class java/lang/StringBuilder
         12: dup
-        13: invokespecial #6                  // Method java/lang/StringBuilder.&#34;&lt;init&gt;&#34;:()V
+        13: invokespecial #6                  // Method java/lang/StringBuilder.&quot;&lt;init&gt;&quot;:()V
         16: aload_1
         17: invokevirtual #7                  // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
         20: aload_2
@@ -846,22 +917,23 @@ Constant pool:
       StackMapTable: number_of_entries = 4
         frame_type = 255 /* full_frame */
           offset_delta = 42
-          locals = [ class &#34;[Ljava/lang/String;&#34;, class java/lang/String, class java/lang/String, class java/lang/String, class java/lang/String ]
+          locals = [ class &quot;[Ljava/lang/String;&quot;, class java/lang/String, class java/lang/String, class java/lang/String, class java/lang/String ]
           stack = [ class java/io/PrintStream ]
         frame_type = 255 /* full_frame */
           offset_delta = 0
-          locals = [ class &#34;[Ljava/lang/String;&#34;, class java/lang/String, class java/lang/String, class java/lang/String, class java/lang/String ]
+          locals = [ class &quot;[Ljava/lang/String;&quot;, class java/lang/String, class java/lang/String, class java/lang/String, class java/lang/String ]
           stack = [ class java/io/PrintStream, int ]
         frame_type = 255 /* full_frame */
           offset_delta = 19
-          locals = [ class &#34;[Ljava/lang/String;&#34;, class java/lang/String, class java/lang/String, class java/lang/String, class java/lang/String, class java/lang/String ]
+          locals = [ class &quot;[Ljava/lang/String;&quot;, class java/lang/String, class java/lang/String, class java/lang/String, class java/lang/String, class java/lang/String ]
           stack = [ class java/io/PrintStream ]
         frame_type = 255 /* full_frame */
           offset_delta = 0
-          locals = [ class &#34;[Ljava/lang/String;&#34;, class java/lang/String, class java/lang/String, class java/lang/String, class java/lang/String, class java/lang/String ]
+          locals = [ class &quot;[Ljava/lang/String;&quot;, class java/lang/String, class java/lang/String, class java/lang/String, class java/lang/String, class java/lang/String ]
           stack = [ class java/io/PrintStream, int ]
 }
-SourceFile: &#34;Demo1_22.java&#34;
+SourceFile: &quot;Demo1_22.java&quot;
+
 </code></pre><h5 id="特征">特征</h5>
 <ul>
 <li>常量池中的字符串仅是符号，只有<strong>在被用到时才会转化为对象</strong></li>
@@ -883,28 +955,28 @@ SourceFile: &#34;Demo1_22.java&#34;
 </li>
 </ul>
 <p>JDK 1.7后，intern方法还是会先去查询常量池中是否有已经存在，如果存在，则返回常量池中的引用，这一点与之前没有区别，区别在于，如果在常量池找不到对应的字符串，则不会再将字符串拷贝到常量池，而只是在常量池中生成一个对原字符串的引用。简单的说，就是往常量池放的东西变了：原来在常量池中找不到时，复制一个副本放到常量池，1.7后则是将在堆上的地址引用复制到常量池。</p>
-<pre tabindex="0"><code>例子1：先创建堆字符串
+<pre tabindex="0"><code>例子1：先创建堆字符串，再intern()
 public static void main(String[] args) {
-    //串池：【&#34;a&#34; &#34;b&#34;】,堆：【new String(&#34;a&#34;)，new String(&#34;b&#34;), new String(&#34;ab&#34;)】
-    String s = new String(&#34;a&#34;) + new String(&#34;b&#34;);
+    //串池：【&quot;a&quot; &quot;b&quot;】,堆：【new String(&quot;a&quot;)，new String(&quot;b&quot;), new String(&quot;ab&quot;)】
+    String s = new String(&quot;a&quot;) + new String(&quot;b&quot;);
 
-    //调用intern方法，这时串池中没有&#34;ab&#34;，则会将s这个对象引用放入到串池中，此时堆内存与串池中的&#34;ab&#34;是同一个字符串对象的引用
+    //调用intern方法，这时串池中没有&quot;ab&quot;，则会将s这个对象引用放入到串池中，此时堆内存与串池中的&quot;ab&quot;是同一个字符串对象的引用
     String s2 = s.intern();
 
     //与串池中的ab对象做比较 返回true
-    System.out.println(s2 == &#34;ab&#34;);
+    System.out.println(s2 == &quot;ab&quot;);
 
-    //比较的是引用 返回true
-    System.out.println(s == &#34;ab&#34;);
+    //比较的是引用 返回true  jdk1.6这里是false
+    System.out.println(s == &quot;ab&quot;);
 }
-</code></pre><pre tabindex="0"><code>例子2：先创建串池字符串，后创建堆中字符串
+</code></pre><pre tabindex="0"><code>例子2：先创建串池字符串，后创建堆中字符串，再intern()
 public static void main(String[] args) {
-    //串池：【&#34;ab&#34;】
-    String x = &#34;ab&#34;;
+    //串池：【&quot;ab&quot;】
+    String x = &quot;ab&quot;;
 
-    //串池：【&#34;ab&#34;,&#34;a&#34; &#34;b&#34;】,这一步只是添加了【&#34;a&#34; &#34;b&#34;】
+    //串池：【&quot;ab&quot;,&quot;a&quot; &quot;b&quot;】,这一步只是添加了【&quot;a&quot; &quot;b&quot;】
     //并且在堆中创建了 s对象 ，s和x不是同一个对象，因为是串池中的“ab”先创建，堆中拼接后创建
-    String s = new String(&#34;a&#34;) + new String(&#34;b&#34;);
+    String s = new String(&quot;a&quot;) + new String(&quot;b&quot;);
 
     //串池中已经有ab了，所以s被没有被放进去，返回的是串池中的对象
     String s2 = s.intern();
@@ -923,9 +995,63 @@ public static void main(String[] args) {
 </ul>
 <p>无论放入是否成功，都会返回<strong>串池中</strong>的字符串对象</p>
 <p><strong>注意</strong>：此时无论调用intern方法成功与否，串池中的字符串对象和堆内存中的字符串对象<strong>都不是同一个对象</strong>，上面例子1中  System.out.println(s== &ldquo;ab&rdquo;);返回false</p>
-<h5 id="stringtable-垃圾回收">StringTable 垃圾回收</h5>
-<p>在jvm1.6中，StringTable是常量池的一部分，在jvm1.8开始，StringTable存在了堆中。为什么要变呢？因为永久代是在full gc的时候，才会gc。触发的时间比较慢。导致StringTable 回收效率不高。但StringTable 使用频繁，java程序中会大量使用字符串常量。回收效率不高会占用大量内存。</p>
-<p>常量池是在永久代在内存紧张时，会发生垃圾回收</p>
+<h5 id="垃圾回收">垃圾回收</h5>
+<p>StringTable在内存紧张时，会发生垃圾回收</p>
+<p>在jvm1.6中，StringTable是常量池的一部分。</p>
+<p>在jvm1.8中，StringTable存在了堆中。</p>
+<p>为什么要变呢？因为永久代是在full gc的时候，才会gc。触发的时间比较慢。导致StringTable 回收效率不高。但StringTable 使用频繁，如java程序中会大量使用字符串常量。回收效率不高会占用大量内存，有可能会导致永久代内存不足。在堆中只要minor gc就会触发gc。</p>
+<p>注意：</p>
+<p>1.6永久代和堆逻辑上是相互隔离的，但它们使用的物理内存是连续的。</p>
+<p>1.8元空间不再与堆连续，而且是存在于本地内存（Native memory）</p>
+<p><a href="https://blog.csdn.net/ju_362204801/article/details/122379813" target="_blank" rel="noopener noreffer ">https://blog.csdn.net/ju_362204801/article/details/122379813</a></p>
+<h5 id="stringtable调优">StringTable调优</h5>
+<ul>
+<li>StringTable是由类似juc里的HashTable实现的，所以可以<strong>适当增加桶的个数</strong>，从而减少哈希碰撞，来减少字符串放入串池所需要的时间。</li>
+</ul>
+<pre tabindex="0"><code>-XX:StringTableSize=20000
+</code></pre><ul>
+<li>如果有大量的字符串，并且有不少是重复的，可以通过intern方法减去重后入池，减少内存占用。因为在串池中，相同的字符串在串池只会存储一份。</li>
+</ul>
+<h4 id="直接内存">直接内存</h4>
+<ul>
+<li>
+<p>属于操作系统，常见于NIO操作时，<strong>用于数据缓冲区</strong></p>
+</li>
+<li>
+<p>分配回收成本较高，但读写性能高</p>
+</li>
+<li>
+<p>不受JVM内存回收管理</p>
+</li>
+<li>
+<p>java 想要读取文件时，需要从用户态切换到内核态，通过内核态将文件先读取到系统缓冲区，再读取到java缓冲区。</p>
+</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="042_%e7%9b%b4%e6%8e%a5%e5%86%85%e5%ad%98_Io.png"
+        data-srcset="042_%e7%9b%b4%e6%8e%a5%e5%86%85%e5%ad%98_Io.png, 042_%e7%9b%b4%e6%8e%a5%e5%86%85%e5%ad%98_Io.png 1.5x, 042_%e7%9b%b4%e6%8e%a5%e5%86%85%e5%ad%98_Io.png 2x"
+        data-sizes="auto"
+        alt="042_直接内存_Io.png"
+        title="042_直接内存_Io.png" /></p>
+<ul>
+<li>直接内存是操作系统和Java代码都可以访问的一块区域，无需将代码从系统内存复制到Java堆内存，从而提高了效率。比如nio中的ByteBuffer.allocateDirect(16)。</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="042_%e7%9b%b4%e6%8e%a5%e5%86%85%e5%ae%b9_nio.png"
+        data-srcset="042_%e7%9b%b4%e6%8e%a5%e5%86%85%e5%ae%b9_nio.png, 042_%e7%9b%b4%e6%8e%a5%e5%86%85%e5%ae%b9_nio.png 1.5x, 042_%e7%9b%b4%e6%8e%a5%e5%86%85%e5%ae%b9_nio.png 2x"
+        data-sizes="auto"
+        alt="042_直接内容_nio.png"
+        title="042_直接内容_nio.png" /></p>
+<ul>
+<li>class java.nio.HeapByteBuffer          -java 堆内存，读写效率较低 ，就和普通javabean 对象一会受到GC影响</li>
+<li>class java.nio.DirectByteBuffer        -直接内存 ，读写效率高（少一次拷贝），不会受到java GC的影响，分配内存效率低,但是也会有内存溢出的限制。</li>
+</ul>
+<h5 id="释放原理">释放原理</h5>
+<p>java.nio.DirectByteBuffer 直接内存的回收不是通过JVM的垃圾回收来释放的，而是通过<strong>unsafe.freeMemory</strong>来手动释放</p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
@@ -952,8 +1078,8 @@ public static void main(String[] args) {
 </div>
 </article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.105.0-DEV">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
-                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ricky</a></span></div>
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.92.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ricky</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>
 
@@ -962,5 +1088,5 @@ public static void main(String[] args) {
             </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
                 <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
             </a>
-        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
 </html>

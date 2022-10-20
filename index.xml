@@ -2,11 +2,19 @@
     <channel>
         <title>ricky的网站</title>
         <link>https://shengtu0328.github.io/</link>
-        <description>This is my cool site</description>
+        <description>The best time to plant a tree was 10 years ago, the second is now</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1007@qq.com (ricky)</managingEditor>
-            <webMaster>1007@qq.com (ricky)</webMaster><lastBuildDate>Wed, 12 Oct 2022 17:55:52 &#43;0800</lastBuildDate>
+            <webMaster>1007@qq.com (ricky)</webMaster><lastBuildDate>Fri, 14 Oct 2022 10:03:11 &#43;0800</lastBuildDate>
             <atom:link href="https://shengtu0328.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Hugo</title>
+    <link>https://shengtu0328.github.io/posts/hugo/</link>
+    <pubDate>Fri, 14 Oct 2022 10:03:11 &#43;0800</pubDate>
+    <author>ricky</author>
+    <guid>https://shengtu0328.github.io/posts/hugo/</guid>
+    <description><![CDATA[一级标题 二级标题1 二级标题2 三级标题1 [TOC] 四级标题 三级标题2 四级标题 五级标题 一级标题 二级标题 三级标题 四级标题 五级标题]]></description>
+</item>
+<item>
     <title>Spring</title>
     <link>https://shengtu0328.github.io/posts/spring/</link>
     <pubDate>Wed, 12 Oct 2022 17:55:52 &#43;0800</pubDate>
