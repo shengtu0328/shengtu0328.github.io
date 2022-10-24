@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/shengtu0328.github.io\/posts\/jvm\/"
-        },"genre": "posts","wordcount":  6431 ,
+        },"genre": "posts","wordcount":  8478 ,
         "url": "https:\/\/shengtu0328.github.io\/posts\/jvm\/","datePublished": "2022-10-11T18:23:30+08:00","dateModified": "2022-10-11T18:23:30+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -102,8 +102,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">JVM学习</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-10-11">2022-10-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;6431 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;13 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-10-11">2022-10-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;8478 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;17 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -173,6 +173,22 @@
         </li>
       </ul>
     </li>
+    <li><a href="#三垃圾回收">三、垃圾回收</a>
+      <ul>
+        <li><a href="#1如何判断对象可以回收">1、如何判断对象可以回收</a>
+          <ul>
+            <li><a href="#引用计数法">引用计数法</a></li>
+            <li><a href="#可达性分析算法jvm用的">可达性分析算法（JVM用的）</a></li>
+            <li><a href="#五种引用">五种引用</a>
+              <ul>
+                <li><a href="#强引用">强引用</a></li>
+                <li><a href="#软引用">软引用</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h2 id="一什么是jvm">一、什么是JVM</h2>
@@ -205,29 +221,89 @@
 <ul>
 <li>
 <p>栈内存大小</p>
-<pre tabindex="0"><code>-Xss1024k
-</code></pre></li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">-Xss1024k
+</code></pre></td></tr></table>
+</div>
+</div></li>
 <li>
 <p>堆内存大小</p>
-<pre tabindex="0"><code>-Xmx4G
-</code></pre></li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">-Xmx4G
+</code></pre></td></tr></table>
+</div>
+</div></li>
 <li>
 <p>永久代大小 1.8 以前</p>
-<pre tabindex="0"><code>-XX:MaxPermSize=8m
-</code></pre></li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">-XX:MaxPermSize=8m
+</code></pre></td></tr></table>
+</div>
+</div></li>
 <li>
 <p>元空间大小 1.8 以后</p>
-<pre tabindex="0"><code>-XX:MaxMetaspaceSize=8m
-</code></pre></li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">-XX:MaxMetaspaceSize=8m
+</code></pre></td></tr></table>
+</div>
+</div></li>
 <li>
 <p>堆空间回收不足开关 +是启用，-是不启用</p>
-<pre tabindex="0"><code>-XX:-UseGCOverheadLimit
-</code></pre><pre tabindex="0"><code>+XX:-UseGCOverheadLimit
-</code></pre></li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">-XX:-UseGCOverheadLimit
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">+XX:-UseGCOverheadLimit
+</code></pre></td></tr></table>
+</div>
+</div></li>
 <li>
 <p>StringTable 桶个数</p>
-<pre tabindex="0"><code>-XX:StringTableSize=20000
-</code></pre></li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">-XX:StringTableSize=20000
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>禁用显示辣鸡回收，如System.gc() 注意：System.gc()是full gc，新生代，老年代。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">-XX:+DisableExplicitGC 显式的
+</code></pre></td></tr></table>
+</div>
+</div></li>
 </ul>
 <h2 id="二内存结构">二、内存结构</h2>
 <p><img
@@ -291,10 +367,29 @@
 <li>每个<strong>线程</strong>运行需要的内存空间，称为<strong>虚拟机栈</strong></li>
 <li>每个栈由多个<strong>栈帧</strong>组成，对应着每次调用<strong>方法</strong>时所占用的内存</li>
 <li>每个线程只能有<strong>一个活动栈帧</strong>，对应着<strong>当前正在执行的方法</strong></li>
+<li>Student s=new Student()；s这个变量也是在栈里，new Student()对象是在堆里</li>
 </ul>
 <h4 id="演示">演示</h4>
 <p>代码</p>
-<pre tabindex="0"><code>public class Main {
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public class Main {
 	public static void main(String[] args) {
 		method1();
 	}
@@ -308,7 +403,9 @@
 		return c;
 	}
 }
-</code></pre><p>可以参考idea debug模式下的 Frames</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>可以参考idea debug模式下的 Frames</p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -522,7 +619,36 @@
 <p>-XX:MaxMetaspaceSize=8m</p>
 </li>
 </ul>
-<pre tabindex="0"><code>/**
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">/**
  * 演示元空间内存溢出 java.lang.OutOfMemoryError: Metaspace
  * 元空间 大小参数设置
  * -XX:MaxMetaspaceSize=8m
@@ -536,18 +662,20 @@ public class Demo1_8 extends ClassLoader { // 可以用来加载类的二进制�
                 // ClassWriter 作用是生成类的二进制字节码
                 ClassWriter cw = new ClassWriter(0);
                 //参数定义: 版本号， public， 类名, 包名, 父类， 接口
-                cw.visit(Opcodes.V1_8, Opcodes.ACC_PUBLIC, &quot;Class&quot; + i, null, &quot;java/lang/Object&quot;, null);
+                cw.visit(Opcodes.V1_8, Opcodes.ACC_PUBLIC, &#34;Class&#34; + i, null, &#34;java/lang/Object&#34;, null);
                 // 返回 byte[]
                 byte[] code = cw.toByteArray();
                 // 执行了类的加载
-                test.defineClass(&quot;Class&quot; + i, code, 0, code.length); // Class 对象
+                test.defineClass(&#34;Class&#34; + i, code, 0, code.length); // Class 对象
             }
         } finally {
             System.out.println(j);
         }
     }
 }
-</code></pre><p>工作中加载类的场景</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>工作中加载类的场景</p>
 <ul>
 <li>
 <p>spring</p>
@@ -570,22 +698,118 @@ public class Demo1_8 extends ClassLoader { // 可以用来加载类的二进制�
 </ul>
 <h5 id="举例说明">举例说明</h5>
 <p>用java代码反编译举个例子</p>
-<pre tabindex="0"><code> // 二进制字节码（类基本信息，常量池，类方法定义，包含了虚拟机指令）
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"> // 二进制字节码（类基本信息，常量池，类方法定义，包含了虚拟机指令）
  public class HelloWorld {
      public static void main(String[] args) {
-         System.out.println(&quot;hello world&quot;);
+         System.out.println(&#34;hello world&#34;);
      }
  }
-</code></pre><ul>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
 <li>
 <p>javap -v HelloWorld.class</p>
 <p>反编译</p>
 </li>
 </ul>
-<pre tabindex="0"><code>========================类基本信息========================
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">========================类基本信息========================
   Last modified 2022-10-14; size 567 bytes
   MD5 checksum 8efebdac91aa496515fa1c161184e354
-  Compiled from &quot;HelloWorld.java&quot;
+  Compiled from &#34;HelloWorld.java&#34;
 public class cn.itcast.jvm.t5.HelloWorld
   minor version: 0
   major version: 52
@@ -593,7 +817,7 @@ public class cn.itcast.jvm.t5.HelloWorld
   
 ========================常量池========================
 Constant pool:
-   #1 = Methodref          #6.#20         // java/lang/Object.&quot;&lt;init&gt;&quot;:()V
+   #1 = Methodref          #6.#20         // java/lang/Object.&#34;&lt;init&gt;&#34;:()V
    #2 = Fieldref           #21.#22        // java/lang/System.out:Ljava/io/PrintStream;
    #3 = String             #23            // hello world
    #4 = Methodref          #24.#25        // java/io/PrintStream.println:(Ljava/lang/String;)V
@@ -612,7 +836,7 @@ Constant pool:
   #17 = Utf8               [Ljava/lang/String;
   #18 = Utf8               SourceFile
   #19 = Utf8               HelloWorld.java
-  #20 = NameAndType        #7:#8          // &quot;&lt;init&gt;&quot;:()V
+  #20 = NameAndType        #7:#8          // &#34;&lt;init&gt;&#34;:()V
   #21 = Class              #28            // java/lang/System
   #22 = NameAndType        #29:#30        // out:Ljava/io/PrintStream;
   #23 = Utf8               hello world
@@ -636,7 +860,7 @@ Constant pool:
     Code:
       stack=1, locals=1, args_size=1
          0: aload_0
-         1: invokespecial #1                  // Method java/lang/Object.&quot;&lt;init&gt;&quot;:()V
+         1: invokespecial #1                  // Method java/lang/Object.&#34;&lt;init&gt;&#34;:()V
          4: return
       LineNumberTable:
         line 4: 0
@@ -660,9 +884,11 @@ Constant pool:
         Start  Length  Slot  Name   Signature
             0       9     0  args   [Ljava/lang/String;
 }
-SourceFile: &quot;HelloWorld.java&quot;
+SourceFile: &#34;HelloWorld.java&#34;
 
-</code></pre><table>
+</code></pre></td></tr></table>
+</div>
+</div><table>
 <thead>
 <tr>
 <th>翻译下就是</th>
@@ -755,41 +981,229 @@ SourceFile: &quot;HelloWorld.java&quot;
 <p>直到用到了该符号，才会创建对应的字符串对象放入字符串常量池</p>
 <h5 id="举例说明依据字节码">举例说明(依据字节码)</h5>
 <p>java代码</p>
-<pre tabindex="0"><code>// StringTable [ &quot;a&quot;, &quot;b&quot; ,&quot;ab&quot; ]  hashtable 结构，不能扩容
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">// StringTable [ &#34;a&#34;, &#34;b&#34; ,&#34;ab&#34; ]  hashtable 结构，不能扩容
 public class Demo1_22 {
     // 常量池中的信息，都会被加载到运行时常量池中， 这时 a b ab 都是常量池中的符号，还没有变为 java 字符串对象
-    // ldc #2 会把 a 符号变为 &quot;a&quot; 字符串对象
-    // ldc #3 会把 b 符号变为 &quot;b&quot; 字符串对象
-    // ldc #4 会把 ab 符号变为 &quot;ab&quot; 字符串对象
+    // ldc #2 会把 a 符号变为 &#34;a&#34; 字符串对象
+    // ldc #3 会把 b 符号变为 &#34;b&#34; 字符串对象
+    // ldc #4 会把 ab 符号变为 &#34;ab&#34; 字符串对象
 
     public static void main(String[] args) {
-        String s1 = &quot;a&quot;; // 懒惰的
-        String s2 = &quot;b&quot;;
-        String s3 = &quot;ab&quot;;
-        String s4 = s1 + s2; //通过字节码可以知道，实际上是 new StringBuilder().append(&quot;a&quot;).append(&quot;b&quot;).toString() 和  new String(&quot;ab&quot;)
+        String s1 = &#34;a&#34;; // 懒惰的
+        String s2 = &#34;b&#34;;
+        String s3 = &#34;ab&#34;;
+        String s4 = s1 + s2; //通过字节码可以知道，实际上是 new StringBuilder().append(&#34;a&#34;).append(&#34;b&#34;).toString() 和  new String(&#34;ab&#34;)
         System.out.println(s3 == s4);// false  因为s3在串池，s4在堆中
-        String s5 = &quot;a&quot; + &quot;b&quot;;  // javac 在编译期间的优化，结果已经在编译期确定为ab
+        String s5 = &#34;a&#34; + &#34;b&#34;;  // javac 在编译期间的优化，结果已经在编译期确定为ab
         System.out.println(s3 == s5);//true 因为都是在串池
 
     }
 }
 
-</code></pre><p>java字节码</p>
-<pre tabindex="0"><code>Classfile /G:/xrqProjects/jvm/代码/jvm/out/production/jvm/cn/itcast/jvm/t1/stringtable/Demo1_22.class
+</code></pre></td></tr></table>
+</div>
+</div><p>java字节码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Classfile /G:/xrqProjects/jvm/代码/jvm/out/production/jvm/cn/itcast/jvm/t1/stringtable/Demo1_22.class
   Last modified 2022-10-17; size 1057 bytes
   MD5 checksum b94bb46c9f03f10beb6d57556ca42557
-  Compiled from &quot;Demo1_22.java&quot;
+  Compiled from &#34;Demo1_22.java&#34;
 public class cn.itcast.jvm.t1.stringtable.Demo1_22
   minor version: 0
   major version: 52
   flags: ACC_PUBLIC, ACC_SUPER
 Constant pool:
-   #1 = Methodref          #12.#36        // java/lang/Object.&quot;&lt;init&gt;&quot;:()V
+   #1 = Methodref          #12.#36        // java/lang/Object.&#34;&lt;init&gt;&#34;:()V
    #2 = String             #37            // a
    #3 = String             #38            // b
    #4 = String             #39            // ab
    #5 = Class              #40            // java/lang/StringBuilder
-   #6 = Methodref          #5.#36         // java/lang/StringBuilder.&quot;&lt;init&gt;&quot;:()V
+   #6 = Methodref          #5.#36         // java/lang/StringBuilder.&#34;&lt;init&gt;&#34;:()V
    #7 = Methodref          #5.#41         // java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
    #8 = Methodref          #5.#42         // java/lang/StringBuilder.toString:()Ljava/lang/String;
    #9 = Fieldref           #43.#44        // java/lang/System.out:Ljava/io/PrintStream;
@@ -814,12 +1228,12 @@ Constant pool:
   #28 = Utf8               s4
   #29 = Utf8               s5
   #30 = Utf8               StackMapTable
-  #31 = Class              #23            // &quot;[Ljava/lang/String;&quot;
+  #31 = Class              #23            // &#34;[Ljava/lang/String;&#34;
   #32 = Class              #49            // java/lang/String
   #33 = Class              #50            // java/io/PrintStream
   #34 = Utf8               SourceFile
   #35 = Utf8               Demo1_22.java
-  #36 = NameAndType        #13:#14        // &quot;&lt;init&gt;&quot;:()V
+  #36 = NameAndType        #13:#14        // &#34;&lt;init&gt;&#34;:()V
   #37 = Utf8               a
   #38 = Utf8               b
   #39 = Utf8               ab
@@ -850,7 +1264,7 @@ Constant pool:
     Code:
       stack=1, locals=1, args_size=1
          0: aload_0
-         1: invokespecial #1                  // Method java/lang/Object.&quot;&lt;init&gt;&quot;:()V
+         1: invokespecial #1                  // Method java/lang/Object.&#34;&lt;init&gt;&#34;:()V
          4: return
       LineNumberTable:
         line 4: 0
@@ -871,7 +1285,7 @@ Constant pool:
          8: astore_3
          9: new           #5                  // class java/lang/StringBuilder
         12: dup
-        13: invokespecial #6                  // Method java/lang/StringBuilder.&quot;&lt;init&gt;&quot;:()V
+        13: invokespecial #6                  // Method java/lang/StringBuilder.&#34;&lt;init&gt;&#34;:()V
         16: aload_1
         17: invokevirtual #7                  // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
         20: aload_2
@@ -917,24 +1331,26 @@ Constant pool:
       StackMapTable: number_of_entries = 4
         frame_type = 255 /* full_frame */
           offset_delta = 42
-          locals = [ class &quot;[Ljava/lang/String;&quot;, class java/lang/String, class java/lang/String, class java/lang/String, class java/lang/String ]
+          locals = [ class &#34;[Ljava/lang/String;&#34;, class java/lang/String, class java/lang/String, class java/lang/String, class java/lang/String ]
           stack = [ class java/io/PrintStream ]
         frame_type = 255 /* full_frame */
           offset_delta = 0
-          locals = [ class &quot;[Ljava/lang/String;&quot;, class java/lang/String, class java/lang/String, class java/lang/String, class java/lang/String ]
+          locals = [ class &#34;[Ljava/lang/String;&#34;, class java/lang/String, class java/lang/String, class java/lang/String, class java/lang/String ]
           stack = [ class java/io/PrintStream, int ]
         frame_type = 255 /* full_frame */
           offset_delta = 19
-          locals = [ class &quot;[Ljava/lang/String;&quot;, class java/lang/String, class java/lang/String, class java/lang/String, class java/lang/String, class java/lang/String ]
+          locals = [ class &#34;[Ljava/lang/String;&#34;, class java/lang/String, class java/lang/String, class java/lang/String, class java/lang/String, class java/lang/String ]
           stack = [ class java/io/PrintStream ]
         frame_type = 255 /* full_frame */
           offset_delta = 0
-          locals = [ class &quot;[Ljava/lang/String;&quot;, class java/lang/String, class java/lang/String, class java/lang/String, class java/lang/String, class java/lang/String ]
+          locals = [ class &#34;[Ljava/lang/String;&#34;, class java/lang/String, class java/lang/String, class java/lang/String, class java/lang/String, class java/lang/String ]
           stack = [ class java/io/PrintStream, int ]
 }
-SourceFile: &quot;Demo1_22.java&quot;
+SourceFile: &#34;Demo1_22.java&#34;
 
-</code></pre><h5 id="特征">特征</h5>
+</code></pre></td></tr></table>
+</div>
+</div><h5 id="特征">特征</h5>
 <ul>
 <li>常量池中的字符串仅是符号，只有<strong>在被用到时才会转化为对象</strong></li>
 <li>利用串池的机制，来避免重复创建字符串对象</li>
@@ -955,28 +1371,70 @@ SourceFile: &quot;Demo1_22.java&quot;
 </li>
 </ul>
 <p>JDK 1.7后，intern方法还是会先去查询常量池中是否有已经存在，如果存在，则返回常量池中的引用，这一点与之前没有区别，区别在于，如果在常量池找不到对应的字符串，则不会再将字符串拷贝到常量池，而只是在常量池中生成一个对原字符串的引用。简单的说，就是往常量池放的东西变了：原来在常量池中找不到时，复制一个副本放到常量池，1.7后则是将在堆上的地址引用复制到常量池。</p>
-<pre tabindex="0"><code>例子1：先创建堆字符串，再intern()
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">例子1：先创建堆字符串，再intern()
 public static void main(String[] args) {
-    //串池：【&quot;a&quot; &quot;b&quot;】,堆：【new String(&quot;a&quot;)，new String(&quot;b&quot;), new String(&quot;ab&quot;)】
-    String s = new String(&quot;a&quot;) + new String(&quot;b&quot;);
+    //串池：【&#34;a&#34; &#34;b&#34;】,堆：【new String(&#34;a&#34;)，new String(&#34;b&#34;), new String(&#34;ab&#34;)】
+    String s = new String(&#34;a&#34;) + new String(&#34;b&#34;);
 
-    //调用intern方法，这时串池中没有&quot;ab&quot;，则会将s这个对象引用放入到串池中，此时堆内存与串池中的&quot;ab&quot;是同一个字符串对象的引用
+    //调用intern方法，这时串池中没有&#34;ab&#34;，则会将s这个对象引用放入到串池中，此时堆内存与串池中的&#34;ab&#34;是同一个字符串对象的引用
     String s2 = s.intern();
 
     //与串池中的ab对象做比较 返回true
-    System.out.println(s2 == &quot;ab&quot;);
+    System.out.println(s2 == &#34;ab&#34;);
 
     //比较的是引用 返回true  jdk1.6这里是false
-    System.out.println(s == &quot;ab&quot;);
+    System.out.println(s == &#34;ab&#34;);
 }
-</code></pre><pre tabindex="0"><code>例子2：先创建串池字符串，后创建堆中字符串，再intern()
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">例子2：先创建串池字符串，后创建堆中字符串，再intern()
 public static void main(String[] args) {
-    //串池：【&quot;ab&quot;】
-    String x = &quot;ab&quot;;
+    //串池：【&#34;ab&#34;】
+    String x = &#34;ab&#34;;
 
-    //串池：【&quot;ab&quot;,&quot;a&quot; &quot;b&quot;】,这一步只是添加了【&quot;a&quot; &quot;b&quot;】
+    //串池：【&#34;ab&#34;,&#34;a&#34; &#34;b&#34;】,这一步只是添加了【&#34;a&#34; &#34;b&#34;】
     //并且在堆中创建了 s对象 ，s和x不是同一个对象，因为是串池中的“ab”先创建，堆中拼接后创建
-    String s = new String(&quot;a&quot;) + new String(&quot;b&quot;);
+    String s = new String(&#34;a&#34;) + new String(&#34;b&#34;);
 
     //串池中已经有ab了，所以s被没有被放进去，返回的是串池中的对象
     String s2 = s.intern();
@@ -987,7 +1445,9 @@ public static void main(String[] args) {
     //s是堆中的对象 x串池中对象 返回false
     System.out.println(s == x);
 }
-</code></pre><h5 id="intern方法-16">intern方法 1.6</h5>
+</code></pre></td></tr></table>
+</div>
+</div><h5 id="intern方法-16">intern方法 1.6</h5>
 <p>调用字符串对象的intern方法，会将该字符串对象尝试放入到串池中</p>
 <ul>
 <li>如果串池中没有该字符串对象，<strong>会将该字符串对象复制一份</strong>，再放入到串池中</li>
@@ -1008,8 +1468,15 @@ public static void main(String[] args) {
 <ul>
 <li>StringTable是由类似juc里的HashTable实现的，所以可以<strong>适当增加桶的个数</strong>，从而减少哈希碰撞，来减少字符串放入串池所需要的时间。</li>
 </ul>
-<pre tabindex="0"><code>-XX:StringTableSize=20000
-</code></pre><ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">-XX:StringTableSize=20000
+</code></pre></td></tr></table>
+</div>
+</div><ul>
 <li>如果有大量的字符串，并且有不少是重复的，可以通过intern方法减去重后入池，减少内存占用。因为在串池中，相同的字符串在串池只会存储一份。</li>
 </ul>
 <h4 id="直接内存">直接内存</h4>
@@ -1051,7 +1518,311 @@ public static void main(String[] args) {
 <li>class java.nio.DirectByteBuffer        -直接内存 ，读写效率高（少一次拷贝），不会受到java GC的影响，分配内存效率低,但是也会有内存溢出的限制。</li>
 </ul>
 <h5 id="释放原理">释放原理</h5>
-<p>java.nio.DirectByteBuffer 直接内存的回收不是通过JVM的垃圾回收来释放的，而是通过<strong>unsafe.freeMemory</strong>来手动释放</p>
+<p>java.nio.DirectByteBuffer 直接内存的回收不是通过JVM的垃圾回收来释放的，而是最终通过<strong>unsafe.freeMemory</strong>来手动释放</p>
+<ul>
+<li>使用了Unsafe类来完成直接内存的分配回收，回收需要主动调用freeMemory方法</li>
+<li>ByteBuffer的实现内部使用了Cleaner（虚引用）来检测ByteBuffer。一旦ByteBuffer被垃圾回收，那么会由ReferenceHandler来调用Cleaner的clean方法调用freeMemory来释放内存</li>
+<li>如果java中 ByteBuffer对象没有垃圾回收，直接内存对象不会自动回收，需要通过<strong>unsafe.freeMemory</strong>来手动释放</li>
+</ul>
+<p>通过 ByteBuffer.allocateDirect 得到DirectByteBuffer</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">ByteBuffer bb = ByteBuffer.allocateDirect(1024 * 1024)
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"> DirectByteBuffer(int cap) {                   // package-private
+
+        super(-1, 0, cap, cap);
+        boolean pa = VM.isDirectMemoryPageAligned();
+        int ps = Bits.pageSize();
+        long size = Math.max(1L, (long)cap + (pa ? ps : 0));
+        Bits.reserveMemory(size, cap);
+
+        long base = 0;
+        try {
+            base = unsafe.allocateMemory(size);// 分配了DirectByteBuffer对象的直接内存！！！！！！！！！！！！！！！
+        } catch (OutOfMemoryError x) {
+            Bits.unreserveMemory(size, cap);
+            throw x;
+        }
+        unsafe.setMemory(base, size, (byte) 0);
+        if (pa &amp;&amp; (base % ps != 0)) {
+            // Round up to page boundary
+            address = base + ps - (base &amp; (ps - 1));
+        } else {
+            address = base;
+        }
+        //Cleaner是个虚引用类型 Cleaner extends PhantomReference&lt;Object&gt;，当它所关联的对象被gc时，会触发它的clean方法。也就是this对象触发gc时，会调用Cleaner 的clean方法。
+        //本例中就是调用Deallocator里的 run方法 用unsafe 方式进行直接内存的回收
+        //在后台有个专门检测虚引用对象的ReferenceHandler 线程中clean方法执行。
+        cleaner = Cleaner.create(this, new Deallocator(base, size, cap));//
+        att = null;
+
+
+
+    }
+</code></pre></td></tr></table>
+</div>
+</div><p>回调任务对象Deallocator会释放DirectByteBuffer对象的直接内存！</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"> #Cleaner的 回调任务对象 
+ private static class Deallocator
+        implements Runnable
+    {
+
+        private static Unsafe unsafe = Unsafe.getUnsafe();
+
+        private long address;
+        private long size;
+        private int capacity;
+
+        private Deallocator(long address, long size, int capacity) {
+            assert (address != 0);
+            this.address = address;
+            this.size = size;
+            this.capacity = capacity;
+        }
+
+        public void run() {
+            if (address == 0) {
+                // Paranoia
+                return;
+            }
+            unsafe.freeMemory(address);// 释放了DirectByteBuffer对象的直接内存！！！！！！！！！！！！！！！
+            address = 0;
+            Bits.unreserveMemory(size, capacity);      
+        }
+
+    }
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="三垃圾回收">三、垃圾回收</h2>
+<h3 id="1如何判断对象可以回收">1、如何判断对象可以回收</h3>
+<h4 id="引用计数法">引用计数法</h4>
+<p>只要这个对象被其他对象引用就 计数加一，不再被引用就减一。0代表可以回收。</p>
+<p>弊端：循环引用时，两个对象的计数都为1，导致两个对象都无法被释放</p>
+<h4 id="可达性分析算法jvm用的">可达性分析算法（JVM用的）</h4>
+<ul>
+<li>
+<p>JVM中的垃圾回收器通过<strong>可达性分析</strong>来探索所有存活的对象</p>
+</li>
+<li>
+<p>扫描 <strong>堆</strong> 中的对象，看能否沿着GC Root对象为起点的引用链找到该对象，如果<strong>找不到，则表示可以回收</strong></p>
+<p>例子：抓住葡萄的根，连着的葡萄就是不可辣鸡回收的对象，落下的葡萄就是可辣鸡回收的对象</p>
+</li>
+<li>
+<p>可以作为GC Root的对象，指肯定不能被辣鸡回收 的对象</p>
+<ul>
+<li>虚拟机栈（栈帧中的本地变量表）中引用的对象。　</li>
+<li>方法区中类静态属性引用的对象</li>
+<li>方法区中常量引用的对象</li>
+<li>本地方法栈中JNI（即一般说的Native方法）引用的对象</li>
+</ul>
+</li>
+</ul>
+<h4 id="五种引用">五种引用</h4>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="054_5%e7%a7%8d%e5%bc%95%e7%94%a8.png"
+        data-srcset="054_5%e7%a7%8d%e5%bc%95%e7%94%a8.png, 054_5%e7%a7%8d%e5%bc%95%e7%94%a8.png 1.5x, 054_5%e7%a7%8d%e5%bc%95%e7%94%a8.png 2x"
+        data-sizes="auto"
+        alt="054_5种引用.png"
+        title="054_5种引用.png" /></p>
+<h5 id="强引用">强引用</h5>
+<p>只有GC Root<strong>都不引用</strong>该对象时，才会回收<strong>强引用</strong>对象</p>
+<ul>
+<li>如上图B、C对象都不引用A1对象时，A1对象才会被回收</li>
+</ul>
+<h5 id="软引用">软引用</h5>
+<p>当GC Root指向软引用对象时，在<strong>内存不足时</strong>，会<strong>回收软引用所引用的对象</strong></p>
+<ul>
+<li>如上图如果B对象不再引用A2对象且内存不足时，软引用所引用的A2对象就会被回收</li>
+</ul>
+<p>软引用的使用</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">    public static void soft() {
+        // list --&gt; SoftReference --&gt; byte[]
+
+        List&lt;SoftReference&lt;byte[]&gt;&gt; list = new ArrayList&lt;&gt;();
+        for (int i = 0; i &lt; 5; i++) {
+            SoftReference&lt;byte[]&gt; ref = new SoftReference&lt;&gt;(new byte[_4MB]);
+            System.out.println(ref.get());
+            list.add(ref);
+            System.out.println(list.size());
+
+        }
+        System.out.println(&#34;循环结束：&#34; + list.size());
+        for (SoftReference&lt;byte[]&gt; ref : list) {
+            System.out.println(ref.get());
+        }
+    }
+    
+    
+    
+Connected to the target VM, address: &#39;127.0.0.1:65198&#39;, transport: &#39;socket&#39;
+[B@6f75e721
+1
+[B@69222c14
+2
+[B@606d8acf
+3
+[GC (Allocation Failure) [PSYoungGen: 1777K-&gt;464K(6144K)] 14065K-&gt;12760K(19968K), 0.0007427 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+[B@782830e
+4
+[GC (Allocation Failure) --[PSYoungGen: 4672K-&gt;4672K(6144K)] 16968K-&gt;16968K(19968K), 0.0007738 secs] [Times: user=0.01 sys=0.00, real=0.00 secs] 
+[Full GC (Ergonomics) [PSYoungGen: 4672K-&gt;4471K(6144K)] [ParOldGen: 12296K-&gt;12289K(13824K)] 16968K-&gt;16760K(19968K), [Metaspace: 2843K-&gt;2843K(1056768K)], 0.0047325 secs] [Times: user=0.00 sys=0.00, real=0.01 secs] 
+[GC (Allocation Failure) --[PSYoungGen: 4471K-&gt;4471K(6144K)] 16760K-&gt;16760K(19968K), 0.0007396 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+[Full GC (Allocation Failure) [PSYoungGen: 4471K-&gt;0K(6144K)] [ParOldGen: 12289K-&gt;361K(8192K)] 16760K-&gt;361K(14336K), [Metaspace: 2843K-&gt;2843K(1056768K)], 0.0072134 secs] [Times: user=0.01 sys=0.00, real=0.01 secs] 
+[B@470e2030
+5
+循环结束：5
+null
+null
+null
+null
+[B@470e2030
+Heap
+ PSYoungGen      total 6144K, used 4378K [0x00000007bf980000, 0x00000007c0000000, 0x00000007c0000000)
+  eden space 5632K, 77% used [0x00000007bf980000,0x00000007bfdc6808,0x00000007bff00000)
+  from space 512K, 0% used [0x00000007bff00000,0x00000007bff00000,0x00000007bff80000)
+  to   space 512K, 0% used [0x00000007bff80000,0x00000007bff80000,0x00000007c0000000)
+ ParOldGen       total 8192K, used 361K [0x00000007bec00000, 0x00000007bf400000, 0x00000007bf980000)
+  object space 8192K, 4% used [0x00000007bec00000,0x00000007bec5a6f0,0x00000007bf400000)
+ Metaspace       used 2850K, capacity 4486K, committed 4864K, reserved 1056768K
+  class space    used 304K, capacity 386K, committed 512K, reserved 1048576K
+Disconnected from the target VM, address: &#39;127.0.0.1:65198&#39;, transport: &#39;socket&#39;
+    
+    
+</code></pre></td></tr></table>
+</div>
+</div><p>如果在垃圾回收时发现内存不足，在回收软引用所指向的对象时，<strong>软引用本身不会被清理</strong></p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
