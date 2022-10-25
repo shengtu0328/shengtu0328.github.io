@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/shengtu0328.github.io\/posts\/jvm\/"
-        },"genre": "posts","wordcount":  12407 ,
+        },"genre": "posts","wordcount":  13011 ,
         "url": "https:\/\/shengtu0328.github.io\/posts\/jvm\/","datePublished": "2022-10-11T18:23:30+08:00","dateModified": "2022-10-11T18:23:30+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -102,8 +102,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">JVM学习</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span>&nbsp;<span class="post-category">included in <a href="/categories/tech/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>tech</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-10-11">2022-10-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;12407 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;25 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-10-11">2022-10-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;13011 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;26 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -179,6 +179,7 @@
           <ul>
             <li><a href="#引用计数法">引用计数法</a></li>
             <li><a href="#可达性分析算法jvm使用的">可达性分析算法（JVM使用的）</a></li>
+            <li><a href="#可以作为gc-root的对象">可以作为GC Root的对象</a></li>
             <li><a href="#五种引用">五种引用</a>
               <ul>
                 <li><a href="#强引用">强引用</a></li>
@@ -217,6 +218,14 @@
             <li><a href="#响应时间优先多线程的垃圾回收器如cms">响应时间优先(多线程的垃圾回收器，如CMS)</a>
               <ul>
                 <li><a href="#cms-收集器">CMS 收集器</a></li>
+              </ul>
+            </li>
+            <li><a href="#g1">G1</a>
+              <ul>
+                <li><a href="#定义-5"><strong>定义</strong>：</a></li>
+                <li><a href="#适用场景">适用场景</a></li>
+                <li><a href="#1young-collection">1.Young Collection</a></li>
+                <li><a href="#2young-collection--cm">2.Young Collection + CM</a></li>
               </ul>
             </li>
           </ul>
@@ -1714,15 +1723,14 @@ public static void main(String[] args) {
 <p>扫描 <strong>堆</strong> 中的对象，看能否沿着GC Root对象为起点的引用链找到该对象，如果<strong>找不到，则表示可以回收</strong></p>
 <p>例子：抓住葡萄的根，连着的葡萄就是不可辣鸡回收的对象，落下的葡萄就是可辣鸡回收的对象</p>
 </li>
-<li>
-<p>可以作为GC Root的对象，指肯定不能被辣鸡回收 的对象</p>
+</ul>
+<h4 id="可以作为gc-root的对象">可以作为GC Root的对象</h4>
+<p>-指肯定不能被辣鸡回收 的对象</p>
 <ul>
 <li>虚拟机栈（栈帧中的本地变量表）中引用的对象。　</li>
 <li>方法区中类静态属性引用的对象</li>
 <li>方法区中常量引用的对象</li>
 <li>本地方法栈中JNI（即一般说的Native方法）引用的对象</li>
-</ul>
-</li>
 </ul>
 <h4 id="五种引用">五种引用</h4>
 <p><img
@@ -2312,6 +2320,7 @@ public class Demo2_5 {
 <h4 id="吞吐量优先多线程的垃圾回收器">吞吐量优先(多线程的垃圾回收器)</h4>
 <p>让<strong>单位时间</strong>内，STW 的时间最短 0.2 0.2 = 0.4，垃圾回收时间占程序运行时间比最低，这样就称吞吐量高</p>
 <p>堆内存较大，多核cpu</p>
+<p>但用户线程不能运行了</p>
 <p>​    <img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -2339,19 +2348,115 @@ public class Demo2_5 {
 <p><strong>并行收集</strong>：指多条垃圾收集线程并行工作，但此时<strong>用户线程仍处于等待状态</strong>。</p>
 <p><strong>并发收集</strong>：指用户线程与垃圾收集线程<strong>同时工作</strong>（不一定是并行的可能会交替执行）。<strong>用户程序在继续运行</strong>，而垃圾收集程序运行在另一个CPU上，可以减少 STW。</p>
 <h5 id="cms-收集器">CMS 收集器</h5>
-<p>Concurrent Mark Sweep，一种以<strong>响应时间短</strong>老年代**收集器</p>
-<p><strong>特点</strong>：基于<strong>标记-清除算法</strong>实现。并发收集、低停顿，但是会产生内存碎片</p>
+<p>Concurrent Mark Sweep，一种以<strong>响应时间短</strong>老年代垃圾收集器</p>
+<p><strong>特点</strong>：基于<strong>标记-清除算法</strong>实现。并发收集、低停顿，但是会产生内存碎片，CMS收集器的内存回收过程是与用户线程一起<strong>并发执行</strong>的。</p>
 <p><strong>应用场景</strong>：适用于注重服务的响应速度，希望系统停顿时间最短，给用户带来更好的体验等场景下。如web程序、b/s服务</p>
 <p><strong>CMS收集器的运行过程分为下列4步：</strong></p>
 <p><strong>初始标记</strong>：标记GC Roots能直接到的对象。速度很快但是<strong>仍存在Stop The World问题</strong></p>
 <p><strong>并发标记</strong>：进行GC Roots Tracing 的过程，找出存活对象且用户线程可并发执行,剩余的垃圾找出来？</p>
 <p><strong>重新标记</strong>：为了<strong>修正并发标记期间</strong>因用户程序继续运行而导致标记产生变动的那一部分对象的标记记录。仍然存在Stop The World问题</p>
 <p><strong>并发清除</strong>：对标记的对象进行清除回收</p>
-<p>CMS收集器的内存回收过程是与用户线程一起<strong>并发执行</strong>的</p>
-<p>-XX:+UseConcMarkSweepGC ~ -XX:+UseParNewGC ~ SerialOld</p>
-<p>-XX:ParallelGCThreads=n ~ -XX:ConcGCThreads=threads               -XX:ParallelGCThreads=4 ~ -XX:ConcGCThreads=1  1个线程gc，3个线程给用户，按照这样的比例。</p>
-<p>-XX:CMSInitiatingOccupancyFraction=percent</p>
-<p>-XX:+CMSScavengeBeforeRemark</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">-XX:+UseConcMarkSweepGC ~ -XX:+UseParNewGC ~ SerialOld 
+</code></pre></td></tr></table>
+</div>
+</div><p>ConcMarkSweepGC CMS 是工作在老年代的垃圾回收器，与之配合的UseParNewGC 是工作在新生代。CMS有可能会因为内存碎片化的问题退化到SerialOld 单线程（串行的垃圾回收器使用的），垃圾回收时间会非常慢。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">-XX:ParallelGCThreads=n ~ -XX:ConcGCThreads=threads       
+</code></pre></td></tr></table>
+</div>
+</div><p>-XX:ParallelGCThreads=4 ~ -XX:ConcGCThreads=1  代表1个线程gc，3个线程给用户，按照这样的比例。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">-XX:CMSInitiatingOccupancyFraction=percent 
+</code></pre></td></tr></table>
+</div>
+</div><p>这个参数就是何时触发垃圾回收。不能堆内存占100%的时候去GC，因为并发清理时候也会产生浮动垃圾，这些浮动垃圾没地方存。这样说懂了吧。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">-XX:+CMSScavengeBeforeRemark
+</code></pre></td></tr></table>
+</div>
+</div><p>在重新标记的阶段，有可能新生代的对象引用了老年代的对象。如果重新标记要扫描整个堆，新生代的个数比较多，而且本身就有可能已经是垃圾了。就算从新生代找到老年代，就算老年代被引用了，但实际上最终还是要被回收掉。</p>
+<p>XX:+CMSScavengeBeforeRemark，在重新标记之前，先执行一次ygc，回收掉年轻带的对象无用的对象，并将对象放入幸存带或晋升到老年代，这样再进行年轻带扫描时，只需要扫描幸存区的对象即可，一般幸存带非常小，这大大减少了扫描时间。</p>
+<p><a href="https://juejin.cn/post/6844903782107578382" target="_blank" rel="noopener noreffer ">https://juejin.cn/post/6844903782107578382</a></p>
+<h4 id="g1">G1</h4>
+<h5 id="定义-5"><strong>定义</strong>：</h5>
+<p>Garbage First</p>
+<p>JDK 9以后默认使用，而且替代了CMS 收集器</p>
+<h5 id="适用场景">适用场景</h5>
+<ul>
+<li>同时注重吞吐量和低延迟（响应时间）</li>
+<li>超大堆内存（内存大的），会将堆内存划分为多个<strong>大小相等</strong>的区域</li>
+<li>整体上是<strong>标记-整理</strong>算法，两个区域之间是<strong>复制</strong>算法</li>
+</ul>
+<p>相关 JVM 参数</p>
+<p>-XX:+UseG1GC</p>
+<p>-XX:G1HeapRegionSize=size</p>
+<p>-XX:MaxGCPauseMillis=time</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="073_g1.png"
+        data-srcset="073_g1.png, 073_g1.png 1.5x, 073_g1.png 2x"
+        data-sizes="auto"
+        alt="073_g1.png"
+        title="073_g1.png" /></p>
+<p>E：伊甸园 S：幸存区 O：老年代</p>
+<h5 id="1young-collection">1.Young Collection</h5>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="073_g1_01.png"
+        data-srcset="073_g1_01.png, 073_g1_01.png 1.5x, 073_g1_01.png 2x"
+        data-sizes="auto"
+        alt="073_g1_01.png"
+        title="073_g1_01.png" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="073_g1_02.png"
+        data-srcset="073_g1_02.png, 073_g1_02.png 1.5x, 073_g1_02.png 2x"
+        data-sizes="auto"
+        alt="073_g1_02.png"
+        title="073_g1_02.png" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="073_g1_03.png"
+        data-srcset="073_g1_03.png, 073_g1_03.png 1.5x, 073_g1_03.png 2x"
+        data-sizes="auto"
+        alt="073_g1_03.png"
+        title="073_g1_03.png" /></p>
+<h5 id="2young-collection--cm">2.Young Collection + CM</h5>
+<p>CM：并发标记</p>
+<ul>
+<li>在 Young GC 时会<strong>对 GC Root 进行初始标记</strong></li>
+<li>在老年代<strong>占用堆内存的比例</strong>达到阈值时，对进行并发标记（不会STW），阈值可以根据用户来进行设定</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="076_g1_01.png"
+        data-srcset="076_g1_01.png, 076_g1_01.png 1.5x, 076_g1_01.png 2x"
+        data-sizes="auto"
+        alt="076_g1_01.png"
+        title="076_g1_01.png" /></p>
+<p><a href="https://juejin.cn/post/7010034105165299725" target="_blank" rel="noopener noreffer ">https://juejin.cn/post/7010034105165299725</a></p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
