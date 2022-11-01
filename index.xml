@@ -4,15 +4,31 @@
         <link>https://shengtu0328.github.io/</link>
         <description>The best time to plant a tree was 10 years ago, the second is now</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1007@qq.com (ricky)</managingEditor>
-            <webMaster>1007@qq.com (ricky)</webMaster><lastBuildDate>Fri, 14 Oct 2022 10:03:11 &#43;0800</lastBuildDate>
+            <webMaster>1007@qq.com (ricky)</webMaster><lastBuildDate>Mon, 31 Oct 2022 17:33:47 &#43;0800</lastBuildDate>
             <atom:link href="https://shengtu0328.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Profile</title>
+    <link>https://shengtu0328.github.io/posts/profile/</link>
+    <pubDate>Mon, 31 Oct 2022 17:33:47 &#43;0800</pubDate>
+    <author>ricky</author>
+    <guid>https://shengtu0328.github.io/posts/profile/</guid>
+    <description><![CDATA[名字 5年工作经验 | 本科 | 27岁 | 男 | 手机 | 邮箱 专业技能 5年Java开发经验 熟练使用SpringBoot，Spring，SpringSecur]]></description>
+</item>
+<item>
+    <title>AQS</title>
+    <link>https://shengtu0328.github.io/posts/aqs/</link>
+    <pubDate>Thu, 27 Oct 2022 14:29:43 &#43;0800</pubDate>
+    <author>ricky</author>
+    <guid>https://shengtu0328.github.io/posts/aqs/</guid>
+    <description><![CDATA[CountDownLatch-&gt;AQS-&gt;Park-&gt;Unsfae]]></description>
+</item>
+<item>
     <title>Hugo</title>
     <link>https://shengtu0328.github.io/posts/hugo/</link>
     <pubDate>Fri, 14 Oct 2022 10:03:11 &#43;0800</pubDate>
     <author>ricky</author>
     <guid>https://shengtu0328.github.io/posts/hugo/</guid>
-    <description><![CDATA[hugo serve &ndash;disableFastRender &ndash;buildDrafts hugo &ndash;buildDrafts hugo new posts/first_post.md ]]></description>
+    <description><![CDATA[1 2 3 4 5  hugo serve --disableFastRender --buildDrafts hugo --buildDrafts hugo new posts/first_post.md   ]]></description>
 </item>
 <item>
     <title>Spring</title>
