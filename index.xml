@@ -4,15 +4,31 @@
         <link>https://shengtu0328.github.io/</link>
         <description>The best time to plant a tree was 10 years ago, the second is now</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1007@qq.com (ricky)</managingEditor>
-            <webMaster>1007@qq.com (ricky)</webMaster><lastBuildDate>Mon, 31 Oct 2022 17:33:47 &#43;0800</lastBuildDate>
+            <webMaster>1007@qq.com (ricky)</webMaster><lastBuildDate>Thu, 03 Nov 2022 14:22:04 &#43;0800</lastBuildDate>
             <atom:link href="https://shengtu0328.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>SpringSecurity</title>
+    <link>https://shengtu0328.github.io/posts/springsecurity/</link>
+    <pubDate>Thu, 03 Nov 2022 14:22:04 &#43;0800</pubDate>
+    <author>ricky</author>
+    <guid>https://shengtu0328.github.io/posts/springsecurity/</guid>
+    <description><![CDATA[注意点1: 1 2 3 4 5 6 7 8 9 10 11 12 13 @Bean @Override public UserDetailsService userDetailsService() { UserDetails user = User.withDefaultPasswordEncoder() .username(&#34;user&#34;) .password(&#34;password&#34;) .authorities(&#34;authorityg&#34;) //authorities和roles只应该定义一个 //.roles(&#34;admin&#34;,&#34;rolei&#34;) .build(); return new InMemoryUserDetailsManager(user); } roles() 和 autho]]></description>
+</item>
+<item>
+    <title>ProgrammerWords</title>
+    <link>https://shengtu0328.github.io/posts/programmerwords/</link>
+    <pubDate>Wed, 02 Nov 2022 18:11:56 &#43;0800</pubDate>
+    <author>ricky</author>
+    <guid>https://shengtu0328.github.io/posts/programmerwords/</guid>
+    <description><![CDATA[工作中遇到的单词记录 词性 释义 备注 flow n. 流程 v. 流动 intended adj. 有意的；为……打算 are intended to 打算,有意的 authorize v. 授权，批准 commence v. 开始，着手]]></description>
+</item>
+<item>
     <title>Profile</title>
     <link>https://shengtu0328.github.io/posts/profile/</link>
     <pubDate>Mon, 31 Oct 2022 17:33:47 &#43;0800</pubDate>
     <author>ricky</author>
     <guid>https://shengtu0328.github.io/posts/profile/</guid>
-    <description><![CDATA[名字 5年工作经验 | 本科 | 27岁 | 男 | 手机 | 邮箱 专业技能 5年Java开发经验 熟练使用SpringBoot，Spring，SpringSecur]]></description>
+    <description><![CDATA[名字 5年工作经验 | 本科 | 27岁 | 男 | 手机 | 邮箱 专业技能 5年Java开发经验 熟练使用SpringBoot，Spring，SpringCloud]]></description>
 </item>
 <item>
     <title>AQS</title>
