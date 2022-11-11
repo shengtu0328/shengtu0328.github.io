@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <title>学习SpringSecurity - ricky的网站</title><meta name="Description" content="The best time to plant a tree was 10 years ago, the second is now"><meta property="og:title" content="学习SpringSecurity" />
-<meta property="og:description" content="示例代码 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 import org.springframework.context.annotation.Bean; import org.springframework.context.annotation.Configuration; import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity; import org.springframework.security.config.annotation.web.builders.HttpSecurity; import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity; import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter; import org.springframework.security.core.userdetails.User; import org.springframework.security.core.userdetails.UserDetails; import org.springframework.security.core.userdetails.UserDetailsService; import org.springframework.security.provisioning.InMemoryUserDetailsManager; @Configuration @EnableWebSecurity @EnableGlobalMethodSecurity(prePostEnabled = true)" />
+<meta property="og:description" content="SpringSecurity概览 在日常工作中，web应用的用户登录，用户认证，用户授权等都是常用到的功能，而与Spring相结合的Sprin" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://shengtu0328.github.io/posts/learnspringsecurity/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-11-03T14:22:04+08:00" />
@@ -13,7 +13,7 @@
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="学习SpringSecurity"/>
-<meta name="twitter:description" content="示例代码 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 import org.springframework.context.annotation.Bean; import org.springframework.context.annotation.Configuration; import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity; import org.springframework.security.config.annotation.web.builders.HttpSecurity; import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity; import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter; import org.springframework.security.core.userdetails.User; import org.springframework.security.core.userdetails.UserDetails; import org.springframework.security.core.userdetails.UserDetailsService; import org.springframework.security.provisioning.InMemoryUserDetailsManager; @Configuration @EnableWebSecurity @EnableGlobalMethodSecurity(prePostEnabled = true)"/>
+<meta name="twitter:description" content="SpringSecurity概览 在日常工作中，web应用的用户登录，用户认证，用户授权等都是常用到的功能，而与Spring相结合的Sprin"/>
 <meta name="application-name" content="我的网站">
 <meta name="apple-mobile-web-app-title" content="我的网站"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/shengtu0328.github.io\/posts\/learnspringsecurity\/"
-        },"genre": "posts","wordcount":  879 ,
+        },"genre": "posts","wordcount":  4629 ,
         "url": "https:\/\/shengtu0328.github.io\/posts\/learnspringsecurity\/","datePublished": "2022-11-03T14:22:04+08:00","dateModified": "2022-11-03T14:22:04+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -102,8 +102,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">学习SpringSecurity</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-03">2022-11-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;879 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-03">2022-11-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;4629 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;10 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -111,23 +111,201 @@
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li>
+    <li><a href="#springsecurity概览">SpringSecurity概览</a></li>
+    <li><a href="#第一个springsecurity应用">第一个SpringSecurity应用</a></li>
+    <li><a href="#认证授权">认证&amp;授权</a></li>
+    <li><a href="#一些重要的对象">一些重要的对象</a></li>
+    <li><a href="#过滤器链">过滤器链</a></li>
+    <li><a href="#securitycontextpersistencefilter">SecurityContextPersistenceFilter</a></li>
+    <li><a href="#logoutfilter">LogoutFilter</a></li>
+    <li><a href="#formlogin认证模式">FormLogin认证模式</a></li>
+    <li><a href="#httpbasic认证模式">HttpBasic认证模式</a></li>
+    <li><a href="#自定义filter">自定义Filter</a></li>
+    <li><a href="#filtersecurityinterceptor">FilterSecurityInterceptor</a></li>
+    <li><a href="#authorizationfilter">AuthorizationFilter</a></li>
+    <li><a href="#filtersecurityinterceptor-中的accessdecisionmanager">FilterSecurityInterceptor 中的AccessDecisionManager</a></li>
+    <li><a href="#exceptiontranslationfilter">ExceptionTranslationFilter</a></li>
+    <li><a href="#流程总结">流程总结</a></li>
+    <li><a href="#过滤器执行顺序">过滤器执行顺序</a></li>
+    <li><a href="#preauthorizehasauthorityauthorityg-是怎么处理的">@PreAuthorize(&ldquo;hasAuthority(&lsquo;authorityg&rsquo;)&quot;) 是怎么处理的？</a></li>
+    <li><a href="#在springsecuriy中如果usernamepasswordauthenticationfilter的userdetailsservice中验证失败抛出了自定义异常是怎么处理的">在SpringSecuriy中，如果UsernamePasswordAuthenticationFilter的UserDetailsService中验证失败，抛出了自定义异常，是怎么处理的？</a></li>
+    <li><a href="#在springsecuriy中如果在自定义的filter中抛出了自定义异常是怎么处理的">在SpringSecuriy中，如果在自定义的Filter中，抛出了自定义异常，是怎么处理的？</a></li>
+    <li><a href="#passwordencoder">PasswordEncoder</a></li>
+    <li><a href="#httpsecurity配置">HttpSecurity配置</a>
       <ul>
-        <li>
-          <ul>
-            <li><a href="#示例代码">示例代码</a></li>
-            <li><a href="#注意点1">注意点1:</a></li>
-            <li><a href="#注意点2">注意点2：</a></li>
-            <li><a href="#注意点3">注意点3：</a></li>
-            <li><a href="#参考资料">参考资料</a></li>
-          </ul>
-        </li>
+        <li><a href="#session控制">Session控制</a></li>
+        <li><a href="#roles和authorities">roles()和authorities()</a></li>
       </ul>
     </li>
+    <li><a href="#csrf">CSRF</a></li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><h4 id="示例代码">示例代码</h4>
+            </div><div class="content" id="content"><h2 id="springsecurity概览">SpringSecurity概览</h2>
+<p>在日常工作中，web应用的用户登录，用户认证，用户授权等都是常用到的功能，而与Spring相结合的SpringSecurity就是一个可高度定制化的安全框架。</p>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Info<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>Spring Security is a powerful and highly customizable authentication and access-control framework. It is the de-facto standard for securing Spring-based applications.</p>
+<p>Spring Security is a framework that focuses on providing both authentication and authorization to Java applications. Like all Spring projects, the real power of Spring Security is found in how easily it can be extended to meet custom requirements</p>
+</div>
+        </div>
+    </div>
+<p><a href="https://spring.io/projects/spring-security" target="_blank" rel="noopener noreffer ">https://spring.io/projects/spring-security</a></p>
+<p><a href="https://spring.io/guides/topicals/spring-security-architecture" target="_blank" rel="noopener noreffer ">https://spring.io/guides/topicals/spring-security-architecture</a></p>
+<p>英语水平好的最好还是通读官网文档最好！</p>
 <hr>
+<h2 id="第一个springsecurity应用">第一个SpringSecurity应用</h2>
+<p><a href="https://spring.io/guides/gs/securing-web/" target="_blank" rel="noopener noreffer ">https://spring.io/guides/gs/securing-web/</a></p>
+<p>打开网址，可以直接clone一个官方的Springboot+SpringSecurity 简单应用，也可以选择仓库中之前released 版本下载</p>
+<p>注意：在SpringSecurity 5.7版本中，SpringSecurity已经将需要继承WebSecurityConfigurerAdapter的方式改成了SecurityFilterChain</p>
+<p><a href="https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.7-Release-Notes" target="_blank" rel="noopener noreffer ">https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.7-Release-Notes</a></p>
+<p><a href="https://spring.io/blog/2022/02/21/spring-security-without-the-websecurityconfigureradapter" target="_blank" rel="noopener noreffer ">https://spring.io/blog/2022/02/21/spring-security-without-the-websecurityconfigureradapter</a></p>
+<p>这是我自己学习用的项目：</p>
+<p><a href="https://github.com/shengtu0328/xrq-spring-security" target="_blank" rel="noopener noreffer ">https://github.com/shengtu0328/xrq-spring-security</a></p>
+<hr>
+<h2 id="认证授权">认证&amp;授权</h2>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Info<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">Application security <!-- raw HTML omitted -->boils down to(归结为）<!-- raw HTML omitted --> two more or less independent problems: authentication (who are you?) and authorization (what are you allowed to do?). Sometimes people say “access control” instead of &ldquo;authorization&rdquo;, which can get confusing, but it can be helpful to think of it that way because “authorization” is overloaded in other places. Spring Security has an architecture that is designed to separate authentication from authorization and has strategies and extension points for both.</div>
+        </div>
+    </div>
+<hr>
+<h2 id="一些重要的对象">一些重要的对象</h2>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>Tip<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">先对每个对象有所了解，之后再看源码就会清晰很多</div>
+        </div>
+    </div>
+<table>
+<thead>
+<tr>
+<th>用户对象</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UserDetails</td>
+<td>描述SpringSecurity中得的用户</td>
+</tr>
+<tr>
+<td>GrantedAuthority</td>
+<td>用户拥有的权限</td>
+</tr>
+<tr>
+<td>UserDetailsService</td>
+<td><strong>对用户的查询Service，loadUserByUsername方法应该只查询用户存不存在，不做密码正确与否的校验。在ProviderManager 中才会进行密码正确的校验 如DaoAuthenticationProvider.additionalAuthenticationChecks()</strong></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>认证对象</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Authentication</td>
+<td>认证的请求信息 也是结果信息</td>
+</tr>
+<tr>
+<td>Authentication.principal</td>
+<td>用户名 比如xrq</td>
+</tr>
+<tr>
+<td>Authentication.credentials</td>
+<td>用户凭证 比如密码 123456</td>
+</tr>
+<tr>
+<td>AuthenticationManager,ProviderManager</td>
+<td>处理认证逻辑的对象</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><a href="https://docs.spring.io/spring-security/reference/servlet/authentication/architecture.html#servlet-authentication-authentication" target="_blank" rel="noopener noreffer ">https://docs.spring.io/spring-security/reference/servlet/authentication/architecture.html#servlet-authentication-authentication</a></p>
+<p>The <a href="https://docs.spring.io/spring-security/site/docs/5.7.5/api/org/springframework/security/core/Authentication.html" target="_blank" rel="noopener noreffer "><code>Authentication</code></a> serves two main purposes within Spring Security:</p>
+<ul>
+<li>An input to <a href="https://docs.spring.io/spring-security/reference/servlet/authentication/architecture.html#servlet-authentication-authenticationmanager" target="_blank" rel="noopener noreffer "><code>AuthenticationManager</code></a> to provide the credentials a user has provided to authenticate. When used in this scenario, <code>isAuthenticated()</code> returns <code>false</code>.</li>
+<li>Represents the currently authenticated user. The current <code>Authentication</code> can be obtained from the <a href="https://docs.spring.io/spring-security/reference/servlet/authentication/architecture.html#servlet-authentication-securitycontext" target="_blank" rel="noopener noreffer ">SecurityContext</a>.</li>
+</ul>
+<p>The <code>Authentication</code> contains:</p>
+<ul>
+<li><code>principal</code> - identifies the user. When authenticating with a username/password this is often an instance of <a href="https://docs.spring.io/spring-security/reference/servlet/authentication/passwords/user-details.html#servlet-authentication-userdetails" target="_blank" rel="noopener noreffer "><code>UserDetails</code></a>.</li>
+<li><code>credentials</code> - often a password. In many cases this will be cleared after the user is authenticated to ensure it is not leaked.</li>
+<li><code>authorities</code> - the <a href="https://docs.spring.io/spring-security/reference/servlet/authentication/architecture.html#servlet-authentication-granted-authority" target="_blank" rel="noopener noreffer "><code>GrantedAuthority</code>s</a> are high level permissions the user is granted. A few examples are roles or scopes.</li>
+</ul>
+<h2 id="过滤器链">过滤器链</h2>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://docs.spring.io/spring-security/reference/_images/servlet/architecture/securityfilterchain.png"
+        data-srcset="https://docs.spring.io/spring-security/reference/_images/servlet/architecture/securityfilterchain.png, https://docs.spring.io/spring-security/reference/_images/servlet/architecture/securityfilterchain.png 1.5x, https://docs.spring.io/spring-security/reference/_images/servlet/architecture/securityfilterchain.png 2x"
+        data-sizes="auto"
+        alt="https://docs.spring.io/spring-security/reference/_images/servlet/architecture/securityfilterchain.png"
+        title="securityfilterchain" /></p>
+<p>有两个过滤器链，ApplicationFilterChain内嵌套了FilterChainProxy$VirtualFilterChain</p>
+<p>ApplicationFilterChain 过滤器链</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="ApplicationFilterChain.png"
+        data-srcset="ApplicationFilterChain.png, ApplicationFilterChain.png 1.5x, ApplicationFilterChain.png 2x"
+        data-sizes="auto"
+        alt="ApplicationFilterChain.png"
+        title="ApplicationFilterChain.png" /></p>
+<p>FilterChainProxy$VirtualFilterChain 过滤器链 （也就是 SpringSecurityFilterChain）</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="FilterChainProxy$VirtualFilterChain.png"
+        data-srcset="FilterChainProxy$VirtualFilterChain.png, FilterChainProxy$VirtualFilterChain.png 1.5x, FilterChainProxy$VirtualFilterChain.png 2x"
+        data-sizes="auto"
+        alt="FilterChainProxy$VirtualFilterChain.png"
+        title="FilterChainProxy$VirtualFilterChain.png" /></p>
+<p><a href="https://docs.spring.io/spring-security/reference/servlet/architecture.html" target="_blank" rel="noopener noreffer ">https://docs.spring.io/spring-security/reference/servlet/architecture.html</a></p>
+<hr>
+<h2 id="securitycontextpersistencefilter">SecurityContextPersistenceFilter</h2>
+<p>其功能是通过SecurityContextPersistenceFilter实现的，在SecurityContextPersistenceFilter代码中执行chain.doFilter(holder.getRequest(), holder.getResponse())前，中配置不同的private SecurityContextRepository repo，会执行this.repo.loadContext(holder)方法，是否在此次请求中加载authentication</p>
+<table>
+<thead>
+<tr>
+<th>SessionCreationPolicy</th>
+<th>SecurityContextRepository repo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SessionCreationPolicy.STATELESS</td>
+<td>NullSecurityContextRepository</td>
+</tr>
+<tr>
+<td>默认值</td>
+<td>HttpSessionSecurityContextRepository</td>
+</tr>
+</tbody>
+</table>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -147,228 +325,312 @@
 </span><span class="lnt">15
 </span><span class="lnt">16
 </span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-
-@Configuration
-@EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers(&#34;/&#34;, &#34;/home&#34;).permitAll()
-                .antMatchers(&#34;/c&#34;).permitAll()
-                .antMatchers(&#34;/d&#34;).hasRole(&#34;roled&#34;)
-                .antMatchers(&#34;/e&#34;).hasRole(&#34;rolee&#34;)
-                .antMatchers(&#34;/f&#34;).hasRole(&#34;rolef&#34;)
-                .antMatchers(&#34;/i&#34;).hasRole(&#34;rolei&#34;)
-//				.antMatchers(&#34;/g&#34;).hasAuthority(&#34;roleg&#34;)
-                .anyRequest().authenticated().and().formLogin().loginPage(&#34;/login&#34;).permitAll().and().logout().permitAll();
-    }
-
-    @Bean
-    @Override
-    public UserDetailsService userDetailsService() {
-        UserDetails user = User.withDefaultPasswordEncoder()
-                .username(&#34;user&#34;)
-                .password(&#34;password&#34;)
-                .authorities(&#34;authorityg&#34;)
-                //authorities和roles只应该定义一个
-                //.roles(&#34;admin&#34;,&#34;rolei&#34;)
-                .build();
-
-        return new InMemoryUserDetailsManager(user);
-    }
-}
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">#SecurityContextPersistenceFilter
+private void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
+      throws IOException, ServletException {
+   // ensure that filter is only applied once per request
+   if (request.getAttribute(FILTER_APPLIED) != null) {
+      chain.doFilter(request, response);
+      return;
+   }
+   request.setAttribute(FILTER_APPLIED, Boolean.TRUE);
+   if (this.forceEagerSessionCreation) {
+      HttpSession session = request.getSession();
+      if (this.logger.isDebugEnabled() &amp;&amp; session.isNew()) {
+         this.logger.debug(LogMessage.format(&#34;Created session %s eagerly&#34;, session.getId()));
+      }
+   }
+   HttpRequestResponseHolder holder = new HttpRequestResponseHolder(request, response);
+   SecurityContext contextBeforeChainExecution = this.repo.loadContext(holder);
 </code></pre></td></tr></table>
 </div>
-</div><div class="highlight"><div class="chroma">
+</div><hr>
+<h2 id="logoutfilter">LogoutFilter</h2>
+<p>处理注销操作的LogoutFilter 只会处理注销请求，其余放行</p>
+<hr>
+<h2 id="formlogin认证模式">FormLogin认证模式</h2>
+<p>FormLogin是Spring Security默认的认证模式。</p>
+<p>有状态的，有session的概念。第一此登录成功后，服务端就将用户信息放入session中，并将sessionId给客户端。之后的校验不需要再查数据库，但是占用服务器内存。默认如果多台服务器的话，那多台服务器之间是没有共享session的，所以是有状态的。不需要查库，省去了大量重复校验，性能比Httpbasic要好。</p>
+<p>所以说<strong>UsernamePasswordAuthenticationFilter</strong>中，每次请求时并不会访问到此过滤器，会有<strong>SecurityContextPersistenceFilter</strong>先从session里面取。</p>
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>Note<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">UsernamePasswordAuthenticationFilter 只会处理登录接口的请求，其他的一律放行。因此它的作用还可以让你少写一个登录Controller方法</div>
+        </div>
+    </div>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="FormLogin.png"
+        data-srcset="FormLogin.png, FormLogin.png 1.5x, FormLogin.png 2x"
+        data-sizes="auto"
+        alt="FormLogin.png"
+        title="FormLogin.png" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://docs.spring.io/spring-security/reference/_images/servlet/authentication/unpwd/loginurlauthenticationentrypoint.png"
+        data-srcset="https://docs.spring.io/spring-security/reference/_images/servlet/authentication/unpwd/loginurlauthenticationentrypoint.png, https://docs.spring.io/spring-security/reference/_images/servlet/authentication/unpwd/loginurlauthenticationentrypoint.png 1.5x, https://docs.spring.io/spring-security/reference/_images/servlet/authentication/unpwd/loginurlauthenticationentrypoint.png 2x"
+        data-sizes="auto"
+        alt="https://docs.spring.io/spring-security/reference/_images/servlet/authentication/unpwd/loginurlauthenticationentrypoint.png"
+        title="loginurlauthenticationentrypoint" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://docs.spring.io/spring-security/reference/_images/servlet/authentication/unpwd/usernamepasswordauthenticationfilter.png"
+        data-srcset="https://docs.spring.io/spring-security/reference/_images/servlet/authentication/unpwd/usernamepasswordauthenticationfilter.png, https://docs.spring.io/spring-security/reference/_images/servlet/authentication/unpwd/usernamepasswordauthenticationfilter.png 1.5x, https://docs.spring.io/spring-security/reference/_images/servlet/authentication/unpwd/usernamepasswordauthenticationfilter.png 2x"
+        data-sizes="auto"
+        alt="https://docs.spring.io/spring-security/reference/_images/servlet/authentication/unpwd/usernamepasswordauthenticationfilter.png"
+        title="usernamepasswordauthenticationfilter" /></p>
+<p><a href="https://docs.spring.io/spring-security/reference/servlet/authentication/passwords/form.html" target="_blank" rel="noopener noreffer ">https://docs.spring.io/spring-security/reference/servlet/authentication/passwords/form.html</a></p>
+<hr>
+<h2 id="httpbasic认证模式">HttpBasic认证模式</h2>
+<p>Authorization: Basic eHJxOjEyMzQ1Ng==</p>
+<p>Basic 后面跟的是用户名:密码的 base64 如 xrq:123456</p>
+<p>HttpBasic是无状态的，不使用Cookie，也没有会话和注销的概念。每次请求时都要在Request Header加上   Authorization: Basic eHJxOjEyMzQ1Ng==。服务端每次接收的请求都要去库里校验。</p>
+<p>所以说<strong>BasicAuthenticationFilter</strong>中的doFilterInternal()方法在每次请求中都是会被调用。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://docs.spring.io/spring-security/reference/_images/servlet/authentication/unpwd/basicauthenticationfilter.png"
+        data-srcset="https://docs.spring.io/spring-security/reference/_images/servlet/authentication/unpwd/basicauthenticationfilter.png, https://docs.spring.io/spring-security/reference/_images/servlet/authentication/unpwd/basicauthenticationfilter.png 1.5x, https://docs.spring.io/spring-security/reference/_images/servlet/authentication/unpwd/basicauthenticationfilter.png 2x"
+        data-sizes="auto"
+        alt="https://docs.spring.io/spring-security/reference/_images/servlet/authentication/unpwd/basicauthenticationfilter.png"
+        title="basicauthenticationfilter" /></p>
+<p><a href="https://docs.spring.io/spring-security/reference/servlet/authentication/passwords/basic.html" target="_blank" rel="noopener noreffer ">https://docs.spring.io/spring-security/reference/servlet/authentication/passwords/basic.html</a></p>
+<hr>
+<h2 id="自定义filter">自定义Filter</h2>
+<p>自定义个filter 比如jwtFilter</p>
+<p>如果当前request 是登陆状态的 ，则在FilterSecurityInterceptor 之前的某个 filter就应该将setAuthentication 好</p>
+<hr>
+<h2 id="filtersecurityinterceptor">FilterSecurityInterceptor</h2>
+<p><a href="https://docs.spring.io/spring-security/reference/servlet/authorization/authorize-requests.html#servlet-authorization-filtersecurityinterceptor" target="_blank" rel="noopener noreffer ">https://docs.spring.io/spring-security/reference/servlet/authorization/authorize-requests.html#servlet-authorization-filtersecurityinterceptor</a></p>
+<p>总而言之：认证和授权这两部（authentication (who are you?) and authorization (what are you allowed to do?) ）</p>
+<p>都是在FilterSecurityInterceptor 中完成，需要两个参数</p>
+<p><strong>Authentication</strong>（当前登录用户的信息,包括用户名，拥有的权限等等）  和 <strong>当前请求的url需要的authorities</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>判断条件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>认证</td>
+<td>Authentication 是否为空</td>
+</tr>
+<tr>
+<td>授权</td>
+<td>Authentication 是否包含当前请求需要的authorities</td>
+</tr>
+</tbody>
+</table>
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>Note<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>注意：在SpringSecurity 5.7版本中</p>
+<p><code>FilterSecurityInterceptor</code> is in the process of being replaced by <a href="https://docs.spring.io/spring-security/reference/servlet/authorization/authorize-http-requests.html" target="_blank" rel="noopener noreffer "><code>AuthorizationFilter</code></a>. Consider using that instead.</p>
+</div>
+        </div>
+    </div>
+<hr>
+<h2 id="authorizationfilter">AuthorizationFilter</h2>
+<p><code>FilterSecurityInterceptor</code> is in the process of being replaced by <a href="https://docs.spring.io/spring-security/reference/servlet/authorization/authorize-http-requests.html" target="_blank" rel="noopener noreffer "><code>AuthorizationFilter</code></a>. Consider using that instead.</p>
+<hr>
+<h2 id="filtersecurityinterceptor-中的accessdecisionmanager">FilterSecurityInterceptor 中的AccessDecisionManager</h2>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Info<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">It has pretty simple flow. It gets authentication object which has role information for user, security metadata which has required role for certain url pattern, and requested url.</div>
+        </div>
+    </div>
+<p>AccessDecisionManager 接收三个参数：</p>
+<p>Authentication authentication：用户的认证信息，认证成功的话是应该会有这个用户所拥有的权限</p>
+<p>Object object： 当前请求访问的url地址</p>
+<p>Collection<!-- raw HTML omitted --> configAttributes：当前这个url地址所需要的权限</p>
+<p><a href="https://backendstory.com/spring-security-authorization-mechanism/" target="_blank" rel="noopener noreffer ">https://backendstory.com/spring-security-authorization-mechanism/</a></p>
+<hr>
+<p>请求/g</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="AccessDecisionManager.png"
+        data-srcset="AccessDecisionManager.png, AccessDecisionManager.png 1.5x, AccessDecisionManager.png 2x"
+        data-sizes="auto"
+        alt="AccessDecisionManager.png"
+        title="AccessDecisionManager.png" /></p>
+<hr>
+<p>请求/d</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="AccessDecisionManager2.png"
+        data-srcset="AccessDecisionManager2.png, AccessDecisionManager2.png 1.5x, AccessDecisionManager2.png 2x"
+        data-sizes="auto"
+        alt="AccessDecisionManager2.png"
+        title="AccessDecisionManager2.png" /></p>
+<hr>
+<h2 id="exceptiontranslationfilter">ExceptionTranslationFilter</h2>
+<p>处理 FilterSecurityInterceptor 抛出的异常；判断是认证异常，还是授权异常，分别进行处理。</p>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
-</span><span class="lnt">43
-</span><span class="lnt">44
-</span><span class="lnt">45
-</span><span class="lnt">46
-</span><span class="lnt">47
-</span><span class="lnt">48
-</span><span class="lnt">49
-</span><span class="lnt">50
-</span><span class="lnt">51
-</span><span class="lnt">52
-</span><span class="lnt">53
-</span><span class="lnt">54
-</span><span class="lnt">55
-</span><span class="lnt">56
-</span><span class="lnt">57
-</span><span class="lnt">58
-</span><span class="lnt">59
-</span><span class="lnt">60
-</span><span class="lnt">61
-</span><span class="lnt">62
-</span><span class="lnt">63
-</span><span class="lnt">64
-</span><span class="lnt">65
-</span><span class="lnt">66
-</span><span class="lnt">67
-</span><span class="lnt">68
-</span><span class="lnt">69
-</span><span class="lnt">70
-</span><span class="lnt">71
-</span><span class="lnt">72
-</span><span class="lnt">73
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">
-@RestController
-public class Controller {
-
-    @RequestMapping(&#34;/a&#34;)
-    public String a(String email){
-        return &#34;email:&#34;+email;
-    }
-
-
-    @RequestMapping(&#34;/b&#34;)
-    public String b(){
-        return &#34;b&#34;;
-    }
-
-    @RequestMapping(&#34;/c&#34;)
-    public String c(){
-        return &#34;c&#34;;
-    }
-
-    @RequestMapping(&#34;/d&#34;)
-    public String d(){
-        return &#34;d&#34;;
-    }
-
-    @RequestMapping(&#34;/e&#34;)
-    public String e(){
-        return &#34;e&#34;;
-    }
-
-
-    @RequestMapping(&#34;/f&#34;)
-    public String f(){
-        return &#34;f&#34;;
-    }
-
-    @PreAuthorize(&#34;hasAuthority(&#39;authorityg&#39;)&#34;)
-    @RequestMapping(&#34;/g&#34;)
-    public String g(){
-        return &#34;g&#34;;
-    }
-
-    @PreAuthorize(&#34;hasAuthority(&#39;authorityg2&#39;)&#34;)
-    @RequestMapping(&#34;/g2&#34;)
-    public String g2(){
-        return &#34;g2&#34;;
-    }
-
-    @PreAuthorize(&#34;hasRole(&#39;ROLE_admin&#39;)&#34;)
-    @RequestMapping(&#34;/h&#34;)
-    public String h(){
-        return &#34;h&#34;;
-    }
-
-    @PreAuthorize(&#34;hasRole(&#39;admin&#39;)&#34;)
-    @RequestMapping(&#34;/h1&#34;)
-    public String h1(){
-        return &#34;h1&#34;;
-    }
-
-    @PreAuthorize(&#34;hasRole(&#39;ROLE_admin2&#39;)&#34;)
-    @RequestMapping(&#34;/h2&#34;)
-    public String h2(){
-        return &#34;h2&#34;;
-    }
-
-
-    @RequestMapping(&#34;/i&#34;)
-    public String i(){
-        return &#34;i&#34;;
-    }
-
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">private void handleSpringSecurityException(HttpServletRequest request, HttpServletResponse response,
+      FilterChain chain, RuntimeException exception) throws IOException, ServletException {
+   if (exception instanceof AuthenticationException) {
+      handleAuthenticationException(request, response, chain, (AuthenticationException) exception);
+   }
+   else if (exception instanceof AccessDeniedException) {
+      handleAccessDeniedException(request, response, chain, (AccessDeniedException) exception);
+   }
 }
 </code></pre></td></tr></table>
 </div>
-</div><h4 id="注意点1">注意点1:</h4>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://docs.spring.io/spring-security/reference/_images/servlet/architecture/exceptiontranslationfilter.png"
+        data-srcset="https://docs.spring.io/spring-security/reference/_images/servlet/architecture/exceptiontranslationfilter.png, https://docs.spring.io/spring-security/reference/_images/servlet/architecture/exceptiontranslationfilter.png 1.5x, https://docs.spring.io/spring-security/reference/_images/servlet/architecture/exceptiontranslationfilter.png 2x"
+        data-sizes="auto"
+        alt="https://docs.spring.io/spring-security/reference/_images/servlet/architecture/exceptiontranslationfilter.png"
+        title="exceptiontranslationfilter" /></p>
+<p><a href="https://docs.spring.io/spring-security/reference/servlet/architecture.html#servlet-security-filters" target="_blank" rel="noopener noreffer ">https://docs.spring.io/spring-security/reference/servlet/architecture.html#servlet-security-filters</a></p>
+<hr>
+<h2 id="流程总结">流程总结</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SecurityContext中setAuthentication()的Filter</td>
+<td>主要是认证成功后，完成SecurityContext中setAuthentication()，如BasicAuthenticationFilter</td>
+</tr>
+<tr>
+<td>FilterSecurityInterceptor</td>
+<td>对SecurityContext中getAuthentication()，也就是从ThreadLoacl取出当前请求的用户认证结果进行认证和授权的验证。</td>
+</tr>
+</tbody>
+</table>
+<p>用几句话概括SpringSecurity</p>
+<p>SpringSecurity为我们项目中添加了一个过滤器链。在完成认证这一步的Filter里（根据request的参数去UserDetail验证)，此过滤器一般是过滤器链中间位置，</p>
+<p>如果认证通过，就应该在SecurityContext中setAuthentication(); 然后调用chain.doFilter(request, response);</p>
+<p>如果认证失败，可以直接返回失败结果，不继续或者继续执行chain.doFilter(request, response)。参考BasicAuthenticationFilter的实现</p>
+<p>在过滤器的最后一个FilterSecurityInterceptor最终都会进行Authentication认证和授权校验。没有通过的最终都会被拦截。</p>
+<hr>
+<h2 id="过滤器执行顺序">过滤器执行顺序</h2>
+<p>有一点需要说明，虽然说SpringSecurity 中的过滤器链是按照过滤器链中的顺序依次执行doFilter()，但并不是说 执行完 Filter1 doFilter()全部代码后，再执行Filter2。</p>
+<p>就如 SecurityContextPersistenceFilter中doFilter()</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="SecurityContextPersistenceFilter.png"
+        data-srcset="SecurityContextPersistenceFilter.png, SecurityContextPersistenceFilter.png 1.5x, SecurityContextPersistenceFilter.png 2x"
+        data-sizes="auto"
+        alt="SecurityContextPersistenceFilter.png"
+        title="SecurityContextPersistenceFilter.png" /></p>
+<hr>
+<h2 id="preauthorizehasauthorityauthorityg-是怎么处理的">@PreAuthorize(&ldquo;hasAuthority(&lsquo;authorityg&rsquo;)&quot;) 是怎么处理的？</h2>
+<p>猜测：</p>
+<p>是在服务启动时将所有带有@PreAuthorize 注解的方法收集好，然后在SpringSecutiyFilterChain里完成权限的认证？</p>
+<p>还是直接在借口调用的时候，调用具体的资源方法时前进行拦截？</p>
+<p>结果：</p>
+<p>追踪源码发现是执行完全部的Filter Chain，进入 DispatcherServlet 类后，最终通过MethodSecurityInterceptor 这个拦截器处理的，</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="MethodSecurityInterceptor.png"
+        data-srcset="MethodSecurityInterceptor.png, MethodSecurityInterceptor.png 1.5x, MethodSecurityInterceptor.png 2x"
+        data-sizes="auto"
+        alt="MethodSecurityInterceptor.png"
+        title="MethodSecurityInterceptor.png" /></p>
+<hr>
+<h2 id="在springsecuriy中如果usernamepasswordauthenticationfilter的userdetailsservice中验证失败抛出了自定义异常是怎么处理的">在SpringSecuriy中，如果UsernamePasswordAuthenticationFilter的UserDetailsService中验证失败，抛出了自定义异常，是怎么处理的？</h2>
+<p>还是看下流程图，如果UserDetailsService抛出异常会一路往外层抛出异常，直到 UsernamePasswordAuthenticationFilter中catch住，交给AuthenticationFailureHandler 处理。比如AuthenticationFailureHandler会重定向或者其他。</p>
+<p>UsernamePasswordAuthenticationFilter</p>
+<p>doFilter()-&gt;attemptAuthentication()-&gt;</p>
+<p>AuthenticationManager</p>
+<p>authenticate()-&gt;</p>
+<p>AuthenticationProvider</p>
+<p>authenticate()-&gt;</p>
+<h2 id="在springsecuriy中如果在自定义的filter中抛出了自定义异常是怎么处理的">在SpringSecuriy中，如果在自定义的Filter中，抛出了自定义异常，是怎么处理的？</h2>
+<p>处理不了。所以不要在自定义filter中抛出异常，如果验证逻辑不通过，不setAuthentication即可，最终会自动交给FilterSecurityInterceptor 判断处理。可以参考BasicAuthenticationFilter的实现。</p>
+<p>如果是AuthenticationManager 中 校验用户抛出了异常，是可以在外层filter中处理的</p>
+<h2 id="passwordencoder">PasswordEncoder</h2>
+<p>密码在数据库最好不以明文存储，</p>
+<p>BCryptPasswordEncoder 是强散列算法对密码进行散列操作</p>
+<p>BCrypt 将在内部随机产生盐值，并且为了这种随机盐值能正常工作，BCrypt将盐值存在hash值本身中，例如，以下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">BCryptPasswordEncoder encoder=new BCryptPasswordEncoder();
+System.out.println(encoder.encode(&#34;123456&#34;));
+System.out.println(encoder.encode(&#34;123456&#34;));
+
+$2a$10$TS.YfXaPNbhCFDljBda04u6YQgbL18TBWMgPgkdJb6djKJO9nt9tq
+$2a$10$H9Ub8PIfhKaE9mafKrW4s.XlYbzZcU6gdUqZxAHOWnKeo1ML9is0q
+</code></pre></td></tr></table>
+</div>
+</div><p>用$分割三个字段</p>
+<p>2a 代表BCrypt 算法版本</p>
+<p>10 代表算法强度</p>
+<p>H9Ub8PIfhKaE9mafKrW4s. 代表随机产生的盐值，前22个一般是salt盐值，后面剩下的就是密码结合盐值生成的散列内容</p>
+<p>总长度60</p>
+<p>为什么要加盐？</p>
+<p>因为123456加密后固定是abc，所以万一知道了abc明文值是123456的话，那么只要是123456作为密码的，就都被破解了。</p>
+<p>但如果有了盐值，每次都随机生成一个字符串，混淆到原始的明密码中，</p>
+<ol>
+<li>盐 qwer</li>
+<li>明文密码 123456</li>
+<li>加了盐的明文密码12q3w345e6r</li>
+<li>对加了盐的明文密码加密  jljsahpq
+这样就算拿到了 加密密码 jljsahpq就算知道原始对应值12q3w345e6r也没法破解</li>
+</ol>
+<hr>
+<hr>
+<h2 id="httpsecurity配置">HttpSecurity配置</h2>
+<h3 id="session控制">Session控制</h3>
+<p>在HttpBasic认证中，每次请求都带着  Authorization: Basic eHJxOjEyMzQ1Ng==，之前期望httpbasic是无状态的，每次都根据eHJxOjEyMzQ1Ng== base64解码的用户名和密码取库里校验。但实际上SpringSecutiy默认开着从session获取，是有状态的。第一次请求服务端产生了sessionId，第第二次请求客户端会带着sessionId，服务器会从根据sessionId取到session及其中的数据。</p>
+<p>通过HttpSecurity配置可以设置问无状态的请求模式</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+</code></pre></td></tr></table>
+</div>
+</div><hr>
+<h3 id="roles和authorities">roles()和authorities()</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -403,58 +665,8 @@ public class Controller {
 </div>
 </div><p>roles() 和 authorities（）会会覆盖当前用户的 authorities，所以roles()和  authorities（）只能调用一个，一般是用authorities().</p>
 <hr>
-<h4 id="注意点2">注意点2：</h4>
-<p>疑问 ：@PreAuthorize(&ldquo;hasAuthority(&lsquo;authorityg&rsquo;)&quot;) 是怎么处理的？</p>
-<p>猜测：</p>
-<p>是在服务启动时将所有带有@PreAuthorize 注解的方法收集好，然后在SpringSecutiyFilterChain里完成权限的认证？</p>
-<p>还是直接在借口调用的时候，调用具体的资源方法时前进行拦截？</p>
-<p>结果：</p>
-<p>追踪源码发现是执行完全部的Filter Chain，进入 DispatcherServlet 类后，最终通过MethodSecurityInterceptor 这个拦截器处理的，</p>
-<p><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="MethodSecurityInterceptor.png"
-        data-srcset="MethodSecurityInterceptor.png, MethodSecurityInterceptor.png 1.5x, MethodSecurityInterceptor.png 2x"
-        data-sizes="auto"
-        alt="MethodSecurityInterceptor.png"
-        title="MethodSecurityInterceptor.png" /></p>
+<h2 id="csrf">CSRF</h2>
 <hr>
-<h4 id="注意点3">注意点3：</h4>
-<p><strong>AccessDecisionManager</strong></p>
-<div class="details admonition info open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Info<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content">It has pretty simple flow. It gets authentication object which has role information for user, security metadata which has required role for certain url pattern, and requested url.</div>
-        </div>
-    </div>
-<p>AccessDecisionManager 接收三个参数：</p>
-<p>Authentication authentication：用户的认证信息，认证成功的话是应该会有这个用户所拥有的权限</p>
-<p>Object object： 当前请求访问的url地址</p>
-<p>Collection<!-- raw HTML omitted --> configAttributes：当前这个url地址所需要的权限</p>
-<hr>
-<p>请求/g</p>
-<p><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="AccessDecisionManager.png"
-        data-srcset="AccessDecisionManager.png, AccessDecisionManager.png 1.5x, AccessDecisionManager.png 2x"
-        data-sizes="auto"
-        alt="AccessDecisionManager.png"
-        title="AccessDecisionManager.png" /></p>
-<hr>
-<p>请求/d</p>
-<p><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="AccessDecisionManager2.png"
-        data-srcset="AccessDecisionManager2.png, AccessDecisionManager2.png 1.5x, AccessDecisionManager2.png 2x"
-        data-sizes="auto"
-        alt="AccessDecisionManager2.png"
-        title="AccessDecisionManager2.png" /></p>
-<h4 id="参考资料">参考资料</h4>
-<p><a href="https://backendstory.com/spring-security-authorization-mechanism/" target="_blank" rel="noopener noreffer ">https://backendstory.com/spring-security-authorization-mechanism/</a></p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
