@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/shengtu0328.github.io\/posts\/learnspringsecurity\/"
-        },"genre": "posts","wordcount":  4629 ,
+        },"genre": "posts","wordcount":  4781 ,
         "url": "https:\/\/shengtu0328.github.io\/posts\/learnspringsecurity\/","datePublished": "2022-11-03T14:22:04+08:00","dateModified": "2022-11-03T14:22:04+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -102,7 +102,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">学习SpringSecurity</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-03">2022-11-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;4629 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-03">2022-11-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;4781 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;10 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -220,7 +220,7 @@
 <tbody>
 <tr>
 <td>Authentication</td>
-<td>认证的请求信息 也是结果信息</td>
+<td>认证的请求信息 也是认证结果信息</td>
 </tr>
 <tr>
 <td>Authentication.principal</td>
@@ -235,8 +235,8 @@
 <td>处理认证逻辑的对象</td>
 </tr>
 <tr>
-<td></td>
-<td></td>
+<td>SecurityContextHolder.getContext()</td>
+<td>默认是包装了一个ThreadLocal实现的，通过它在FilterChain中多个Filter中获取到当前请求里认证信息，它很重要。就好像失败总是贯穿人生始终！</td>
 </tr>
 <tr>
 <td></td>
@@ -287,7 +287,7 @@
 <p><a href="https://docs.spring.io/spring-security/reference/servlet/architecture.html" target="_blank" rel="noopener noreffer ">https://docs.spring.io/spring-security/reference/servlet/architecture.html</a></p>
 <hr>
 <h2 id="securitycontextpersistencefilter">SecurityContextPersistenceFilter</h2>
-<p>其功能是通过SecurityContextPersistenceFilter实现的，在SecurityContextPersistenceFilter代码中执行chain.doFilter(holder.getRequest(), holder.getResponse())前，中配置不同的private SecurityContextRepository repo，会执行this.repo.loadContext(holder)方法，是否在此次请求中加载authentication</p>
+<p>每次请求处理是有状态还是无状态是通过SecurityContextPersistenceFilter实现的，在SecurityContextPersistenceFilter代码中执行chain.doFilter(holder.getRequest(), holder.getResponse())前，中配置不同的private SecurityContextRepository repo，会执行this.repo.loadContext(holder)方法，是否在此次请求中加载authentication</p>
 <table>
 <thead>
 <tr>
@@ -666,6 +666,12 @@ $2a$10$H9Ub8PIfhKaE9mafKrW4s.XlYbzZcU6gdUqZxAHOWnKeo1ML9is0q
 </div><p>roles() 和 authorities（）会会覆盖当前用户的 authorities，所以roles()和  authorities（）只能调用一个，一般是用authorities().</p>
 <hr>
 <h2 id="csrf">CSRF</h2>
+<p><a href="https://docs.spring.io/spring-security/reference/features/exploits/csrf.html" target="_blank" rel="noopener noreffer ">https://docs.spring.io/spring-security/reference/features/exploits/csrf.html</a></p>
+<ul>
+<li>如果你只是创建一个非浏览器客户端使用的服务,你可能会想要禁用CSRF保护</li>
+</ul>
+<p>检查Referer字段</p>
+<p>添加校验token</p>
 <hr>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
