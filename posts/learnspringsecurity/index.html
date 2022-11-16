@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/shengtu0328.github.io\/posts\/learnspringsecurity\/"
-        },"genre": "posts","wordcount":  4781 ,
+        },"genre": "posts","wordcount":  5604 ,
         "url": "https:\/\/shengtu0328.github.io\/posts\/learnspringsecurity\/","datePublished": "2022-11-03T14:22:04+08:00","dateModified": "2022-11-03T14:22:04+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -102,8 +102,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">学习SpringSecurity</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-03">2022-11-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;4781 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;10 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-03">2022-11-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;5604 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;12 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -123,13 +123,21 @@
     <li><a href="#自定义filter">自定义Filter</a></li>
     <li><a href="#filtersecurityinterceptor">FilterSecurityInterceptor</a></li>
     <li><a href="#authorizationfilter">AuthorizationFilter</a></li>
-    <li><a href="#filtersecurityinterceptor-中的accessdecisionmanager">FilterSecurityInterceptor 中的AccessDecisionManager</a></li>
+    <li><a href="#filtersecurityinterceptor-中的accessdecisionmanager">FilterSecurityInterceptor 中的AccessDecisionManager</a>
+      <ul>
+        <li><a href="#请求d">请求/d</a></li>
+        <li><a href="#请求g">请求/g</a></li>
+      </ul>
+    </li>
     <li><a href="#exceptiontranslationfilter">ExceptionTranslationFilter</a></li>
     <li><a href="#流程总结">流程总结</a></li>
     <li><a href="#过滤器执行顺序">过滤器执行顺序</a></li>
     <li><a href="#preauthorizehasauthorityauthorityg-是怎么处理的">@PreAuthorize(&ldquo;hasAuthority(&lsquo;authorityg&rsquo;)&quot;) 是怎么处理的？</a></li>
-    <li><a href="#在springsecuriy中如果usernamepasswordauthenticationfilter的userdetailsservice中验证失败抛出了自定义异常是怎么处理的">在SpringSecuriy中，如果UsernamePasswordAuthenticationFilter的UserDetailsService中验证失败，抛出了自定义异常，是怎么处理的？</a></li>
-    <li><a href="#在springsecuriy中如果在自定义的filter中抛出了自定义异常是怎么处理的">在SpringSecuriy中，如果在自定义的Filter中，抛出了自定义异常，是怎么处理的？</a></li>
+    <li><a href="#如果usernamepasswordauthenticationfilter的userdetailsservice中验证失败抛出了自定义异常是怎么处理的">如果UsernamePasswordAuthenticationFilter的UserDetailsService中验证失败，抛出了自定义异常，是怎么处理的？</a></li>
+    <li><a href="#如果在自定义的filter中抛出了自定义异常是怎么处理的">如果在自定义的Filter中，抛出了自定义异常，是怎么处理的？</a></li>
+    <li><a href="#accessdeniedhandler是在哪里调用的">AccessDeniedHandler是在哪里调用的</a></li>
+    <li><a href="#authenticationentrypoint是在哪里调用的">AuthenticationEntryPoint是在哪里调用的</a></li>
+    <li><a href="#未登录的状态取访问需要登录的资源时是在哪里处理的">未登录的状态取访问需要登录的资源时，是在哪里处理的</a></li>
     <li><a href="#passwordencoder">PasswordEncoder</a></li>
     <li><a href="#httpsecurity配置">HttpSecurity配置</a>
       <ul>
@@ -202,7 +210,7 @@
 </tr>
 <tr>
 <td>UserDetailsService</td>
-<td><strong>对用户的查询Service，loadUserByUsername方法应该只查询用户存不存在，不做密码正确与否的校验。在ProviderManager 中才会进行密码正确的校验 如DaoAuthenticationProvider.additionalAuthenticationChecks()</strong></td>
+<td><strong>对用户的查询Service，loadUserByUsername方法应该只查询用户存不存在，不做密码正确与否的校验,但是不通过一般可以抛出异常。在ProviderManager 中才会进行密码正确的校验 如DaoAuthenticationProvider.additionalAuthenticationChecks()</strong></td>
 </tr>
 <tr>
 <td></td>
@@ -405,7 +413,23 @@ private void doFilter(HttpServletRequest request, HttpServletResponse response, 
 <hr>
 <h2 id="自定义filter">自定义Filter</h2>
 <p>自定义个filter 比如jwtFilter</p>
-<p>如果当前request 是登陆状态的 ，则在FilterSecurityInterceptor 之前的某个 filter就应该将setAuthentication 好</p>
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>Note<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">只是说加在UsernamePasswordAuthenticationFilter.class 位置前面一个加一个jwtAuthenticationTokenFilter，并没有添加UsernamePasswordAuthenticationFilter.class。</div>
+        </div>
+    </div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">http.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
+</code></pre></td></tr></table>
+</div>
+</div><p>如果当前request 是登陆状态的 ，则在FilterSecurityInterceptor 之前的某个 filter就应该将setAuthentication 好</p>
 <hr>
 <h2 id="filtersecurityinterceptor">FilterSecurityInterceptor</h2>
 <p><a href="https://docs.spring.io/spring-security/reference/servlet/authorization/authorize-requests.html#servlet-authorization-filtersecurityinterceptor" target="_blank" rel="noopener noreffer ">https://docs.spring.io/spring-security/reference/servlet/authorization/authorize-requests.html#servlet-authorization-filtersecurityinterceptor</a></p>
@@ -430,6 +454,7 @@ private void doFilter(HttpServletRequest request, HttpServletResponse response, 
 </tr>
 </tbody>
 </table>
+<p>如果在AccessDecisionManager没有抛出异常的话，就继续doFilter()</p>
 <div class="details admonition note open">
         <div class="details-summary admonition-title">
             <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>Note<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
@@ -459,17 +484,16 @@ private void doFilter(HttpServletRequest request, HttpServletResponse response, 
 <p>Collection<!-- raw HTML omitted --> configAttributes：当前这个url地址所需要的权限</p>
 <p><a href="https://backendstory.com/spring-security-authorization-mechanism/" target="_blank" rel="noopener noreffer ">https://backendstory.com/spring-security-authorization-mechanism/</a></p>
 <hr>
-<p>请求/g</p>
-<p><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="AccessDecisionManager.png"
-        data-srcset="AccessDecisionManager.png, AccessDecisionManager.png 1.5x, AccessDecisionManager.png 2x"
-        data-sizes="auto"
-        alt="AccessDecisionManager.png"
-        title="AccessDecisionManager.png" /></p>
-<hr>
-<p>请求/d</p>
+<h3 id="请求d">请求/d</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">.antMatchers(&#34;/d&#34;).hasRole(&#34;roled&#34;)
+</code></pre></td></tr></table>
+</div>
+</div><p>FilterSecurityInterceptor 实现</p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -479,7 +503,43 @@ private void doFilter(HttpServletRequest request, HttpServletResponse response, 
         alt="AccessDecisionManager2.png"
         title="AccessDecisionManager2.png" /></p>
 <hr>
+<h3 id="请求g">请求/g</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">@PreAuthorize(&#34;hasAuthority(&#39;authorityg&#39;)&#34;)
+@RequestMapping(&#34;/g&#34;)
+public String g(){
+    return &#34;g&#34;;
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>已经追踪源码发现是执行完全部的Filter Chain，进入 DispatcherServlet 类后，最终通过MethodSecurityInterceptor 这个拦截器处理的，</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="AccessDecisionManager.png"
+        data-srcset="AccessDecisionManager.png, AccessDecisionManager.png 1.5x, AccessDecisionManager.png 2x"
+        data-sizes="auto"
+        alt="AccessDecisionManager.png"
+        title="AccessDecisionManager.png" /></p>
+<p>FilterSecurityInterceptor 和  MethodSecurityInterceptor都实现了AbstractSecurityInterceptor，AbstractSecurityInterceptor其实也设计了只执行一次的过滤逻辑</p>
+<hr>
 <h2 id="exceptiontranslationfilter">ExceptionTranslationFilter</h2>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="ExceptionTranslationFilter.png"
+        data-srcset="ExceptionTranslationFilter.png, ExceptionTranslationFilter.png 1.5x, ExceptionTranslationFilter.png 2x"
+        data-sizes="auto"
+        alt="ExceptionTranslationFilter.png"
+        title="ExceptionTranslationFilter.png" /></p>
 <p>处理 FilterSecurityInterceptor 抛出的异常；判断是认证异常，还是授权异常，分别进行处理。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -557,7 +617,16 @@ private void doFilter(HttpServletRequest request, HttpServletResponse response, 
 <p>是在服务启动时将所有带有@PreAuthorize 注解的方法收集好，然后在SpringSecutiyFilterChain里完成权限的认证？</p>
 <p>还是直接在借口调用的时候，调用具体的资源方法时前进行拦截？</p>
 <p>结果：</p>
-<p>追踪源码发现是执行完全部的Filter Chain，进入 DispatcherServlet 类后，最终通过MethodSecurityInterceptor 这个拦截器处理的，</p>
+<p>追踪源码发现是执行完全部的Filter Chain，进入 DispatcherServlet 类后，最终通过MethodSecurityInterceptor 这个拦截器处理的.</p>
+<p>这个请求也会正常通过FilterSecurityInterceptor. 的accessDecisionManager 方法，但是如果是普通资源，默认是需要登陆，所以说正常登录的用户可以正常通过这层判断。之后再走到FilterSecurityInterceptor。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="FilterSecurityInterceptor.png"
+        data-srcset="FilterSecurityInterceptor.png, FilterSecurityInterceptor.png 1.5x, FilterSecurityInterceptor.png 2x"
+        data-sizes="auto"
+        alt="FilterSecurityInterceptor.png"
+        title="FilterSecurityInterceptor.png" /></p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -567,17 +636,61 @@ private void doFilter(HttpServletRequest request, HttpServletResponse response, 
         alt="MethodSecurityInterceptor.png"
         title="MethodSecurityInterceptor.png" /></p>
 <hr>
-<h2 id="在springsecuriy中如果usernamepasswordauthenticationfilter的userdetailsservice中验证失败抛出了自定义异常是怎么处理的">在SpringSecuriy中，如果UsernamePasswordAuthenticationFilter的UserDetailsService中验证失败，抛出了自定义异常，是怎么处理的？</h2>
-<p>还是看下流程图，如果UserDetailsService抛出异常会一路往外层抛出异常，直到 UsernamePasswordAuthenticationFilter中catch住，交给AuthenticationFailureHandler 处理。比如AuthenticationFailureHandler会重定向或者其他。</p>
+<h2 id="如果usernamepasswordauthenticationfilter的userdetailsservice中验证失败抛出了自定义异常是怎么处理的">如果UsernamePasswordAuthenticationFilter的UserDetailsService中验证失败，抛出了自定义异常，是怎么处理的？</h2>
+<p>UserDetailService.loadUserByUsername 抛异常</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="loadUserByUsername.png"
+        data-srcset="loadUserByUsername.png, loadUserByUsername.png 1.5x, loadUserByUsername.png 2x"
+        data-sizes="auto"
+        alt="loadUserByUsername.png"
+        title="loadUserByUsername.png" /></p>
+<p>并且 AuthenticationProvier 也不会处理异常，也只会继续抛异常</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="DaoAuthenticationProvider.png"
+        data-srcset="DaoAuthenticationProvider.png, DaoAuthenticationProvider.png 1.5x, DaoAuthenticationProvider.png 2x"
+        data-sizes="auto"
+        alt="DaoAuthenticationProvider.png"
+        title="DaoAuthenticationProvider.png" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="ProviderManager.png"
+        data-srcset="ProviderManager.png, ProviderManager.png 1.5x, ProviderManager.png 2x"
+        data-sizes="auto"
+        alt="ProviderManager.png"
+        title="ProviderManager.png" /></p>
+<p>直到 UsernamePasswordAuthenticationFilter中catch住，交给AuthenticationFailureHandler 处理。比如AuthenticationFailureHandler会重定向或者其他。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="BasicAuthenticationFilter.png"
+        data-srcset="BasicAuthenticationFilter.png, BasicAuthenticationFilter.png 1.5x, BasicAuthenticationFilter.png 2x"
+        data-sizes="auto"
+        alt="BasicAuthenticationFilter.png"
+        title="BasicAuthenticationFilter.png" /></p>
 <p>UsernamePasswordAuthenticationFilter</p>
 <p>doFilter()-&gt;attemptAuthentication()-&gt;</p>
 <p>AuthenticationManager</p>
 <p>authenticate()-&gt;</p>
 <p>AuthenticationProvider</p>
 <p>authenticate()-&gt;</p>
-<h2 id="在springsecuriy中如果在自定义的filter中抛出了自定义异常是怎么处理的">在SpringSecuriy中，如果在自定义的Filter中，抛出了自定义异常，是怎么处理的？</h2>
+<h2 id="如果在自定义的filter中抛出了自定义异常是怎么处理的">如果在自定义的Filter中，抛出了自定义异常，是怎么处理的？</h2>
 <p>处理不了。所以不要在自定义filter中抛出异常，如果验证逻辑不通过，不setAuthentication即可，最终会自动交给FilterSecurityInterceptor 判断处理。可以参考BasicAuthenticationFilter的实现。</p>
 <p>如果是AuthenticationManager 中 校验用户抛出了异常，是可以在外层filter中处理的</p>
+<hr>
+<h2 id="accessdeniedhandler是在哪里调用的">AccessDeniedHandler是在哪里调用的</h2>
+<p>在ExceptionTranslationFilter 对FilterSecurityInterceptor 进行try catch后，FilterSecurityInterceptor抛出的进行处理，也就是handleSpringSecurityException ()方法</p>
+<hr>
+<h2 id="authenticationentrypoint是在哪里调用的">AuthenticationEntryPoint是在哪里调用的</h2>
+<p>在自定义filter中，认证失败后调用。</p>
+<hr>
+<h2 id="未登录的状态取访问需要登录的资源时是在哪里处理的">未登录的状态取访问需要登录的资源时，是在哪里处理的</h2>
+<p>还是在MethodSecurityInterceptor的attemptAuthorization 方法中，会返回 AccessDeniedException ，然后交给</p>
+<p>ExceptionTranslationFilter.handleSpringSecurityException处理</p>
 <h2 id="passwordencoder">PasswordEncoder</h2>
 <p>密码在数据库最好不以明文存储，</p>
 <p>BCryptPasswordEncoder 是强散列算法对密码进行散列操作</p>
