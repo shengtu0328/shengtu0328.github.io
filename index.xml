@@ -4,9 +4,17 @@
         <link>https://shengtu0328.github.io/</link>
         <description>The best time to plant a tree was 10 years ago, the second is now</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1007@qq.com (ricky)</managingEditor>
-            <webMaster>1007@qq.com (ricky)</webMaster><lastBuildDate>Thu, 03 Nov 2022 14:22:04 &#43;0800</lastBuildDate>
+            <webMaster>1007@qq.com (ricky)</webMaster><lastBuildDate>Thu, 17 Nov 2022 18:04:01 &#43;0800</lastBuildDate>
             <atom:link href="https://shengtu0328.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>学习SpringSecurityOauth2</title>
+    <link>https://shengtu0328.github.io/posts/springsecurityoauth2/</link>
+    <pubDate>Thu, 17 Nov 2022 18:04:01 &#43;0800</pubDate>
+    <author>ricky</author>
+    <guid>https://shengtu0328.github.io/posts/springsecurityoauth2/</guid>
+    <description><![CDATA[SpringSecurityOauth2几个重要注解 1 2 3 #创建一个类 加上这两个注解 ，就实现了认证服务器。不需要自己写一行代码 @Configuration @EnableAuthorizationServer 1 2 3 创建]]></description>
+</item>
+<item>
     <title>学习SpringSecurity</title>
     <link>https://shengtu0328.github.io/posts/learnspringsecurity/</link>
     <pubDate>Thu, 03 Nov 2022 14:22:04 &#43;0800</pubDate>
@@ -20,7 +28,7 @@
     <pubDate>Wed, 02 Nov 2022 18:11:56 &#43;0800</pubDate>
     <author>ricky</author>
     <guid>https://shengtu0328.github.io/posts/programmerwords/</guid>
-    <description><![CDATA[工作中遇到的单词记录，进行记录，加深记忆，以记录工作环境中的释义为主 词性 释义 发音 备注 flow n. 流程 v. 流动 intended adj. 有意的；为……打算 are intended to 打算,有意的 authorize]]></description>
+    <description><![CDATA[工作中遇到的单词记录，进行记录，加深记忆，以工作环境中的释义为主 词性 释义 发音 备注 flow n. 流程 v. 流动 intended adj. 有意的；为……打算 are intended to 打算,有意的 authorize v. 授]]></description>
 </item>
 <item>
     <title>简历</title>

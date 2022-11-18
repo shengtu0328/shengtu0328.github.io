@@ -17,7 +17,7 @@
 <meta name="application-name" content="我的网站">
 <meta name="apple-mobile-web-app-title" content="我的网站"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://shengtu0328.github.io/posts/learnspringsecurity/" /><link rel="prev" href="https://shengtu0328.github.io/posts/programmerwords/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://shengtu0328.github.io/posts/learnspringsecurity/" /><link rel="prev" href="https://shengtu0328.github.io/posts/programmerwords/" /><link rel="next" href="https://shengtu0328.github.io/posts/springsecurityoauth2/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
     {
@@ -618,7 +618,7 @@ public String g(){
 <p>还是直接在借口调用的时候，调用具体的资源方法时前进行拦截？</p>
 <p>结果：</p>
 <p>追踪源码发现是执行完全部的Filter Chain，进入 DispatcherServlet 类后，最终通过MethodSecurityInterceptor 这个拦截器处理的.</p>
-<p>这个请求也会正常通过FilterSecurityInterceptor. 的accessDecisionManager 方法，但是如果是普通资源，默认是需要登陆，所以说正常登录的用户可以正常通过这层判断。之后再走到FilterSecurityInterceptor。</p>
+<p>这个请求也会正常通过FilterSecurityInterceptor. 的accessDecisionManager 方法，但是如果是普通资源，默认是需要登陆，所以说正常登录的用户可以正常通过这层判断。之后再走到MethodSecurityInterceptor。</p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -807,7 +807,8 @@ $2a$10$H9Ub8PIfhKaE9mafKrW4s.XlYbzZcU6gdUqZxAHOWnKeo1ML9is0q
         </section>
     </div>
 
-    <div class="post-nav"><a href="/posts/programmerwords/" class="prev" rel="prev" title="英文单词记录"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>英文单词记录</a></div>
+    <div class="post-nav"><a href="/posts/programmerwords/" class="prev" rel="prev" title="英文单词记录"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>英文单词记录</a>
+            <a href="/posts/springsecurityoauth2/" class="next" rel="next" title="学习SpringSecurityOauth2">学习SpringSecurityOauth2<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 </article></div>
             </main><footer class="footer">
