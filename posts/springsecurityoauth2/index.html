@@ -17,7 +17,7 @@
 <meta name="application-name" content="我的网站">
 <meta name="apple-mobile-web-app-title" content="我的网站"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://shengtu0328.github.io/posts/springsecurityoauth2/" /><link rel="prev" href="https://shengtu0328.github.io/posts/learnspringsecurity/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://shengtu0328.github.io/posts/springsecurityoauth2/" /><link rel="prev" href="https://shengtu0328.github.io/posts/learnspringsecurity/" /><link rel="next" href="https://shengtu0328.github.io/posts/ffmpeg/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
     {
@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/shengtu0328.github.io\/posts\/springsecurityoauth2\/"
-        },"genre": "posts","wordcount":  1827 ,
+        },"genre": "posts","wordcount":  2470 ,
         "url": "https:\/\/shengtu0328.github.io\/posts\/springsecurityoauth2\/","datePublished": "2022-11-17T18:04:01+08:00","dateModified": "2022-11-17T18:04:01+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -102,8 +102,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">学习SpringSecurityOauth2</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-17">2022-11-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1827 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-17">2022-11-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2470 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -190,10 +190,40 @@
 </div><p>SpringSecurityOauth2 为了实现Oauth2，其实无非也只是在SpringSecurity上基础上加了以下几点</p>
 <p><strong>生成token的请求处理</strong></p>
 <ol>
-<li>添加了<strong>ClientCredentialsTokenEndpointFilter</strong>，通过ClientDetailsUserDetailsService认证请求中的client信息</li>
-<li>添加了TokenEndpoint类，生成token的接口，其中包括校验client信息的逻辑</li>
-<li>添加了CheckTokenEndpoint类，/oauth/check_token用于校验token</li>
-<li>添加了TokenGranter类，实现Oauth2的 多种grant_type模式，生成token</li>
+<li>
+<p><strong>BasicAuthenticationFilter或者</strong>添加了<strong>ClientCredentialsTokenEndpointFilter</strong>，通过ClientDetailsUserDetailsService认证请求中的client信息</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">@EnableAuthorizationServer
+public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {  
+    @Override
+    public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
+        //ClientCredentialsTokenEndpointFilter默认不开启，要配置此行才能开启
+        security.allowFormAuthenticationForClients();
+    }
+}
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>添加了TokenEndpoint类，生成token的接口，其中包括校验client信息的逻辑</p>
+</li>
+<li>
+<p>添加了CheckTokenEndpoint类，/oauth/check_token用于校验token</p>
+</li>
+<li>
+<p>添加了TokenGranter类，实现Oauth2的 多种grant_type模式，生成token</p>
+</li>
 </ol>
 <p><strong>访问资源时的请求处理</strong></p>
 <ul>
@@ -223,17 +253,17 @@
 </tr>
 <tr>
 <td>A</td>
-<td>ClientCredentialsTokenEndpointFilter</td>
-<td>校验client信息</td>
-<td></td>
-<td></td>
+<td>BasicAuthenticationFilter(主要的)或者ClientCredentialsTokenEndpointFilter</td>
+<td>校验<strong>ClientDetails</strong>信息（两种方式，根据http head参数 或者 表单参数来校验）</td>
+<td>同样是BasicAuthenticationFilter</td>
+<td>校验<strong>Userdetails</strong></td>
 </tr>
 <tr>
 <td>A</td>
 <td>ClientDetailsUserDetailsService</td>
 <td>查询client信息</td>
-<td></td>
-<td></td>
+<td>UserDetailsService</td>
+<td>查询User信息</td>
 </tr>
 <tr>
 <td></td>
@@ -246,8 +276,8 @@
 <td>A</td>
 <td>TokenEndpoint</td>
 <td>处理/oauth/token请求</td>
-<td>UsernamePasswordAuthenticationFilter</td>
-<td>生成token</td>
+<td></td>
+<td></td>
 </tr>
 <tr>
 <td>A</td>
@@ -352,8 +382,15 @@
         </div>
     </div>
 <h2 id="springsecurityoauth2的httpsecurity和springsecurity的httpsecurity配置问题">SpringSecurityOauth2的HttpSecurity和SpringSecurity的HttpSecurity配置问题</h2>
+<p>首先HttpSecurity的功能是是为项目中的url配置所需的权限。</p>
+<p>测试下来 WebSecurityConfigurerAdapter的HttpSecurity任何配置都没有生效，生效的只有ResourceServerConfigurerAdapter的HttpSecurity。</p>
 <h2 id="总结">总结</h2>
-<p>SpringSecurityOauth2为了实现oauth2，分别通过添加 ClientCredentialsTokenEndpointFilter 和 OAuth2AuthenticationProcessingFilter 实现了AuthorizationServer和ResourceServer。AuthorizationServer实现生成token，check token，refresh token的职责。用户首先从AuthorizationServer获取token，然后在带着token访问ResourceServer才能成功获取到资源。</p>
+<p>SpringSecurityOauth2为了实现oauth2，</p>
+<p>通过添加 BasicAuthenticationFilter/ClientCredentialsTokenEndpointFilter ,TokenEndPoint等实现了AuthorizationServer。</p>
+<p>通过添加 OAuth2AuthenticationProcessingFilter等实现了AuthorizationServer和ResourceServer。</p>
+<p>AuthorizationServer实现生成token，check token，refresh token的职责。</p>
+<p>用户首先从AuthorizationServer获取token，然后在带着token访问ResourceServer时，会去AuthorizationServer校验token，成功的话会得到当前用户所有信息(包括权限数据)，然后在resourceServer内对@PreAuthorize(&ldquo;hasAnyAuthority(&lsquo;admin&rsquo;)&quot;)进行校验。</p>
+<p>与SpringSecurity相同的点都是在FilterChain中先进行认证后进行授权。</p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
@@ -375,7 +412,8 @@
         </section>
     </div>
 
-    <div class="post-nav"><a href="/posts/learnspringsecurity/" class="prev" rel="prev" title="学习SpringSecurity"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>学习SpringSecurity</a></div>
+    <div class="post-nav"><a href="/posts/learnspringsecurity/" class="prev" rel="prev" title="学习SpringSecurity"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>学习SpringSecurity</a>
+            <a href="/posts/ffmpeg/" class="next" rel="next" title="Ffmpeg">Ffmpeg<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 </article></div>
             </main><footer class="footer">

@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/shengtu0328.github.io\/posts\/learnspringsecurity\/"
-        },"genre": "posts","wordcount":  5604 ,
+        },"genre": "posts","wordcount":  6244 ,
         "url": "https:\/\/shengtu0328.github.io\/posts\/learnspringsecurity\/","datePublished": "2022-11-03T14:22:04+08:00","dateModified": "2022-11-03T14:22:04+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -102,8 +102,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">学习SpringSecurity</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-03">2022-11-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;5604 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;12 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-03">2022-11-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;6244 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;13 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -143,9 +143,11 @@
       <ul>
         <li><a href="#session控制">Session控制</a></li>
         <li><a href="#roles和authorities">roles()和authorities()</a></li>
+        <li><a href="#多个-antmatchers执行顺序">多个 antMatchers（）执行顺序</a></li>
       </ul>
     </li>
     <li><a href="#csrf">CSRF</a></li>
+    <li><a href="#rememberme">rememberMe</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h2 id="springsecurity概览">SpringSecurity概览</h2>
@@ -210,7 +212,7 @@
 </tr>
 <tr>
 <td>UserDetailsService</td>
-<td><strong>对用户的查询Service，loadUserByUsername方法应该只查询用户存不存在，不做密码正确与否的校验,但是不通过一般可以抛出异常。在ProviderManager 中才会进行密码正确的校验 如DaoAuthenticationProvider.additionalAuthenticationChecks()</strong></td>
+<td><strong>对用户的查询Service，loadUserByUsername方法应该只查询用户存不存在，不做密码正确与否的校验,但是不通过一般会抛出异常。到ProviderManager 中才会进行密码正确的校验 如DaoAuthenticationProvider.additionalAuthenticationChecks()</strong></td>
 </tr>
 <tr>
 <td></td>
@@ -529,6 +531,14 @@ public String g(){
         data-sizes="auto"
         alt="AccessDecisionManager.png"
         title="AccessDecisionManager.png" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://s1.ax1x.com/2022/11/29/zdcgj1.jpg"
+        data-srcset="https://s1.ax1x.com/2022/11/29/zdcgj1.jpg, https://s1.ax1x.com/2022/11/29/zdcgj1.jpg 1.5x, https://s1.ax1x.com/2022/11/29/zdcgj1.jpg 2x"
+        data-sizes="auto"
+        alt="https://s1.ax1x.com/2022/11/29/zdcgj1.jpg"
+        title="https://s1.ax1x.com/2022/11/29/zdcgj1.jpg" /></p>
 <p>FilterSecurityInterceptor 和  MethodSecurityInterceptor都实现了AbstractSecurityInterceptor，AbstractSecurityInterceptor其实也设计了只执行一次的过滤逻辑</p>
 <hr>
 <h2 id="exceptiontranslationfilter">ExceptionTranslationFilter</h2>
@@ -777,6 +787,24 @@ $2a$10$H9Ub8PIfhKaE9mafKrW4s.XlYbzZcU6gdUqZxAHOWnKeo1ML9is0q
 </code></pre></td></tr></table>
 </div>
 </div><p>roles() 和 authorities（）会会覆盖当前用户的 authorities，所以roles()和  authorities（）只能调用一个，一般是用authorities().</p>
+<h3 id="多个-antmatchers执行顺序">多个 antMatchers（）执行顺序</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">.authorizeRequests()
+
+//本项目所需要的授权范围,这个scope是写在auth服务的配置里的
+.antMatchers(&#34;/**&#34;).access(&#34;#oauth2.hasScope(&#39;scope1&#39;)&#34;)
+.antMatchers( &#34;/a&#34;).hasAuthority(&#34;authorityOauth2&#34;)
+</code></pre></td></tr></table>
+</div>
+</div><p>写在前面的会覆盖 写在后面的，如 访问/a 实际需要的权限判断的条件是.antMatchers(&quot;/**&quot;).access(&quot;#oauth2.hasScope(&lsquo;scope1&rsquo;)&quot;)</p>
 <hr>
 <h2 id="csrf">CSRF</h2>
 <p><a href="https://docs.spring.io/spring-security/reference/features/exploits/csrf.html" target="_blank" rel="noopener noreffer ">https://docs.spring.io/spring-security/reference/features/exploits/csrf.html</a></p>
@@ -786,6 +814,38 @@ $2a$10$H9Ub8PIfhKaE9mafKrW4s.XlYbzZcU6gdUqZxAHOWnKeo1ML9is0q
 <p>检查Referer字段</p>
 <p>添加校验token</p>
 <hr>
+<h2 id="rememberme">rememberMe</h2>
+<p>springsecurity 的 rememberMe是在服务端的一种实现，和前端<strong>记住密码</strong>有区别。</p>
+<p><strong>记住密码</strong>是服务端登录成功后，set账密的cookie，然后前端以后每次登录都会根据cookie提交账密。</p>
+<p><strong>记住我</strong>是指一旦用户的会话超时过期，就要再次登录，这样太过于烦琐。记住我可以让用户会话过期之后，还能保持认证状态，就会方便很多。</p>
+<p>主要实现步骤</p>
+<ol>
+<li>
+<p>UsernamePasswordAuthenticationFilter登录成功会-&gt;successfulAuthentication()-&gt;this.rememberMeServices.loginSuccess</p>
+<p>生成一个  bas64encode（username+  expiryTime+md5（ username + &ldquo;:&rdquo; + tokenExpiryTime + &ldquo;:&rdquo; + password + &ldquo;:&rdquo; + getKey()））</p>
+<p>set 到cookie里</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="makeTokenSignature.png"
+        data-srcset="makeTokenSignature.png, makeTokenSignature.png 1.5x, makeTokenSignature.png 2x"
+        data-sizes="auto"
+        alt="makeTokenSignature.png"
+        title="makeTokenSignature.png" /></p>
+</li>
+<li>
+<p>RememberMeAuthenticationFilter 发现如果session为空，但是session中的   remember-me属性不为空时，就再base64decode，</p>
+<p>在 md5进行验签，成功后SecurityContextHolder.setContext(context);登录成功。</p>
+</li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="RememberMeAuthenticationFilter.png"
+        data-srcset="RememberMeAuthenticationFilter.png, RememberMeAuthenticationFilter.png 1.5x, RememberMeAuthenticationFilter.png 2x"
+        data-sizes="auto"
+        alt="RememberMeAuthenticationFilter.png"
+        title="RememberMeAuthenticationFilter.png" /></p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
