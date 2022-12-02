@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/shengtu0328.github.io\/posts\/threadpool\/"
-        },"genre": "posts","wordcount":  2648 ,
+        },"genre": "posts","wordcount":  2662 ,
         "url": "https:\/\/shengtu0328.github.io\/posts\/threadpool\/","datePublished": "2022-12-01T14:14:25+08:00","dateModified": "2022-12-01T14:14:25+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -37,7 +37,7 @@
             },"description": ""
     }
     </script></head>
-    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
 
         <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
     <div class="header-wrapper">
@@ -102,7 +102,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">线程池</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span>&nbsp;<span class="post-category">included in <a href="/categories/juc/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>JUC</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-12-01">2022-12-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2648 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-12-01">2022-12-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2662 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;6 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -112,13 +112,13 @@
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
     <li><a href="#我是0线程池的主要作用">我是0.线程池的主要作用</a></li>
-    <li><a href="#stage1自己如何写一个最简单的线程池模拟jucthreadpoolexecutor">Stage1.自己如何写一个最简单的线程池？（模拟JUC.ThreadPoolExecutor）</a>
+    <li><a href="#stage1自己如何写一个最简单的线程池">Stage1.自己如何写一个最简单的线程池？</a>
       <ul>
         <li><a href="#需要以下组件">需要以下组件</a></li>
-        <li><a href="#流程">流程</a>
+        <li><a href="#重要流程">重要流程</a>
           <ul>
-            <li><a href="#流程1threadpoolexecute">流程1.threadPool.execute()</a></li>
-            <li><a href="#流程2线程集合中的线程">流程2.线程集合中的线程</a></li>
+            <li><a href="#threadpoolexecute-执行流程">threadPool.execute()-执行流程</a></li>
+            <li><a href="#线程集合中的线程-运行流程">线程集合中的线程-运行流程</a></li>
           </ul>
         </li>
         <li><a href="#代码">代码</a>
@@ -153,7 +153,15 @@
 <p><strong>其他</strong></p>
 </li>
 </ul>
-<h2 id="stage1自己如何写一个最简单的线程池模拟jucthreadpoolexecutor">Stage1.自己如何写一个最简单的线程池？（模拟JUC.ThreadPoolExecutor）</h2>
+<h2 id="stage1自己如何写一个最简单的线程池">Stage1.自己如何写一个最简单的线程池？</h2>
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>Note<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">虽然是个简单的线程池，但也是在模拟JUC.ThreadPoolExecutor。</div>
+        </div>
+    </div>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -179,8 +187,8 @@
 <p>2.2  队列一般都是要有容量上限，不会无限量的存放任务</p>
 </li>
 </ol>
-<h3 id="流程">流程</h3>
-<h4 id="流程1threadpoolexecute">流程1.threadPool.execute()</h4>
+<h3 id="重要流程">重要流程</h3>
+<h4 id="threadpoolexecute-执行流程">threadPool.execute()-执行流程</h4>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -189,7 +197,7 @@
         data-sizes="auto"
         alt="ThreadPool流程图.png"
         title="ThreadPool流程图.png" /></p>
-<h4 id="流程2线程集合中的线程">流程2.线程集合中的线程</h4>
+<h4 id="线程集合中的线程-运行流程">线程集合中的线程-运行流程</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -230,7 +238,7 @@
             task = null;
         }
     }
-    //能走到这一步只有带从队列获取超时时间的线程
+    //能走到这一步只会是执行 taskQueue.poll(timeout, timeUnit) 的线程
     synchronized (workers) {
         log.debug(&#34;worker 被移除{}&#34;, this);
         workers.remove(this);
