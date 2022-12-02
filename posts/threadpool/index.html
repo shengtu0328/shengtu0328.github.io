@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>线程池 - ricky的网站</title><meta name="Description" content="The best time to plant a tree was 10 years ago, the second is now"><meta property="og:title" content="线程池" />
+<meta property="og:description" content="我是0.线程池的主要作用 降低资源消耗：创建线程（分配栈内存）和销毁线程都是消耗资源的，通过线程池可以重复利用已创建的线程，降低线程创建和销毁" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://shengtu0328.github.io/posts/threadpool/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-12-01T14:14:25+08:00" />
+<meta property="article:modified_time" content="2022-12-01T14:14:25+08:00" /><meta property="og:site_name" content="我的网站" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="线程池"/>
+<meta name="twitter:description" content="我是0.线程池的主要作用 降低资源消耗：创建线程（分配栈内存）和销毁线程都是消耗资源的，通过线程池可以重复利用已创建的线程，降低线程创建和销毁"/>
+<meta name="application-name" content="我的网站">
+<meta name="apple-mobile-web-app-title" content="我的网站"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://shengtu0328.github.io/posts/threadpool/" /><link rel="prev" href="https://shengtu0328.github.io/posts/juc/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "线程池",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/shengtu0328.github.io\/posts\/threadpool\/"
+        },"genre": "posts","wordcount":  2276 ,
+        "url": "https:\/\/shengtu0328.github.io\/posts\/threadpool\/","datePublished": "2022-12-01T14:14:25+08:00","dateModified": "2022-12-01T14:14:25+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "ricky"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="ricky的网站">Ricky’s blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="ricky的网站">Ricky’s blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">线程池</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span>&nbsp;<span class="post-category">included in <a href="/categories/juc/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>JUC</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-12-01">2022-12-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2276 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#我是0线程池的主要作用">我是0.线程池的主要作用</a></li>
+    <li><a href="#一如何自己写一个简单的线程池">一.如何自己写一个简单的线程池？</a>
+      <ul>
+        <li><a href="#需要以下组件">需要以下组件</a></li>
+        <li><a href="#流程">流程</a></li>
+        <li><a href="#代码">代码</a>
+          <ul>
+            <li><a href="#1自定义的一个阻塞队列">1.自定义的一个阻塞队列</a></li>
+            <li><a href="#2自定义的工作线程">2.自定义的工作线程</a></li>
+            <li><a href="#3自定义的线程池">3.自定义的线程池</a></li>
+            <li><a href="#4测试类">4.测试类</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#提问">提问</a></li>
+    <li><a href="#参考">参考：</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="我是0线程池的主要作用">我是0.线程池的主要作用</h2>
+<ul>
+<li>
+<p><strong>降低资源消耗</strong>：创建线程（分配栈内存）和销毁线程都是消耗资源的，通过线程池可以重复利用已创建的线程，降低线程创建和销毁造成的损耗。</p>
+</li>
+<li>
+<p><strong>线程的管理型</strong>:  无节制的创建线程，会对系统内存占用相当大造成OOM。如果线程特别多，cpu数量硬件固定忙不过来，会造成上下文频繁切换，导致资源调度失衡，降低系统的稳定性。使用线程池可以进行统一的分配、调优和监控。</p>
+</li>
+<li>
+<p><strong>其他</strong></p>
+</li>
+</ul>
+<h2 id="一如何自己写一个简单的线程池">一.如何自己写一个简单的线程池？</h2>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="threadpool.png"
+        data-srcset="threadpool.png, threadpool.png 1.5x, threadpool.png 2x"
+        data-sizes="auto"
+        alt="threadpool.png"
+        title="threadpool.png" /></p>
+<h3 id="需要以下组件">需要以下组件</h3>
+<ol>
+<li>
+<p><strong>线程集合</strong>：线程集合中有着一批可重复利用的线程,专注于(不停的)(996的)(while循环的)处理任务。（任务的来源分两种：线程当前执行的任务和从队列获得的新任务）</p>
+</li>
+<li>
+<p><strong>阻塞队列</strong>：如果线程集合来不及处理，可以将任务放入队列暂存</p>
+<p>2.1. 但为什么还必须是一个有<strong>阻塞</strong>功能的队列呢？</p>
+<ul>
+<li>向队列中消费任务时，队列中有任务时，会存在多个线程同时去队列获取任务的情况，阻塞队列可以保证消费者的线程安全</li>
+<li>向队列中消费任务时，队列中没有任务时，线程集合中的线程可以阻塞住，一旦拿到任务可以继续执行任务</li>
+<li>向队列中提交任务时，也需要控制生产者的线程安全</li>
+<li>向队列中提交任务时，如果队列任务满了需要阻塞</li>
+</ul>
+<p>2.2  队列一般都是要有容量上限，不会无限量的存放任务</p>
+</li>
+</ol>
+<h3 id="流程">流程</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="ThreadPool%e6%b5%81%e7%a8%8b%e5%9b%be.png"
+        data-srcset="ThreadPool%e6%b5%81%e7%a8%8b%e5%9b%be.png, ThreadPool%e6%b5%81%e7%a8%8b%e5%9b%be.png 1.5x, ThreadPool%e6%b5%81%e7%a8%8b%e5%9b%be.png 2x"
+        data-sizes="auto"
+        alt="ThreadPool流程图.png"
+        title="ThreadPool流程图.png" /></p>
+<h3 id="代码">代码</h3>
+<h4 id="1自定义的一个阻塞队列">1.自定义的一个阻塞队列</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">
+import lombok.extern.slf4j.Slf4j;
+
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.ReentrantLock;
+
+/**
+ * 自定义的一个阻塞队列
+ *
+ * @author xrq
+ */
+@Slf4j(topic = &#34;c.MyBlockingQueue&#34;)
+public class MyBlockingQueue&lt;T&gt; {
+
+    /**
+     * 1. 任务队列 ，队列先进先出 ，Deque双向链表
+     */
+    private Deque&lt;T&gt; queue = new ArrayDeque&lt;&gt;();
+
+    /**
+     * 2. 锁  1：锁的作用是防止一个任务被三个线程获取,
+     *        2：还有就是队列中没有元素时，可以通过reentrantLock.newCondition() 等待。
+     */
+    private ReentrantLock lock = new ReentrantLock();
+
+    /**
+     * 3. 生产者条件变量：如果队列满了生产者线程去这个Condition个await(),等待队列不满时被消费者唤醒
+     */
+    private Condition fullWaitSet = lock.newCondition();
+
+    /**
+     * 4. 消费者条件变量：如果队列空了消费者线程去这个Condition里await(),等待队列不空时被生产者唤醒
+     */
+    private Condition emptyWaitSet = lock.newCondition();
+
+    /**
+     * 5. 容量
+     */
+    private int capacity;
+
+    public MyBlockingQueue(int capacity) {
+        this.capacity = capacity;
+    }
+
+    /**
+     * 阻塞获取
+     *
+     * @return
+     */
+    public T take() {
+        lock.lock();
+        try {
+            while (queue.isEmpty()) {
+                try {
+                    emptyWaitSet.await();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            T t = queue.removeFirst();
+            fullWaitSet.signal();
+            return t;
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    /**
+     * 带超时的阻塞获取
+     *
+     * @param timeout 超时时间
+     * @param unit    时间单位
+     * @return
+     */
+    public T poll(long timeout, TimeUnit unit) {
+        lock.lock();
+        try {
+            // 将 timeout 统一转换为 纳秒
+            long nanos = unit.toNanos(timeout);
+            while (queue.isEmpty()) {
+                try {
+                    // 等待时间过了队列还是空就结束
+                    if (nanos &lt;= 0) {
+                        return null;
+                    }
+                    // 返回值是剩余等待时间
+                    nanos = emptyWaitSet.awaitNanos(nanos);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            T t = queue.removeFirst();
+            fullWaitSet.signal();
+            return t;
+        } finally {
+            lock.unlock();
+        }
+    }
+
+
+    /**
+     * 阻塞添加
+     *
+     * @param task
+     */
+    public void put(T task) {
+        lock.lock();
+        try {
+            while (queue.size() == capacity) {
+                try {
+                    log.debug(&#34;等待加入任务队列 {} ...&#34;, task);
+                    fullWaitSet.await();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            log.debug(&#34;加入任务队列 {}&#34;, task);
+            queue.addLast(task);
+            emptyWaitSet.signal();
+        } finally {
+            lock.unlock();
+        }
+    }
+
+
+    /**
+     * 获取队列大小
+     *
+     * @return
+     */
+    public int size() {
+        lock.lock();
+        try {
+            return queue.size();
+        } finally {
+            lock.unlock();
+        }
+    }
+
+}
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="2自定义的工作线程">2.自定义的工作线程</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">class MyWorker extends Thread {
+    private Runnable task;
+
+    public MyWorker(Runnable task) {
+        this.task = task;
+    }
+
+    @Override
+    public void run() {
+        // 执行任务，重用线程 taskQueue.take()是关键！！！
+        // 1) 当 task 不为空，执行任务
+        // 2) 当 task 执行完毕，再接着从任务队列获取任务并执行
+        // while(task != null || (task = taskQueue.poll(timeout, timeUnit)) != null) {
+        while (task != null || (task = taskQueue.take()) != null) {
+            try {
+                log.debug(&#34;正在执行...{}&#34;, task);
+                task.run();
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                task = null;
+            }
+        }
+        //能走到这一步只有带从队列获取超时时间的线程
+        synchronized (workers) {
+            log.debug(&#34;worker 被移除{}&#34;, this);
+            workers.remove(this);
+        }
+    }
+}
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="3自定义的线程池">3.自定义的线程池</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">import lombok.extern.slf4j.Slf4j;
+
+import java.util.HashSet;
+import java.util.concurrent.TimeUnit;
+
+/**
+ * @author xrq
+ */
+@Slf4j(topic = &#34;c.MyThreadPool&#34;)
+public class MyThreadPool {
+
+    /**
+     * 任务队列
+     */
+    private MyBlockingQueue&lt;Runnable&gt; taskQueue;
+
+    /**
+     * 线程集合
+     */
+    private HashSet&lt;MyWorker&gt; workers = new HashSet&lt;&gt;();
+
+    /**
+     * 核心线程数
+     */
+    private int coreSize;
+
+    /**
+     * 从队列获取任务时的超时时间
+     */
+    private long timeout;
+
+    /**
+     * 从队列获取任务时的超时时间 的 时间单位
+     */
+    private TimeUnit timeUnit;
+
+
+    public MyThreadPool(int coreSize, long timeout, TimeUnit timeUnit, int queueCapacity) {
+        this.coreSize = coreSize;
+        this.timeout = timeout;
+        this.timeUnit = timeUnit;
+        this.taskQueue = new MyBlockingQueue&lt;&gt;(queueCapacity);
+    }
+
+    /**
+     * 执行任务，生产任务提交线程池
+     *
+     * @param task
+     */
+    public void execute(Runnable task) {
+        // 当线程集合没满时，创建worker对象并交给他执行
+        // 当线程集合满了时 coreSize 时，加入任务队列暂存
+        synchronized (workers) {
+            if (workers.size() &lt; coreSize) {
+                MyWorker worker = new MyWorker(task);
+                log.debug(&#34;新增 worker{}, {}&#34;, worker, task);
+                workers.add(worker);
+                worker.start();
+            } else {
+                taskQueue.put(task);
+            }
+        }
+    }
+
+
+    //工作线程
+    class MyWorker extends Thread {
+       //.......
+    }
+
+}
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="4测试类">4.测试类</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">import lombok.extern.slf4j.Slf4j;
+
+import java.util.concurrent.TimeUnit;
+
+/**
+ * 测试类
+ */
+@Slf4j(topic = &#34;c.CustomThreadPool&#34;)
+public class MyThreadPoolTest {
+
+
+    public static void main(String[] args) {
+
+        MyThreadPool threadPool = new MyThreadPool(2, 1000, TimeUnit.MILLISECONDS, 10);
+
+        for (int i = 0; i &lt; 5; i++) {
+            int j = i;
+            threadPool.execute(() -&gt; {
+                log.debug(&#34;任务被执行了&#34; + j);
+            });
+        }
+    }
+
+}
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="提问">提问</h2>
+<p>1.为什么只用了一把锁(ReentrantLock)，生产者拿到锁提交任务到队列的时候，此时队列中还有很多任务的时候，队列中有数据但消费者却因为获取不到锁了就不能消费了吗？不是降低了性能？</p>
+<p>如果改成生产一个锁l1，消费一个锁l2，那生产者和消费者不是共用一把锁，就无法在生产者的同步代码中调用l2的condition2.singal()方法，如果这么写，只会报IllegalMonitorStateException。这实际上还是对ReentrantLock锁的理解问题。</p>
+<p>并且如果这个队列同时有消费有生产，会不会有可能产生线程安全问题？未知。</p>
+<p>或者说确实有2个锁的队列，</p>
+<hr>
+<p>2.线程池中的核心线程重复利用 和救急线程用完后移除是怎么实现的？</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">//核心线程
+while (task != null || (task = taskQueue.take()) != null) {
+
+//救急线程
+while(task != null || (task = taskQueue.poll(timeout, timeUnit)) != null) {
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="参考">参考：</h2>
+<p><a href="https://www.bilibili.com/video/BV16J411h7Rd?p=204&amp;spm_id_from=pageDriver&amp;vd_source=429ff5cbebe69e9917bdeda0424404db" target="_blank" rel="noopener noreffer ">https://www.bilibili.com/video/BV16J411h7Rd?p=204&spm_id_from=pageDriver&vd_source=429ff5cbebe69e9917bdeda0424404db</a></p>
+<p><a href="https://tech.meituan.com/2020/04/02/java-pooling-pratice-in-meituan.html" target="_blank" rel="noopener noreffer ">https://tech.meituan.com/2020/04/02/java-pooling-pratice-in-meituan.html</a></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2022-12-01</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://shengtu0328.github.io/posts/threadpool/" data-title="线程池"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://shengtu0328.github.io/posts/threadpool/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://shengtu0328.github.io/posts/threadpool/" data-title="线程池"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://shengtu0328.github.io/posts/threadpool/" data-title="线程池"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://shengtu0328.github.io/posts/threadpool/" data-title="线程池"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/juc/" class="prev" rel="prev" title="JUC"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>JUC</a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.92.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ricky</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
