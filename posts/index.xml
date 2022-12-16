@@ -10,7 +10,7 @@
     <pubDate>Thu, 01 Dec 2022 14:14:25 &#43;0800</pubDate>
     <author>ricky</author>
     <guid>https://shengtu0328.github.io/posts/threadpool/</guid>
-    <description><![CDATA[我是0.线程池的主要作用 降低资源消耗：创建线程（分配栈内存）和销毁线程都是消耗资源的，通过线程池可以重复利用已创建的线程，降低线程创建和销毁]]></description>
+    <description><![CDATA[我是零.线程池的主要作用 降低资源消耗：创建线程（分配栈内存）和销毁线程都是消耗资源的，通过线程池可以重复利用已创建的线程，降低线程创建和销毁]]></description>
 </item>
 <item>
     <title>JUC</title>
@@ -27,14 +27,6 @@
     <author>ricky</author>
     <guid>https://shengtu0328.github.io/posts/designpatternatwork/</guid>
     <description><![CDATA[策略设计]]></description>
-</item>
-<item>
-    <title>Ffmpeg</title>
-    <link>https://shengtu0328.github.io/posts/ffmpeg/</link>
-    <pubDate>Tue, 22 Nov 2022 13:34:23 &#43;0800</pubDate>
-    <author>ricky</author>
-    <guid>https://shengtu0328.github.io/posts/ffmpeg/</guid>
-    <description><![CDATA[]]></description>
 </item>
 <item>
     <title>学习SpringSecurityOauth2</title>
@@ -83,6 +75,14 @@
     <author>ricky</author>
     <guid>https://shengtu0328.github.io/posts/hugo/</guid>
     <description><![CDATA[1 2 3 4 5  hugo serve --disableFastRender --buildDrafts hugo --buildDrafts hugo new posts/first_post.md   ]]></description>
+</item>
+<item>
+    <title>Spring</title>
+    <link>https://shengtu0328.github.io/posts/spring/</link>
+    <pubDate>Wed, 12 Oct 2022 17:55:52 &#43;0800</pubDate>
+    <author>ricky</author>
+    <guid>https://shengtu0328.github.io/posts/spring/</guid>
+    <description><![CDATA[嗨嗨嗨]]></description>
 </item>
 </channel>
 </rss>

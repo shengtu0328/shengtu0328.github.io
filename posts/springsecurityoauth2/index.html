@@ -17,7 +17,7 @@
 <meta name="application-name" content="我的网站">
 <meta name="apple-mobile-web-app-title" content="我的网站"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://shengtu0328.github.io/posts/springsecurityoauth2/" /><link rel="prev" href="https://shengtu0328.github.io/posts/learnspringsecurity/" /><link rel="next" href="https://shengtu0328.github.io/posts/ffmpeg/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://shengtu0328.github.io/posts/springsecurityoauth2/" /><link rel="prev" href="https://shengtu0328.github.io/posts/learnspringsecurity/" /><link rel="next" href="https://shengtu0328.github.io/posts/designpatternatwork/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
     {
@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/shengtu0328.github.io\/posts\/springsecurityoauth2\/"
-        },"genre": "posts","wordcount":  2470 ,
+        },"genre": "posts","wordcount":  2519 ,
         "url": "https:\/\/shengtu0328.github.io\/posts\/springsecurityoauth2\/","datePublished": "2022-11-17T18:04:01+08:00","dateModified": "2022-11-17T18:04:01+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -102,8 +102,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">学习SpringSecurityOauth2</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-17">2022-11-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2470 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-17">2022-11-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2519 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;6 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -115,6 +115,7 @@
     <li><a href="#springsecurityoauth2的过滤器链">SpringSecurityOauth2的过滤器链</a></li>
     <li><a href="#springsecurityoauth2在springsecurity基础之上还做了什么">SpringSecurityOauth2在SpringSecurity基础之上还做了什么</a></li>
     <li><a href="#springsecurityoauth2的httpsecurity和springsecurity的httpsecurity配置问题">SpringSecurityOauth2的HttpSecurity和SpringSecurity的HttpSecurity配置问题</a></li>
+    <li><a href="#一些问题">一些问题</a></li>
     <li><a href="#总结">总结</a></li>
   </ul>
 </nav></div>
@@ -384,6 +385,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 <h2 id="springsecurityoauth2的httpsecurity和springsecurity的httpsecurity配置问题">SpringSecurityOauth2的HttpSecurity和SpringSecurity的HttpSecurity配置问题</h2>
 <p>首先HttpSecurity的功能是是为项目中的url配置所需的权限。</p>
 <p>测试下来 WebSecurityConfigurerAdapter的HttpSecurity任何配置都没有生效，生效的只有ResourceServerConfigurerAdapter的HttpSecurity。</p>
+<h2 id="一些问题">一些问题</h2>
+<p>1.refresh_token 接口调用后，会颁发一个新的access_token,并让旧的access_token失效</p>
 <h2 id="总结">总结</h2>
 <p>SpringSecurityOauth2为了实现oauth2，</p>
 <p>通过添加 BasicAuthenticationFilter/ClientCredentialsTokenEndpointFilter ,TokenEndPoint等实现了AuthorizationServer。</p>
@@ -413,7 +416,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     </div>
 
     <div class="post-nav"><a href="/posts/learnspringsecurity/" class="prev" rel="prev" title="学习SpringSecurity"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>学习SpringSecurity</a>
-            <a href="/posts/ffmpeg/" class="next" rel="next" title="Ffmpeg">Ffmpeg<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+            <a href="/posts/designpatternatwork/" class="next" rel="next" title="工作中遇到的设计模式">工作中遇到的设计模式<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 </article></div>
             </main><footer class="footer">
