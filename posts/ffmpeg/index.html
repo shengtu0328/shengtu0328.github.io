@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/shengtu0328.github.io\/posts\/ffmpeg\/"
-        },"genre": "posts","wordcount":  310 ,
+        },"genre": "posts","wordcount":  346 ,
         "url": "https:\/\/shengtu0328.github.io\/posts\/ffmpeg\/","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -102,7 +102,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">FFmpeg</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="0001-01-01">0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;310 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="0001-01-01">0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;346 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;One minute&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -119,6 +119,10 @@
             <li><a href="#segment_list命令">segment_list命令</a></li>
           </ul>
         </li>
+      </ul>
+    </li>
+    <li><a href="#2mp4转成m3u8及ts文件带加密">2.mp4转成m3u8及ts文件（带加密）</a>
+      <ul>
         <li><a href="#参考httpswwwtwblogsneta5eec32aa45d52357fb4923e6langzh-cn">参考：https://www.twblogs.net/a/5eec32aa45d52357fb4923e6/?lang=zh-cn</a></li>
       </ul>
     </li>
@@ -198,6 +202,16 @@ xrq1112.ts
 <p>这么写也不行，第一秒的视频会不准</p>
 <p>FFmpeg 转换命令 : /var/folders/fp/fg__cpln099g08625c1vf0xm0000gn/T/jave/ffmpeg-x86_64-3.2.0-osx -i /Users/videopls/develop/ffmpeg/input.avi -codec:v h264 -codec:a aac -map 0 -f ssegment -segment_format mpegts -segment_list /Users/videopls/develop/ffmpeg/input.avi.m3u8 -segment_time 8 /Users/videopls/develop/ffmpeg/input.avi.%d.ts</p>
 <p>你想知道米的味道吗</p>
+<h2 id="2mp4转成m3u8及ts文件带加密">2.mp4转成m3u8及ts文件（带加密）</h2>
+<p>/Users/videopls/develop/ffmpeg/ffmpeg -i /Users/videopls/develop/ffmpeg/input.avi -f hls -hls_time 10 -hls_key_info_file /Users/videopls/develop/ffmpeg/enctest/enc.keyinfo -hls_playlist_type vod -hls_segment_filename /Users/videopls/develop/ffmpeg/encoutput/xrq111%d.ts /Users/videopls/develop/ffmpeg/encoutput/xrq2222.m3u8</p>
+<p>​    <img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="encrypt.key"
+        data-srcset="encrypt.key, encrypt.key 1.5x, encrypt.key 2x"
+        data-sizes="auto"
+        alt="encrypt.key"
+        title="encrypt.key" /></p>
 <h3 id="参考httpswwwtwblogsneta5eec32aa45d52357fb4923e6langzh-cn">参考：https://www.twblogs.net/a/5eec32aa45d52357fb4923e6/?lang=zh-cn</h3>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
