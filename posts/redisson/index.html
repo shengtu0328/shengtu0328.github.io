@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Redisson - ricky的网站</title><meta name="Description" content="The best time to plant a tree was 10 years ago, the second is now"><meta property="og:title" content="Redisson" />
+<meta property="og:description" content="Redis分布式锁（悲观锁） 假设需求是商品下单，并且一人只能买一单。 mysql update行锁可以限制操作单张库存中表库存字段不超卖，但这只适用于单" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://shengtu0328.github.io/posts/redisson/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-12-30T10:09:27+08:00" />
+<meta property="article:modified_time" content="2022-12-30T10:09:27+08:00" /><meta property="og:site_name" content="我的网站" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Redisson"/>
+<meta name="twitter:description" content="Redis分布式锁（悲观锁） 假设需求是商品下单，并且一人只能买一单。 mysql update行锁可以限制操作单张库存中表库存字段不超卖，但这只适用于单"/>
+<meta name="application-name" content="我的网站">
+<meta name="apple-mobile-web-app-title" content="我的网站"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://shengtu0328.github.io/posts/redisson/" /><link rel="prev" href="https://shengtu0328.github.io/posts/threadpool/" /><link rel="next" href="https://shengtu0328.github.io/posts/session/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Redisson",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/shengtu0328.github.io\/posts\/redisson\/"
+        },"genre": "posts","wordcount":  2671 ,
+        "url": "https:\/\/shengtu0328.github.io\/posts\/redisson\/","datePublished": "2022-12-30T10:09:27+08:00","dateModified": "2022-12-30T10:09:27+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "ricky"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="ricky的网站">Ricky’s blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="ricky的网站">Ricky’s blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Redisson</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-12-30">2022-12-30</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2671 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;6 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#一基于redis实现分布式锁">一.基于redis实现分布式锁</a>
+      <ul>
+        <li><a href="#heading"></a></li>
+        <li><a href="#第0阶段">第0阶段</a></li>
+        <li><a href="#第一阶段">第一阶段</a></li>
+        <li><a href="#第二阶段">第二阶段</a></li>
+        <li><a href="#第三阶段">第三阶段</a></li>
+      </ul>
+    </li>
+    <li><a href="#二rlockredisson分布式锁">二.RLock（Redisson分布式锁）</a>
+      <ul>
+        <li><a href="#1获取锁释放锁原理">1.获取锁释放锁原理</a></li>
+        <li><a href="#2api使用">2.api使用</a></li>
+        <li><a href="#3流程">3.流程</a></li>
+      </ul>
+    </li>
+    <li><a href="#三multilock联锁">三.MultiLock（联锁）</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>Redis分布式锁（悲观锁）</p>
+<p>假设需求是商品下单，并且一人只能买一单。</p>
+<p>mysql update行锁可以限制操作单张库存中表库存字段不超卖，但这只适用于单纯数据库中update操作的业务逻辑。</p>
+<p>如果要实现一人一单的业务逻辑，即先要查询当前用户有没有下过单，没下过单可以减库存。用户下单的这个操作算是一个新增逻辑。</p>
+<p>假设也不去考虑使用数据库联合列唯一索引的话。可以用分布式锁来完成这个需求。</p>
+<h2 id="一基于redis实现分布式锁">一.基于redis实现分布式锁</h2>
+<p>最基本需要实现两点  1.获取锁，2.释放锁</p>
+<p>一人一单逻辑使用锁的代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">    public Result seckillVoucherOld(Long voucherId) {
+        // 1.查询优惠券
+        SeckillVoucher voucher = seckillVoucherService.getById(voucherId);
+        // 2.判断秒杀是否开始
+        if (voucher.getBeginTime().isAfter(LocalDateTime.now())) {
+            // 尚未开始
+            return Result.fail(&#34;秒杀尚未开始！&#34;);
+        }
+        // 3.判断秒杀是否已经结束
+        if (voucher.getEndTime().isBefore(LocalDateTime.now())) {
+            // 尚未开始
+            return Result.fail(&#34;秒杀已经结束！&#34;);
+        }
+        // 4.判断库存是否充足
+        if (voucher.getStock() &lt; 1) {
+            // 库存不足
+            return Result.fail(&#34;库存不足！&#34;);
+        }
+
+        Long userId = UserHolder.getUser().getId();
+        // 创建锁对象
+         SimpleRedisLockStage1 lock = new SimpleRedisLockStage1(&#34;order:&#34; + userId, stringRedisTemplate);
+//        RLock lock = redissonClient.getLock(&#34;lock:order:&#34; + userId);
+        // 获取锁
+        boolean isLock = lock.tryLock(1200);
+        // 判断是否获取锁成功
+        if(!isLock){
+            // 获取锁失败，返回错误或重试
+            return Result.fail(&#34;不允许重复下单&#34;);
+        }
+        try {
+            // 获取代理对象（事务）
+            IVoucherOrderService proxy = (IVoucherOrderService) AopContext.currentProxy();
+            return proxy.createVoucherOrder(voucherId);
+        } finally {
+            // 释放锁
+            lock.unlock();
+        }
+    }
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="heading"></h3>
+<h3 id="第0阶段">第0阶段</h3>
+<table>
+<thead>
+<tr>
+<th>redis命令</th>
+<th>问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SETNX lock1 thread1<!-- raw HTML omitted -->EXPIRE lock1 10<!-- raw HTML omitted -->DEL lock1<!-- raw HTML omitted --></td>
+<td>value用线程id即可，可以知道是哪个线程获得了锁。SETNX命令锁的是key<!-- raw HTML omitted -->SETNX 和 EXPIRE分成了两部，并不是一个完整的原子性操作。可能会在执行 EXPIRE前服务宕机，锁一直不释放</td>
+</tr>
+</tbody>
+</table>
+<h3 id="第一阶段">第一阶段</h3>
+<table>
+<thead>
+<tr>
+<th>redis命令</th>
+<th>问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SET lock1 thread1 EX 10 NX<!-- raw HTML omitted -->DEL lock1</td>
+<td>将 NX 和EX 整合进一个原子操作中</td>
+</tr>
+</tbody>
+</table>
+<p>#SimpleRedisLockStage1.class</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">import org.springframework.data.redis.core.StringRedisTemplate;
+
+import java.util.concurrent.TimeUnit;
+
+public class SimpleRedisLockStage1 implements ILock {
+
+    private String name;
+    private StringRedisTemplate stringRedisTemplate;
+
+    public SimpleRedisLockStage1(String name, StringRedisTemplate stringRedisTemplate) {
+        this.name = name;
+        this.stringRedisTemplate = stringRedisTemplate;
+    }
+
+    private static final String KEY_PREFIX = &#34;lock:&#34;;
+
+    @Override
+    public boolean tryLock(long timeoutSec) {
+        // 获取线程标示
+        long threadId = Thread.currentThread().getId();
+        // 获取锁
+        Boolean success = stringRedisTemplate.opsForValue().setIfAbsent(KEY_PREFIX + name, threadId+&#34; &#34;, timeoutSec, TimeUnit.SECONDS);
+        return Boolean.TRUE.equals(success);
+    }
+
+    @Override
+    public void unlock() {
+        stringRedisTemplate.delete(KEY_PREFIX + name);
+    }
+
+}
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="第二阶段">第二阶段</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="unlockByAnotherThread.png"
+        data-srcset="unlockByAnotherThread.png, unlockByAnotherThread.png 1.5x, unlockByAnotherThread.png 2x"
+        data-sizes="auto"
+        alt="unlockByAnotherThread.png"
+        title="unlockByAnotherThread.png" /></p>
+<p>为了解决有可能产生的 锁 被非当前线程释放的问题，</p>
+<p>#SimpleRedisLockStage2.class</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public class SimpleRedisLockStage2 implements ILock {
+
+    private String name;
+    private StringRedisTemplate stringRedisTemplate;
+
+    public SimpleRedisLockStage2(String name, StringRedisTemplate stringRedisTemplate) {
+        this.name = name;
+        this.stringRedisTemplate = stringRedisTemplate;
+    }
+
+    private static final String KEY_PREFIX = &#34;lock:&#34;;
+    private static final String ID_PREFIX = UUID.randomUUID().toString(true) + &#34;-&#34;;
+
+    @Override
+    public boolean tryLock(long timeoutSec) {
+        // 获取线程标示
+        String threadId = ID_PREFIX + Thread.currentThread().getId();
+        // 获取锁
+        Boolean success = stringRedisTemplate.opsForValue().setIfAbsent(KEY_PREFIX + name, threadId+&#34; &#34;, timeoutSec, TimeUnit.SECONDS);
+        return Boolean.TRUE.equals(success);
+    }
+
+    @Override
+    public void unlock() {
+        // 获取线程标示
+        String threadId = ID_PREFIX + Thread.currentThread().getId();
+        // 获取锁中的标示
+        String id = stringRedisTemplate.opsForValue().get(KEY_PREFIX + name);
+        // 判断标示是否一致
+        if(threadId.equals(id)) {
+            // 释放锁
+            stringRedisTemplate.delete(KEY_PREFIX + name);
+        }
+    }
+}
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="第三阶段">第三阶段</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="unlockBlock.png"
+        data-srcset="unlockBlock.png, unlockBlock.png 1.5x, unlockBlock.png 2x"
+        data-sizes="auto"
+        alt="unlockBlock.png"
+        title="unlockBlock.png" /></p>
+<p>因为判断锁是不是当前线程1自己的 和 释放锁 不是在一个原子性操作里，在释放锁前，如果jvm发生GC STW，导致锁过期，从而让线程2由获得了锁。但线程1阻塞结束后直接 进行释放锁操作，导致线程2执行到一半锁却被释放。导致其他线程获得锁与线程2并行执行。</p>
+<p>但实际上线程1的事物已经提交了才会释放锁，所以在本次一人一单的场景中，线程2包括其他线程获取到锁之后，会进行校验，能够保持正确逻辑？但是只要出现并行 就有可能影响？</p>
+<p>解决办法：使用lua 整合redis多条命令为一个原子性操作。即判断锁+释放锁 整合为一条命令</p>
+<p><code>localhost:0&gt;EVAL &quot;return redis.call ('set','name1','jack1')&quot; 0</code></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="lua.png"
+        data-srcset="lua.png, lua.png 1.5x, lua.png 2x"
+        data-sizes="auto"
+        alt="lua.png"
+        title="lua.png" /></p>
+<p>#SimpleRedisLockStage3.class</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">import cn.hutool.core.lang.UUID;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.script.DefaultRedisScript;
+
+import java.util.Collections;
+import java.util.concurrent.TimeUnit;
+
+
+
+public class SimpleRedisLockStage3 implements ILock {
+
+    private String name;
+    private StringRedisTemplate stringRedisTemplate;
+
+    public SimpleRedisLockStage3(String name, StringRedisTemplate stringRedisTemplate) {
+        this.name = name;
+        this.stringRedisTemplate = stringRedisTemplate;
+    }
+
+    private static final String KEY_PREFIX = &#34;lock:&#34;;
+    private static final String ID_PREFIX = UUID.randomUUID().toString(true) + &#34;-&#34;;
+    private static final DefaultRedisScript&lt;Long&gt; UNLOCK_SCRIPT;
+    static {
+        UNLOCK_SCRIPT = new DefaultRedisScript&lt;&gt;();
+        UNLOCK_SCRIPT.setLocation(new ClassPathResource(&#34;unlock.lua&#34;));
+        UNLOCK_SCRIPT.setResultType(Long.class);
+    }
+
+    @Override
+    public boolean tryLock(long timeoutSec) {
+        // 获取线程标示
+        String threadId = ID_PREFIX + Thread.currentThread().getId();
+        // 获取锁
+        Boolean success = stringRedisTemplate.opsForValue()
+                .setIfAbsent(KEY_PREFIX + name, threadId, timeoutSec, TimeUnit.SECONDS);
+        return Boolean.TRUE.equals(success);
+    }
+
+    @Override
+    public void unlock() {
+        // 调用lua脚本
+        stringRedisTemplate.execute(
+                UNLOCK_SCRIPT,
+                Collections.singletonList(KEY_PREFIX + name),
+                ID_PREFIX + Thread.currentThread().getId());
+    }
+
+}
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="二rlockredisson分布式锁">二.RLock（Redisson分布式锁）</h2>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="%e8%87%aa%e5%ae%9a%e4%b9%89%e9%94%81%e7%9a%84%e9%97%ae%e9%a2%98.png"
+        data-srcset="%e8%87%aa%e5%ae%9a%e4%b9%89%e9%94%81%e7%9a%84%e9%97%ae%e9%a2%98.png, %e8%87%aa%e5%ae%9a%e4%b9%89%e9%94%81%e7%9a%84%e9%97%ae%e9%a2%98.png 1.5x, %e8%87%aa%e5%ae%9a%e4%b9%89%e9%94%81%e7%9a%84%e9%97%ae%e9%a2%98.png 2x"
+        data-sizes="auto"
+        alt="自定义锁的问题.png"
+        title="自定义锁的问题.png" /></p>
+<p>Redisson wiki</p>
+<p><a href="https://github.com/redisson/redisson/wiki/8.-distributed-locks-and-synchronizers" target="_blank" rel="noopener noreffer ">https://github.com/redisson/redisson/wiki/8.-distributed-locks-and-synchronizers</a></p>
+<h3 id="1获取锁释放锁原理">1.获取锁释放锁原理</h3>
+<p>1.redisson是一个实现了可重入的分布式锁。可重入这个部分的实现可以参考jdk里的<strong>ReentrantLock</strong>，利用了redis hash结构的(HSET key field value)。fileld还跟以前一样可以设置成线程id，每次重入锁之后，value会加1。但redis的 hash类型 没有string类型的setnx的命令。所以redisson为了实现操作的原子性，利用了lua脚本，自定义了一组命令来实现互斥。</p>
+<p>1.redisson 加锁</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="redissonLock.png"
+        data-srcset="redissonLock.png, redissonLock.png 1.5x, redissonLock.png 2x"
+        data-sizes="auto"
+        alt="redissonLock.png"
+        title="redissonLock.png" /></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">&lt;T&gt; RFuture&lt;T&gt; tryLockInnerAsync(long waitTime, long leaseTime, TimeUnit unit, long threadId, RedisStrictCommand&lt;T&gt; command) {
+    internalLockLeaseTime = unit.toMillis(leaseTime);
+
+    return evalWriteAsync(getName(), LongCodec.INSTANCE, command,
+            &#34;if (redis.call(&#39;exists&#39;, KEYS[1]) == 0) then &#34; +
+                    &#34;redis.call(&#39;hincrby&#39;, KEYS[1], ARGV[2], 1); &#34; +
+                    &#34;redis.call(&#39;pexpire&#39;, KEYS[1], ARGV[1]); &#34; +
+                    &#34;return nil; &#34; +
+                    &#34;end; &#34; +
+                    &#34;if (redis.call(&#39;hexists&#39;, KEYS[1], ARGV[2]) == 1) then &#34; +
+                    &#34;redis.call(&#39;hincrby&#39;, KEYS[1], ARGV[2], 1); &#34; +
+                    &#34;redis.call(&#39;pexpire&#39;, KEYS[1], ARGV[1]); &#34; +
+                    &#34;return nil; &#34; +
+                    &#34;end; &#34; +
+                    &#34;return redis.call(&#39;pttl&#39;, KEYS[1]);&#34;,
+            Collections.singletonList(getName()), internalLockLeaseTime, getLockName(threadId));
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>2.redisson 释放锁</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="redissonUnlock.png"
+        data-srcset="redissonUnlock.png, redissonUnlock.png 1.5x, redissonUnlock.png 2x"
+        data-sizes="auto"
+        alt="redissonUnlock.png"
+        title="redissonUnlock.png" /></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">protected RFuture&lt;Boolean&gt; unlockInnerAsync(long threadId) {
+    return evalWriteAsync(getName(), LongCodec.INSTANCE, RedisCommands.EVAL_BOOLEAN,
+            &#34;if (redis.call(&#39;hexists&#39;, KEYS[1], ARGV[3]) == 0) then &#34; +
+                    &#34;return nil;&#34; +
+                    &#34;end; &#34; +
+                    &#34;local counter = redis.call(&#39;hincrby&#39;, KEYS[1], ARGV[3], -1); &#34; +
+                    &#34;if (counter &gt; 0) then &#34; +
+                    &#34;redis.call(&#39;pexpire&#39;, KEYS[1], ARGV[2]); &#34; +
+                    &#34;return 0; &#34; +
+                    &#34;else &#34; +
+                    &#34;redis.call(&#39;del&#39;, KEYS[1]); &#34; +
+                    &#34;redis.call(&#39;publish&#39;, KEYS[2], ARGV[1]); &#34; +
+                    &#34;return 1; &#34; +
+                    &#34;end; &#34; +
+                    &#34;return nil;&#34;,
+            Arrays.asList(getName(), getChannelName()), LockPubSub.UNLOCK_MESSAGE, internalLockLeaseTime, getLockName(threadId));
+}
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="2api使用">2.api使用</h3>
+<p>redisson有多个lock和trylock方法.</p>
+<p>总结：</p>
+<ol>
+<li>lock() 和 trylock()的区别，lock()如果获取不到锁会一直阻塞,类似synchronized 。trylock()如果获取不到锁可以选择放弃。</li>
+<li>方法参数：没有设置过释放时间的会自动续期。设置过释放时间的不会续期，过了设置的释放时间直接释放锁。也就是releaseTime如果是-1的，就没有看门狗。</li>
+</ol>
+<p>lock()</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">//lock()如果线程一直没有执行完，会在剩 2/3的 持有锁时间时，重新续上完整的持有锁时间，直到线程结束运行
+lock.lock(); 默认持有锁时间30s，到ttl 20s时，会再续到30s，会一直续下去，直到线程结束运行
+//lock(90L, TimeUnit.SECONDS) 不会续期，超过了设定的释放时间，锁就会释放
+lock.lock(90L, TimeUnit.SECONDS);  设置持有锁时间90s，90s过了程序没执行完，锁也会被释放
+</code></pre></td></tr></table>
+</div>
+</div><p>tryLock()</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">//tryLock()如果锁可用，则获取锁并立即返回值 true。 如果锁不可用，则此方法将立即返回值 false。
+//获得锁后，默认持有锁时间30s，到ttl 20s时，会再续到30s，会一直续下去，直到线程结束运行
+lock.tryLock();
+
+
+//tryLock()如果在设置时间内获取到了锁，返回值 true。 如果锁不可用，会等待设定的时间，超过时间返回false
+//获得锁后，默认持有锁时间30s，到ttl 20s时，会再续到30s，会一直续下去，直到线程结束运行
+lock.tryLock(100L, TimeUnit.SECONDS);
+
+//tryLock()如果锁可用，如果在设置时间内获取到了锁，返回值 true。 如果锁不可用，会等待设定的时间，超过时间返回false
+//不会续期，超过了设定的释放时间，锁就会释放
+boolean b2 = lock.tryLock(10,90L, TimeUnit.SECONDS);
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">//**但是 这种情况 先lock()后lock.lock(90L, TimeUnit.SECONDS); .lock(90L, TimeUnit.SECONDS)可以续签
+lock.lock();
+System.out.println(&#34;lock.lock() 获取到了锁&#34;);
+Thread.sleep(100*1000);
+lock.lock(90L, TimeUnit.SECONDS);
+System.out.println(&#34;lock.lock(90L, TimeUnit.SECONDS) 获取到了锁&#34;);
+Thread.sleep(300*1000);
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="3流程">3.流程</h3>
+<h2 id="三multilock联锁">三.MultiLock（联锁）</h2>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2022-12-30</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://shengtu0328.github.io/posts/redisson/" data-title="Redisson"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://shengtu0328.github.io/posts/redisson/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://shengtu0328.github.io/posts/redisson/" data-title="Redisson"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://shengtu0328.github.io/posts/redisson/" data-title="Redisson"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://shengtu0328.github.io/posts/redisson/" data-title="Redisson"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/threadpool/" class="prev" rel="prev" title="线程池"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>线程池</a>
+            <a href="/posts/session/" class="next" rel="next" title="Session">Session<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.92.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ricky</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/shengtu0328.github.io\/posts\/learnspringsecurity\/"
-        },"genre": "posts","wordcount":  6244 ,
+        },"genre": "posts","wordcount":  6267 ,
         "url": "https:\/\/shengtu0328.github.io\/posts\/learnspringsecurity\/","datePublished": "2022-11-03T14:22:04+08:00","dateModified": "2022-11-03T14:22:04+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -102,7 +102,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">学习SpringSecurity</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-03">2022-11-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;6244 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-03">2022-11-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;6267 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;13 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -148,6 +148,7 @@
     </li>
     <li><a href="#csrf">CSRF</a></li>
     <li><a href="#rememberme">rememberMe</a></li>
+    <li><a href="#tokenenhancer配置了后什么时候调用">TokenEnhancer配置了后什么时候调用</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h2 id="springsecurity概览">SpringSecurity概览</h2>
@@ -531,14 +532,6 @@ public String g(){
         data-sizes="auto"
         alt="AccessDecisionManager.png"
         title="AccessDecisionManager.png" /></p>
-<p><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="https://s1.ax1x.com/2022/11/29/zdcgj1.jpg"
-        data-srcset="https://s1.ax1x.com/2022/11/29/zdcgj1.jpg, https://s1.ax1x.com/2022/11/29/zdcgj1.jpg 1.5x, https://s1.ax1x.com/2022/11/29/zdcgj1.jpg 2x"
-        data-sizes="auto"
-        alt="https://s1.ax1x.com/2022/11/29/zdcgj1.jpg"
-        title="https://s1.ax1x.com/2022/11/29/zdcgj1.jpg" /></p>
 <p>FilterSecurityInterceptor 和  MethodSecurityInterceptor都实现了AbstractSecurityInterceptor，AbstractSecurityInterceptor其实也设计了只执行一次的过滤逻辑</p>
 <hr>
 <h2 id="exceptiontranslationfilter">ExceptionTranslationFilter</h2>
@@ -846,6 +839,15 @@ $2a$10$H9Ub8PIfhKaE9mafKrW4s.XlYbzZcU6gdUqZxAHOWnKeo1ML9is0q
         data-sizes="auto"
         alt="RememberMeAuthenticationFilter.png"
         title="RememberMeAuthenticationFilter.png" /></p>
+<h2 id="tokenenhancer配置了后什么时候调用">TokenEnhancer配置了后什么时候调用</h2>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="TokenEnhance.png.png"
+        data-srcset="TokenEnhance.png.png, TokenEnhance.png.png 1.5x, TokenEnhance.png.png 2x"
+        data-sizes="auto"
+        alt="TokenEnhance.png.png"
+        title="TokenEnhance.png.png" /></p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
@@ -873,7 +875,7 @@ $2a$10$H9Ub8PIfhKaE9mafKrW4s.XlYbzZcU6gdUqZxAHOWnKeo1ML9is0q
 </article></div>
             </main><footer class="footer">
         <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.92.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
-                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ricky</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ricky</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>
 

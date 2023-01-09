@@ -4,9 +4,33 @@
         <link>https://shengtu0328.github.io/</link>
         <description>The best time to plant a tree was 10 years ago, the second is now</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1007@qq.com (ricky)</managingEditor>
-            <webMaster>1007@qq.com (ricky)</webMaster><lastBuildDate>Thu, 01 Dec 2022 14:14:25 &#43;0800</lastBuildDate>
+            <webMaster>1007@qq.com (ricky)</webMaster><lastBuildDate>Fri, 30 Dec 2022 18:00:43 &#43;0800</lastBuildDate>
             <atom:link href="https://shengtu0328.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Redis</title>
+    <link>https://shengtu0328.github.io/posts/redis/</link>
+    <pubDate>Fri, 30 Dec 2022 18:00:43 &#43;0800</pubDate>
+    <author>ricky</author>
+    <guid>https://shengtu0328.github.io/posts/redis/</guid>
+    <description><![CDATA[1.缓存穿透 缓存穿透是指客户端请求的数据在缓存中和数据库中都不存在，这样缓存永远不会生效，这些请求都会打到数据库。 常见的解决方案有两种： 缓存]]></description>
+</item>
+<item>
+    <title>Session</title>
+    <link>https://shengtu0328.github.io/posts/session/</link>
+    <pubDate>Fri, 30 Dec 2022 15:30:56 &#43;0800</pubDate>
+    <author>ricky</author>
+    <guid>https://shengtu0328.github.io/posts/session/</guid>
+    <description><![CDATA[servlet中 HttpSession是在tomcat中实现的。 StandardSession是HttpSession的默认实现Standa]]></description>
+</item>
+<item>
+    <title>Redisson</title>
+    <link>https://shengtu0328.github.io/posts/redisson/</link>
+    <pubDate>Fri, 30 Dec 2022 10:09:27 &#43;0800</pubDate>
+    <author>ricky</author>
+    <guid>https://shengtu0328.github.io/posts/redisson/</guid>
+    <description><![CDATA[Redis分布式锁（悲观锁） 假设需求是商品下单，并且一人只能买一单。 mysql update行锁可以限制操作单张库存中表库存字段不超卖，但这只适用于单]]></description>
+</item>
+<item>
     <title>线程池</title>
     <link>https://shengtu0328.github.io/posts/threadpool/</link>
     <pubDate>Thu, 01 Dec 2022 14:14:25 &#43;0800</pubDate>
@@ -61,30 +85,6 @@
     <author>ricky</author>
     <guid>https://shengtu0328.github.io/posts/resume/</guid>
     <description><![CDATA[名字 JAVA | 5年工作经验 | 本科 | 27岁 | 男 | 手机 | 邮箱 | https://shengtu0328.github.io | 专业技能 熟悉SpringBoot，Spring，SpringCloud 微服务全家桶，]]></description>
-</item>
-<item>
-    <title>AQS</title>
-    <link>https://shengtu0328.github.io/posts/aqs/</link>
-    <pubDate>Thu, 27 Oct 2022 14:29:43 &#43;0800</pubDate>
-    <author>ricky</author>
-    <guid>https://shengtu0328.github.io/posts/aqs/</guid>
-    <description><![CDATA[CountDownLatch-&gt;AQS-&gt;Park-&gt;Unsfae]]></description>
-</item>
-<item>
-    <title>Hugo</title>
-    <link>https://shengtu0328.github.io/posts/hugo/</link>
-    <pubDate>Fri, 14 Oct 2022 10:03:11 &#43;0800</pubDate>
-    <author>ricky</author>
-    <guid>https://shengtu0328.github.io/posts/hugo/</guid>
-    <description><![CDATA[1 2 3 4 5  hugo serve --disableFastRender --buildDrafts hugo --buildDrafts hugo new posts/first_post.md   ]]></description>
-</item>
-<item>
-    <title>Spring</title>
-    <link>https://shengtu0328.github.io/posts/spring/</link>
-    <pubDate>Wed, 12 Oct 2022 17:55:52 &#43;0800</pubDate>
-    <author>ricky</author>
-    <guid>https://shengtu0328.github.io/posts/spring/</guid>
-    <description><![CDATA[嗨嗨嗨]]></description>
 </item>
 </channel>
 </rss>
