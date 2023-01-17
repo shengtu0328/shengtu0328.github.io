@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/shengtu0328.github.io\/posts\/redis\/"
-        },"genre": "posts","wordcount":  1012 ,
+        },"genre": "posts","wordcount":  1541 ,
         "url": "https:\/\/shengtu0328.github.io\/posts\/redis\/","datePublished": "2022-12-30T18:00:43+08:00","dateModified": "2022-12-30T18:00:43+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -102,8 +102,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Redis</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-12-30">2022-12-30</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1012 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-12-30">2022-12-30</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1541 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -116,6 +116,15 @@
     <li><a href="#3缓存击穿">3.缓存击穿</a></li>
     <li><a href="#4缓存策略">4.缓存策略</a></li>
     <li><a href="#工作中哪些场景用到了redis">工作中哪些场景用到了redis？</a></li>
+    <li><a href="#秒杀问题">秒杀问题</a></li>
+    <li><a href="#list">List</a></li>
+    <li><a href="#pubsub">PubSub</a></li>
+    <li><a href="#持久化">持久化</a>
+      <ul>
+        <li><a href="#rdb">RDB</a></li>
+        <li><a href="#aof">AOF</a></li>
+      </ul>
+    </li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h2 id="1缓存穿透">1.缓存穿透</h2>
@@ -223,6 +232,22 @@
 <td>分布式锁（悲观锁）</td>
 <td>setnx</td>
 </tr>
+<tr>
+<td>点赞 （一个用户一篇文章只能赞一次）</td>
+<td>Set</td>
+</tr>
+<tr>
+<td>排行榜</td>
+<td>sorted Set</td>
+</tr>
+<tr>
+<td>大量用户的每年每天的签到记录，以及连续签到多少天</td>
+<td>BitMap（也是String里的）</td>
+</tr>
+<tr>
+<td>统计uv，pv</td>
+<td>HyperLogLog</td>
+</tr>
 </tbody>
 </table>
 <table>
@@ -256,6 +281,42 @@
         data-sizes="auto"
         alt="延迟双删.png"
         title="延迟双删.png" /></p>
+<h2 id="秒杀问题">秒杀问题</h2>
+<p>库存防止超卖可以有两种办法实现情况</p>
+<ol>
+<li>只需要decr 1， 结果 ＜0 的话成功，否则失败。</li>
+<li>需要一个lua脚本，里面包含了2部操作(1.先get 库存，2.如果&gt;0,decr 1)</li>
+</ol>
+<h2 id="list">List</h2>
+<p>基于List的消息队列有哪些优缺点？</p>
+<p>优点：</p>
+<p>利用Redis存储，不受限于JVM内存上限基于Redis的持久化机制，数据安全性有保证可以满足消息有序性</p>
+<p>缺点：</p>
+<p>无法避免消息丢失只支持单消费者</p>
+<h2 id="pubsub">PubSub</h2>
+<p>基于PubSub的消息队列有哪些优缺点？</p>
+<p>优点：</p>
+<p>采用发布订阅模型，支持多生产、多消费</p>
+<p>缺点：</p>
+<p>不支持数据持久化无法避免消息丢失消息堆积有上限，超出时数据丢失</p>
+<h2 id="持久化">持久化</h2>
+<h3 id="rdb">RDB</h3>
+<p>RDB方式的 bgsave基本流程是什么？</p>
+<p>fork主进程得到一个子进程，共享内存空间子进程读取内存数据并写入新的RDB文件用新RDB文件替换旧的RDB文件。</p>
+<p>RDB会在什么时候执行？save 60 1000代表什么含义？</p>
+<p>默认是服务停止时。代表60秒内至少执行1000次修改则触发RDB</p>
+<p>RDB的缺点？</p>
+<p>RDB执行间隔时间长，两次RDB之间写入数据有丢失的风险</p>
+<p>fork子进程、压缩、写出RDB文件都比较耗时</p>
+<h3 id="aof">AOF</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="rdb&amp;aof.png"
+        data-srcset="rdb&amp;aof.png, rdb&amp;aof.png 1.5x, rdb&amp;aof.png 2x"
+        data-sizes="auto"
+        alt="rdb&amp;aof.png"
+        title="rdb&amp;aof.png" /></p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">

@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/shengtu0328.github.io\/posts\/threadpool\/"
-        },"genre": "posts","wordcount":  7027 ,
+        },"genre": "posts","wordcount":  7193 ,
         "url": "https:\/\/shengtu0328.github.io\/posts\/threadpool\/","datePublished": "2022-12-01T14:14:25+08:00","dateModified": "2022-12-01T14:14:25+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -102,7 +102,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">线程池</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span>&nbsp;<span class="post-category">included in <a href="/categories/juc/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>JUC</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-12-01">2022-12-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;7027 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-12-01">2022-12-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;7193 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;15 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -150,6 +150,7 @@
       </ul>
     </li>
     <li><a href="#三javautilconcurrentthreadpoolexecutor">三.java.util.concurrent.ThreadPoolExecutor</a></li>
+    <li><a href="#四其他问题">四.其他问题</a></li>
     <li><a href="#参考">参考：</a></li>
   </ul>
 </nav></div>
@@ -1223,8 +1224,18 @@ while(task != null || (task = taskQueue.poll(timeout, timeUnit)) != null) {
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="三javautilconcurrentthreadpoolexecutor">三.java.util.concurrent.ThreadPoolExecutor</h2>
-<p>1111111111</p>
 <p>核心不是一定会重用， jdk中有个allowCoreThreadTimeOut == false，false的时候 核心线程不会被销毁， true的时候 一段时间后会销毁</p>
+<h2 id="四其他问题">四.其他问题</h2>
+<p>1.创建多少线程池合适？</p>
+<p>cpu密集型</p>
+<p>CPU核数+1</p>
+<p>IO密集型</p>
+<p>经验公式如下</p>
+<p>线程数 = 核数 * 期望 CPU 利用率 * 总时间(CPU计算时间+等待时间) / CPU 计算时间</p>
+<p>例如 4 核 CPU 计算时间是 50% ，其它等待时间是 50%，期望 cpu 被 100% 利用，套用公式</p>
+<p>4 * 100% * 100% / 50% = 8</p>
+<p>例如 4 核 CPU 计算时间是 10% ，其它等待时间是 90%，期望 cpu 被 100% 利用，套用公式</p>
+<p>4 * 100% * 100% / 10% = 40</p>
 <h2 id="参考">参考：</h2>
 <p><a href="https://www.bilibili.com/video/BV16J411h7Rd?p=204&amp;spm_id_from=pageDriver&amp;vd_source=429ff5cbebe69e9917bdeda0424404db" target="_blank" rel="noopener noreffer ">https://www.bilibili.com/video/BV16J411h7Rd?p=204&spm_id_from=pageDriver&vd_source=429ff5cbebe69e9917bdeda0424404db</a></p>
 <p><a href="https://tech.meituan.com/2020/04/02/java-pooling-pratice-in-meituan.html" target="_blank" rel="noopener noreffer ">https://tech.meituan.com/2020/04/02/java-pooling-pratice-in-meituan.html</a></p>

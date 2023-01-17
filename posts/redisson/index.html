@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/shengtu0328.github.io\/posts\/redisson\/"
-        },"genre": "posts","wordcount":  2671 ,
+        },"genre": "posts","wordcount":  3659 ,
         "url": "https:\/\/shengtu0328.github.io\/posts\/redisson\/","datePublished": "2022-12-30T10:09:27+08:00","dateModified": "2022-12-30T10:09:27+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -102,8 +102,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Redisson</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-12-30">2022-12-30</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2671 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;6 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-12-30">2022-12-30</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3659 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;8 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -547,7 +547,10 @@ public class SimpleRedisLockStage3 implements ILock {
 <p>Redisson wiki</p>
 <p><a href="https://github.com/redisson/redisson/wiki/8.-distributed-locks-and-synchronizers" target="_blank" rel="noopener noreffer ">https://github.com/redisson/redisson/wiki/8.-distributed-locks-and-synchronizers</a></p>
 <h3 id="1获取锁释放锁原理">1.获取锁释放锁原理</h3>
-<p>1.redisson是一个实现了可重入的分布式锁。可重入这个部分的实现可以参考jdk里的<strong>ReentrantLock</strong>，利用了redis hash结构的(HSET key field value)。fileld还跟以前一样可以设置成线程id，每次重入锁之后，value会加1。但redis的 hash类型 没有string类型的setnx的命令。所以redisson为了实现操作的原子性，利用了lua脚本，自定义了一组命令来实现互斥。</p>
+<p>1.redisson Rlock是一个实现了可重入的分布式锁。可重入这个部分的实现可以参考jdk里的<strong>ReentrantLock</strong>，利用了redis hash结构的(HSET key field value)。fileld还跟以前一样可以设置成线程id，每次重入锁之后，value会加1。但redis的 hash类型 没有string类型的setnx的命令。所以redisson为了实现操作的原子性，利用了lua脚本，自定义了一组命令来实现互斥。</p>
+<p>并且在持有锁时，如果leaseTime！=-1时，会有一个额外的看门狗线程检查线程scheduleExpirationRenewal() 过期时间续约方法</p>
+<p>在加锁的时候，如果没有获取到锁，还会有等待锁并且订阅 信号量 的机制，</p>
+<p>在解锁的时候，会发布 释放锁的信号量  消息</p>
 <p>1.redisson 加锁</p>
 <p><img
         class="lazyload"
@@ -558,6 +561,52 @@ public class SimpleRedisLockStage3 implements ILock {
         alt="redissonLock.png"
         title="redissonLock.png" /></p>
 <div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"> // KEYS[1] : hash的key参数
+ // ARGV[1] : LeaseTime 锁释放时间
+ // ARGV[2] ：hash的field参数，当前进程的 redisson client+ 线程id
+ // 判断是不是自己获得了锁
+ 
+ // 获取到了锁
+    // key不存在，set field，1
+&#34;if (redis.call(&#39;exists&#39;, KEYS[1]) == 0) then &#34; +
+&#34;redis.call(&#39;hincrby&#39;, KEYS[1], ARGV[2], 1); &#34; +  // hash incr 1
+&#34;redis.call(&#39;pexpire&#39;, KEYS[1], ARGV[1]); &#34; +     // 设置过期时间
+&#34;return nil; &#34; +
+&#34;end; &#34; +
+    // key存在且field也是自己，执行重入操作
+&#34;if (redis.call(&#39;hexists&#39;, KEYS[1], ARGV[2]) == 1) then &#34; +
+&#34;redis.call(&#39;hincrby&#39;, KEYS[1], ARGV[2], 1); &#34; +  // 重入锁 +1
+&#34;redis.call(&#39;pexpire&#39;, KEYS[1], ARGV[1]); &#34; +     // 重新设置过期时间
+&#34;return nil; &#34; +
+&#34;end; &#34; +
+//  获取不到锁，返回锁的剩余时间
+&#34;return redis.call(&#39;pttl&#39;, KEYS[1]);&#34;;
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -598,7 +647,59 @@ public class SimpleRedisLockStage3 implements ILock {
 </code></pre></td></tr></table>
 </div>
 </div><p>2.redisson 释放锁</p>
-<p><img
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"> // KEYS[1] : hash的key参数
+ // ARGV[1] : 解锁时候 发送的消息，用于通知其他等待锁的进程
+ // ARGV[2] : LeaseTime 锁释放时间
+ // ARGV[3] ：redisson client+ 线程id
+ // 判断锁是否还是自己持有
+    // 如果不是自己，直接返回
+&#34;if (redis.call(&#39;hexists&#39;, KEYS[1], ARGV[3]) == 0) then &#34; +
+&#34;return nil;&#34; +
+&#34;end; &#34; +
+    // 如果是自己 ，value incrby 1
+&#34;local counter = redis.call(&#39;hincrby&#39;, KEYS[1], ARGV[3], -1); &#34; +
+        //  判断重入次数是否为0
+        // &gt;0 还不能释放锁，并且续期
+&#34;if (counter &gt; 0) then &#34; +
+&#34;redis.call(&#39;pexpire&#39;, KEYS[1], ARGV[2]); &#34; +
+&#34;return 0; &#34; +
+&#34;else &#34; +
+        // &lt;=0 可以解锁，并发送消息通知
+&#34;redis.call(&#39;del&#39;, KEYS[1]); &#34; +
+&#34;redis.call(&#39;publish&#39;, KEYS[2], ARGV[1]); &#34; +
+&#34;return 1; &#34; +
+&#34;end; &#34; +
+&#34;return nil;&#34;,
+</code></pre></td></tr></table>
+</div>
+</div><p><img
         class="lazyload"
         src="/svg/loading.min.svg"
         data-src="redissonUnlock.png"
@@ -644,6 +745,227 @@ public class SimpleRedisLockStage3 implements ILock {
                     &#34;return nil;&#34;,
             Arrays.asList(getName(), getChannelName()), LockPubSub.UNLOCK_MESSAGE, internalLockLeaseTime, getLockName(threadId));
 }
+</code></pre></td></tr></table>
+</div>
+</div><p>3.看门狗代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">//设置看门狗 ，可以看到会有一个EXPIRATION_RENEWAL_MAP map来维护每个看门狗
+
+private void renewExpiration() {
+    ExpirationEntry ee = EXPIRATION_RENEWAL_MAP.get(getEntryName());
+    if (ee == null) {
+        return;
+    }
+    
+    Timeout task = commandExecutor.getConnectionManager().newTimeout(new TimerTask() {
+        @Override
+        public void run(Timeout timeout) throws Exception {
+            ExpirationEntry ent = EXPIRATION_RENEWAL_MAP.get(getEntryName());
+            if (ent == null) {
+                return;
+            }
+            Long threadId = ent.getFirstThreadId();
+            if (threadId == null) {
+                return;
+            }
+            
+            RFuture&lt;Boolean&gt; future = renewExpirationAsync(threadId);
+            future.onComplete((res, e) -&gt; {
+                if (e != null) {
+                    log.error(&#34;Can&#39;t update lock &#34; + getName() + &#34; expiration&#34;, e);
+                    return;
+                }
+                
+                if (res) {
+                    // reschedule itself
+                    renewExpiration();
+                }
+            });
+        }
+    }, internalLockLeaseTime / 3, TimeUnit.MILLISECONDS);
+    
+    ee.setTimeout(task);
+}
+
+
+
+
+
+ //重置锁 有效期！
+ protected RFuture&lt;Boolean&gt; renewExpirationAsync(long threadId) {
+     return evalWriteAsync(getName(), LongCodec.INSTANCE, RedisCommands.EVAL_BOOLEAN,
+             &#34;if (redis.call(&#39;hexists&#39;, KEYS[1], ARGV[2]) == 1) then &#34; +
+                     &#34;redis.call(&#39;pexpire&#39;, KEYS[1], ARGV[1]); &#34; +
+                     &#34;return 1; &#34; +
+                     &#34;end; &#34; +
+                     &#34;return 0;&#34;,
+             Collections.singletonList(getName()),
+             internalLockLeaseTime, getLockName(threadId));
+ }
+
+
+
+
+
+
+
+//取消看门狗
+
+ @Override
+    public RFuture&lt;Void&gt; unlockAsync(long threadId) {
+        RPromise&lt;Void&gt; result = new RedissonPromise&lt;Void&gt;();
+        RFuture&lt;Boolean&gt; future = unlockInnerAsync(threadId);
+
+        future.onComplete((opStatus, e) -&gt; {
+            cancelExpirationRenewal(threadId);
+
+            if (e != null) {
+                result.tryFailure(e);
+                return;
+            }
+
+            if (opStatus == null) {
+                IllegalMonitorStateException cause = new IllegalMonitorStateException(&#34;attempt to unlock lock, not locked by current thread by node id: &#34;
+                        + id + &#34; thread-id: &#34; + threadId);
+                result.tryFailure(cause);
+                return;
+            }
+
+            result.trySuccess(null);
+        });
+
+        return result;
+    }
+    
+    
+        void cancelExpirationRenewal(Long threadId) {
+        ExpirationEntry task = EXPIRATION_RENEWAL_MAP.get(getEntryName());
+        if (task == null) {
+            return;
+        }
+        
+        if (threadId != null) {
+            task.removeThreadId(threadId);
+        }
+
+        if (threadId == null || task.hasNoThreads()) {
+            Timeout timeout = task.getTimeout();
+            if (timeout != null) {
+                timeout.cancel();
+            }
+            EXPIRATION_RENEWAL_MAP.remove(getEntryName());
+        }
+    }
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="2api使用">2.api使用</h3>
