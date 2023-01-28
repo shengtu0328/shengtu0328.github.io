@@ -4,9 +4,25 @@
         <link>https://shengtu0328.github.io/</link>
         <description>The best time to plant a tree was 10 years ago, the second is now</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1007@qq.com (ricky)</managingEditor>
-            <webMaster>1007@qq.com (ricky)</webMaster><lastBuildDate>Fri, 30 Dec 2022 18:00:43 &#43;0800</lastBuildDate>
+            <webMaster>1007@qq.com (ricky)</webMaster><lastBuildDate>Sat, 28 Jan 2023 16:39:05 &#43;0800</lastBuildDate>
             <atom:link href="https://shengtu0328.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>English_grammar</title>
+    <link>https://shengtu0328.github.io/posts/english_grammar/</link>
+    <pubDate>Sat, 28 Jan 2023 16:39:05 &#43;0800</pubDate>
+    <author>ricky</author>
+    <guid>https://shengtu0328.github.io/posts/english_grammar/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>RocketMQ</title>
+    <link>https://shengtu0328.github.io/posts/rocketmq/</link>
+    <pubDate>Tue, 17 Jan 2023 17:21:36 &#43;0800</pubDate>
+    <author>ricky</author>
+    <guid>https://shengtu0328.github.io/posts/rocketmq/</guid>
+    <description><![CDATA[RoctetMQ基本架构 几种MQ对比 rocketmq 支持集群模型，负载均衡，水平扩容 采用零拷贝原理，顺序写盘，随机读 丰富API（顺序消息，延迟消息，事物消]]></description>
+</item>
+<item>
     <title>Redis</title>
     <link>https://shengtu0328.github.io/posts/redis/</link>
     <pubDate>Fri, 30 Dec 2022 18:00:43 &#43;0800</pubDate>
@@ -69,22 +85,6 @@
     <author>ricky</author>
     <guid>https://shengtu0328.github.io/posts/learnspringsecurity/</guid>
     <description><![CDATA[SpringSecurity概览 在日常工作中，web应用的用户登录，用户认证，用户授权等都是常用到的功能，而与Spring相结合的Sprin]]></description>
-</item>
-<item>
-    <title>英文单词记录</title>
-    <link>https://shengtu0328.github.io/posts/programmerwords/</link>
-    <pubDate>Wed, 02 Nov 2022 18:11:56 &#43;0800</pubDate>
-    <author>ricky</author>
-    <guid>https://shengtu0328.github.io/posts/programmerwords/</guid>
-    <description><![CDATA[工作中遇到的单词记录，进行记录，加深记忆，以工作环境中的释义为主 词性 释义 发音 备注 flow n. 流程 v. 流动 intended adj. 有意的；为……打算 are intended to 打算,有意的 authorize v. 授]]></description>
-</item>
-<item>
-    <title>简历</title>
-    <link>https://shengtu0328.github.io/posts/resume/</link>
-    <pubDate>Mon, 31 Oct 2022 17:33:47 &#43;0800</pubDate>
-    <author>ricky</author>
-    <guid>https://shengtu0328.github.io/posts/resume/</guid>
-    <description><![CDATA[名字 JAVA | 5年工作经验 | 本科 | 27岁 | 男 | 手机 | 邮箱 | https://shengtu0328.github.io | 专业技能 熟悉SpringBoot，Spring，SpringCloud 微服务全家桶，]]></description>
 </item>
 </channel>
 </rss>
