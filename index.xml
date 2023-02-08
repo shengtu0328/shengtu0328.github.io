@@ -4,14 +4,22 @@
         <link>https://shengtu0328.github.io/</link>
         <description>The best time to plant a tree was 10 years ago, the second is now</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1007@qq.com (ricky)</managingEditor>
-            <webMaster>1007@qq.com (ricky)</webMaster><lastBuildDate>Sat, 28 Jan 2023 16:39:05 &#43;0800</lastBuildDate>
+            <webMaster>1007@qq.com (ricky)</webMaster><lastBuildDate>Wed, 08 Feb 2023 17:10:48 &#43;0800</lastBuildDate>
             <atom:link href="https://shengtu0328.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
-    <title>English_grammar</title>
-    <link>https://shengtu0328.github.io/posts/english_grammar/</link>
+    <title>English_wirting</title>
+    <link>https://shengtu0328.github.io/posts/english_wirting/</link>
+    <pubDate>Wed, 08 Feb 2023 17:10:48 &#43;0800</pubDate>
+    <author>ricky</author>
+    <guid>https://shengtu0328.github.io/posts/english_wirting/</guid>
+    <description><![CDATA[Why i learned English You know，i recently practised my english。The ultimate goal is to run（润）。Although the chinese government have optimized covid-19 epidemic measures，the domestic software industry as well as other]]></description>
+</item>
+<item>
+    <title>英语语法康复训练-从句</title>
+    <link>https://shengtu0328.github.io/posts/english_grammar_subordinate_clause/</link>
     <pubDate>Sat, 28 Jan 2023 16:39:05 &#43;0800</pubDate>
     <author>ricky</author>
-    <guid>https://shengtu0328.github.io/posts/english_grammar/</guid>
+    <guid>https://shengtu0328.github.io/posts/english_grammar_subordinate_clause/</guid>
     <description><![CDATA[从句 1.形容词从句(定语从句/关系从句) 非限定性形容性从句。chinadaily news中一直看到这种写法。 2.主语从句 3.宾语从句 表达某种]]></description>
 </item>
 <item>
@@ -77,14 +85,6 @@
     <author>ricky</author>
     <guid>https://shengtu0328.github.io/posts/springsecurityoauth2/</guid>
     <description><![CDATA[SpringSecurityOauth2几个重要注解 1 2 3 #创建一个类 加上这两个注解 ，就实现了认证服务器。不需要自己写一行代码 @Configuration @EnableAuthorizationServer 1 2 3 创建]]></description>
-</item>
-<item>
-    <title>学习SpringSecurity</title>
-    <link>https://shengtu0328.github.io/posts/learnspringsecurity/</link>
-    <pubDate>Thu, 03 Nov 2022 14:22:04 &#43;0800</pubDate>
-    <author>ricky</author>
-    <guid>https://shengtu0328.github.io/posts/learnspringsecurity/</guid>
-    <description><![CDATA[SpringSecurity概览 在日常工作中，web应用的用户登录，用户认证，用户授权等都是常用到的功能，而与Spring相结合的Sprin]]></description>
 </item>
 </channel>
 </rss>
