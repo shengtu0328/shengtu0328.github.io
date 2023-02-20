@@ -4,13 +4,21 @@
         <link>https://shengtu0328.github.io/posts/</link>
         <description>All Posts | ricky的网站</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1007@qq.com (ricky)</managingEditor>
-            <webMaster>1007@qq.com (ricky)</webMaster><lastBuildDate>Wed, 08 Feb 2023 17:10:48 &#43;0800</lastBuildDate><atom:link href="https://shengtu0328.github.io/posts/" rel="self" type="application/rss+xml" /><item>
-    <title>英语康复训练-输出</title>
+            <webMaster>1007@qq.com (ricky)</webMaster><lastBuildDate>Mon, 13 Feb 2023 11:09:37 &#43;0800</lastBuildDate><atom:link href="https://shengtu0328.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>支付业务</title>
+    <link>https://shengtu0328.github.io/posts/pay_service/</link>
+    <pubDate>Mon, 13 Feb 2023 11:09:37 &#43;0800</pubDate>
+    <author>ricky</author>
+    <guid>https://shengtu0328.github.io/posts/pay_service/</guid>
+    <description><![CDATA[支付业务 如需接入微信，支付宝业务，在商城系统里 需要额外添加一张 支付记录表。并非是业务代码里本身的订单表。 目前公司用的是 v2版本https:/]]></description>
+</item>
+<item>
+    <title>Learing English is not a rocket science.</title>
     <link>https://shengtu0328.github.io/posts/english_writing/</link>
     <pubDate>Wed, 08 Feb 2023 17:10:48 &#43;0800</pubDate>
     <author>ricky</author>
     <guid>https://shengtu0328.github.io/posts/english_writing/</guid>
-    <description><![CDATA[Why i learned English You know，i recently practised my english。The ultimate goal is to run（润）。Although the chinese government have optimized covid-19 epidemic measures，the domestic software industry as well as otheriindustry]]></description>
+    <description><![CDATA[Why i learned English You know，i recently practised my english。The ultimate goal is to run（润）. Job is a crucial part in life. Although the chinese government have optimized covid-19 epidemic measures，the domestic software industry as well as other]]></description>
 </item>
 <item>
     <title>英语语法康复训练-从句</title>
@@ -75,14 +83,6 @@
     <author>ricky</author>
     <guid>https://shengtu0328.github.io/posts/juc/</guid>
     <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>工作中遇到的设计模式</title>
-    <link>https://shengtu0328.github.io/posts/designpatternatwork/</link>
-    <pubDate>Fri, 25 Nov 2022 18:30:10 &#43;0800</pubDate>
-    <author>ricky</author>
-    <guid>https://shengtu0328.github.io/posts/designpatternatwork/</guid>
-    <description><![CDATA[策略设计]]></description>
 </item>
 </channel>
 </rss>
