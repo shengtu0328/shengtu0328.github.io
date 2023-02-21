@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <title>支付业务 - ricky的网站</title><meta name="Description" content="The best time to plant a tree was 10 years ago, the second is now"><meta property="og:title" content="支付业务" />
-<meta property="og:description" content="支付业务 如需接入微信，支付宝业务，在商城系统里 需要额外添加一张 支付记录表。并非是业务代码里本身的订单表。 目前公司用的是 v2版本https:/" />
+<meta property="og:description" content="支付业务 如需接入微信，支付宝业务，在商城系统里 需要额外添加一张 支付记录表。并非是业务代码里本身的订单表。 目前公司用的是 v2版本 APP WAP 一.订单支" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://shengtu0328.github.io/posts/pay_service/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-02-13T11:09:37+08:00" />
@@ -13,7 +13,7 @@
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="支付业务"/>
-<meta name="twitter:description" content="支付业务 如需接入微信，支付宝业务，在商城系统里 需要额外添加一张 支付记录表。并非是业务代码里本身的订单表。 目前公司用的是 v2版本https:/"/>
+<meta name="twitter:description" content="支付业务 如需接入微信，支付宝业务，在商城系统里 需要额外添加一张 支付记录表。并非是业务代码里本身的订单表。 目前公司用的是 v2版本 APP WAP 一.订单支"/>
 <meta name="application-name" content="我的网站">
 <meta name="apple-mobile-web-app-title" content="我的网站"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/shengtu0328.github.io\/posts\/pay_service\/"
-        },"genre": "posts","wordcount":  455 ,
+        },"genre": "posts","wordcount":  452 ,
         "url": "https:\/\/shengtu0328.github.io\/posts\/pay_service\/","datePublished": "2023-02-13T11:09:37+08:00","dateModified": "2023-02-13T11:09:37+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -102,7 +102,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">支付业务</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-02-13">2023-02-13</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;455 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-02-13">2023-02-13</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;452 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;One minute&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -114,14 +114,16 @@
     <li>
       <ul>
         <li><a href="#支付业务">支付业务</a></li>
+        <li><a href="#密码">密码</a></li>
         <li><a href="#微信">微信</a></li>
+        <li><a href="#支付宝">支付宝</a></li>
       </ul>
     </li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h3 id="支付业务">支付业务</h3>
 <p>如需接入微信，支付宝业务，在商城系统里 需要额外添加一张 <strong>支付记录表</strong>。并非是业务代码里本身的订单表。</p>
-<p>目前公司用的是 v2版本https://github.com/alipay/alipay-sdk-java-all/blob/master/v2/README.md</p>
+<p>目前公司用的是 v2版本</p>
 <p>APP</p>
 <p>WAP</p>
 <p>一.订单支付接口</p>
@@ -166,9 +168,38 @@
 <ol>
 <li>校验订单状态</li>
 </ol>
+<h3 id="密码">密码</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AES</td>
+<td>RSA</td>
+<td>MD5、SHA1、SHA2（SHA224、SHA256、SHA384）</td>
+</tr>
+<tr>
+<td>对称加密</td>
+<td>非对称密码</td>
+<td>摘要算法（没有秘钥这个概念的）</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <h3 id="微信">微信</h3>
 <p>商户证书？</p>
 <p>商户证书是微信提供的二进制文件，商户系统发起与微信支付后台服务器通信请求的时候，作为微信支付后台识别商户真实身份的凭据。</p>
+<h3 id="支付宝">支付宝</h3>
+<p><a href="https://github.com/alipay/alipay-sdk-java-all/blob/master/v2/README.md" target="_blank" rel="noopener noreffer ">https://github.com/alipay/alipay-sdk-java-all/blob/master/v2/README.md</a></p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
