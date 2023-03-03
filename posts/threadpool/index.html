@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/shengtu0328.github.io\/posts\/threadpool\/"
-        },"genre": "posts","wordcount":  7193 ,
+        },"genre": "posts","wordcount":  7626 ,
         "url": "https:\/\/shengtu0328.github.io\/posts\/threadpool\/","datePublished": "2022-12-01T14:14:25+08:00","dateModified": "2022-12-01T14:14:25+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -102,8 +102,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">线程池</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span>&nbsp;<span class="post-category">included in <a href="/categories/juc/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>JUC</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-12-01">2022-12-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;7193 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;15 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-12-01">2022-12-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;7626 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;16 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -1225,6 +1225,105 @@ while(task != null || (task = taskQueue.poll(timeout, timeUnit)) != null) {
 </div>
 </div><h2 id="三javautilconcurrentthreadpoolexecutor">三.java.util.concurrent.ThreadPoolExecutor</h2>
 <p>核心不是一定会重用， jdk中有个allowCoreThreadTimeOut == false，false的时候 核心线程不会被销毁， true的时候 一段时间后会销毁</p>
+<p><strong>3) newFixedThreadPool</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public static ExecutorService newFixedThreadPool(int nThreads) {
+
+return new ThreadPoolExecutor(nThreads, nThreads,
+
+0L, TimeUnit.MILLISECONDS,
+
+new LinkedBlockingQueue&lt;Runnable&gt;());
+
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>特点</p>
+<p>核心线程数 == 最大线程数（没有救急线程被创建），因此也无需超时时间</p>
+<p>阻塞队列是无界的，可以放任意数量的任务</p>
+<blockquote>
+<p><strong>评价</strong> 适用于任务量已知，相对耗时的任务</p>
+</blockquote>
+<p><strong>4) newCachedThreadPool</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public static ExecutorService newCachedThreadPool() {
+
+return new ThreadPoolExecutor(0, Integer.MAX_VALUE,
+
+60L, TimeUnit.SECONDS,
+
+new SynchronousQueue&lt;Runnable&gt;());
+
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>特点</p>
+<p>核心线程数是 0， 最大线程数是 Integer.MAX_VALUE，救急线程的空闲生存时间是 60s，意味着</p>
+<p>全部都是救急线程（60s 后可以回收）</p>
+<p><strong>5) newSingleThreadExecutor</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public static ExecutorService newSingleThreadExecutor() {
+
+return new FinalizableDelegatedExecutorService
+
+ (new ThreadPoolExecutor(1, 1,
+
+0L, TimeUnit.MILLISECONDS,
+
+new LinkedBlockingQueue&lt;Runnable&gt;()));
+
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>使用场景：</p>
+<p>希望多个任务排队执行。线程数固定为 1，任务数多于 1 时，会放入无界队列排队。任务执行完毕，这唯一的线程</p>
+<p>也不会被释放。</p>
+<p>区别：</p>
+<p>自己创建一个单线程串行执行任务，如果任务执行失败而终止那么没有任何补救措施，而线程池还会新建一</p>
+<p>个线程，保证池的正常工作</p>
+<p>Executors.newSingleThreadExecutor() 线程个数始终为1，不能修改</p>
+<p>FinalizableDelegatedExecutorService 应用的是装饰器模式，只对外暴露了 ExecutorService 接口，因</p>
+<p>此不能调用 ThreadPoolExecutor 中特有的方法</p>
+<p>Executors.newFixedThreadPool(1) 初始时为1，以后还可以修改</p>
+<p>对外暴露的是 ThreadPoolExecutor 对象，可以强转后调用 setCorePoolSize 等方法进行修改</p>
 <h2 id="四其他问题">四.其他问题</h2>
 <p>1.创建多少线程池合适？</p>
 <p>cpu密集型</p>
