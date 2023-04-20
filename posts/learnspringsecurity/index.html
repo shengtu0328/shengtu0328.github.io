@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/shengtu0328.github.io\/posts\/learnspringsecurity\/"
-        },"genre": "posts","wordcount":  6267 ,
+        },"genre": "posts","wordcount":  6445 ,
         "url": "https:\/\/shengtu0328.github.io\/posts\/learnspringsecurity\/","datePublished": "2022-11-03T14:22:04+08:00","dateModified": "2022-11-03T14:22:04+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -102,7 +102,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">学习SpringSecurity</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-03">2022-11-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;6267 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-03">2022-11-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;6445 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;13 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -689,7 +689,15 @@ public String g(){
 <p>在ExceptionTranslationFilter 对FilterSecurityInterceptor 进行try catch后，FilterSecurityInterceptor抛出的进行处理，也就是handleSpringSecurityException ()方法</p>
 <hr>
 <h2 id="authenticationentrypoint是在哪里调用的">AuthenticationEntryPoint是在哪里调用的</h2>
-<p>在自定义filter中，认证失败后调用。</p>
+<p>在ExceptionTranslationFilter 对FilterSecurityInterceptor 进行try catch后，FilterSecurityInterceptor抛出的进行处理，也就是handleSpringSecurityException ()-&gt;handleAccessDeniedException()-&gt;sendStartAuthentication()调用</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="AuthenticationEntryPoint.png"
+        data-srcset="AuthenticationEntryPoint.png, AuthenticationEntryPoint.png 1.5x, AuthenticationEntryPoint.png 2x"
+        data-sizes="auto"
+        alt="AuthenticationEntryPoint.png"
+        title="AuthenticationEntryPoint.png" /></p>
 <hr>
 <h2 id="未登录的状态取访问需要登录的资源时是在哪里处理的">未登录的状态取访问需要登录的资源时，是在哪里处理的</h2>
 <p>还是在MethodSecurityInterceptor的attemptAuthorization 方法中，会返回 AccessDeniedException ，然后交给</p>
