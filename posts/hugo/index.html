@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/shengtu0328.github.io\/posts\/hugo\/"
-        },"genre": "posts","wordcount":  269 ,
+        },"genre": "posts","wordcount":  520 ,
         "url": "https:\/\/shengtu0328.github.io\/posts\/hugo\/","datePublished": "2022-10-14T10:03:11+08:00","dateModified": "2022-10-14T10:03:11+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -102,8 +102,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Hugo</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-10-14">2022-10-14</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;269 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;One minute&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-10-14">2022-10-14</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;520 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -111,7 +111,12 @@
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li><a href="#重新克隆包含子模块的项目">重新克隆包含子模块的项目</a></li>
+    <li><a href="#重新克隆包含子模块的项目">重新克隆包含子模块的项目</a>
+      <ul>
+        <li><a href="#一是先克隆父项目再更新子模块">一。是先克隆父项目，再更新子模块</a></li>
+        <li><a href="#二递归克隆整个项目">二。递归克隆整个项目</a></li>
+      </ul>
+    </li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><div class="highlight"><div class="chroma">
@@ -137,6 +142,7 @@ hugo new posts/first_post.md
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="重新克隆包含子模块的项目">重新克隆包含子模块的项目</h2>
+<h3 id="一是先克隆父项目再更新子模块">一。是先克隆父项目，再更新子模块</h3>
 <ol>
 <li>克隆父项目</li>
 </ol>
@@ -213,6 +219,71 @@ Submodule &#39;github_blog/themes/LoveIt&#39; (https://github.com/dillonzq/LoveI
 Cloning into &#39;/Users/videopls/xrqProjects/myHugo/github_blog/public&#39;...
 Cloning into &#39;/Users/videopls/xrqProjects/myHugo/github_blog/themes/LoveIt&#39;...
 Submodule path &#39;github_blog/public&#39;: checked out &#39;7bf4bb367cd252b7b99bcbf4c5bbd26aaff7d9e0&#39;
+Submodule path &#39;github_blog/themes/LoveIt&#39;: checked out &#39;e9e89a4613baee823596822b7d246f5931263491&#39;
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="二递归克隆整个项目">二。递归克隆整个项目</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">videopls@f01898564faf ideaProjectsBackup % git clone git@github.com:shengtu0328/myHugo.git myHugo --recursive
+Cloning into &#39;myHugo&#39;...
+remote: Enumerating objects: 611, done.
+remote: Counting objects: 100% (20/20), done.
+remote: Compressing objects: 100% (14/14), done.
+remote: Total 611 (delta 4), reused 15 (delta 4), pack-reused 591
+Receiving objects: 100% (611/611), 37.62 MiB | 4.30 MiB/s, done.
+Resolving deltas: 100% (199/199), done.
+Submodule &#39;github_blog/public&#39; (git@github.com:shengtu0328/shengtu0328.github.io.git) registered for path &#39;github_blog/public&#39;
+Submodule &#39;github_blog/themes/LoveIt&#39; (https://github.com/dillonzq/LoveIt.git) registered for path &#39;github_blog/themes/LoveIt&#39;
+Cloning into &#39;/Users/videopls/ideaProjectsBackup/myHugo/github_blog/public&#39;...
+remote: Enumerating objects: 910, done.
+remote: Counting objects: 100% (36/36), done.
+remote: Compressing objects: 100% (24/24), done.
+remote: Total 910 (delta 14), reused 20 (delta 4), pack-reused 874
+Receiving objects: 100% (910/910), 39.17 MiB | 81.00 KiB/s, done.
+Resolving deltas: 100% (418/418), done.
+Cloning into &#39;/Users/videopls/ideaProjectsBackup/myHugo/github_blog/themes/LoveIt&#39;...
+fatal: unable to access &#39;https://github.com/dillonzq/LoveIt.git/&#39;: LibreSSL SSL_connect: SSL_ERROR_SYSCALL in connection to github.com:443
+fatal: clone of &#39;https://github.com/dillonzq/LoveIt.git&#39; into submodule path &#39;/Users/videopls/ideaProjectsBackup/myHugo/github_blog/themes/LoveIt&#39; failed
+Failed to clone &#39;github_blog/themes/LoveIt&#39;. Retry scheduled
+Cloning into &#39;/Users/videopls/ideaProjectsBackup/myHugo/github_blog/themes/LoveIt&#39;...
+remote: Enumerating objects: 14632, done.
+remote: Total 14632 (delta 0), reused 0 (delta 0), pack-reused 14632
+Receiving objects: 100% (14632/14632), 45.84 MiB | 7.91 MiB/s, done.
+Resolving deltas: 100% (7216/7216), done.
+Submodule path &#39;github_blog/public&#39;: checked out &#39;4c7446185276829a0eb6ff29c839994885163a33&#39;
+Submodule path &#39;github_blog/themes/LoveIt&#39;: checked out &#39;e9e89a4613baee823596822b7d246f5931263491&#39;
 Submodule path &#39;github_blog/themes/LoveIt&#39;: checked out &#39;e9e89a4613baee823596822b7d246f5931263491&#39;
 </code></pre></td></tr></table>
 </div>
