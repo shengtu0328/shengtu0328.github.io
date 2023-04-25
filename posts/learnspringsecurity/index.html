@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/shengtu0328.github.io\/posts\/learnspringsecurity\/"
-        },"genre": "posts","wordcount":  6445 ,
+        },"genre": "posts","wordcount":  6595 ,
         "url": "https:\/\/shengtu0328.github.io\/posts\/learnspringsecurity\/","datePublished": "2022-11-03T14:22:04+08:00","dateModified": "2022-11-03T14:22:04+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -102,8 +102,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">学习SpringSecurity</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-03">2022-11-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;6445 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;13 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-03">2022-11-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;6595 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;14 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -133,6 +133,7 @@
     <li><a href="#流程总结">流程总结</a></li>
     <li><a href="#过滤器执行顺序">过滤器执行顺序</a></li>
     <li><a href="#preauthorizehasauthorityauthorityg-是怎么处理的">@PreAuthorize(&ldquo;hasAuthority(&lsquo;authorityg&rsquo;)&quot;) 是怎么处理的？</a></li>
+    <li><a href="#permissionevaluator-是什么">PermissionEvaluator 是什么？</a></li>
     <li><a href="#如果usernamepasswordauthenticationfilter的userdetailsservice中验证失败抛出了自定义异常是怎么处理的">如果UsernamePasswordAuthenticationFilter的UserDetailsService中验证失败，抛出了自定义异常，是怎么处理的？</a></li>
     <li><a href="#如果在自定义的filter中抛出了自定义异常是怎么处理的">如果在自定义的Filter中，抛出了自定义异常，是怎么处理的？</a></li>
     <li><a href="#accessdeniedhandler是在哪里调用的">AccessDeniedHandler是在哪里调用的</a></li>
@@ -638,6 +639,35 @@ public String g(){
         data-sizes="auto"
         alt="MethodSecurityInterceptor.png"
         title="MethodSecurityInterceptor.png" /></p>
+<hr>
+<h2 id="permissionevaluator-是什么">PermissionEvaluator 是什么？</h2>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="PermissionEvaluator.png"
+        data-srcset="PermissionEvaluator.png, PermissionEvaluator.png 1.5x, PermissionEvaluator.png 2x"
+        data-sizes="auto"
+        alt="PermissionEvaluator.png"
+        title="PermissionEvaluator.png" /></p>
+<p>PermissionEvaluator 还是在MethodSecurityInterceptor 中里被调用的。</p>
+<p>hasPermission()和   hasAuthority()相比较 ， hasPermission()是可以自定义实现判断规则， hasAuthority()只能用默认的实现</p>
+<p>根据SecurityExpressionRoot 中</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="SecurityExpressionRoot.png"
+        data-srcset="SecurityExpressionRoot.png, SecurityExpressionRoot.png 1.5x, SecurityExpressionRoot.png 2x"
+        data-sizes="auto"
+        alt="SecurityExpressionRoot.png"
+        title="SecurityExpressionRoot.png" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="SecurityExpressionRoot2.png"
+        data-srcset="SecurityExpressionRoot2.png, SecurityExpressionRoot2.png 1.5x, SecurityExpressionRoot2.png 2x"
+        data-sizes="auto"
+        alt="SecurityExpressionRoot2.png"
+        title="SecurityExpressionRoot2.png" /></p>
 <hr>
 <h2 id="如果usernamepasswordauthenticationfilter的userdetailsservice中验证失败抛出了自定义异常是怎么处理的">如果UsernamePasswordAuthenticationFilter的UserDetailsService中验证失败，抛出了自定义异常，是怎么处理的？</h2>
 <p>UserDetailService.loadUserByUsername 抛异常</p>

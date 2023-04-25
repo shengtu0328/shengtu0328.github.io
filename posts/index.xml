@@ -4,7 +4,15 @@
         <link>https://shengtu0328.github.io/posts/</link>
         <description>All Posts | ricky的网站</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1007@qq.com (ricky)</managingEditor>
-            <webMaster>1007@qq.com (ricky)</webMaster><lastBuildDate>Thu, 20 Apr 2023 11:45:10 &#43;0800</lastBuildDate><atom:link href="https://shengtu0328.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>1007@qq.com (ricky)</webMaster><lastBuildDate>Mon, 24 Apr 2023 18:17:58 &#43;0800</lastBuildDate><atom:link href="https://shengtu0328.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>English_writing_0424</title>
+    <link>https://shengtu0328.github.io/posts/english_writing_0424/</link>
+    <pubDate>Mon, 24 Apr 2023 18:17:58 &#43;0800</pubDate>
+    <author>ricky</author>
+    <guid>https://shengtu0328.github.io/posts/english_writing_0424/</guid>
+    <description><![CDATA[Simply put,]]></description>
+</item>
+<item>
     <title>英语语法康复训练-连词</title>
     <link>https://shengtu0328.github.io/posts/english_grammar_conjunction/</link>
     <pubDate>Thu, 20 Apr 2023 11:45:10 &#43;0800</pubDate>
@@ -75,14 +83,6 @@
     <author>ricky</author>
     <guid>https://shengtu0328.github.io/posts/redisson/</guid>
     <description><![CDATA[Redis分布式锁（悲观锁） 假设需求是商品下单，并且一人只能买一单。 mysql update行锁可以限制操作单张库存中表库存字段不超卖，但这只适用于单]]></description>
-</item>
-<item>
-    <title>线程池</title>
-    <link>https://shengtu0328.github.io/posts/threadpool/</link>
-    <pubDate>Thu, 01 Dec 2022 14:14:25 &#43;0800</pubDate>
-    <author>ricky</author>
-    <guid>https://shengtu0328.github.io/posts/threadpool/</guid>
-    <description><![CDATA[我是零.线程池的主要作用 降低资源消耗：创建线程（分配栈内存）和销毁线程都是消耗资源的，通过线程池可以重复利用已创建的线程，降低线程创建和销毁]]></description>
 </item>
 </channel>
 </rss>
