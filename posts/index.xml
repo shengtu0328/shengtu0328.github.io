@@ -4,7 +4,39 @@
         <link>https://shengtu0328.github.io/posts/</link>
         <description>All Posts | ricky的网站</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1007@qq.com (ricky)</managingEditor>
-            <webMaster>1007@qq.com (ricky)</webMaster><lastBuildDate>Mon, 24 Apr 2023 18:17:58 &#43;0800</lastBuildDate><atom:link href="https://shengtu0328.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>1007@qq.com (ricky)</webMaster><lastBuildDate>Tue, 25 Apr 2023 16:06:06 &#43;0800</lastBuildDate><atom:link href="https://shengtu0328.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>线程池</title>
+    <link>https://shengtu0328.github.io/posts/threadpool/</link>
+    <pubDate>Thu, 01 Dec 2022 14:14:25 &#43;0800</pubDate>
+    <author>ricky</author>
+    <guid>https://shengtu0328.github.io/posts/threadpool/</guid>
+    <description><![CDATA[我是零.线程池的主要作用 降低资源消耗：创建线程（分配栈内存）和销毁线程都是消耗资源的，通过线程池可以重复利用已创建的线程，降低线程创建和销毁]]></description>
+</item>
+<item>
+    <title>学习SpringSecurity</title>
+    <link>https://shengtu0328.github.io/posts/learnspringsecurity/</link>
+    <pubDate>Thu, 03 Nov 2022 14:22:04 &#43;0800</pubDate>
+    <author>ricky</author>
+    <guid>https://shengtu0328.github.io/posts/learnspringsecurity/</guid>
+    <description><![CDATA[SpringSecurity概览 在日常工作中，web应用的用户登录，用户认证，用户授权等都是常用到的功能，而与Spring相结合的Sprin]]></description>
+</item>
+<item>
+    <title>Learing English is not a rocket science.</title>
+    <link>https://shengtu0328.github.io/posts/english_writing/</link>
+    <pubDate>Wed, 08 Feb 2023 17:10:48 &#43;0800</pubDate>
+    <author>ricky</author>
+    <guid>https://shengtu0328.github.io/posts/english_writing/</guid>
+    <description><![CDATA[Why i learned English You know，i recently practised my english。The ultimate goal is to run（润）. Job is a crucial part in one&rsquo;s life. Although the chinese government have optimized covid-19 epidemic control policies,，the domestic software industry as]]></description>
+</item>
+<item>
+    <title>英语语法康复训练-时态</title>
+    <link>https://shengtu0328.github.io/posts/english_grammar_non_verb_tenses/</link>
+    <pubDate>Tue, 25 Apr 2023 16:06:06 &#43;0800</pubDate>
+    <author>ricky</author>
+    <guid>https://shengtu0328.github.io/posts/english_grammar_non_verb_tenses/</guid>
+    <description><![CDATA[一.形容词从句(定语从句/关系从句) 1.1 关系代词引导的形容词从句 时：过去，现在，将来，过去将来 态：一般，进行，完成，完成进行 一般现在时，陈述事]]></description>
+</item>
+<item>
     <title>English_writing_0424</title>
     <link>https://shengtu0328.github.io/posts/english_writing_0424/</link>
     <pubDate>Mon, 24 Apr 2023 18:17:58 &#43;0800</pubDate>
@@ -29,14 +61,6 @@
     <description><![CDATA[支付业务 如需接入微信，支付宝业务，在商城系统里 需要额外添加一张 支付记录表。并非是业务代码里本身的订单表。 目前公司用的是 v2版本 APP WAP 一.订单支]]></description>
 </item>
 <item>
-    <title>Learing English is not a rocket science.</title>
-    <link>https://shengtu0328.github.io/posts/english_writing/</link>
-    <pubDate>Wed, 08 Feb 2023 17:10:48 &#43;0800</pubDate>
-    <author>ricky</author>
-    <guid>https://shengtu0328.github.io/posts/english_writing/</guid>
-    <description><![CDATA[Why i learned English You know，i recently practised my english。The ultimate goal is to run（润）. Job is a crucial part in one&rsquo;s life. Although the chinese government have optimized covid-19 epidemic control policies,，the domestic software industry as]]></description>
-</item>
-<item>
     <title>英语语法康复训练-从句</title>
     <link>https://shengtu0328.github.io/posts/english_grammar_subordinate_clause/</link>
     <pubDate>Sat, 28 Jan 2023 16:39:05 &#43;0800</pubDate>
@@ -59,30 +83,6 @@
     <author>ricky</author>
     <guid>https://shengtu0328.github.io/posts/rocketmq/</guid>
     <description><![CDATA[RoctetMQ基本架构 几种MQ对比 rocketmq 支持集群模型，负载均衡，水平扩容 采用零拷贝原理，顺序写盘，随机读 丰富API（顺序消息，延迟消息，事物消]]></description>
-</item>
-<item>
-    <title>Redis</title>
-    <link>https://shengtu0328.github.io/posts/redis/</link>
-    <pubDate>Fri, 30 Dec 2022 18:00:43 &#43;0800</pubDate>
-    <author>ricky</author>
-    <guid>https://shengtu0328.github.io/posts/redis/</guid>
-    <description><![CDATA[1.缓存穿透 缓存穿透是指客户端请求的数据在缓存中和数据库中都不存在，这样缓存永远不会生效，这些请求都会打到数据库。 常见的解决方案有两种： 缓存]]></description>
-</item>
-<item>
-    <title>Session</title>
-    <link>https://shengtu0328.github.io/posts/session/</link>
-    <pubDate>Fri, 30 Dec 2022 15:30:56 &#43;0800</pubDate>
-    <author>ricky</author>
-    <guid>https://shengtu0328.github.io/posts/session/</guid>
-    <description><![CDATA[servlet中 HttpSession是在tomcat中实现的。 StandardSession是HttpSession的默认实现Standa]]></description>
-</item>
-<item>
-    <title>Redisson</title>
-    <link>https://shengtu0328.github.io/posts/redisson/</link>
-    <pubDate>Fri, 30 Dec 2022 10:09:27 &#43;0800</pubDate>
-    <author>ricky</author>
-    <guid>https://shengtu0328.github.io/posts/redisson/</guid>
-    <description><![CDATA[Redis分布式锁（悲观锁） 假设需求是商品下单，并且一人只能买一单。 mysql update行锁可以限制操作单张库存中表库存字段不超卖，但这只适用于单]]></description>
 </item>
 </channel>
 </rss>
