@@ -4,7 +4,7 @@
         <link>https://shengtu0328.github.io/posts/</link>
         <description>All Posts | ricky的网站</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1007@qq.com (ricky)</managingEditor>
-            <webMaster>1007@qq.com (ricky)</webMaster><lastBuildDate>Wed, 10 May 2023 11:33:27 &#43;0800</lastBuildDate><atom:link href="https://shengtu0328.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>1007@qq.com (ricky)</webMaster><lastBuildDate>Wed, 10 May 2023 14:22:35 &#43;0800</lastBuildDate><atom:link href="https://shengtu0328.github.io/posts/" rel="self" type="application/rss+xml" /><item>
     <title>线程池</title>
     <link>https://shengtu0328.github.io/posts/threadpool/</link>
     <pubDate>Thu, 01 Dec 2022 14:14:25 &#43;0800</pubDate>
@@ -27,6 +27,14 @@
     <author>ricky</author>
     <guid>https://shengtu0328.github.io/posts/english_writing/</guid>
     <description><![CDATA[Why i learned English I recently watched some interesting videos on bilibli which is about communicating with foreigners in English on website. The videos was so funny that it made me have the idea of relearning the skill of English language . You know，i recently started to practise my english from multiple aspects 。Literally,m]]></description>
+</item>
+<item>
+    <title>English_grammar_other_others</title>
+    <link>https://shengtu0328.github.io/posts/english_grammar_other_others/</link>
+    <pubDate>Wed, 10 May 2023 14:22:35 &#43;0800</pubDate>
+    <author>ricky</author>
+    <guid>https://shengtu0328.github.io/posts/english_grammar_other_others/</guid>
+    <description><![CDATA[other adj.其他的 I am smarter than other rabbits 我比其他的兔子更聪明 pron.两个中的其他的那一个。one&hellip;the other&hellip; There are two rabbits in the room.One is white.The other is black. 有两只]]></description>
 </item>
 <item>
     <title>Enligsh_writing_chatgpt</title>
@@ -76,14 +84,6 @@ Recently, I have started practicing my English from multiple aspects. Ultimately
     <author>ricky</author>
     <guid>https://shengtu0328.github.io/posts/english_grammar_subordinate_clause/</guid>
     <description><![CDATA[一.形容词从句(定语从句/关系从句) 1.1 关系代词引导的形容词从句 that和 which区别 1.2 关系副词引导的形容词从句 1.3 非限定性形容性从句 非限定性]]></description>
-</item>
-<item>
-    <title>英语语法康复训练-非谓语动词</title>
-    <link>https://shengtu0328.github.io/posts/english_grammar_non_predicate_verb/</link>
-    <pubDate>Sat, 28 Jan 2023 16:39:05 &#43;0800</pubDate>
-    <author>ricky</author>
-    <guid>https://shengtu0328.github.io/posts/english_grammar_non_predicate_verb/</guid>
-    <description><![CDATA[一.谓语动词 &amp; 非谓语动词 谓语动词（限定性动词） 能表达时间，状态，语气。 非谓语动词(限定性动词) 非谓语动词 失去了表达人称，时态的能力。 一个简单]]></description>
 </item>
 </channel>
 </rss>

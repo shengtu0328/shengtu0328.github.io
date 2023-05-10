@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <title>工作中使用到的设计模式 - ricky的网站</title><meta name="Description" content="The best time to plant a tree was 10 years ago, the second is now"><meta property="og:title" content="工作中使用到的设计模式" />
-<meta property="og:description" content="一.策略模式 SpringBoot 实现策略模式 1.接口 2.反通过动态传参，指定beanname和 methodname 二.门面模式 接口 SL4j 实现 logback ，log4j" />
+<meta property="og:description" content="一.策略模式(Strategy Pattern) SpringBoot 实现策略模式 1.接口 2.反通过动态传参，指定beanname和 methodname 二.门面模式(Facade Pattern) 接口 SL4j 实现 logback ，" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://shengtu0328.github.io/posts/designpatternatwork/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-11-25T18:30:10+08:00" />
@@ -13,7 +13,7 @@
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="工作中使用到的设计模式"/>
-<meta name="twitter:description" content="一.策略模式 SpringBoot 实现策略模式 1.接口 2.反通过动态传参，指定beanname和 methodname 二.门面模式 接口 SL4j 实现 logback ，log4j"/>
+<meta name="twitter:description" content="一.策略模式(Strategy Pattern) SpringBoot 实现策略模式 1.接口 2.反通过动态传参，指定beanname和 methodname 二.门面模式(Facade Pattern) 接口 SL4j 实现 logback ，"/>
 <meta name="application-name" content="我的网站">
 <meta name="apple-mobile-web-app-title" content="我的网站"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/shengtu0328.github.io\/posts\/designpatternatwork\/"
-        },"genre": "posts","wordcount":  57 ,
+        },"genre": "posts","wordcount":  75 ,
         "url": "https:\/\/shengtu0328.github.io\/posts\/designpatternatwork\/","datePublished": "2022-11-25T18:30:10+08:00","dateModified": "2022-11-25T18:30:10+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -102,7 +102,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">工作中使用到的设计模式</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-25">2022-11-25</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;57 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-25">2022-11-25</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;75 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;One minute&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -111,15 +111,15 @@
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li><a href="#一策略模式">一.策略模式</a></li>
-    <li><a href="#二门面模式">二.门面模式</a></li>
+    <li><a href="#一策略模式strategy-pattern">一.策略模式(Strategy Pattern)</a></li>
+    <li><a href="#二门面模式facade-pattern">二.门面模式(Facade Pattern)</a></li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><h2 id="一策略模式">一.策略模式</h2>
+            </div><div class="content" id="content"><h2 id="一策略模式strategy-pattern">一.策略模式(Strategy Pattern)</h2>
 <p>SpringBoot 实现策略模式</p>
 <p>1.接口</p>
 <p>2.反通过动态传参，指定beanname和 methodname</p>
-<h2 id="二门面模式">二.门面模式</h2>
+<h2 id="二门面模式facade-pattern">二.门面模式(Facade Pattern)</h2>
 <p>接口 SL4j</p>
 <p>实现 logback ，log4j</p>
 </div><div class="post-footer" id="post-footer">
