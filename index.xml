@@ -4,7 +4,7 @@
         <link>https://shengtu0328.github.io/</link>
         <description>The best time to plant a tree was 10 years ago, the second is now</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1007@qq.com (ricky)</managingEditor>
-            <webMaster>1007@qq.com (ricky)</webMaster><lastBuildDate>Tue, 25 Apr 2023 16:06:06 &#43;0800</lastBuildDate>
+            <webMaster>1007@qq.com (ricky)</webMaster><lastBuildDate>Wed, 10 May 2023 11:33:27 &#43;0800</lastBuildDate>
             <atom:link href="https://shengtu0328.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
     <title>线程池</title>
@@ -28,7 +28,16 @@
     <pubDate>Wed, 08 Feb 2023 17:10:48 &#43;0800</pubDate>
     <author>ricky</author>
     <guid>https://shengtu0328.github.io/posts/english_writing/</guid>
-    <description><![CDATA[Why i learned English You know，i recently practised my english。The ultimate goal is to run（润）. Job is a crucial part in one&rsquo;s life. Although the chinese government have optimized covid-19 epidemic control policies,，the domestic software industry as]]></description>
+    <description><![CDATA[Why i learned English I recently watched some interesting videos on bilibli which is about communicating with foreigners in English on website. The videos was so funny that it made me have the idea of relearning the skill of English language . You know，i recently started to practise my english from multiple aspects 。Literally,m]]></description>
+</item>
+<item>
+    <title>Enligsh_writing_chatgpt</title>
+    <link>https://shengtu0328.github.io/posts/english_writing_chatgpt/</link>
+    <pubDate>Wed, 10 May 2023 11:33:27 &#43;0800</pubDate>
+    <author>ricky</author>
+    <guid>https://shengtu0328.github.io/posts/english_writing_chatgpt/</guid>
+    <description><![CDATA[Why I Learned English I recently watched some interesting videos on Bilibili about communicating with foreigners in English on websites. The videos were so funny that they sparked the idea of relearning the skill of the English language in me.
+Recently, I have started practicing my English from multiple aspects. Ultimately, my goal is to improve. Work is a crucial part of one&rsquo;s life. Although the Chinese government has optimized COVID-19 epidemic control policies, the domestic software industry, as well as other industries, are still facing challenges overall.]]></description>
 </item>
 <item>
     <title>英语语法康复训练-时态</title>
@@ -77,14 +86,6 @@
     <author>ricky</author>
     <guid>https://shengtu0328.github.io/posts/english_grammar_non_predicate_verb/</guid>
     <description><![CDATA[一.谓语动词 &amp; 非谓语动词 谓语动词（限定性动词） 能表达时间，状态，语气。 非谓语动词(限定性动词) 非谓语动词 失去了表达人称，时态的能力。 一个简单]]></description>
-</item>
-<item>
-    <title>RocketMQ</title>
-    <link>https://shengtu0328.github.io/posts/rocketmq/</link>
-    <pubDate>Tue, 17 Jan 2023 17:21:36 &#43;0800</pubDate>
-    <author>ricky</author>
-    <guid>https://shengtu0328.github.io/posts/rocketmq/</guid>
-    <description><![CDATA[RoctetMQ基本架构 几种MQ对比 rocketmq 支持集群模型，负载均衡，水平扩容 采用零拷贝原理，顺序写盘，随机读 丰富API（顺序消息，延迟消息，事物消]]></description>
 </item>
 </channel>
 </rss>
