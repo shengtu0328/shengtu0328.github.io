@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/shengtu0328.github.io\/posts\/springsecurityoauth2\/"
-        },"genre": "posts","wordcount":  2519 ,
+        },"genre": "posts","wordcount":  2656 ,
         "url": "https:\/\/shengtu0328.github.io\/posts\/springsecurityoauth2\/","datePublished": "2022-11-17T18:04:01+08:00","dateModified": "2022-11-17T18:04:01+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -102,7 +102,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">学习SpringSecurityOauth2</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-17">2022-11-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2519 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-17">2022-11-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2656 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;6 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -232,7 +232,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 <li>OAuth2AuthenticationProcessingFilter-&gt;OAuth2AuthenticationManager-&gt;ResourceServerTokenServices</li>
 <li>并且因为Oauth2本身是支持分布式的场景，对 <strong>ResourceServerTokenServices</strong>进行了扩展，如<strong>RemoteTokenServices</strong>，可以向AuthorizationServer发送http校验token。</li>
 </ul>
-<p>最左侧代表代码所处的位置，A代表AuthorizationServer，R代表ResourceServer</p>
+<p>最左侧代表代码所处的位置，<strong>A</strong>代表AuthorizationServer，<strong>R</strong>代表ResourceServer</p>
 <p>下面的表格类比了SpringSecurityOauth2 和 SpringSecurity的功能，调用链顺序自上而下的。</p>
 <table>
 <thead>
@@ -247,7 +247,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 <tbody>
 <tr>
 <td></td>
-<td><strong>生成token的请求处理</strong></td>
+<td>**生成token的请求处理 **/oauth/token</td>
 <td></td>
 <td></td>
 <td></td>
@@ -316,6 +316,34 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 <td></td>
 </tr>
 <tr>
+<td>A</td>
+<td>DaoAuthenticationProvider</td>
+<td>查询UserDetail</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
 <td></td>
 <td>||||||||||||||||||||||||||||||||</td>
 <td></td>
@@ -324,7 +352,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 </tr>
 <tr>
 <td></td>
-<td><strong>访问资源时的请求处理</strong></td>
+<td><strong>访问资源时的请求处理</strong>  /hello</td>
 <td></td>
 <td></td>
 <td></td>
@@ -379,7 +407,24 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
             <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>Note<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
         </div>
         <div class="details-content">
-            <div class="admonition-content">并不是SpringSecurityOauth2 比 SpringSecurity 多了一个FilterChain，而是在SpringSecurity的FilterChain 替换了一个OAuth2AuthenticationProcessingFilter。</div>
+            <div class="admonition-content"><p>并不是SpringSecurityOauth2 比 SpringSecurity 多了一个FilterChain，而是在SpringSecurity的FilterChain 替换了一个OAuth2AuthenticationProcessingFilter？</p>
+<p>总结下</p>
+<p>一. /oauth/token 的做了几件事</p>
+<ol>
+<li>校验ClientDetail</li>
+<li>校验UserDetail</li>
+<li>生成token</li>
+</ol>
+<p>二. /hello 的做了几件事</p>
+<ol>
+<li>
+<p>验校token</p>
+</li>
+<li>
+<p>如果还需要校验权限的话，一般交给SpringSecuity的MethodSecurityInterceptor 来处理</p>
+</li>
+</ol>
+</div>
         </div>
     </div>
 <h2 id="springsecurityoauth2的httpsecurity和springsecurity的httpsecurity配置问题">SpringSecurityOauth2的HttpSecurity和SpringSecurity的HttpSecurity配置问题</h2>
