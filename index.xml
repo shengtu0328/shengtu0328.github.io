@@ -4,7 +4,7 @@
         <link>https://shengtu0328.github.io/</link>
         <description>The best time to plant a tree was 10 years ago, the second is now</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1007@qq.com (ricky)</managingEditor>
-            <webMaster>1007@qq.com (ricky)</webMaster><lastBuildDate>Tue, 23 May 2023 15:37:06 &#43;0800</lastBuildDate>
+            <webMaster>1007@qq.com (ricky)</webMaster><lastBuildDate>Wed, 24 May 2023 10:38:27 &#43;0800</lastBuildDate>
             <atom:link href="https://shengtu0328.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
     <title>线程池</title>
@@ -29,6 +29,14 @@
     <author>ricky</author>
     <guid>https://shengtu0328.github.io/posts/english_writing/</guid>
     <description><![CDATA[Why i learned English I recently watched some interesting videos on bilibli which is about communicating with foreigners in English on website. The videos was so funny that it made me have the idea of relearning the skill of English language . You know，i recently started to practise my english from multiple aspects 。Literally,m]]></description>
+</item>
+<item>
+    <title>Springboot启动流程</title>
+    <link>https://shengtu0328.github.io/posts/springboot_startup_process/</link>
+    <pubDate>Wed, 24 May 2023 10:38:27 &#43;0800</pubDate>
+    <author>ricky</author>
+    <guid>https://shengtu0328.github.io/posts/springboot_startup_process/</guid>
+    <description><![CDATA[AnnotationConfigServletWebServerApplicationContext 包含了beanFactory beanFactory 包含了singletonObjects 总结springboot 启动流程 在new SpringApplication() 构造方法中，会解析当前Cla]]></description>
 </item>
 <item>
     <title>我应该做什么，不应该做什么</title>
@@ -77,18 +85,7 @@ Recently, I have started practicing my English from multiple aspects. Ultimately
     <pubDate>Mon, 24 Apr 2023 18:17:58 &#43;0800</pubDate>
     <author>ricky</author>
     <guid>https://shengtu0328.github.io/posts/english_writing_0424/</guid>
-    <description><![CDATA[Good morning/afternoon, it&rsquo;s great to be here. Thank you for the opportunity to interview. I hope I can make a good performance today.
-My Chinese name is XXX and you can call me XXX which is my English name .I am 28 years old,born in Shanghai.
-I graduated from Shanghai Dianji Institute, my major is software engineering. After i graduated, I started working as a Java Developer.
-My last job is]]></description>
-</item>
-<item>
-    <title>英语语法康复训练-连词</title>
-    <link>https://shengtu0328.github.io/posts/english_grammar_conjunction/</link>
-    <pubDate>Thu, 20 Apr 2023 11:45:10 &#43;0800</pubDate>
-    <author>ricky</author>
-    <guid>https://shengtu0328.github.io/posts/english_grammar_conjunction/</guid>
-    <description><![CDATA[一.并列连词 1.1 并列关系 并列关系表示否定 1.2 选择关系 1.3 转折关系 1.4 因果关系 二.从属连词 2.1 引导名词性从句的连词 2.1 引导状语从句的连词]]></description>
+    <description><![CDATA[Good morning/afternoon, it&rsquo;s great to be here. Thank you for the opportunity to interview. I hope I can make a good performance today. My Chinese name is XXX and you can call me XXX which is my English name .I am 28 years old,born in Shanghai. I graduated from Shanghai Dianji Institute, my major is software engineering. After i graduated, I started working as a Java Developer. My last job]]></description>
 </item>
 </channel>
 </rss>

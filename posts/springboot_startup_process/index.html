@@ -4,32 +4,32 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>工作中使用到的设计模式 - ricky的网站</title><meta name="Description" content="The best time to plant a tree was 10 years ago, the second is now"><meta property="og:title" content="工作中使用到的设计模式" />
-<meta property="og:description" content="一.策略模式(Strategy Pattern) SpringBoot 实现策略模式 1.接口 2.反通过动态传参，指定beanname和 methodname 优点：解耦，如果又新增了一种模式，只需要添" />
+        <title>Springboot启动流程 - ricky的网站</title><meta name="Description" content="The best time to plant a tree was 10 years ago, the second is now"><meta property="og:title" content="Springboot启动流程" />
+<meta property="og:description" content="AnnotationConfigServletWebServerApplicationContext 包含了beanFactory beanFactory 包含了singletonObjects 总结springboot 启动流程 在new SpringApplication() 构造方法中，会解析当前Cla" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://shengtu0328.github.io/posts/designpatternatwork/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2022-11-25T18:30:10+08:00" />
-<meta property="article:modified_time" content="2022-11-25T18:30:10+08:00" /><meta property="og:site_name" content="我的网站" />
+<meta property="og:url" content="https://shengtu0328.github.io/posts/springboot_startup_process/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-05-24T10:38:27+08:00" />
+<meta property="article:modified_time" content="2023-05-24T10:38:27+08:00" /><meta property="og:site_name" content="我的网站" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="工作中使用到的设计模式"/>
-<meta name="twitter:description" content="一.策略模式(Strategy Pattern) SpringBoot 实现策略模式 1.接口 2.反通过动态传参，指定beanname和 methodname 优点：解耦，如果又新增了一种模式，只需要添"/>
+<meta name="twitter:title" content="Springboot启动流程"/>
+<meta name="twitter:description" content="AnnotationConfigServletWebServerApplicationContext 包含了beanFactory beanFactory 包含了singletonObjects 总结springboot 启动流程 在new SpringApplication() 构造方法中，会解析当前Cla"/>
 <meta name="application-name" content="我的网站">
 <meta name="apple-mobile-web-app-title" content="我的网站"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://shengtu0328.github.io/posts/designpatternatwork/" /><link rel="prev" href="https://shengtu0328.github.io/posts/springsecurityoauth2/" /><link rel="next" href="https://shengtu0328.github.io/posts/juc/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://shengtu0328.github.io/posts/springboot_startup_process/" /><link rel="prev" href="https://shengtu0328.github.io/posts/english_writing_get_studying/" /><link rel="next" href="https://shengtu0328.github.io/posts/english_writing/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "工作中使用到的设计模式",
+        "headline": "Springboot启动流程",
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "https:\/\/shengtu0328.github.io\/posts\/designpatternatwork\/"
-        },"genre": "posts","wordcount":  344 ,
-        "url": "https:\/\/shengtu0328.github.io\/posts\/designpatternatwork\/","datePublished": "2022-11-25T18:30:10+08:00","dateModified": "2022-11-25T18:30:10+08:00","publisher": {
+            "@id": "https:\/\/shengtu0328.github.io\/posts\/springboot_startup_process\/"
+        },"genre": "posts","wordcount":  1066 ,
+        "url": "https:\/\/shengtu0328.github.io\/posts\/springboot_startup_process\/","datePublished": "2023-05-24T10:38:27+08:00","dateModified": "2023-05-24T10:38:27+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
                 "@type": "Person",
@@ -100,48 +100,111 @@
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">Contents</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">工作中使用到的设计模式</h1><div class="post-meta">
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Springboot启动流程</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-25">2022-11-25</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;344 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;One minute&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-05-24">2023-05-24</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1066 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
                     <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
                 </div>
-                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
-  <ul>
-    <li><a href="#一策略模式strategy-pattern">一.策略模式(Strategy Pattern)</a></li>
-    <li><a href="#二门面模式facade-pattern">二.门面模式(Facade Pattern)</a></li>
-    <li><a href="#二工厂模式factory-pattern">二.工厂模式(Factory Pattern)</a></li>
-    <li><a href="#三观察者模式observer-pattern">三.观察者模式(Observer Pattern)</a></li>
-  </ul>
-</nav></div>
-            </div><div class="content" id="content"><h2 id="一策略模式strategy-pattern">一.策略模式(Strategy Pattern)</h2>
-<p>SpringBoot 实现策略模式</p>
-<p>1.接口</p>
-<p>2.反通过动态传参，指定beanname和 methodname</p>
-<p>优点：解耦，如果又新增了一种模式，只需要添加模式本身的代码，不需要改动调用模式的方法。</p>
-<h2 id="二门面模式facade-pattern">二.门面模式(Facade Pattern)</h2>
-<p>接口 SL4j</p>
-<p>实现 logback ，log4j</p>
-<p>优点：解耦，如果我想从log4j 切换到 logback，不需要改代码，只要改依赖就行</p>
-<h2 id="二工厂模式factory-pattern">二.工厂模式(Factory Pattern)</h2>
-<p>spring中 实例化 bean 的 Factory</p>
-<p>优点: 解耦，如果bean的创建实例的方法比较复杂，如mybatis 只写了接口，靠工厂类动态代理生成bean的实例，可以先实现一个bean Factory，然后在其中修改，方便解耦。</p>
-<h2 id="三观察者模式observer-pattern">三.观察者模式(Observer Pattern)</h2>
-<p>springboot启动时，SpringApplicationRunListeners会发布事件</p>
-<p>优点:</p>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
+            </div><div class="content" id="content"><p>AnnotationConfigServletWebServerApplicationContext 包含了beanFactory</p>
+<p>beanFactory 包含了singletonObjects</p>
+<p>总结springboot 启动流程</p>
+<ol>
+<li>
+<p>在new SpringApplication() 构造方法中，会解析当前ClassLoader中所有jar包下的spring.factories文件，包括我们项目里自定义的spring.factories文件。将文件中的内容即 &ldquo;接口全限定名-实现类全限定名（1对多的关系）&quot;，</p>
+<p>将这些className 放入缓存的名为cache 的map中，static final Map&lt;ClassLoader, Map&lt;String, List<!-- raw HTML omitted -->&raquo; cache = new ConcurrentReferenceHashMap&lt;&gt;();以供后续使用，</p>
+<p>并且还实例化了几个默认的bean。</p>
+</li>
+<li>
+<p>在run方法中</p>
+<ol>
+<li>
+<p>createApplicationContext()</p>
+<p>创建上下文对象</p>
+</li>
+<li>
+<p>prepareEnvironment()</p>
+<p>不是自定义的那种properties类</p>
+</li>
+<li>
+<p>prepareContext() 准备上下文</p>
+<ol>
+<li>加载当前系统的Environment的一些变量</li>
+<li>创建BeanDefinitionLoader</li>
+<li><strong>主要就是  BeanDefinitionLoader注册 启动类 的 BeanDefinition</strong></li>
+</ol>
+</li>
+<li>
+<p><strong>refreshContext()</strong></p>
+<p><strong>spring的核心方法，springboot也是依托于此</strong></p>
+<ol>
+<li>
+<p>prepareRefresh();</p>
+</li>
+<li>
+<p>obtainFreshBeanFactory();</p>
+<p>获取BeanFactory</p>
+</li>
+<li>
+<p>postProcessBeanFactory(beanFactory);</p>
+</li>
+<li>
+<p><strong>invokeBeanFactoryPostProcessors（）</strong> (也算是自动装配的起点 ， 获取到启动类<strong>ConfigurationClassPostProcessor</strong>)</p>
+<ol>
+<li><strong>ConfigurationClassPostProcessor</strong>类 执行
+<ol>
+<li><strong>ConfigurationClassParser</strong>解析启动类上的@Configuration注解， @PropertySource 注解， @import注解(包括启动类上的@import注解里的AutoConfigurationImportSelector)
+<ol>
+<li>调用<strong>AutoConfigurationImportSelector <strong>process()方法，从SpringFactoriesLoader.loadFactoryNames 缓存加载</strong>EnableAutoConfiguration</strong>的 自动配置实现类，加载<strong>BeanDefinition</strong></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>实例化一些第三方的、自定义的 BeanFactoryPostProcessors ,如MapperScannerConfigurer。并且这些BeanFactoryPostProcessors如果没有创建bean，就会在此时为他们实例化。 并且调用他们的<strong>postProcessBeanDefinitionRegistry</strong>()方法，<strong>主要作用是加载BeanDefinition</strong></li>
+</ol>
+</li>
+<li>
+<p><strong>registerBeanPostProcessors(beanFactory);</strong></p>
+<p>实例化 BeanPostProcessor 并注册到 BeanFactory 的 beanPostProcessors 缓存中，如<strong>AutowiredAnnotationBeanPostProcessor</strong></p>
+</li>
+<li>
+<p><strong>onRefresh();</strong></p>
+<p>启动内嵌的tomcat</p>
+</li>
+<li>
+<p><strong>finishBeanFactoryInitialization(beanFactory);</strong></p>
+<p>普通bean的 <strong>按以下顺序依次执行</strong></p>
+<ol>
+<li>
+<p>构造方法调用</p>
+</li>
+<li>
+<p>populateBean(beanName, mbd, instanceWrapper); 也就是 AutowiredAnnotationBeanPostProcessor.postProcessProperties()</p>
+</li>
+<li>
+<p>ApplicationContextAware.setApplicationContext()</p>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2022-11-25</span>
+                <span>Updated on 2023-05-24</span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://shengtu0328.github.io/posts/designpatternatwork/" data-title="工作中使用到的设计模式"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://shengtu0328.github.io/posts/designpatternatwork/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://shengtu0328.github.io/posts/designpatternatwork/" data-title="工作中使用到的设计模式"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://shengtu0328.github.io/posts/designpatternatwork/" data-title="工作中使用到的设计模式"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://shengtu0328.github.io/posts/designpatternatwork/" data-title="工作中使用到的设计模式"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://shengtu0328.github.io/posts/springboot_startup_process/" data-title="Springboot启动流程"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://shengtu0328.github.io/posts/springboot_startup_process/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://shengtu0328.github.io/posts/springboot_startup_process/" data-title="Springboot启动流程"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://shengtu0328.github.io/posts/springboot_startup_process/" data-title="Springboot启动流程"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://shengtu0328.github.io/posts/springboot_startup_process/" data-title="Springboot启动流程"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
             </div>
         </div>
     </div>
@@ -153,8 +216,8 @@
         </section>
     </div>
 
-    <div class="post-nav"><a href="/posts/springsecurityoauth2/" class="prev" rel="prev" title="学习SpringSecurityOauth2"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>学习SpringSecurityOauth2</a>
-            <a href="/posts/juc/" class="next" rel="next" title="JUC">JUC<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+    <div class="post-nav"><a href="/posts/english_writing_get_studying/" class="prev" rel="prev" title="我应该做什么，不应该做什么"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>我应该做什么，不应该做什么</a>
+            <a href="/posts/english_writing/" class="next" rel="next" title="Learing English is not a rocket science.">Learing English is not a rocket science.<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 </article></div>
             </main><footer class="footer">
