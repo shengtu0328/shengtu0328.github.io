@@ -34,7 +34,7 @@
     <pubDate>Wed, 24 May 2023 10:38:27 &#43;0800</pubDate>
     <author>ricky</author>
     <guid>https://shengtu0328.github.io/posts/springboot_startup_process/</guid>
-    <description><![CDATA[AnnotationConfigServletWebServerApplicationContext 包含了beanFactory beanFactory 包含了singletonObjects 总结springboot 启动流程 在new SpringApplication() 构造方法中，会解析当前Cla]]></description>
+    <description><![CDATA[几个重要的类 AnnotationConfigServletWebServerApplicationContext 包含了beanFactory beanFactory 包含了singletonObjects 总结springboot 启动流程 在new SpringApplication() 构造方法中，会解]]></description>
 </item>
 <item>
     <title>我应该做什么，不应该做什么</title>
