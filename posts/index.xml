@@ -4,7 +4,7 @@
         <link>https://shengtu0328.github.io/posts/</link>
         <description>All Posts | ricky的网站</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1007@qq.com (ricky)</managingEditor>
-            <webMaster>1007@qq.com (ricky)</webMaster><lastBuildDate>Wed, 24 May 2023 10:38:27 &#43;0800</lastBuildDate><atom:link href="https://shengtu0328.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>1007@qq.com (ricky)</webMaster><lastBuildDate>Wed, 31 May 2023 15:27:05 &#43;0800</lastBuildDate><atom:link href="https://shengtu0328.github.io/posts/" rel="self" type="application/rss+xml" /><item>
     <title>线程池</title>
     <link>https://shengtu0328.github.io/posts/threadpool/</link>
     <pubDate>Thu, 01 Dec 2022 14:14:25 &#43;0800</pubDate>
@@ -27,6 +27,16 @@
     <author>ricky</author>
     <guid>https://shengtu0328.github.io/posts/english_writing/</guid>
     <description><![CDATA[Why i learned English I recently watched some interesting videos on bilibli which is about communicating with foreigners in English on website. The videos was so funny that it made me have the idea of relearning the skill of English language . You know，i recently started to practise my english from multiple aspects 。Literally,m]]></description>
+</item>
+<item>
+    <title>Resume_english</title>
+    <link>https://shengtu0328.github.io/posts/resume_english/</link>
+    <pubDate>Wed, 31 May 2023 15:27:05 &#43;0800</pubDate>
+    <author>ricky</author>
+    <guid>https://shengtu0328.github.io/posts/resume_english/</guid>
+    <description><![CDATA[EXECUTIVE SUMMARY Accomplished Java Developer with &gt;5 years’ experience in designing, developing, testing and maintaining enterprise web applications. Passionate about learning new technologies.
+Project Experience  | Eye of God System | Jun.2022 - Jan.2023 | Project Description:
+ Eye of God System is a content review system based on AI learning algorithms, which detects sensitive and risky content in internet videos/audio/images/texts. Technical Solution: SpringBoot, SpringSecurity, Nacos, ELK, RocketMQ, Redis, MySQL  My Responsibilities:]]></description>
 </item>
 <item>
     <title>Springboot启动流程</title>
@@ -76,14 +86,6 @@ Recently, I have started practicing my English from multiple aspects. Ultimately
     <author>ricky</author>
     <guid>https://shengtu0328.github.io/posts/english_grammar_non_verb_tenses/</guid>
     <description><![CDATA[一.形容词从句(定语从句/关系从句) 1.1 关系代词引导的形容词从句 时：过去，现在，将来，过去将来 态：一般，进行，完成，完成进行 一般现在时，陈述事]]></description>
-</item>
-<item>
-    <title>English_writing_0424</title>
-    <link>https://shengtu0328.github.io/posts/english_writing_0424/</link>
-    <pubDate>Mon, 24 Apr 2023 18:17:58 &#43;0800</pubDate>
-    <author>ricky</author>
-    <guid>https://shengtu0328.github.io/posts/english_writing_0424/</guid>
-    <description><![CDATA[Good morning/afternoon, it&rsquo;s great to be here. Thank you for the opportunity to interview. I hope I can make a good performance today. My Chinese name is XXX and you can call me XXX which is my English name .I am 28 years old,born in Shanghai. I graduated from Shanghai Dianji Institute, my major is software engineering. After i graduated, I started working as a Java Developer. My last job]]></description>
 </item>
 </channel>
 </rss>
