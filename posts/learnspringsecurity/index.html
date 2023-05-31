@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/shengtu0328.github.io\/posts\/learnspringsecurity\/"
-        },"genre": "posts","wordcount":  6886 ,
+        },"genre": "posts","wordcount":  6978 ,
         "url": "https:\/\/shengtu0328.github.io\/posts\/learnspringsecurity\/","datePublished": "2022-11-03T14:22:04+08:00","dateModified": "2022-11-03T14:22:04+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -102,7 +102,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">学习SpringSecurity</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-03">2022-11-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;6886 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-03">2022-11-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;6978 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;14 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -117,6 +117,7 @@
     <li><a href="#一些重要的对象">一些重要的对象</a></li>
     <li><a href="#过滤器链">过滤器链</a></li>
     <li><a href="#securitycontextpersistencefilter">SecurityContextPersistenceFilter</a></li>
+    <li><a href="#session和cookie">Session和Cookie</a></li>
     <li><a href="#logoutfilter">LogoutFilter</a></li>
     <li><a href="#formlogin认证模式">FormLogin认证模式</a></li>
     <li><a href="#httpbasic认证模式">HttpBasic认证模式</a></li>
@@ -362,6 +363,17 @@ private void doFilter(HttpServletRequest request, HttpServletResponse response, 
 </code></pre></td></tr></table>
 </div>
 </div><hr>
+<h2 id="session和cookie">Session和Cookie</h2>
+<p>servlet中 HttpSession是在tomcat中实现的。生成sessionId，并将sessionId set进cookie，用来区分不同的用户请求。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="doGetSession.png"
+        data-srcset="doGetSession.png, doGetSession.png 1.5x, doGetSession.png 2x"
+        data-sizes="auto"
+        alt="doGetSession.png"
+        title="doGetSession.png" /></p>
+<hr>
 <h2 id="logoutfilter">LogoutFilter</h2>
 <p>处理注销操作的LogoutFilter 只会处理注销请求，其余放行</p>
 <hr>
