@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/shengtu0328.github.io\/posts\/learnspringsecurity\/"
-        },"genre": "posts","wordcount":  6595 ,
+        },"genre": "posts","wordcount":  6655 ,
         "url": "https:\/\/shengtu0328.github.io\/posts\/learnspringsecurity\/","datePublished": "2022-11-03T14:22:04+08:00","dateModified": "2022-11-03T14:22:04+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -102,7 +102,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">学习SpringSecurity</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-03">2022-11-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;6595 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-03">2022-11-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;6655 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;14 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -149,6 +149,7 @@
     </li>
     <li><a href="#csrf">CSRF</a></li>
     <li><a href="#rememberme">rememberMe</a></li>
+    <li><a href="#访问a提示登录登陆成功后自动跳转到a页面是怎么实现的">访问/a，提示登录，登陆成功后，自动跳转到a页面是怎么实现的？</a></li>
     <li><a href="#tokenenhancer配置了后什么时候调用">TokenEnhancer配置了后什么时候调用</a></li>
   </ul>
 </nav></div>
@@ -877,6 +878,17 @@ $2a$10$H9Ub8PIfhKaE9mafKrW4s.XlYbzZcU6gdUqZxAHOWnKeo1ML9is0q
         data-sizes="auto"
         alt="RememberMeAuthenticationFilter.png"
         title="RememberMeAuthenticationFilter.png" /></p>
+<hr>
+<h2 id="访问a提示登录登陆成功后自动跳转到a页面是怎么实现的">访问/a，提示登录，登陆成功后，自动跳转到a页面是怎么实现的？</h2>
+<p>HttpSessionRequestCache 实现的 ，在session中存了上一次的request信息</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="HttpSessionRequestCache.png"
+        data-srcset="HttpSessionRequestCache.png, HttpSessionRequestCache.png 1.5x, HttpSessionRequestCache.png 2x"
+        data-sizes="auto"
+        alt="HttpSessionRequestCache.png"
+        title="HttpSessionRequestCache.png" /></p>
 <h2 id="tokenenhancer配置了后什么时候调用">TokenEnhancer配置了后什么时候调用</h2>
 <p><img
         class="lazyload"
