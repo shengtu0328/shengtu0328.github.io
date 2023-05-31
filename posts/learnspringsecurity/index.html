@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/shengtu0328.github.io\/posts\/learnspringsecurity\/"
-        },"genre": "posts","wordcount":  6655 ,
+        },"genre": "posts","wordcount":  6886 ,
         "url": "https:\/\/shengtu0328.github.io\/posts\/learnspringsecurity\/","datePublished": "2022-11-03T14:22:04+08:00","dateModified": "2022-11-03T14:22:04+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -102,7 +102,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">学习SpringSecurity</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-03">2022-11-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;6655 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-03">2022-11-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;6886 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;14 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -150,6 +150,7 @@
     <li><a href="#csrf">CSRF</a></li>
     <li><a href="#rememberme">rememberMe</a></li>
     <li><a href="#访问a提示登录登陆成功后自动跳转到a页面是怎么实现的">访问/a，提示登录，登陆成功后，自动跳转到a页面是怎么实现的？</a></li>
+    <li><a href="#表单登录验证码登陆登陆成功后在哪里执行securitycontextholdergetcontextsetauthenticationauthresult">表单登录，验证码登陆，登陆成功后在哪里执行SecurityContextHolder.getContext().setAuthentication(authResult);</a></li>
     <li><a href="#tokenenhancer配置了后什么时候调用">TokenEnhancer配置了后什么时候调用</a></li>
   </ul>
 </nav></div>
@@ -300,6 +301,7 @@
 <p><a href="https://docs.spring.io/spring-security/reference/servlet/architecture.html" target="_blank" rel="noopener noreffer ">https://docs.spring.io/spring-security/reference/servlet/architecture.html</a></p>
 <hr>
 <h2 id="securitycontextpersistencefilter">SecurityContextPersistenceFilter</h2>
+<p>SecurityContextPersistenceFilter 主要的功能如果登录的filter成功了 会将Authentication放入 session中。以便在登录成功以后，下次访问其他接口，从session 中取出，保持登录状态。 并且每次请求过后都会清空 threadloca即SecurityContextHolder.clearContext();</p>
 <p>每次请求处理是有状态还是无状态是通过SecurityContextPersistenceFilter实现的，在SecurityContextPersistenceFilter代码中执行chain.doFilter(holder.getRequest(), holder.getResponse())前，中配置不同的private SecurityContextRepository repo，会执行this.repo.loadContext(holder)方法，是否在此次请求中加载authentication</p>
 <table>
 <thead>
@@ -889,6 +891,15 @@ $2a$10$H9Ub8PIfhKaE9mafKrW4s.XlYbzZcU6gdUqZxAHOWnKeo1ML9is0q
         data-sizes="auto"
         alt="HttpSessionRequestCache.png"
         title="HttpSessionRequestCache.png" /></p>
+<h2 id="表单登录验证码登陆登陆成功后在哪里执行securitycontextholdergetcontextsetauthenticationauthresult">表单登录，验证码登陆，登陆成功后在哪里执行SecurityContextHolder.getContext().setAuthentication(authResult);</h2>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="SecurityContextHolder.getContext%28%29.setAuthentication.png"
+        data-srcset="SecurityContextHolder.getContext%28%29.setAuthentication.png, SecurityContextHolder.getContext%28%29.setAuthentication.png 1.5x, SecurityContextHolder.getContext%28%29.setAuthentication.png 2x"
+        data-sizes="auto"
+        alt="SecurityContextHolder.getContext().setAuthentication.png"
+        title="SecurityContextHolder.getContext().setAuthentication.png" /></p>
 <h2 id="tokenenhancer配置了后什么时候调用">TokenEnhancer配置了后什么时候调用</h2>
 <p><img
         class="lazyload"
