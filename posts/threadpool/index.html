@@ -17,7 +17,7 @@
 <meta name="application-name" content="我的网站">
 <meta name="apple-mobile-web-app-title" content="我的网站"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://shengtu0328.github.io/posts/threadpool/" /><link rel="prev" href="https://shengtu0328.github.io/posts/learnspringsecurity/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://shengtu0328.github.io/posts/threadpool/" /><link rel="prev" href="https://shengtu0328.github.io/posts/blockingqueue/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
     {
@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/shengtu0328.github.io\/posts\/threadpool\/"
-        },"genre": "posts","wordcount":  7626 ,
+        },"genre": "posts","wordcount":  7627 ,
         "url": "https:\/\/shengtu0328.github.io\/posts\/threadpool\/","datePublished": "2022-12-01T14:14:25+08:00","dateModified": "2022-12-01T14:14:25+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -102,7 +102,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">线程池</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span>&nbsp;<span class="post-category">included in <a href="/categories/juc/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>JUC</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-12-01">2022-12-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;7626 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-12-01">2022-12-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;7627 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;16 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -1188,11 +1188,10 @@ public boolean offer(T task, long timeout, TimeUnit timeUnit) {
 </div>
 </div><h3 id="提问">提问</h3>
 <p>1）为什么只用了一把锁(ReentrantLock)，生产者拿到锁提交任务到队列的时候，此时队列中还有很多任务的时候，队列中有数据但消费者却因为获取不到锁了就不能消费了吗？不是降低了性能？</p>
-<p>如果改成生产一个锁l1，消费一个锁l2，那生产者和消费者不是共用一把锁，就无法在生产者的同步代码中调用l2的condition2.singal()方法，如果这么写，只会报IllegalMonitorStateException。这实际上还是对ReentrantLock锁的理解问题。</p>
-<p>并且如果这个队列同时有消费有生产，会不会有可能产生线程安全问题？未知。</p>
-<p>或者说确实有2个锁的队列，</p>
+<p>如果改成生产一个锁l1，消费一个锁l2，那生产者和消费者不是共用一把锁，就无法在生产者的同步代码中调用l2的condition2.singal()方法，如果这么写，只会报IllegalMonitorStateException。这实际上还是对ReentrantLock锁的理解问题。比如获得对应的锁，才能执行condition的方法。</p>
+<p>2）那如果改成 消费和生产方法分别用两个锁实现？</p>
 <hr>
-<p>2）线程池中的核心线程重复利用 和救急线程用完后移除是怎么实现的？</p>
+<p>3）线程池中的核心线程重复利用 和救急线程用完后移除是怎么实现的？</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -1359,7 +1358,7 @@ new LinkedBlockingQueue&lt;Runnable&gt;()));
         </section>
     </div>
 
-    <div class="post-nav"><a href="/posts/learnspringsecurity/" class="prev" rel="prev" title="学习SpringSecurity"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>学习SpringSecurity</a></div>
+    <div class="post-nav"><a href="/posts/blockingqueue/" class="prev" rel="prev" title="阻塞队列-双锁实现"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>阻塞队列-双锁实现</a></div>
 </div>
 </article></div>
             </main><footer class="footer">

@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>阻塞队列-双锁实现 - ricky的网站</title><meta name="Description" content="The best time to plant a tree was 10 years ago, the second is now"><meta property="og:title" content="阻塞队列-双锁实现" />
+<meta property="og:description" content="前提摘要 在阻塞队列-单锁的实现中，消费 （poll） 和 生产 （offer） 两个方法都是用了同一个锁，也就是会发生队列中有元素，但消费方却有可能等" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://shengtu0328.github.io/posts/blockingqueue/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-06-16T16:14:17+08:00" />
+<meta property="article:modified_time" content="2023-06-16T16:14:17+08:00" /><meta property="og:site_name" content="我的网站" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="阻塞队列-双锁实现"/>
+<meta name="twitter:description" content="前提摘要 在阻塞队列-单锁的实现中，消费 （poll） 和 生产 （offer） 两个方法都是用了同一个锁，也就是会发生队列中有元素，但消费方却有可能等"/>
+<meta name="application-name" content="我的网站">
+<meta name="apple-mobile-web-app-title" content="我的网站"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://shengtu0328.github.io/posts/blockingqueue/" /><link rel="prev" href="https://shengtu0328.github.io/posts/learnspringsecurity/" /><link rel="next" href="https://shengtu0328.github.io/posts/threadpool/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "阻塞队列-双锁实现",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/shengtu0328.github.io\/posts\/blockingqueue\/"
+        },"genre": "posts","wordcount":  1288 ,
+        "url": "https:\/\/shengtu0328.github.io\/posts\/blockingqueue\/","datePublished": "2023-06-16T16:14:17+08:00","dateModified": "2023-06-16T16:14:17+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "ricky"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="ricky的网站">Ricky’s blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="ricky的网站">Ricky’s blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">阻塞队列-双锁实现</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span>&nbsp;<span class="post-category">included in <a href="/categories/juc/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>JUC</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-06-16">2023-06-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1288 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#前提摘要">前提摘要</a></li>
+        <li><a href="#写法一会产生死锁">写法一（会产生死锁）</a></li>
+        <li><a href="#写法二-两个锁改为平级后">写法二 （两个锁改为平级后）</a></li>
+        <li><a href="#最终写法级联通知">最终写法（级联通知）</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h3 id="前提摘要">前提摘要</h3>
+<p>在阻塞队列-单锁的实现中，<strong>消费 （poll）</strong> 和 <strong>生产 （offer）</strong> 两个方法都是用了同一个锁，也就是会发生队列中有元素，但消费方却有可能等待获取锁，从而不能消费的情况。 为了要让消费 的时候可以生产，生产的时候可以消费 从而有了 阻塞队列-双锁实现</p>
+<h3 id="写法一会产生死锁">写法一（会产生死锁）</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="deadlock.png"
+        data-srcset="deadlock.png, deadlock.png 1.5x, deadlock.png 2x"
+        data-sizes="auto"
+        alt="deadlock.png"
+        title="deadlock.png" /></p>
+<p>在offer方法中向队列添加完元素后 ，唤醒 Condition headWaits</p>
+<p>在poll方法中向队列消费元素后，唤醒 Condition tailWaits</p>
+<p>但因为上面这种写法  在获取了锁A且没有释放的情况下，尝试获取锁B，以及 在获取了锁B且没有释放的情况下，尝试获取锁A 这种情况下会产生死锁。</p>
+<h3 id="写法二-两个锁改为平级后">写法二 （两个锁改为平级后）</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="2.png"
+        data-srcset="2.png, 2.png 1.5x, 2.png 2x"
+        data-sizes="auto"
+        alt="2.png"
+        title="2.png" /></p>
+<p>将两个锁改为平级后，可以防止死锁。但并没有减少 在offer方法后 对headLock加锁的次数。希望要尽量减少。</p>
+<h3 id="最终写法级联通知">最终写法（级联通知）</h3>
+<p>尽量减少offer方法中对headLock的加锁次数，在poll方法中自己唤醒自己。</p>
+<p>offer方法中改为了元素个数从0-&gt;1的时候，即空-&gt;非空的时候，才会对headLock的加锁然后唤醒。poll方法还可以消费元素的话，poll方法的最后面还要自己signal()</p>
+<p>poll方法中改为了元素个数从满到不满 array.length-&gt;array.length-1 的时候，才会对tailLock的加锁然后唤醒。offer方法还可以添加元素的话，offer方法的最后面 还要自己signal自己</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">import java.util.Arrays;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.ReentrantLock;
+
+/**
+ * 双锁实现
+ * @param &lt;E&gt; 元素类型
+ */
+@SuppressWarnings(&#34;all&#34;)
+public class BlockingQueue2&lt;E&gt; implements BlockingQueue&lt;E&gt; {
+
+    private final E[] array;
+    private int head;
+    private int tail;
+    private AtomicInteger size = new AtomicInteger();
+
+    private ReentrantLock tailLock = new ReentrantLock();
+    private Condition tailWaits = tailLock.newCondition();
+
+    private ReentrantLock headLock = new ReentrantLock();
+    private Condition headWaits = headLock.newCondition();
+
+    public BlockingQueue2(int capacity) {
+        this.array = (E[]) new Object[capacity];
+    }
+
+    private boolean isEmpty() {
+        return size.get() == 0;
+    }
+
+    private boolean isFull() {
+        return size.get() == array.length;
+    }
+
+    @Override
+    public String toString() {
+        return Arrays.toString(array);
+    }
+
+    @Override
+    public void offer(E e) throws InterruptedException {
+        int c; // 添加前元素个数
+        tailLock.lockInterruptibly();
+        try {
+            // 1. 队列满则等待
+            while (isFull()) {
+                tailWaits.await(); //  offer2
+            }
+
+            // 2. 不满则入队
+            array[tail] = e;
+            if (++tail == array.length) {
+                tail = 0;
+            }
+
+            // 3. 修改 size
+            /*
+                size = 6
+             */
+            c = size.getAndIncrement();
+            if (c + 1 &lt; array.length) {
+                tailWaits.signal();
+            }
+            /*
+                1. 读取成员变量size的值  5
+                2. 自增 6
+                3. 结果写回成员变量size 6
+             */
+        } finally {
+            tailLock.unlock();
+        }
+
+        // 4. 如果从0变为非空，由offer这边唤醒等待非空的poll线程
+        //                       0-&gt;1   1-&gt;2    2-&gt;3
+        if(c == 0) {
+            headLock.lock(); // offer_1 offer_2 offer_3
+            try {
+                headWaits.signal();
+            } finally {
+                headLock.unlock();
+            }
+        }
+    }
+
+    @Override
+    public E poll() throws InterruptedException {
+        E e;
+        int c; // 取走前的元素个数
+        headLock.lockInterruptibly();
+        try {
+            // 1. 队列空则等待
+            while (isEmpty()) {
+                headWaits.await(); // poll_4
+            }
+
+            // 2. 非空则出队
+            e = array[head];
+            array[head] = null; // help GC
+            if (++head == array.length) {
+                head = 0;
+            }
+
+            // 3. 修改 size
+            c = size.getAndDecrement();
+            // 3-&gt;2   2-&gt;1   1-&gt;0
+            // poll_1 poll_2 poll_3
+            if (c &gt; 1) {
+                headWaits.signal();
+            }
+            /*
+                1. 读取成员变量size的值 5
+                2. 自减 4
+                3. 结果写回成员变量size 4
+             */
+        } finally {
+            headLock.unlock();
+        }
+
+        // 4. 队列从满-&gt;不满时 由poll唤醒等待不满的 offer 线程
+        if(c == array.length) {
+            tailLock.lock();
+            try {
+                tailWaits.signal(); // ctrl+alt+t
+            } finally {
+                tailLock.unlock();
+            }
+        }
+
+        return e;
+    }
+
+    @Override
+    public boolean offer(E e, long timeout) throws InterruptedException {
+        return false;
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+        BlockingQueue2&lt;String&gt; queue = new BlockingQueue2&lt;&gt;(3);
+        queue.offer(&#34;元素1&#34;);
+        queue.offer(&#34;元素2&#34;);
+
+        new Thread(()-&gt;{
+            try {
+                queue.offer(&#34;元素3&#34;);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }, &#34;offer&#34;).start();
+
+        new Thread(()-&gt;{
+            try {
+                queue.poll();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }, &#34;poll&#34;).start();
+    }
+}
+</code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-06-16</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://shengtu0328.github.io/posts/blockingqueue/" data-title="阻塞队列-双锁实现"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://shengtu0328.github.io/posts/blockingqueue/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://shengtu0328.github.io/posts/blockingqueue/" data-title="阻塞队列-双锁实现"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://shengtu0328.github.io/posts/blockingqueue/" data-title="阻塞队列-双锁实现"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://shengtu0328.github.io/posts/blockingqueue/" data-title="阻塞队列-双锁实现"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/learnspringsecurity/" class="prev" rel="prev" title="学习SpringSecurity"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>学习SpringSecurity</a>
+            <a href="/posts/threadpool/" class="next" rel="next" title="线程池">线程池<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.92.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ricky</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
