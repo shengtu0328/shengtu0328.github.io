@@ -4,7 +4,7 @@
         <link>https://shengtu0328.github.io/</link>
         <description>The best time to plant a tree was 10 years ago, the second is now</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1007@qq.com (ricky)</managingEditor>
-            <webMaster>1007@qq.com (ricky)</webMaster><lastBuildDate>Fri, 16 Jun 2023 16:14:17 &#43;0800</lastBuildDate>
+            <webMaster>1007@qq.com (ricky)</webMaster><lastBuildDate>Mon, 19 Jun 2023 18:01:48 &#43;0800</lastBuildDate>
             <atom:link href="https://shengtu0328.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
     <title>线程池</title>
@@ -39,7 +39,15 @@
     <description><![CDATA[Why i learned English I recently watched some interesting videos on bilibli which is about communicating with foreigners in English on website. The videos was so funny that it made me have the idea of relearning the skill of English language . You know，i recently started to practise my english from multiple aspects 。Literally,m]]></description>
 </item>
 <item>
-    <title>English_grammar_inversion</title>
+    <title>volatile（易变关键字）</title>
+    <link>https://shengtu0328.github.io/posts/volatile/</link>
+    <pubDate>Mon, 19 Jun 2023 18:01:48 &#43;0800</pubDate>
+    <author>ricky</author>
+    <guid>https://shengtu0328.github.io/posts/volatile/</guid>
+    <description><![CDATA[一.可见性 它可以用来修饰成员变量和静态成员变量，他可以避免线程从自己的工作缓存中查找变量的值，必须到主存中获取 它的值，线程操作 volatile 变量都是直接]]></description>
+</item>
+<item>
+    <title>英语语法康复训练-倒装</title>
     <link>https://shengtu0328.github.io/posts/english_grammar_inversion/</link>
     <pubDate>Tue, 13 Jun 2023 10:01:59 &#43;0800</pubDate>
     <author>ricky</author>
@@ -55,7 +63,7 @@
     <description><![CDATA[]]></description>
 </item>
 <item>
-    <title>english_grammar_Subjective_mood</title>
+    <title>英语语法康复训练-虚拟语气</title>
     <link>https://shengtu0328.github.io/posts/english_grammar_subjective_mood/</link>
     <pubDate>Thu, 01 Jun 2023 15:51:34 &#43;0800</pubDate>
     <author>ricky</author>
@@ -79,14 +87,6 @@ Project Experience  | Eye of God System | Jun.2022 - Jan.2023 | Project Descript
     <author>ricky</author>
     <guid>https://shengtu0328.github.io/posts/springboot_startup_process/</guid>
     <description><![CDATA[几个重要的类 AnnotationConfigServletWebServerApplicationContext 包含了beanFactory beanFactory 包含了singletonObjects 总结springboot 启动流程 在new SpringApplication() 构造方法中，会解]]></description>
-</item>
-<item>
-    <title>我应该做什么，不应该做什么</title>
-    <link>https://shengtu0328.github.io/posts/english_writing_get_studying/</link>
-    <pubDate>Tue, 23 May 2023 15:37:06 &#43;0800</pubDate>
-    <author>ricky</author>
-    <guid>https://shengtu0328.github.io/posts/english_writing_get_studying/</guid>
-    <description><![CDATA[将以下内容翻译成英文 0.自己是被动型人格，安排好计划，接下来要干什么，不要浪费时间，无所事事 就比如写现在正在写的这篇文章就是一个规划 白天及上]]></description>
 </item>
 </channel>
 </rss>
