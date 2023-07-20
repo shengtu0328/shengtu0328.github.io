@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/shengtu0328.github.io\/posts\/ffmpeg\/"
-        },"genre": "posts","wordcount":  362 ,
+        },"genre": "posts","wordcount":  360 ,
         "url": "https:\/\/shengtu0328.github.io\/posts\/ffmpeg\/","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -102,7 +102,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">FFmpeg</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="0001-01-01">0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;362 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="0001-01-01">0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;360 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;One minute&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -148,19 +148,19 @@
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">#EXTM3U
-#EXT-X-VERSION:3
-#EXT-X-TARGETDURATION:12
-#EXT-X-MEDIA-SEQUENCE:0
-#EXT-X-PLAYLIST-TYPE:VOD
-#EXTINF:12.500000,
-xrq1110.ts
-#EXTINF:8.333333,
-xrq1111.ts
-#EXTINF:5.633333,
-xrq1112.ts
-#EXT-X-ENDLIST
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">#EXTM3U
+</span></span><span class="line"><span class="cl">#EXT-X-VERSION:3
+</span></span><span class="line"><span class="cl">#EXT-X-TARGETDURATION:12
+</span></span><span class="line"><span class="cl">#EXT-X-MEDIA-SEQUENCE:0
+</span></span><span class="line"><span class="cl">#EXT-X-PLAYLIST-TYPE:VOD
+</span></span><span class="line"><span class="cl">#EXTINF:12.500000,
+</span></span><span class="line"><span class="cl">xrq1110.ts
+</span></span><span class="line"><span class="cl">#EXTINF:8.333333,
+</span></span><span class="line"><span class="cl">xrq1111.ts
+</span></span><span class="line"><span class="cl">#EXTINF:5.633333,
+</span></span><span class="line"><span class="cl">xrq1112.ts
+</span></span><span class="line"><span class="cl">#EXT-X-ENDLIST
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>2）严格按照10s 分ts 加了 &ldquo;expr:gte(t,n_forced*1)&ldquo;参数</p>
 <p>/Users/videopls/develop/ffmpeg/ffmpeg -i /Users/videopls/develop/ffmpeg/input.avi -force_key_frames &ldquo;expr:gte(t,n_forced*1)&rdquo; -strict -2 -c:a aac -c:v libx264 -f hls -hls_time 10 -hls_playlist_type vod  -hls_segment_filename /Users/videopls/develop/ffmpeg/output/xrq111%d.ts /Users/videopls/develop/ffmpeg/output/xrq2222.m3u8</p>
@@ -178,25 +178,21 @@ xrq1112.ts
 </span><span class="lnt">10
 </span><span class="lnt">11
 </span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">#EXTM3U
-#EXT-X-VERSION:3
-#EXT-X-TARGETDURATION:10
-#EXT-X-MEDIA-SEQUENCE:0
-#EXT-X-PLAYLIST-TYPE:VOD
-#EXTINF:10.000000,
-xrq1110.ts
-#EXTINF:10.000000,
-xrq1111.ts
-#EXTINF:6.466667,
-xrq1112.ts
-#EXT-X-ENDLIST
-
-
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">#EXTM3U
+</span></span><span class="line"><span class="cl">#EXT-X-VERSION:3
+</span></span><span class="line"><span class="cl">#EXT-X-TARGETDURATION:10
+</span></span><span class="line"><span class="cl">#EXT-X-MEDIA-SEQUENCE:0
+</span></span><span class="line"><span class="cl">#EXT-X-PLAYLIST-TYPE:VOD
+</span></span><span class="line"><span class="cl">#EXTINF:10.000000,
+</span></span><span class="line"><span class="cl">xrq1110.ts
+</span></span><span class="line"><span class="cl">#EXTINF:10.000000,
+</span></span><span class="line"><span class="cl">xrq1111.ts
+</span></span><span class="line"><span class="cl">#EXTINF:6.466667,
+</span></span><span class="line"><span class="cl">xrq1112.ts
+</span></span><span class="line"><span class="cl">#EXT-X-ENDLIST
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="segment_list命令">segment_list命令</h4>
 <p>这么写也不行，第一秒的视频会不准</p>
@@ -244,7 +240,7 @@ xrq1112.ts
 </div>
 </article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.92.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.105.0-DEV">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
                 </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ricky</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>

@@ -191,11 +191,11 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Message msg = new Message(&#34;Topic&#34;,&#34;*&#34;,&#34;Hello MQ&#34;.getBytes()); 
-
-/** * 对每条消息设置其检索的 Key，该 Key 值代表消息的业务关键属性，请尽可能全局唯一。 * 以方便您在无法正常收到消息情况下，可通过消息队列 RocketMQ 控制台查询消息。 不设置也不会影响消息正常收发。 */
-msg.setKey(&#34;TestKey&#34;+System.currentTimeMillis());
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Message msg = new Message(&#34;Topic&#34;,&#34;*&#34;,&#34;Hello MQ&#34;.getBytes()); 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/** * 对每条消息设置其检索的 Key，该 Key 值代表消息的业务关键属性，请尽可能全局唯一。 * 以方便您在无法正常收到消息情况下，可通过消息队列 RocketMQ 控制台查询消息。 不设置也不会影响消息正常收发。 */
+</span></span><span class="line"><span class="cl">msg.setKey(&#34;TestKey&#34;+System.currentTimeMillis());
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="顺序消息">顺序消息</h4>
 <p>在需要保证 一个订单如果有5个步骤，每个订单里都必须要按照 1,2,3,4,5执行。但是订单a和订单b之前的消费顺序有可能会穿插。这种局部有序，总体无序就是顺序消息。一组有序的消息发送到topic下的一个message queue。</p>
@@ -323,7 +323,7 @@ NOTICE		benchmark	conf</p>
 </div>
 </article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.92.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.105.0-DEV">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
                 </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ricky</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>

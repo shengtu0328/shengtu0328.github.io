@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/shengtu0328.github.io\/posts\/threadpool\/"
-        },"genre": "posts","wordcount":  7627 ,
+        },"genre": "posts","wordcount":  7626 ,
         "url": "https:\/\/shengtu0328.github.io\/posts\/threadpool\/","datePublished": "2022-12-01T14:14:25+08:00","dateModified": "2022-12-01T14:14:25+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -102,7 +102,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">线程池</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span>&nbsp;<span class="post-category">included in <a href="/categories/juc/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>JUC</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-12-01">2022-12-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;7627 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-12-01">2022-12-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;7626 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;16 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -234,26 +234,26 @@
 </span><span class="lnt">19
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">/**
- * 执行任务，生产任务提交线程池
- *
- * @param task
- */
-public void execute(Runnable task) {
-    // 当线程集合没满时，创建worker对象并交给他执行
-    // 当线程集合满了时，加入任务队列暂存
-    synchronized (workers) {
-        if (workers.size() &lt; coreSize) {
-            MyWorker worker = new MyWorker(task);
-            log.debug(&#34;新增 worker{}, {}&#34;, worker, task);
-            workers.add(worker);
-            worker.start();
-        } else {
-            taskQueue.put(task);
-        }
-    }
-}
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">/**
+</span></span><span class="line"><span class="cl"> * 执行任务，生产任务提交线程池
+</span></span><span class="line"><span class="cl"> *
+</span></span><span class="line"><span class="cl"> * @param task
+</span></span><span class="line"><span class="cl"> */
+</span></span><span class="line"><span class="cl">public void execute(Runnable task) {
+</span></span><span class="line"><span class="cl">    // 当线程集合没满时，创建worker对象并交给他执行
+</span></span><span class="line"><span class="cl">    // 当线程集合满了时，加入任务队列暂存
+</span></span><span class="line"><span class="cl">    synchronized (workers) {
+</span></span><span class="line"><span class="cl">        if (workers.size() &lt; coreSize) {
+</span></span><span class="line"><span class="cl">            MyWorker worker = new MyWorker(task);
+</span></span><span class="line"><span class="cl">            log.debug(&#34;新增 worker{}, {}&#34;, worker, task);
+</span></span><span class="line"><span class="cl">            workers.add(worker);
+</span></span><span class="line"><span class="cl">            worker.start();
+</span></span><span class="line"><span class="cl">        } else {
+</span></span><span class="line"><span class="cl">            taskQueue.put(task);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h5 id="2线程集合中的两种线程-运行流程">2）线程集合中的两种线程-运行流程</h5>
 <p>工作线程应该完成当前的任务，如果当前任务执行完了，队列中还有任务的话，去执行队列里的任务</p>
@@ -304,28 +304,28 @@ public void execute(Runnable task) {
 </span><span class="lnt">21
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public void run() {
-    // 执行任务，重用线程 taskQueue.take()是关键！！！
-    // 1) 当 task 不为空，执行任务
-    // 2) 当 task 执行完毕，再接着从任务队列获取任务并执行
-    // while(task != null || (task = taskQueue.poll(timeout, timeUnit)) != null) {
-    while (task != null || (task = taskQueue.take()) != null) {
-        try {
-            log.debug(&#34;正在执行...{}&#34;, task);
-            task.run();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            task = null;
-        }
-    }
-    //能走到这一步只会是执行 taskQueue.poll(timeout, timeUnit) 的线程
-    synchronized (workers) {
-        log.debug(&#34;worker 被移除{}&#34;, this);
-        workers.remove(this);
-    }
-}
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">public void run() {
+</span></span><span class="line"><span class="cl">    // 执行任务，重用线程 taskQueue.take()是关键！！！
+</span></span><span class="line"><span class="cl">    // 1) 当 task 不为空，执行任务
+</span></span><span class="line"><span class="cl">    // 2) 当 task 执行完毕，再接着从任务队列获取任务并执行
+</span></span><span class="line"><span class="cl">    // while(task != null || (task = taskQueue.poll(timeout, timeUnit)) != null) {
+</span></span><span class="line"><span class="cl">    while (task != null || (task = taskQueue.take()) != null) {
+</span></span><span class="line"><span class="cl">        try {
+</span></span><span class="line"><span class="cl">            log.debug(&#34;正在执行...{}&#34;, task);
+</span></span><span class="line"><span class="cl">            task.run();
+</span></span><span class="line"><span class="cl">        } catch (Exception e) {
+</span></span><span class="line"><span class="cl">            e.printStackTrace();
+</span></span><span class="line"><span class="cl">        } finally {
+</span></span><span class="line"><span class="cl">            task = null;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    //能走到这一步只会是执行 taskQueue.poll(timeout, timeUnit) 的线程
+</span></span><span class="line"><span class="cl">    synchronized (workers) {
+</span></span><span class="line"><span class="cl">        log.debug(&#34;worker 被移除{}&#34;, this);
+</span></span><span class="line"><span class="cl">        workers.remove(this);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="代码">代码</h4>
 <p>代码仓库 <a href="https://gitee.com/xiaoruiqing/juc/tree/master/src/main/java/ThreadPool/CustomThreadPool/Stage1" target="_blank" rel="noopener noreffer ">https://gitee.com/xiaoruiqing/juc/tree/master/src/main/java/ThreadPool/CustomThreadPool/Stage1</a></p>
@@ -477,150 +477,150 @@ public void execute(Runnable task) {
 </span><span class="lnt">143
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">
-import lombok.extern.slf4j.Slf4j;
-
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.ReentrantLock;
-
-/**
- * 自定义的一个阻塞队列
- *
- * @author xrq
- */
-@Slf4j(topic = &#34;c.MyBlockingQueue&#34;)
-public class MyBlockingQueue&lt;T&gt; {
-
-    /**
-     * 1. 任务队列 ，队列先进先出 ，Deque双向链表
-     */
-    private Deque&lt;T&gt; queue = new ArrayDeque&lt;&gt;();
-
-    /**
-     * 2. 锁  1：锁的作用是防止一个任务被三个线程获取,
-     *        2：还有就是队列中没有元素时，可以通过reentrantLock.newCondition() 等待。
-     */
-    private ReentrantLock lock = new ReentrantLock();
-
-    /**
-     * 3. 生产者条件变量：如果队列满了生产者线程去这个Condition个await(),等待队列不满时被消费者唤醒
-     */
-    private Condition fullWaitSet = lock.newCondition();
-
-    /**
-     * 4. 消费者条件变量：如果队列空了消费者线程去这个Condition里await(),等待队列不空时被生产者唤醒
-     */
-    private Condition emptyWaitSet = lock.newCondition();
-
-    /**
-     * 5. 容量
-     */
-    private int capacity;
-
-    public MyBlockingQueue(int capacity) {
-        this.capacity = capacity;
-    }
-
-    /**
-     * 阻塞获取
-     *
-     * @return
-     */
-    public T take() {
-        lock.lock();
-        try {
-            while (queue.isEmpty()) {
-                try {
-                    emptyWaitSet.await();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            T t = queue.removeFirst();
-            fullWaitSet.signal();
-            return t;
-        } finally {
-            lock.unlock();
-        }
-    }
-
-    /**
-     * 带超时的阻塞获取
-     *
-     * @param timeout 超时时间
-     * @param unit    时间单位
-     * @return
-     */
-    public T poll(long timeout, TimeUnit unit) {
-        lock.lock();
-        try {
-            // 将 timeout 统一转换为 纳秒
-            long nanos = unit.toNanos(timeout);
-            while (queue.isEmpty()) {
-                try {
-                    // 等待时间过了队列还是空就结束
-                    if (nanos &lt;= 0) {
-                        return null;
-                    }
-                    // 返回值是剩余等待时间
-                    nanos = emptyWaitSet.awaitNanos(nanos);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            T t = queue.removeFirst();
-            fullWaitSet.signal();
-            return t;
-        } finally {
-            lock.unlock();
-        }
-    }
-
-
-    /**
-     * 阻塞添加
-     *
-     * @param task
-     */
-    public void put(T task) {
-        lock.lock();
-        try {
-            while (queue.size() == capacity) {
-                try {
-                    log.debug(&#34;等待加入任务队列 {} ...&#34;, task);
-                    fullWaitSet.await();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            log.debug(&#34;加入任务队列 {}&#34;, task);
-            queue.addLast(task);
-            emptyWaitSet.signal();
-        } finally {
-            lock.unlock();
-        }
-    }
-
-
-    /**
-     * 获取队列大小
-     *
-     * @return
-     */
-    public int size() {
-        lock.lock();
-        try {
-            return queue.size();
-        } finally {
-            lock.unlock();
-        }
-    }
-
-}
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">import lombok.extern.slf4j.Slf4j;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">import java.util.ArrayDeque;
+</span></span><span class="line"><span class="cl">import java.util.Deque;
+</span></span><span class="line"><span class="cl">import java.util.concurrent.TimeUnit;
+</span></span><span class="line"><span class="cl">import java.util.concurrent.locks.Condition;
+</span></span><span class="line"><span class="cl">import java.util.concurrent.locks.ReentrantLock;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/**
+</span></span><span class="line"><span class="cl"> * 自定义的一个阻塞队列
+</span></span><span class="line"><span class="cl"> *
+</span></span><span class="line"><span class="cl"> * @author xrq
+</span></span><span class="line"><span class="cl"> */
+</span></span><span class="line"><span class="cl">@Slf4j(topic = &#34;c.MyBlockingQueue&#34;)
+</span></span><span class="line"><span class="cl">public class MyBlockingQueue&lt;T&gt; {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    /**
+</span></span><span class="line"><span class="cl">     * 1. 任务队列 ，队列先进先出 ，Deque双向链表
+</span></span><span class="line"><span class="cl">     */
+</span></span><span class="line"><span class="cl">    private Deque&lt;T&gt; queue = new ArrayDeque&lt;&gt;();
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    /**
+</span></span><span class="line"><span class="cl">     * 2. 锁  1：锁的作用是防止一个任务被三个线程获取,
+</span></span><span class="line"><span class="cl">     *        2：还有就是队列中没有元素时，可以通过reentrantLock.newCondition() 等待。
+</span></span><span class="line"><span class="cl">     */
+</span></span><span class="line"><span class="cl">    private ReentrantLock lock = new ReentrantLock();
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    /**
+</span></span><span class="line"><span class="cl">     * 3. 生产者条件变量：如果队列满了生产者线程去这个Condition个await(),等待队列不满时被消费者唤醒
+</span></span><span class="line"><span class="cl">     */
+</span></span><span class="line"><span class="cl">    private Condition fullWaitSet = lock.newCondition();
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    /**
+</span></span><span class="line"><span class="cl">     * 4. 消费者条件变量：如果队列空了消费者线程去这个Condition里await(),等待队列不空时被生产者唤醒
+</span></span><span class="line"><span class="cl">     */
+</span></span><span class="line"><span class="cl">    private Condition emptyWaitSet = lock.newCondition();
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    /**
+</span></span><span class="line"><span class="cl">     * 5. 容量
+</span></span><span class="line"><span class="cl">     */
+</span></span><span class="line"><span class="cl">    private int capacity;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    public MyBlockingQueue(int capacity) {
+</span></span><span class="line"><span class="cl">        this.capacity = capacity;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    /**
+</span></span><span class="line"><span class="cl">     * 阻塞获取
+</span></span><span class="line"><span class="cl">     *
+</span></span><span class="line"><span class="cl">     * @return
+</span></span><span class="line"><span class="cl">     */
+</span></span><span class="line"><span class="cl">    public T take() {
+</span></span><span class="line"><span class="cl">        lock.lock();
+</span></span><span class="line"><span class="cl">        try {
+</span></span><span class="line"><span class="cl">            while (queue.isEmpty()) {
+</span></span><span class="line"><span class="cl">                try {
+</span></span><span class="line"><span class="cl">                    emptyWaitSet.await();
+</span></span><span class="line"><span class="cl">                } catch (InterruptedException e) {
+</span></span><span class="line"><span class="cl">                    e.printStackTrace();
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            T t = queue.removeFirst();
+</span></span><span class="line"><span class="cl">            fullWaitSet.signal();
+</span></span><span class="line"><span class="cl">            return t;
+</span></span><span class="line"><span class="cl">        } finally {
+</span></span><span class="line"><span class="cl">            lock.unlock();
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    /**
+</span></span><span class="line"><span class="cl">     * 带超时的阻塞获取
+</span></span><span class="line"><span class="cl">     *
+</span></span><span class="line"><span class="cl">     * @param timeout 超时时间
+</span></span><span class="line"><span class="cl">     * @param unit    时间单位
+</span></span><span class="line"><span class="cl">     * @return
+</span></span><span class="line"><span class="cl">     */
+</span></span><span class="line"><span class="cl">    public T poll(long timeout, TimeUnit unit) {
+</span></span><span class="line"><span class="cl">        lock.lock();
+</span></span><span class="line"><span class="cl">        try {
+</span></span><span class="line"><span class="cl">            // 将 timeout 统一转换为 纳秒
+</span></span><span class="line"><span class="cl">            long nanos = unit.toNanos(timeout);
+</span></span><span class="line"><span class="cl">            while (queue.isEmpty()) {
+</span></span><span class="line"><span class="cl">                try {
+</span></span><span class="line"><span class="cl">                    // 等待时间过了队列还是空就结束
+</span></span><span class="line"><span class="cl">                    if (nanos &lt;= 0) {
+</span></span><span class="line"><span class="cl">                        return null;
+</span></span><span class="line"><span class="cl">                    }
+</span></span><span class="line"><span class="cl">                    // 返回值是剩余等待时间
+</span></span><span class="line"><span class="cl">                    nanos = emptyWaitSet.awaitNanos(nanos);
+</span></span><span class="line"><span class="cl">                } catch (InterruptedException e) {
+</span></span><span class="line"><span class="cl">                    e.printStackTrace();
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            T t = queue.removeFirst();
+</span></span><span class="line"><span class="cl">            fullWaitSet.signal();
+</span></span><span class="line"><span class="cl">            return t;
+</span></span><span class="line"><span class="cl">        } finally {
+</span></span><span class="line"><span class="cl">            lock.unlock();
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    /**
+</span></span><span class="line"><span class="cl">     * 阻塞添加
+</span></span><span class="line"><span class="cl">     *
+</span></span><span class="line"><span class="cl">     * @param task
+</span></span><span class="line"><span class="cl">     */
+</span></span><span class="line"><span class="cl">    public void put(T task) {
+</span></span><span class="line"><span class="cl">        lock.lock();
+</span></span><span class="line"><span class="cl">        try {
+</span></span><span class="line"><span class="cl">            while (queue.size() == capacity) {
+</span></span><span class="line"><span class="cl">                try {
+</span></span><span class="line"><span class="cl">                    log.debug(&#34;等待加入任务队列 {} ...&#34;, task);
+</span></span><span class="line"><span class="cl">                    fullWaitSet.await();
+</span></span><span class="line"><span class="cl">                } catch (InterruptedException e) {
+</span></span><span class="line"><span class="cl">                    e.printStackTrace();
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            log.debug(&#34;加入任务队列 {}&#34;, task);
+</span></span><span class="line"><span class="cl">            queue.addLast(task);
+</span></span><span class="line"><span class="cl">            emptyWaitSet.signal();
+</span></span><span class="line"><span class="cl">        } finally {
+</span></span><span class="line"><span class="cl">            lock.unlock();
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    /**
+</span></span><span class="line"><span class="cl">     * 获取队列大小
+</span></span><span class="line"><span class="cl">     *
+</span></span><span class="line"><span class="cl">     * @return
+</span></span><span class="line"><span class="cl">     */
+</span></span><span class="line"><span class="cl">    public int size() {
+</span></span><span class="line"><span class="cl">        lock.lock();
+</span></span><span class="line"><span class="cl">        try {
+</span></span><span class="line"><span class="cl">            return queue.size();
+</span></span><span class="line"><span class="cl">        } finally {
+</span></span><span class="line"><span class="cl">            lock.unlock();
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h5 id="2自定义的工作线程">2）自定义的工作线程</h5>
 <div class="highlight"><div class="chroma">
@@ -657,37 +657,37 @@ public class MyBlockingQueue&lt;T&gt; {
 </span><span class="lnt">30
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">class MyWorker extends Thread {
-    private Runnable task;
-
-    public MyWorker(Runnable task) {
-        this.task = task;
-    }
-
-    @Override
-    public void run() {
-        // 执行任务，重用线程 taskQueue.take()是关键！！！
-        // 1) 当 task 不为空，执行任务
-        // 2) 当 task 执行完毕，再接着从任务队列获取任务并执行
-        // while(task != null || (task = taskQueue.poll(timeout, timeUnit)) != null) {
-        while (task != null || (task = taskQueue.take()) != null) {
-            try {
-                log.debug(&#34;正在执行...{}&#34;, task);
-                task.run();
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                task = null;
-            }
-        }
-        //能走到这一步只有带从队列获取超时时间的线程
-        synchronized (workers) {
-            log.debug(&#34;worker 被移除{}&#34;, this);
-            workers.remove(this);
-        }
-    }
-}
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">class MyWorker extends Thread {
+</span></span><span class="line"><span class="cl">    private Runnable task;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    public MyWorker(Runnable task) {
+</span></span><span class="line"><span class="cl">        this.task = task;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    @Override
+</span></span><span class="line"><span class="cl">    public void run() {
+</span></span><span class="line"><span class="cl">        // 执行任务，重用线程 taskQueue.take()是关键！！！
+</span></span><span class="line"><span class="cl">        // 1) 当 task 不为空，执行任务
+</span></span><span class="line"><span class="cl">        // 2) 当 task 执行完毕，再接着从任务队列获取任务并执行
+</span></span><span class="line"><span class="cl">        // while(task != null || (task = taskQueue.poll(timeout, timeUnit)) != null) {
+</span></span><span class="line"><span class="cl">        while (task != null || (task = taskQueue.take()) != null) {
+</span></span><span class="line"><span class="cl">            try {
+</span></span><span class="line"><span class="cl">                log.debug(&#34;正在执行...{}&#34;, task);
+</span></span><span class="line"><span class="cl">                task.run();
+</span></span><span class="line"><span class="cl">            } catch (Exception e) {
+</span></span><span class="line"><span class="cl">                e.printStackTrace();
+</span></span><span class="line"><span class="cl">            } finally {
+</span></span><span class="line"><span class="cl">                task = null;
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        //能走到这一步只有带从队列获取超时时间的线程
+</span></span><span class="line"><span class="cl">        synchronized (workers) {
+</span></span><span class="line"><span class="cl">            log.debug(&#34;worker 被移除{}&#34;, this);
+</span></span><span class="line"><span class="cl">            workers.remove(this);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h5 id="3自定义的线程池">3）自定义的线程池</h5>
 <div class="highlight"><div class="chroma">
@@ -762,81 +762,79 @@ public class MyBlockingQueue&lt;T&gt; {
 </span><span class="lnt">68
 </span><span class="lnt">69
 </span><span class="lnt">70
-</span><span class="lnt">71
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">import lombok.extern.slf4j.Slf4j;
-
-import java.util.HashSet;
-import java.util.concurrent.TimeUnit;
-
-/**
- * @author xrq
- */
-@Slf4j(topic = &#34;c.MyThreadPool&#34;)
-public class MyThreadPool {
-
-    /**
-     * 任务队列
-     */
-    private MyBlockingQueue&lt;Runnable&gt; taskQueue;
-
-    /**
-     * 线程集合
-     */
-    private HashSet&lt;MyWorker&gt; workers = new HashSet&lt;&gt;();
-
-    /**
-     * 核心线程数
-     */
-    private int coreSize;
-
-    /**
-     * 从队列获取任务时的超时时间
-     */
-    private long timeout;
-
-    /**
-     * 从队列获取任务时的超时时间 的 时间单位
-     */
-    private TimeUnit timeUnit;
-
-
-    public MyThreadPool(int coreSize, long timeout, TimeUnit timeUnit, int queueCapacity) {
-        this.coreSize = coreSize;
-        this.timeout = timeout;
-        this.timeUnit = timeUnit;
-        this.taskQueue = new MyBlockingQueue&lt;&gt;(queueCapacity);
-    }
-
-    /**
-     * 执行任务，生产任务提交线程池
-     *
-     * @param task
-     */
-    public void execute(Runnable task) {
-        // 当线程集合没满时，创建worker对象并交给他执行
-        // 当线程集合满了时，加入任务队列暂存
-        synchronized (workers) {
-            if (workers.size() &lt; coreSize) {
-                MyWorker worker = new MyWorker(task);
-                log.debug(&#34;新增 worker{}, {}&#34;, worker, task);
-                workers.add(worker);
-                worker.start();
-            } else {
-                taskQueue.put(task);
-            }
-        }
-    }
-
-    //工作线程
-    class MyWorker extends Thread {
-       //..........
-    }
-
-}
-
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">import lombok.extern.slf4j.Slf4j;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">import java.util.HashSet;
+</span></span><span class="line"><span class="cl">import java.util.concurrent.TimeUnit;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/**
+</span></span><span class="line"><span class="cl"> * @author xrq
+</span></span><span class="line"><span class="cl"> */
+</span></span><span class="line"><span class="cl">@Slf4j(topic = &#34;c.MyThreadPool&#34;)
+</span></span><span class="line"><span class="cl">public class MyThreadPool {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    /**
+</span></span><span class="line"><span class="cl">     * 任务队列
+</span></span><span class="line"><span class="cl">     */
+</span></span><span class="line"><span class="cl">    private MyBlockingQueue&lt;Runnable&gt; taskQueue;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    /**
+</span></span><span class="line"><span class="cl">     * 线程集合
+</span></span><span class="line"><span class="cl">     */
+</span></span><span class="line"><span class="cl">    private HashSet&lt;MyWorker&gt; workers = new HashSet&lt;&gt;();
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    /**
+</span></span><span class="line"><span class="cl">     * 核心线程数
+</span></span><span class="line"><span class="cl">     */
+</span></span><span class="line"><span class="cl">    private int coreSize;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    /**
+</span></span><span class="line"><span class="cl">     * 从队列获取任务时的超时时间
+</span></span><span class="line"><span class="cl">     */
+</span></span><span class="line"><span class="cl">    private long timeout;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    /**
+</span></span><span class="line"><span class="cl">     * 从队列获取任务时的超时时间 的 时间单位
+</span></span><span class="line"><span class="cl">     */
+</span></span><span class="line"><span class="cl">    private TimeUnit timeUnit;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    public MyThreadPool(int coreSize, long timeout, TimeUnit timeUnit, int queueCapacity) {
+</span></span><span class="line"><span class="cl">        this.coreSize = coreSize;
+</span></span><span class="line"><span class="cl">        this.timeout = timeout;
+</span></span><span class="line"><span class="cl">        this.timeUnit = timeUnit;
+</span></span><span class="line"><span class="cl">        this.taskQueue = new MyBlockingQueue&lt;&gt;(queueCapacity);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    /**
+</span></span><span class="line"><span class="cl">     * 执行任务，生产任务提交线程池
+</span></span><span class="line"><span class="cl">     *
+</span></span><span class="line"><span class="cl">     * @param task
+</span></span><span class="line"><span class="cl">     */
+</span></span><span class="line"><span class="cl">    public void execute(Runnable task) {
+</span></span><span class="line"><span class="cl">        // 当线程集合没满时，创建worker对象并交给他执行
+</span></span><span class="line"><span class="cl">        // 当线程集合满了时，加入任务队列暂存
+</span></span><span class="line"><span class="cl">        synchronized (workers) {
+</span></span><span class="line"><span class="cl">            if (workers.size() &lt; coreSize) {
+</span></span><span class="line"><span class="cl">                MyWorker worker = new MyWorker(task);
+</span></span><span class="line"><span class="cl">                log.debug(&#34;新增 worker{}, {}&#34;, worker, task);
+</span></span><span class="line"><span class="cl">                workers.add(worker);
+</span></span><span class="line"><span class="cl">                worker.start();
+</span></span><span class="line"><span class="cl">            } else {
+</span></span><span class="line"><span class="cl">                taskQueue.put(task);
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    //工作线程
+</span></span><span class="line"><span class="cl">    class MyWorker extends Thread {
+</span></span><span class="line"><span class="cl">       //..........
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h5 id="4测试类">4）测试类</h5>
 <div class="highlight"><div class="chroma">
@@ -867,31 +865,31 @@ public class MyThreadPool {
 </span><span class="lnt">24
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">import lombok.extern.slf4j.Slf4j;
-
-import java.util.concurrent.TimeUnit;
-
-/**
- * 测试类
- */
-@Slf4j(topic = &#34;c.CustomThreadPool&#34;)
-public class MyThreadPoolTest {
-
-
-    public static void main(String[] args) {
-
-        MyThreadPool threadPool = new MyThreadPool(2, 1000, TimeUnit.MILLISECONDS, 10);
-
-        for (int i = 0; i &lt; 5; i++) {
-            int j = i;
-            threadPool.execute(() -&gt; {
-                log.debug(&#34;任务被执行了&#34; + j);
-            });
-        }
-    }
-
-}
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">import lombok.extern.slf4j.Slf4j;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">import java.util.concurrent.TimeUnit;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/**
+</span></span><span class="line"><span class="cl"> * 测试类
+</span></span><span class="line"><span class="cl"> */
+</span></span><span class="line"><span class="cl">@Slf4j(topic = &#34;c.CustomThreadPool&#34;)
+</span></span><span class="line"><span class="cl">public class MyThreadPoolTest {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    public static void main(String[] args) {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        MyThreadPool threadPool = new MyThreadPool(2, 1000, TimeUnit.MILLISECONDS, 10);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        for (int i = 0; i &lt; 5; i++) {
+</span></span><span class="line"><span class="cl">            int j = i;
+</span></span><span class="line"><span class="cl">            threadPool.execute(() -&gt; {
+</span></span><span class="line"><span class="cl">                log.debug(&#34;任务被执行了&#34; + j);
+</span></span><span class="line"><span class="cl">            });
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>1）使用 <code>while (task != null || (task = taskQueue.take()) != null) {</code> 代码测试，发现工作线程并没有执行完毕。符合核心线程复用的预期结果。</p>
 <div class="details admonition info open">
@@ -1039,14 +1037,14 @@ public class MyThreadPoolTest {
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">/**
- * 拒绝策略
- */
-@FunctionalInterface
-interface MyRejectPolicy&lt;T&gt; {
-    void reject(MyBlockingQueue&lt;T&gt; queue, T task);
-}
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">/**
+</span></span><span class="line"><span class="cl"> * 拒绝策略
+</span></span><span class="line"><span class="cl"> */
+</span></span><span class="line"><span class="cl">@FunctionalInterface
+</span></span><span class="line"><span class="cl">interface MyRejectPolicy&lt;T&gt; {
+</span></span><span class="line"><span class="cl">    void reject(MyBlockingQueue&lt;T&gt; queue, T task);
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h5 id="2主线程获取队列任务带超时时间的offer方法">2）主线程获取队列任务带超时时间的offer方法</h5>
 <p>在之前的代码中如果队列满了，主线程会没有超时时间的阻塞（等待）下去。</p>
@@ -1086,38 +1084,38 @@ interface MyRejectPolicy&lt;T&gt; {
 </span><span class="lnt">31
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">/**
- * 带超时时间的阻塞添加
- *
- * @param task
- * @param timeout
- * @param timeUnit
- * @return
- */
-public boolean offer(T task, long timeout, TimeUnit timeUnit) {
-    lock.lock();
-    try {
-        long nanos = timeUnit.toNanos(timeout);
-        while (queue.size() == capacity) {
-            try {
-                if (nanos &lt;= 0) {
-                    return false;
-                }
-                log.debug(&#34;等待加入任务队列 {} ...&#34;, task);
-                nanos = fullWaitSet.awaitNanos(nanos);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        log.debug(&#34;加入任务队列 {}&#34;, task);
-        queue.addLast(task);
-        emptyWaitSet.signal();
-        return true;
-    } finally {
-        lock.unlock();
-    }
-}
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">/**
+</span></span><span class="line"><span class="cl"> * 带超时时间的阻塞添加
+</span></span><span class="line"><span class="cl"> *
+</span></span><span class="line"><span class="cl"> * @param task
+</span></span><span class="line"><span class="cl"> * @param timeout
+</span></span><span class="line"><span class="cl"> * @param timeUnit
+</span></span><span class="line"><span class="cl"> * @return
+</span></span><span class="line"><span class="cl"> */
+</span></span><span class="line"><span class="cl">public boolean offer(T task, long timeout, TimeUnit timeUnit) {
+</span></span><span class="line"><span class="cl">    lock.lock();
+</span></span><span class="line"><span class="cl">    try {
+</span></span><span class="line"><span class="cl">        long nanos = timeUnit.toNanos(timeout);
+</span></span><span class="line"><span class="cl">        while (queue.size() == capacity) {
+</span></span><span class="line"><span class="cl">            try {
+</span></span><span class="line"><span class="cl">                if (nanos &lt;= 0) {
+</span></span><span class="line"><span class="cl">                    return false;
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">                log.debug(&#34;等待加入任务队列 {} ...&#34;, task);
+</span></span><span class="line"><span class="cl">                nanos = fullWaitSet.awaitNanos(nanos);
+</span></span><span class="line"><span class="cl">            } catch (InterruptedException e) {
+</span></span><span class="line"><span class="cl">                e.printStackTrace();
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        log.debug(&#34;加入任务队列 {}&#34;, task);
+</span></span><span class="line"><span class="cl">        queue.addLast(task);
+</span></span><span class="line"><span class="cl">        emptyWaitSet.signal();
+</span></span><span class="line"><span class="cl">        return true;
+</span></span><span class="line"><span class="cl">    } finally {
+</span></span><span class="line"><span class="cl">        lock.unlock();
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h5 id="3不同的拒绝策略实现">3）不同的拒绝策略实现</h5>
 <div class="highlight"><div class="chroma">
@@ -1154,37 +1152,37 @@ public boolean offer(T task, long timeout, TimeUnit timeUnit) {
 </span><span class="lnt">30
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">  public static void main(String[] args) {
-
-        //这里的timeout是 工作线程从队列获取任务的超时时间
-        MyThreadPool threadPool = new MyThreadPool(1, 1000, TimeUnit.MILLISECONDS, 1,
-                (queue, task) -&gt; {
-                    // 1. 死等
-//            queue.put(task);
-                    // 2) 带超时等待
-                    // 这里的timeout是队列满了之后，主线程等待队列不满的超时时间
-            queue.offer(task, 500, TimeUnit.MILLISECONDS);
-                    // 3) 让调用者放弃任务执行
-//            log.debug(&#34;放弃{}&#34;, task);
-                    // 4) 让调用者抛出异常
-//            throw new RuntimeException(&#34;任务执行失败 &#34; + task);
-                    // 5) 让调用者自己执行任务
-//                    task.run();
-                });
-
-        for (int i = 0; i &lt; 5; i++) {
-            int j = i;
-            threadPool.execute(() -&gt; {
-                try {
-                    Thread.sleep(2000L);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                log.debug(&#34;任务被执行了&#34; + j);
-            });
-        }
-    }
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">  public static void main(String[] args) {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        //这里的timeout是 工作线程从队列获取任务的超时时间
+</span></span><span class="line"><span class="cl">        MyThreadPool threadPool = new MyThreadPool(1, 1000, TimeUnit.MILLISECONDS, 1,
+</span></span><span class="line"><span class="cl">                (queue, task) -&gt; {
+</span></span><span class="line"><span class="cl">                    // 1. 死等
+</span></span><span class="line"><span class="cl">//            queue.put(task);
+</span></span><span class="line"><span class="cl">                    // 2) 带超时等待
+</span></span><span class="line"><span class="cl">                    // 这里的timeout是队列满了之后，主线程等待队列不满的超时时间
+</span></span><span class="line"><span class="cl">            queue.offer(task, 500, TimeUnit.MILLISECONDS);
+</span></span><span class="line"><span class="cl">                    // 3) 让调用者放弃任务执行
+</span></span><span class="line"><span class="cl">//            log.debug(&#34;放弃{}&#34;, task);
+</span></span><span class="line"><span class="cl">                    // 4) 让调用者抛出异常
+</span></span><span class="line"><span class="cl">//            throw new RuntimeException(&#34;任务执行失败 &#34; + task);
+</span></span><span class="line"><span class="cl">                    // 5) 让调用者自己执行任务
+</span></span><span class="line"><span class="cl">//                    task.run();
+</span></span><span class="line"><span class="cl">                });
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        for (int i = 0; i &lt; 5; i++) {
+</span></span><span class="line"><span class="cl">            int j = i;
+</span></span><span class="line"><span class="cl">            threadPool.execute(() -&gt; {
+</span></span><span class="line"><span class="cl">                try {
+</span></span><span class="line"><span class="cl">                    Thread.sleep(2000L);
+</span></span><span class="line"><span class="cl">                } catch (InterruptedException e) {
+</span></span><span class="line"><span class="cl">                    e.printStackTrace();
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">                log.debug(&#34;任务被执行了&#34; + j);
+</span></span><span class="line"><span class="cl">            });
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="提问">提问</h3>
 <p>1）为什么只用了一把锁(ReentrantLock)，生产者拿到锁提交任务到队列的时候，此时队列中还有很多任务的时候，队列中有数据但消费者却因为获取不到锁了就不能消费了吗？不是降低了性能？</p>
@@ -1208,19 +1206,19 @@ public boolean offer(T task, long timeout, TimeUnit timeUnit) {
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">//核心线程
-while (task != null || (task = taskQueue.take()) != null) {
-
-//救急线程
-while(task != null || (task = taskQueue.poll(timeout, timeUnit)) != null) {
-
-        //.........
-        synchronized (workers) {
-            log.debug(&#34;worker 被移除{}&#34;, this);
-            workers.remove(this);
-        }
-}
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">//核心线程
+</span></span><span class="line"><span class="cl">while (task != null || (task = taskQueue.take()) != null) {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">//救急线程
+</span></span><span class="line"><span class="cl">while(task != null || (task = taskQueue.poll(timeout, timeUnit)) != null) {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        //.........
+</span></span><span class="line"><span class="cl">        synchronized (workers) {
+</span></span><span class="line"><span class="cl">            log.debug(&#34;worker 被移除{}&#34;, this);
+</span></span><span class="line"><span class="cl">            workers.remove(this);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="三javautilconcurrentthreadpoolexecutor">三.java.util.concurrent.ThreadPoolExecutor</h2>
 <p>核心不是一定会重用， jdk中有个allowCoreThreadTimeOut == false，false的时候 核心线程不会被销毁， true的时候 一段时间后会销毁</p>
@@ -1238,16 +1236,16 @@ while(task != null || (task = taskQueue.poll(timeout, timeUnit)) != null) {
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public static ExecutorService newFixedThreadPool(int nThreads) {
-
-return new ThreadPoolExecutor(nThreads, nThreads,
-
-0L, TimeUnit.MILLISECONDS,
-
-new LinkedBlockingQueue&lt;Runnable&gt;());
-
-}
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">public static ExecutorService newFixedThreadPool(int nThreads) {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">return new ThreadPoolExecutor(nThreads, nThreads,
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">0L, TimeUnit.MILLISECONDS,
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">new LinkedBlockingQueue&lt;Runnable&gt;());
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>特点</p>
 <p>核心线程数 == 最大线程数（没有救急线程被创建），因此也无需超时时间</p>
@@ -1269,16 +1267,16 @@ new LinkedBlockingQueue&lt;Runnable&gt;());
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public static ExecutorService newCachedThreadPool() {
-
-return new ThreadPoolExecutor(0, Integer.MAX_VALUE,
-
-60L, TimeUnit.SECONDS,
-
-new SynchronousQueue&lt;Runnable&gt;());
-
-}
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">public static ExecutorService newCachedThreadPool() {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">return new ThreadPoolExecutor(0, Integer.MAX_VALUE,
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">60L, TimeUnit.SECONDS,
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">new SynchronousQueue&lt;Runnable&gt;());
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>特点</p>
 <p>核心线程数是 0， 最大线程数是 Integer.MAX_VALUE，救急线程的空闲生存时间是 60s，意味着</p>
@@ -1299,18 +1297,18 @@ new SynchronousQueue&lt;Runnable&gt;());
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public static ExecutorService newSingleThreadExecutor() {
-
-return new FinalizableDelegatedExecutorService
-
- (new ThreadPoolExecutor(1, 1,
-
-0L, TimeUnit.MILLISECONDS,
-
-new LinkedBlockingQueue&lt;Runnable&gt;()));
-
-}
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">public static ExecutorService newSingleThreadExecutor() {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">return new FinalizableDelegatedExecutorService
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> (new ThreadPoolExecutor(1, 1,
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">0L, TimeUnit.MILLISECONDS,
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">new LinkedBlockingQueue&lt;Runnable&gt;()));
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>使用场景：</p>
 <p>希望多个任务排队执行。线程数固定为 1，任务数多于 1 时，会放入无界队列排队。任务执行完毕，这唯一的线程</p>
@@ -1362,7 +1360,7 @@ new LinkedBlockingQueue&lt;Runnable&gt;()));
 </div>
 </article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.92.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.105.0-DEV">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
                 </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ricky</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>

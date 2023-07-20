@@ -147,12 +147,12 @@
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public void actor2(I_Result r) {
-    num = 2;
-    ready = true; // ready 是 volatile 赋值带写屏障
-    // 写屏障
-}
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">public void actor2(I_Result r) {
+</span></span><span class="line"><span class="cl">    num = 2;
+</span></span><span class="line"><span class="cl">    ready = true; // ready 是 volatile 赋值带写屏障
+</span></span><span class="line"><span class="cl">    // 写屏障
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>而读屏障（lfence）保证在该屏障之后，对共享变量的读取，加载的是主存中最新数据</p>
 <div class="highlight"><div class="chroma">
@@ -168,16 +168,16 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public void actor1(I_Result r) {
-    // 读屏障
-    // ready 是 volatile 读取值带读屏障
-    if(ready) {
-    r.r1 = num + num;
-     } else {
-    r.r1 = 1;
-     }
-}
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">public void actor1(I_Result r) {
+</span></span><span class="line"><span class="cl">    // 读屏障
+</span></span><span class="line"><span class="cl">    // ready 是 volatile 读取值带读屏障
+</span></span><span class="line"><span class="cl">    if(ready) {
+</span></span><span class="line"><span class="cl">    r.r1 = num + num;
+</span></span><span class="line"><span class="cl">     } else {
+</span></span><span class="line"><span class="cl">    r.r1 = 1;
+</span></span><span class="line"><span class="cl">     }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><strong>2.</strong> <strong>如何保证有序性</strong></p>
 <p><strong>写屏障会确保指令重排序时</strong>，不会将写屏障之前的代码排在写屏障之后</p>
@@ -190,12 +190,12 @@
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public void actor2(I_Result r) {
-    num = 2;
-    ready = true; // ready 是 volatile 赋值带写屏障
-    // 写屏障
-}
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">public void actor2(I_Result r) {
+</span></span><span class="line"><span class="cl">    num = 2;
+</span></span><span class="line"><span class="cl">    ready = true; // ready 是 volatile 赋值带写屏障
+</span></span><span class="line"><span class="cl">    // 写屏障
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><strong>读屏障会确保指令重排序时</strong>，不会将读屏障之后的代码排在读屏障之前</p>
 <div class="highlight"><div class="chroma">
@@ -211,16 +211,16 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public void actor1(I_Result r) {
-    // 读屏障
-    // ready 是 volatile 读取值带读屏障
-    if(ready) {
-    r.r1 = num + num;
-     } else {
-    r.r1 = 1;
-     }
-}
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">public void actor1(I_Result r) {
+</span></span><span class="line"><span class="cl">    // 读屏障
+</span></span><span class="line"><span class="cl">    // ready 是 volatile 读取值带读屏障
+</span></span><span class="line"><span class="cl">    if(ready) {
+</span></span><span class="line"><span class="cl">    r.r1 = num + num;
+</span></span><span class="line"><span class="cl">     } else {
+</span></span><span class="line"><span class="cl">    r.r1 = 1;
+</span></span><span class="line"><span class="cl">     }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="synchronized">synchronized</h3>
 <p>synchronized里的代码 也有可能会发生指令重排序。在多线程环境中 ，synchronized的代码会被多个线程串行执行。所以不会有重排序的问题。但如果在synchronized保护的代码块之外有其他线程在操作共享变量，那就有可能会出现问题。有时可以通过volatile来解决</p>
@@ -250,7 +250,7 @@
 </div>
 </article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.92.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.105.0-DEV">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
                 </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ricky</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>

@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/shengtu0328.github.io\/posts\/learnspringsecurity\/"
-        },"genre": "posts","wordcount":  6978 ,
+        },"genre": "posts","wordcount":  6967 ,
         "url": "https:\/\/shengtu0328.github.io\/posts\/learnspringsecurity\/","datePublished": "2022-11-03T14:22:04+08:00","dateModified": "2022-11-03T14:22:04+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -102,7 +102,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">学习SpringSecurity</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-03">2022-11-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;6978 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-03">2022-11-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;6967 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;14 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -133,7 +133,7 @@
     <li><a href="#exceptiontranslationfilter">ExceptionTranslationFilter</a></li>
     <li><a href="#流程总结">流程总结</a></li>
     <li><a href="#过滤器执行顺序">过滤器执行顺序</a></li>
-    <li><a href="#preauthorizehasauthorityauthorityg-是怎么处理的">@PreAuthorize(&ldquo;hasAuthority(&lsquo;authorityg&rsquo;)&quot;) 是怎么处理的？</a></li>
+    <li><a href="#preauthorizehasauthorityauthorityg-是怎么处理的">@PreAuthorize(&ldquo;hasAuthority(&lsquo;authorityg&rsquo;)&rdquo;) 是怎么处理的？</a></li>
     <li><a href="#permissionevaluator-是什么">PermissionEvaluator 是什么？</a></li>
     <li><a href="#如果usernamepasswordauthenticationfilter的userdetailsservice中验证失败抛出了自定义异常是怎么处理的">如果UsernamePasswordAuthenticationFilter的UserDetailsService中验证失败，抛出了自定义异常，是怎么处理的？</a></li>
     <li><a href="#如果在自定义的filter中抛出了自定义异常是怎么处理的">如果在自定义的Filter中，抛出了自定义异常，是怎么处理的？</a></li>
@@ -343,24 +343,24 @@
 </span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">#SecurityContextPersistenceFilter
-private void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
-      throws IOException, ServletException {
-   // ensure that filter is only applied once per request
-   if (request.getAttribute(FILTER_APPLIED) != null) {
-      chain.doFilter(request, response);
-      return;
-   }
-   request.setAttribute(FILTER_APPLIED, Boolean.TRUE);
-   if (this.forceEagerSessionCreation) {
-      HttpSession session = request.getSession();
-      if (this.logger.isDebugEnabled() &amp;&amp; session.isNew()) {
-         this.logger.debug(LogMessage.format(&#34;Created session %s eagerly&#34;, session.getId()));
-      }
-   }
-   HttpRequestResponseHolder holder = new HttpRequestResponseHolder(request, response);
-   SecurityContext contextBeforeChainExecution = this.repo.loadContext(holder);
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">#SecurityContextPersistenceFilter
+</span></span><span class="line"><span class="cl">private void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
+</span></span><span class="line"><span class="cl">      throws IOException, ServletException {
+</span></span><span class="line"><span class="cl">   // ensure that filter is only applied once per request
+</span></span><span class="line"><span class="cl">   if (request.getAttribute(FILTER_APPLIED) != null) {
+</span></span><span class="line"><span class="cl">      chain.doFilter(request, response);
+</span></span><span class="line"><span class="cl">      return;
+</span></span><span class="line"><span class="cl">   }
+</span></span><span class="line"><span class="cl">   request.setAttribute(FILTER_APPLIED, Boolean.TRUE);
+</span></span><span class="line"><span class="cl">   if (this.forceEagerSessionCreation) {
+</span></span><span class="line"><span class="cl">      HttpSession session = request.getSession();
+</span></span><span class="line"><span class="cl">      if (this.logger.isDebugEnabled() &amp;&amp; session.isNew()) {
+</span></span><span class="line"><span class="cl">         this.logger.debug(LogMessage.format(&#34;Created session %s eagerly&#34;, session.getId()));
+</span></span><span class="line"><span class="cl">      }
+</span></span><span class="line"><span class="cl">   }
+</span></span><span class="line"><span class="cl">   HttpRequestResponseHolder holder = new HttpRequestResponseHolder(request, response);
+</span></span><span class="line"><span class="cl">   SecurityContext contextBeforeChainExecution = this.repo.loadContext(holder);
+</span></span></code></pre></td></tr></table>
 </div>
 </div><hr>
 <h2 id="session和cookie">Session和Cookie</h2>
@@ -445,8 +445,8 @@ private void doFilter(HttpServletRequest request, HttpServletResponse response, 
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">http.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">http.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>如果当前request 是登陆状态的 ，则在FilterSecurityInterceptor 之前的某个 filter就应该将setAuthentication 好</p>
 <hr>
@@ -509,8 +509,8 @@ private void doFilter(HttpServletRequest request, HttpServletResponse response, 
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">.antMatchers(&#34;/d&#34;).hasRole(&#34;roled&#34;)
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">.antMatchers(&#34;/d&#34;).hasRole(&#34;roled&#34;)
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>FilterSecurityInterceptor 实现</p>
 <p><img
@@ -532,12 +532,12 @@ private void doFilter(HttpServletRequest request, HttpServletResponse response, 
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">@PreAuthorize(&#34;hasAuthority(&#39;authorityg&#39;)&#34;)
-@RequestMapping(&#34;/g&#34;)
-public String g(){
-    return &#34;g&#34;;
-}
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">@PreAuthorize(&#34;hasAuthority(&#39;authorityg&#39;)&#34;)
+</span></span><span class="line"><span class="cl">@RequestMapping(&#34;/g&#34;)
+</span></span><span class="line"><span class="cl">public String g(){
+</span></span><span class="line"><span class="cl">    return &#34;g&#34;;
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>已经追踪源码发现是执行完全部的Filter Chain，进入 DispatcherServlet 类后，最终通过MethodSecurityInterceptor 这个拦截器处理的，</p>
 <p><img
@@ -573,16 +573,16 @@ public String g(){
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">private void handleSpringSecurityException(HttpServletRequest request, HttpServletResponse response,
-      FilterChain chain, RuntimeException exception) throws IOException, ServletException {
-   if (exception instanceof AuthenticationException) {
-      handleAuthenticationException(request, response, chain, (AuthenticationException) exception);
-   }
-   else if (exception instanceof AccessDeniedException) {
-      handleAccessDeniedException(request, response, chain, (AccessDeniedException) exception);
-   }
-}
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">private void handleSpringSecurityException(HttpServletRequest request, HttpServletResponse response,
+</span></span><span class="line"><span class="cl">      FilterChain chain, RuntimeException exception) throws IOException, ServletException {
+</span></span><span class="line"><span class="cl">   if (exception instanceof AuthenticationException) {
+</span></span><span class="line"><span class="cl">      handleAuthenticationException(request, response, chain, (AuthenticationException) exception);
+</span></span><span class="line"><span class="cl">   }
+</span></span><span class="line"><span class="cl">   else if (exception instanceof AccessDeniedException) {
+</span></span><span class="line"><span class="cl">      handleAccessDeniedException(request, response, chain, (AccessDeniedException) exception);
+</span></span><span class="line"><span class="cl">   }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><img
         class="lazyload"
@@ -631,7 +631,7 @@ public String g(){
         alt="SecurityContextPersistenceFilter.png"
         title="SecurityContextPersistenceFilter.png" /></p>
 <hr>
-<h2 id="preauthorizehasauthorityauthorityg-是怎么处理的">@PreAuthorize(&ldquo;hasAuthority(&lsquo;authorityg&rsquo;)&quot;) 是怎么处理的？</h2>
+<h2 id="preauthorizehasauthorityauthorityg-是怎么处理的">@PreAuthorize(&ldquo;hasAuthority(&lsquo;authorityg&rsquo;)&rdquo;) 是怎么处理的？</h2>
 <p>猜测：</p>
 <p>是在服务启动时将所有带有@PreAuthorize 注解的方法收集好，然后在SpringSecutiyFilterChain里完成权限的认证？</p>
 <p>还是直接在借口调用的时候，调用具体的资源方法时前进行拦截？</p>
@@ -761,13 +761,13 @@ public String g(){
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">BCryptPasswordEncoder encoder=new BCryptPasswordEncoder();
-System.out.println(encoder.encode(&#34;123456&#34;));
-System.out.println(encoder.encode(&#34;123456&#34;));
-
-$2a$10$TS.YfXaPNbhCFDljBda04u6YQgbL18TBWMgPgkdJb6djKJO9nt9tq
-$2a$10$H9Ub8PIfhKaE9mafKrW4s.XlYbzZcU6gdUqZxAHOWnKeo1ML9is0q
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">BCryptPasswordEncoder encoder=new BCryptPasswordEncoder();
+</span></span><span class="line"><span class="cl">System.out.println(encoder.encode(&#34;123456&#34;));
+</span></span><span class="line"><span class="cl">System.out.println(encoder.encode(&#34;123456&#34;));
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">$2a$10$TS.YfXaPNbhCFDljBda04u6YQgbL18TBWMgPgkdJb6djKJO9nt9tq
+</span></span><span class="line"><span class="cl">$2a$10$H9Ub8PIfhKaE9mafKrW4s.XlYbzZcU6gdUqZxAHOWnKeo1ML9is0q
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>用$分割三个字段</p>
 <p>2a 代表BCrypt 算法版本</p>
@@ -795,8 +795,8 @@ $2a$10$H9Ub8PIfhKaE9mafKrW4s.XlYbzZcU6gdUqZxAHOWnKeo1ML9is0q
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+</span></span></code></pre></td></tr></table>
 </div>
 </div><hr>
 <h3 id="roles和authorities">roles()和authorities()</h3>
@@ -817,20 +817,20 @@ $2a$10$H9Ub8PIfhKaE9mafKrW4s.XlYbzZcU6gdUqZxAHOWnKeo1ML9is0q
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">    @Bean
-    @Override
-    public UserDetailsService userDetailsService() {
-        UserDetails user = User.withDefaultPasswordEncoder()
-                .username(&#34;user&#34;)
-                .password(&#34;password&#34;)
-                .authorities(&#34;authorityg&#34;)
-                //authorities()和roles()只应该定义一个
-                //.roles(&#34;admin&#34;,&#34;rolei&#34;)
-                .build();
-
-        return new InMemoryUserDetailsManager(user);
-    }
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">    @Bean
+</span></span><span class="line"><span class="cl">    @Override
+</span></span><span class="line"><span class="cl">    public UserDetailsService userDetailsService() {
+</span></span><span class="line"><span class="cl">        UserDetails user = User.withDefaultPasswordEncoder()
+</span></span><span class="line"><span class="cl">                .username(&#34;user&#34;)
+</span></span><span class="line"><span class="cl">                .password(&#34;password&#34;)
+</span></span><span class="line"><span class="cl">                .authorities(&#34;authorityg&#34;)
+</span></span><span class="line"><span class="cl">                //authorities()和roles()只应该定义一个
+</span></span><span class="line"><span class="cl">                //.roles(&#34;admin&#34;,&#34;rolei&#34;)
+</span></span><span class="line"><span class="cl">                .build();
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        return new InMemoryUserDetailsManager(user);
+</span></span><span class="line"><span class="cl">    }
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>roles() 和 authorities（）会会覆盖当前用户的 authorities，所以roles()和  authorities（）只能调用一个，一般是用authorities().</p>
 <h3 id="多个-antmatchers执行顺序">多个 antMatchers（）执行顺序</h3>
@@ -843,12 +843,12 @@ $2a$10$H9Ub8PIfhKaE9mafKrW4s.XlYbzZcU6gdUqZxAHOWnKeo1ML9is0q
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">.authorizeRequests()
-
-//本项目所需要的授权范围,这个scope是写在auth服务的配置里的
-.antMatchers(&#34;/**&#34;).access(&#34;#oauth2.hasScope(&#39;scope1&#39;)&#34;)
-.antMatchers( &#34;/a&#34;).hasAuthority(&#34;authorityOauth2&#34;)
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">.authorizeRequests()
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">//本项目所需要的授权范围,这个scope是写在auth服务的配置里的
+</span></span><span class="line"><span class="cl">.antMatchers(&#34;/**&#34;).access(&#34;#oauth2.hasScope(&#39;scope1&#39;)&#34;)
+</span></span><span class="line"><span class="cl">.antMatchers( &#34;/a&#34;).hasAuthority(&#34;authorityOauth2&#34;)
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>写在前面的会覆盖 写在后面的，如 访问/a 实际需要的权限判断的条件是.antMatchers(&quot;/**&quot;).access(&quot;#oauth2.hasScope(&lsquo;scope1&rsquo;)&quot;)</p>
 <hr>
@@ -947,7 +947,7 @@ $2a$10$H9Ub8PIfhKaE9mafKrW4s.XlYbzZcU6gdUqZxAHOWnKeo1ML9is0q
 </div>
 </article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.92.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.105.0-DEV">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
                 </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ricky</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>

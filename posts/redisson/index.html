@@ -181,46 +181,46 @@
 </span><span class="lnt">39
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">    public Result seckillVoucherOld(Long voucherId) {
-        // 1.查询优惠券
-        SeckillVoucher voucher = seckillVoucherService.getById(voucherId);
-        // 2.判断秒杀是否开始
-        if (voucher.getBeginTime().isAfter(LocalDateTime.now())) {
-            // 尚未开始
-            return Result.fail(&#34;秒杀尚未开始！&#34;);
-        }
-        // 3.判断秒杀是否已经结束
-        if (voucher.getEndTime().isBefore(LocalDateTime.now())) {
-            // 尚未开始
-            return Result.fail(&#34;秒杀已经结束！&#34;);
-        }
-        // 4.判断库存是否充足
-        if (voucher.getStock() &lt; 1) {
-            // 库存不足
-            return Result.fail(&#34;库存不足！&#34;);
-        }
-
-        Long userId = UserHolder.getUser().getId();
-        // 创建锁对象
-         SimpleRedisLockStage1 lock = new SimpleRedisLockStage1(&#34;order:&#34; + userId, stringRedisTemplate);
-//        RLock lock = redissonClient.getLock(&#34;lock:order:&#34; + userId);
-        // 获取锁
-        boolean isLock = lock.tryLock(1200);
-        // 判断是否获取锁成功
-        if(!isLock){
-            // 获取锁失败，返回错误或重试
-            return Result.fail(&#34;不允许重复下单&#34;);
-        }
-        try {
-            // 获取代理对象（事务）
-            IVoucherOrderService proxy = (IVoucherOrderService) AopContext.currentProxy();
-            return proxy.createVoucherOrder(voucherId);
-        } finally {
-            // 释放锁
-            lock.unlock();
-        }
-    }
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">    public Result seckillVoucherOld(Long voucherId) {
+</span></span><span class="line"><span class="cl">        // 1.查询优惠券
+</span></span><span class="line"><span class="cl">        SeckillVoucher voucher = seckillVoucherService.getById(voucherId);
+</span></span><span class="line"><span class="cl">        // 2.判断秒杀是否开始
+</span></span><span class="line"><span class="cl">        if (voucher.getBeginTime().isAfter(LocalDateTime.now())) {
+</span></span><span class="line"><span class="cl">            // 尚未开始
+</span></span><span class="line"><span class="cl">            return Result.fail(&#34;秒杀尚未开始！&#34;);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        // 3.判断秒杀是否已经结束
+</span></span><span class="line"><span class="cl">        if (voucher.getEndTime().isBefore(LocalDateTime.now())) {
+</span></span><span class="line"><span class="cl">            // 尚未开始
+</span></span><span class="line"><span class="cl">            return Result.fail(&#34;秒杀已经结束！&#34;);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        // 4.判断库存是否充足
+</span></span><span class="line"><span class="cl">        if (voucher.getStock() &lt; 1) {
+</span></span><span class="line"><span class="cl">            // 库存不足
+</span></span><span class="line"><span class="cl">            return Result.fail(&#34;库存不足！&#34;);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        Long userId = UserHolder.getUser().getId();
+</span></span><span class="line"><span class="cl">        // 创建锁对象
+</span></span><span class="line"><span class="cl">         SimpleRedisLockStage1 lock = new SimpleRedisLockStage1(&#34;order:&#34; + userId, stringRedisTemplate);
+</span></span><span class="line"><span class="cl">//        RLock lock = redissonClient.getLock(&#34;lock:order:&#34; + userId);
+</span></span><span class="line"><span class="cl">        // 获取锁
+</span></span><span class="line"><span class="cl">        boolean isLock = lock.tryLock(1200);
+</span></span><span class="line"><span class="cl">        // 判断是否获取锁成功
+</span></span><span class="line"><span class="cl">        if(!isLock){
+</span></span><span class="line"><span class="cl">            // 获取锁失败，返回错误或重试
+</span></span><span class="line"><span class="cl">            return Result.fail(&#34;不允许重复下单&#34;);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        try {
+</span></span><span class="line"><span class="cl">            // 获取代理对象（事务）
+</span></span><span class="line"><span class="cl">            IVoucherOrderService proxy = (IVoucherOrderService) AopContext.currentProxy();
+</span></span><span class="line"><span class="cl">            return proxy.createVoucherOrder(voucherId);
+</span></span><span class="line"><span class="cl">        } finally {
+</span></span><span class="line"><span class="cl">            // 释放锁
+</span></span><span class="line"><span class="cl">            lock.unlock();
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="heading"></h3>
 <h3 id="第0阶段">第0阶段</h3>
@@ -289,38 +289,38 @@
 </span><span class="lnt">31
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">import org.springframework.data.redis.core.StringRedisTemplate;
-
-import java.util.concurrent.TimeUnit;
-
-public class SimpleRedisLockStage1 implements ILock {
-
-    private String name;
-    private StringRedisTemplate stringRedisTemplate;
-
-    public SimpleRedisLockStage1(String name, StringRedisTemplate stringRedisTemplate) {
-        this.name = name;
-        this.stringRedisTemplate = stringRedisTemplate;
-    }
-
-    private static final String KEY_PREFIX = &#34;lock:&#34;;
-
-    @Override
-    public boolean tryLock(long timeoutSec) {
-        // 获取线程标示
-        long threadId = Thread.currentThread().getId();
-        // 获取锁
-        Boolean success = stringRedisTemplate.opsForValue().setIfAbsent(KEY_PREFIX + name, threadId+&#34; &#34;, timeoutSec, TimeUnit.SECONDS);
-        return Boolean.TRUE.equals(success);
-    }
-
-    @Override
-    public void unlock() {
-        stringRedisTemplate.delete(KEY_PREFIX + name);
-    }
-
-}
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">import org.springframework.data.redis.core.StringRedisTemplate;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">import java.util.concurrent.TimeUnit;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">public class SimpleRedisLockStage1 implements ILock {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    private String name;
+</span></span><span class="line"><span class="cl">    private StringRedisTemplate stringRedisTemplate;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    public SimpleRedisLockStage1(String name, StringRedisTemplate stringRedisTemplate) {
+</span></span><span class="line"><span class="cl">        this.name = name;
+</span></span><span class="line"><span class="cl">        this.stringRedisTemplate = stringRedisTemplate;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    private static final String KEY_PREFIX = &#34;lock:&#34;;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    @Override
+</span></span><span class="line"><span class="cl">    public boolean tryLock(long timeoutSec) {
+</span></span><span class="line"><span class="cl">        // 获取线程标示
+</span></span><span class="line"><span class="cl">        long threadId = Thread.currentThread().getId();
+</span></span><span class="line"><span class="cl">        // 获取锁
+</span></span><span class="line"><span class="cl">        Boolean success = stringRedisTemplate.opsForValue().setIfAbsent(KEY_PREFIX + name, threadId+&#34; &#34;, timeoutSec, TimeUnit.SECONDS);
+</span></span><span class="line"><span class="cl">        return Boolean.TRUE.equals(success);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    @Override
+</span></span><span class="line"><span class="cl">    public void unlock() {
+</span></span><span class="line"><span class="cl">        stringRedisTemplate.delete(KEY_PREFIX + name);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="第二阶段">第二阶段</h3>
 <p><img
@@ -372,42 +372,42 @@ public class SimpleRedisLockStage1 implements ILock {
 </span><span class="lnt">35
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public class SimpleRedisLockStage2 implements ILock {
-
-    private String name;
-    private StringRedisTemplate stringRedisTemplate;
-
-    public SimpleRedisLockStage2(String name, StringRedisTemplate stringRedisTemplate) {
-        this.name = name;
-        this.stringRedisTemplate = stringRedisTemplate;
-    }
-
-    private static final String KEY_PREFIX = &#34;lock:&#34;;
-    private static final String ID_PREFIX = UUID.randomUUID().toString(true) + &#34;-&#34;;
-
-    @Override
-    public boolean tryLock(long timeoutSec) {
-        // 获取线程标示
-        String threadId = ID_PREFIX + Thread.currentThread().getId();
-        // 获取锁
-        Boolean success = stringRedisTemplate.opsForValue().setIfAbsent(KEY_PREFIX + name, threadId+&#34; &#34;, timeoutSec, TimeUnit.SECONDS);
-        return Boolean.TRUE.equals(success);
-    }
-
-    @Override
-    public void unlock() {
-        // 获取线程标示
-        String threadId = ID_PREFIX + Thread.currentThread().getId();
-        // 获取锁中的标示
-        String id = stringRedisTemplate.opsForValue().get(KEY_PREFIX + name);
-        // 判断标示是否一致
-        if(threadId.equals(id)) {
-            // 释放锁
-            stringRedisTemplate.delete(KEY_PREFIX + name);
-        }
-    }
-}
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">public class SimpleRedisLockStage2 implements ILock {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    private String name;
+</span></span><span class="line"><span class="cl">    private StringRedisTemplate stringRedisTemplate;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    public SimpleRedisLockStage2(String name, StringRedisTemplate stringRedisTemplate) {
+</span></span><span class="line"><span class="cl">        this.name = name;
+</span></span><span class="line"><span class="cl">        this.stringRedisTemplate = stringRedisTemplate;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    private static final String KEY_PREFIX = &#34;lock:&#34;;
+</span></span><span class="line"><span class="cl">    private static final String ID_PREFIX = UUID.randomUUID().toString(true) + &#34;-&#34;;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    @Override
+</span></span><span class="line"><span class="cl">    public boolean tryLock(long timeoutSec) {
+</span></span><span class="line"><span class="cl">        // 获取线程标示
+</span></span><span class="line"><span class="cl">        String threadId = ID_PREFIX + Thread.currentThread().getId();
+</span></span><span class="line"><span class="cl">        // 获取锁
+</span></span><span class="line"><span class="cl">        Boolean success = stringRedisTemplate.opsForValue().setIfAbsent(KEY_PREFIX + name, threadId+&#34; &#34;, timeoutSec, TimeUnit.SECONDS);
+</span></span><span class="line"><span class="cl">        return Boolean.TRUE.equals(success);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    @Override
+</span></span><span class="line"><span class="cl">    public void unlock() {
+</span></span><span class="line"><span class="cl">        // 获取线程标示
+</span></span><span class="line"><span class="cl">        String threadId = ID_PREFIX + Thread.currentThread().getId();
+</span></span><span class="line"><span class="cl">        // 获取锁中的标示
+</span></span><span class="line"><span class="cl">        String id = stringRedisTemplate.opsForValue().get(KEY_PREFIX + name);
+</span></span><span class="line"><span class="cl">        // 判断标示是否一致
+</span></span><span class="line"><span class="cl">        if(threadId.equals(id)) {
+</span></span><span class="line"><span class="cl">            // 释放锁
+</span></span><span class="line"><span class="cl">            stringRedisTemplate.delete(KEY_PREFIX + name);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="第三阶段">第三阶段</h3>
 <p><img
@@ -484,56 +484,56 @@ public class SimpleRedisLockStage1 implements ILock {
 </span><span class="lnt">49
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">import cn.hutool.core.lang.UUID;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.data.redis.core.script.DefaultRedisScript;
-
-import java.util.Collections;
-import java.util.concurrent.TimeUnit;
-
-
-
-public class SimpleRedisLockStage3 implements ILock {
-
-    private String name;
-    private StringRedisTemplate stringRedisTemplate;
-
-    public SimpleRedisLockStage3(String name, StringRedisTemplate stringRedisTemplate) {
-        this.name = name;
-        this.stringRedisTemplate = stringRedisTemplate;
-    }
-
-    private static final String KEY_PREFIX = &#34;lock:&#34;;
-    private static final String ID_PREFIX = UUID.randomUUID().toString(true) + &#34;-&#34;;
-    private static final DefaultRedisScript&lt;Long&gt; UNLOCK_SCRIPT;
-    static {
-        UNLOCK_SCRIPT = new DefaultRedisScript&lt;&gt;();
-        UNLOCK_SCRIPT.setLocation(new ClassPathResource(&#34;unlock.lua&#34;));
-        UNLOCK_SCRIPT.setResultType(Long.class);
-    }
-
-    @Override
-    public boolean tryLock(long timeoutSec) {
-        // 获取线程标示
-        String threadId = ID_PREFIX + Thread.currentThread().getId();
-        // 获取锁
-        Boolean success = stringRedisTemplate.opsForValue()
-                .setIfAbsent(KEY_PREFIX + name, threadId, timeoutSec, TimeUnit.SECONDS);
-        return Boolean.TRUE.equals(success);
-    }
-
-    @Override
-    public void unlock() {
-        // 调用lua脚本
-        stringRedisTemplate.execute(
-                UNLOCK_SCRIPT,
-                Collections.singletonList(KEY_PREFIX + name),
-                ID_PREFIX + Thread.currentThread().getId());
-    }
-
-}
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">import cn.hutool.core.lang.UUID;
+</span></span><span class="line"><span class="cl">import org.springframework.core.io.ClassPathResource;
+</span></span><span class="line"><span class="cl">import org.springframework.data.redis.core.StringRedisTemplate;
+</span></span><span class="line"><span class="cl">import org.springframework.data.redis.core.script.DefaultRedisScript;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">import java.util.Collections;
+</span></span><span class="line"><span class="cl">import java.util.concurrent.TimeUnit;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">public class SimpleRedisLockStage3 implements ILock {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    private String name;
+</span></span><span class="line"><span class="cl">    private StringRedisTemplate stringRedisTemplate;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    public SimpleRedisLockStage3(String name, StringRedisTemplate stringRedisTemplate) {
+</span></span><span class="line"><span class="cl">        this.name = name;
+</span></span><span class="line"><span class="cl">        this.stringRedisTemplate = stringRedisTemplate;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    private static final String KEY_PREFIX = &#34;lock:&#34;;
+</span></span><span class="line"><span class="cl">    private static final String ID_PREFIX = UUID.randomUUID().toString(true) + &#34;-&#34;;
+</span></span><span class="line"><span class="cl">    private static final DefaultRedisScript&lt;Long&gt; UNLOCK_SCRIPT;
+</span></span><span class="line"><span class="cl">    static {
+</span></span><span class="line"><span class="cl">        UNLOCK_SCRIPT = new DefaultRedisScript&lt;&gt;();
+</span></span><span class="line"><span class="cl">        UNLOCK_SCRIPT.setLocation(new ClassPathResource(&#34;unlock.lua&#34;));
+</span></span><span class="line"><span class="cl">        UNLOCK_SCRIPT.setResultType(Long.class);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    @Override
+</span></span><span class="line"><span class="cl">    public boolean tryLock(long timeoutSec) {
+</span></span><span class="line"><span class="cl">        // 获取线程标示
+</span></span><span class="line"><span class="cl">        String threadId = ID_PREFIX + Thread.currentThread().getId();
+</span></span><span class="line"><span class="cl">        // 获取锁
+</span></span><span class="line"><span class="cl">        Boolean success = stringRedisTemplate.opsForValue()
+</span></span><span class="line"><span class="cl">                .setIfAbsent(KEY_PREFIX + name, threadId, timeoutSec, TimeUnit.SECONDS);
+</span></span><span class="line"><span class="cl">        return Boolean.TRUE.equals(success);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    @Override
+</span></span><span class="line"><span class="cl">    public void unlock() {
+</span></span><span class="line"><span class="cl">        // 调用lua脚本
+</span></span><span class="line"><span class="cl">        stringRedisTemplate.execute(
+</span></span><span class="line"><span class="cl">                UNLOCK_SCRIPT,
+</span></span><span class="line"><span class="cl">                Collections.singletonList(KEY_PREFIX + name),
+</span></span><span class="line"><span class="cl">                ID_PREFIX + Thread.currentThread().getId());
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="二rlockredisson分布式锁">二.RLock（Redisson分布式锁）</h2>
 <p><img
@@ -584,27 +584,27 @@ public class SimpleRedisLockStage3 implements ILock {
 </span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"> // KEYS[1] : hash的key参数
- // ARGV[1] : LeaseTime 锁释放时间
- // ARGV[2] ：hash的field参数，当前进程的 redisson client+ 线程id
- // 判断是不是自己获得了锁
- 
- // 获取到了锁
-    // key不存在，set field，1
-&#34;if (redis.call(&#39;exists&#39;, KEYS[1]) == 0) then &#34; +
-&#34;redis.call(&#39;hincrby&#39;, KEYS[1], ARGV[2], 1); &#34; +  // hash incr 1
-&#34;redis.call(&#39;pexpire&#39;, KEYS[1], ARGV[1]); &#34; +     // 设置过期时间
-&#34;return nil; &#34; +
-&#34;end; &#34; +
-    // key存在且field也是自己，执行重入操作
-&#34;if (redis.call(&#39;hexists&#39;, KEYS[1], ARGV[2]) == 1) then &#34; +
-&#34;redis.call(&#39;hincrby&#39;, KEYS[1], ARGV[2], 1); &#34; +  // 重入锁 +1
-&#34;redis.call(&#39;pexpire&#39;, KEYS[1], ARGV[1]); &#34; +     // 重新设置过期时间
-&#34;return nil; &#34; +
-&#34;end; &#34; +
-//  获取不到锁，返回锁的剩余时间
-&#34;return redis.call(&#39;pttl&#39;, KEYS[1]);&#34;;
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"> // KEYS[1] : hash的key参数
+</span></span><span class="line"><span class="cl"> // ARGV[1] : LeaseTime 锁释放时间
+</span></span><span class="line"><span class="cl"> // ARGV[2] ：hash的field参数，当前进程的 redisson client+ 线程id
+</span></span><span class="line"><span class="cl"> // 判断是不是自己获得了锁
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"> // 获取到了锁
+</span></span><span class="line"><span class="cl">    // key不存在，set field，1
+</span></span><span class="line"><span class="cl">&#34;if (redis.call(&#39;exists&#39;, KEYS[1]) == 0) then &#34; +
+</span></span><span class="line"><span class="cl">&#34;redis.call(&#39;hincrby&#39;, KEYS[1], ARGV[2], 1); &#34; +  // hash incr 1
+</span></span><span class="line"><span class="cl">&#34;redis.call(&#39;pexpire&#39;, KEYS[1], ARGV[1]); &#34; +     // 设置过期时间
+</span></span><span class="line"><span class="cl">&#34;return nil; &#34; +
+</span></span><span class="line"><span class="cl">&#34;end; &#34; +
+</span></span><span class="line"><span class="cl">    // key存在且field也是自己，执行重入操作
+</span></span><span class="line"><span class="cl">&#34;if (redis.call(&#39;hexists&#39;, KEYS[1], ARGV[2]) == 1) then &#34; +
+</span></span><span class="line"><span class="cl">&#34;redis.call(&#39;hincrby&#39;, KEYS[1], ARGV[2], 1); &#34; +  // 重入锁 +1
+</span></span><span class="line"><span class="cl">&#34;redis.call(&#39;pexpire&#39;, KEYS[1], ARGV[1]); &#34; +     // 重新设置过期时间
+</span></span><span class="line"><span class="cl">&#34;return nil; &#34; +
+</span></span><span class="line"><span class="cl">&#34;end; &#34; +
+</span></span><span class="line"><span class="cl">//  获取不到锁，返回锁的剩余时间
+</span></span><span class="line"><span class="cl">&#34;return redis.call(&#39;pttl&#39;, KEYS[1]);&#34;;
+</span></span></code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -627,24 +627,24 @@ public class SimpleRedisLockStage3 implements ILock {
 </span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">&lt;T&gt; RFuture&lt;T&gt; tryLockInnerAsync(long waitTime, long leaseTime, TimeUnit unit, long threadId, RedisStrictCommand&lt;T&gt; command) {
-    internalLockLeaseTime = unit.toMillis(leaseTime);
-
-    return evalWriteAsync(getName(), LongCodec.INSTANCE, command,
-            &#34;if (redis.call(&#39;exists&#39;, KEYS[1]) == 0) then &#34; +
-                    &#34;redis.call(&#39;hincrby&#39;, KEYS[1], ARGV[2], 1); &#34; +
-                    &#34;redis.call(&#39;pexpire&#39;, KEYS[1], ARGV[1]); &#34; +
-                    &#34;return nil; &#34; +
-                    &#34;end; &#34; +
-                    &#34;if (redis.call(&#39;hexists&#39;, KEYS[1], ARGV[2]) == 1) then &#34; +
-                    &#34;redis.call(&#39;hincrby&#39;, KEYS[1], ARGV[2], 1); &#34; +
-                    &#34;redis.call(&#39;pexpire&#39;, KEYS[1], ARGV[1]); &#34; +
-                    &#34;return nil; &#34; +
-                    &#34;end; &#34; +
-                    &#34;return redis.call(&#39;pttl&#39;, KEYS[1]);&#34;,
-            Collections.singletonList(getName()), internalLockLeaseTime, getLockName(threadId));
-}
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;T&gt; RFuture&lt;T&gt; tryLockInnerAsync(long waitTime, long leaseTime, TimeUnit unit, long threadId, RedisStrictCommand&lt;T&gt; command) {
+</span></span><span class="line"><span class="cl">    internalLockLeaseTime = unit.toMillis(leaseTime);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    return evalWriteAsync(getName(), LongCodec.INSTANCE, command,
+</span></span><span class="line"><span class="cl">            &#34;if (redis.call(&#39;exists&#39;, KEYS[1]) == 0) then &#34; +
+</span></span><span class="line"><span class="cl">                    &#34;redis.call(&#39;hincrby&#39;, KEYS[1], ARGV[2], 1); &#34; +
+</span></span><span class="line"><span class="cl">                    &#34;redis.call(&#39;pexpire&#39;, KEYS[1], ARGV[1]); &#34; +
+</span></span><span class="line"><span class="cl">                    &#34;return nil; &#34; +
+</span></span><span class="line"><span class="cl">                    &#34;end; &#34; +
+</span></span><span class="line"><span class="cl">                    &#34;if (redis.call(&#39;hexists&#39;, KEYS[1], ARGV[2]) == 1) then &#34; +
+</span></span><span class="line"><span class="cl">                    &#34;redis.call(&#39;hincrby&#39;, KEYS[1], ARGV[2], 1); &#34; +
+</span></span><span class="line"><span class="cl">                    &#34;redis.call(&#39;pexpire&#39;, KEYS[1], ARGV[1]); &#34; +
+</span></span><span class="line"><span class="cl">                    &#34;return nil; &#34; +
+</span></span><span class="line"><span class="cl">                    &#34;end; &#34; +
+</span></span><span class="line"><span class="cl">                    &#34;return redis.call(&#39;pttl&#39;, KEYS[1]);&#34;,
+</span></span><span class="line"><span class="cl">            Collections.singletonList(getName()), internalLockLeaseTime, getLockName(threadId));
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>2.redisson 释放锁</p>
 <div class="highlight"><div class="chroma">
@@ -674,30 +674,30 @@ public class SimpleRedisLockStage3 implements ILock {
 </span><span class="lnt">23
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"> // KEYS[1] : hash的key参数
- // ARGV[1] : 解锁时候 发送的消息，用于通知其他等待锁的进程
- // ARGV[2] : LeaseTime 锁释放时间
- // ARGV[3] ：redisson client+ 线程id
- // 判断锁是否还是自己持有
-    // 如果不是自己，直接返回
-&#34;if (redis.call(&#39;hexists&#39;, KEYS[1], ARGV[3]) == 0) then &#34; +
-&#34;return nil;&#34; +
-&#34;end; &#34; +
-    // 如果是自己 ，value incrby 1
-&#34;local counter = redis.call(&#39;hincrby&#39;, KEYS[1], ARGV[3], -1); &#34; +
-        //  判断重入次数是否为0
-        // &gt;0 还不能释放锁，并且续期
-&#34;if (counter &gt; 0) then &#34; +
-&#34;redis.call(&#39;pexpire&#39;, KEYS[1], ARGV[2]); &#34; +
-&#34;return 0; &#34; +
-&#34;else &#34; +
-        // &lt;=0 可以解锁，并发送消息通知
-&#34;redis.call(&#39;del&#39;, KEYS[1]); &#34; +
-&#34;redis.call(&#39;publish&#39;, KEYS[2], ARGV[1]); &#34; +
-&#34;return 1; &#34; +
-&#34;end; &#34; +
-&#34;return nil;&#34;,
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"> // KEYS[1] : hash的key参数
+</span></span><span class="line"><span class="cl"> // ARGV[1] : 解锁时候 发送的消息，用于通知其他等待锁的进程
+</span></span><span class="line"><span class="cl"> // ARGV[2] : LeaseTime 锁释放时间
+</span></span><span class="line"><span class="cl"> // ARGV[3] ：redisson client+ 线程id
+</span></span><span class="line"><span class="cl"> // 判断锁是否还是自己持有
+</span></span><span class="line"><span class="cl">    // 如果不是自己，直接返回
+</span></span><span class="line"><span class="cl">&#34;if (redis.call(&#39;hexists&#39;, KEYS[1], ARGV[3]) == 0) then &#34; +
+</span></span><span class="line"><span class="cl">&#34;return nil;&#34; +
+</span></span><span class="line"><span class="cl">&#34;end; &#34; +
+</span></span><span class="line"><span class="cl">    // 如果是自己 ，value incrby 1
+</span></span><span class="line"><span class="cl">&#34;local counter = redis.call(&#39;hincrby&#39;, KEYS[1], ARGV[3], -1); &#34; +
+</span></span><span class="line"><span class="cl">        //  判断重入次数是否为0
+</span></span><span class="line"><span class="cl">        // &gt;0 还不能释放锁，并且续期
+</span></span><span class="line"><span class="cl">&#34;if (counter &gt; 0) then &#34; +
+</span></span><span class="line"><span class="cl">&#34;redis.call(&#39;pexpire&#39;, KEYS[1], ARGV[2]); &#34; +
+</span></span><span class="line"><span class="cl">&#34;return 0; &#34; +
+</span></span><span class="line"><span class="cl">&#34;else &#34; +
+</span></span><span class="line"><span class="cl">        // &lt;=0 可以解锁，并发送消息通知
+</span></span><span class="line"><span class="cl">&#34;redis.call(&#39;del&#39;, KEYS[1]); &#34; +
+</span></span><span class="line"><span class="cl">&#34;redis.call(&#39;publish&#39;, KEYS[2], ARGV[1]); &#34; +
+</span></span><span class="line"><span class="cl">&#34;return 1; &#34; +
+</span></span><span class="line"><span class="cl">&#34;end; &#34; +
+</span></span><span class="line"><span class="cl">&#34;return nil;&#34;,
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><img
         class="lazyload"
@@ -728,24 +728,24 @@ public class SimpleRedisLockStage3 implements ILock {
 </span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">protected RFuture&lt;Boolean&gt; unlockInnerAsync(long threadId) {
-    return evalWriteAsync(getName(), LongCodec.INSTANCE, RedisCommands.EVAL_BOOLEAN,
-            &#34;if (redis.call(&#39;hexists&#39;, KEYS[1], ARGV[3]) == 0) then &#34; +
-                    &#34;return nil;&#34; +
-                    &#34;end; &#34; +
-                    &#34;local counter = redis.call(&#39;hincrby&#39;, KEYS[1], ARGV[3], -1); &#34; +
-                    &#34;if (counter &gt; 0) then &#34; +
-                    &#34;redis.call(&#39;pexpire&#39;, KEYS[1], ARGV[2]); &#34; +
-                    &#34;return 0; &#34; +
-                    &#34;else &#34; +
-                    &#34;redis.call(&#39;del&#39;, KEYS[1]); &#34; +
-                    &#34;redis.call(&#39;publish&#39;, KEYS[2], ARGV[1]); &#34; +
-                    &#34;return 1; &#34; +
-                    &#34;end; &#34; +
-                    &#34;return nil;&#34;,
-            Arrays.asList(getName(), getChannelName()), LockPubSub.UNLOCK_MESSAGE, internalLockLeaseTime, getLockName(threadId));
-}
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">protected RFuture&lt;Boolean&gt; unlockInnerAsync(long threadId) {
+</span></span><span class="line"><span class="cl">    return evalWriteAsync(getName(), LongCodec.INSTANCE, RedisCommands.EVAL_BOOLEAN,
+</span></span><span class="line"><span class="cl">            &#34;if (redis.call(&#39;hexists&#39;, KEYS[1], ARGV[3]) == 0) then &#34; +
+</span></span><span class="line"><span class="cl">                    &#34;return nil;&#34; +
+</span></span><span class="line"><span class="cl">                    &#34;end; &#34; +
+</span></span><span class="line"><span class="cl">                    &#34;local counter = redis.call(&#39;hincrby&#39;, KEYS[1], ARGV[3], -1); &#34; +
+</span></span><span class="line"><span class="cl">                    &#34;if (counter &gt; 0) then &#34; +
+</span></span><span class="line"><span class="cl">                    &#34;redis.call(&#39;pexpire&#39;, KEYS[1], ARGV[2]); &#34; +
+</span></span><span class="line"><span class="cl">                    &#34;return 0; &#34; +
+</span></span><span class="line"><span class="cl">                    &#34;else &#34; +
+</span></span><span class="line"><span class="cl">                    &#34;redis.call(&#39;del&#39;, KEYS[1]); &#34; +
+</span></span><span class="line"><span class="cl">                    &#34;redis.call(&#39;publish&#39;, KEYS[2], ARGV[1]); &#34; +
+</span></span><span class="line"><span class="cl">                    &#34;return 1; &#34; +
+</span></span><span class="line"><span class="cl">                    &#34;end; &#34; +
+</span></span><span class="line"><span class="cl">                    &#34;return nil;&#34;,
+</span></span><span class="line"><span class="cl">            Arrays.asList(getName(), getChannelName()), LockPubSub.UNLOCK_MESSAGE, internalLockLeaseTime, getLockName(threadId));
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>3.看门狗代码</p>
 <div class="highlight"><div class="chroma">
@@ -859,114 +859,114 @@ public class SimpleRedisLockStage3 implements ILock {
 </span><span class="lnt">107
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">//设置看门狗 ，可以看到会有一个EXPIRATION_RENEWAL_MAP map来维护每个看门狗
-
-private void renewExpiration() {
-    ExpirationEntry ee = EXPIRATION_RENEWAL_MAP.get(getEntryName());
-    if (ee == null) {
-        return;
-    }
-    
-    Timeout task = commandExecutor.getConnectionManager().newTimeout(new TimerTask() {
-        @Override
-        public void run(Timeout timeout) throws Exception {
-            ExpirationEntry ent = EXPIRATION_RENEWAL_MAP.get(getEntryName());
-            if (ent == null) {
-                return;
-            }
-            Long threadId = ent.getFirstThreadId();
-            if (threadId == null) {
-                return;
-            }
-            
-            RFuture&lt;Boolean&gt; future = renewExpirationAsync(threadId);
-            future.onComplete((res, e) -&gt; {
-                if (e != null) {
-                    log.error(&#34;Can&#39;t update lock &#34; + getName() + &#34; expiration&#34;, e);
-                    return;
-                }
-                
-                if (res) {
-                    // reschedule itself
-                    renewExpiration();
-                }
-            });
-        }
-    }, internalLockLeaseTime / 3, TimeUnit.MILLISECONDS);
-    
-    ee.setTimeout(task);
-}
-
-
-
-
-
- //重置锁 有效期！
- protected RFuture&lt;Boolean&gt; renewExpirationAsync(long threadId) {
-     return evalWriteAsync(getName(), LongCodec.INSTANCE, RedisCommands.EVAL_BOOLEAN,
-             &#34;if (redis.call(&#39;hexists&#39;, KEYS[1], ARGV[2]) == 1) then &#34; +
-                     &#34;redis.call(&#39;pexpire&#39;, KEYS[1], ARGV[1]); &#34; +
-                     &#34;return 1; &#34; +
-                     &#34;end; &#34; +
-                     &#34;return 0;&#34;,
-             Collections.singletonList(getName()),
-             internalLockLeaseTime, getLockName(threadId));
- }
-
-
-
-
-
-
-
-//取消看门狗
-
- @Override
-    public RFuture&lt;Void&gt; unlockAsync(long threadId) {
-        RPromise&lt;Void&gt; result = new RedissonPromise&lt;Void&gt;();
-        RFuture&lt;Boolean&gt; future = unlockInnerAsync(threadId);
-
-        future.onComplete((opStatus, e) -&gt; {
-            cancelExpirationRenewal(threadId);
-
-            if (e != null) {
-                result.tryFailure(e);
-                return;
-            }
-
-            if (opStatus == null) {
-                IllegalMonitorStateException cause = new IllegalMonitorStateException(&#34;attempt to unlock lock, not locked by current thread by node id: &#34;
-                        + id + &#34; thread-id: &#34; + threadId);
-                result.tryFailure(cause);
-                return;
-            }
-
-            result.trySuccess(null);
-        });
-
-        return result;
-    }
-    
-    
-        void cancelExpirationRenewal(Long threadId) {
-        ExpirationEntry task = EXPIRATION_RENEWAL_MAP.get(getEntryName());
-        if (task == null) {
-            return;
-        }
-        
-        if (threadId != null) {
-            task.removeThreadId(threadId);
-        }
-
-        if (threadId == null || task.hasNoThreads()) {
-            Timeout timeout = task.getTimeout();
-            if (timeout != null) {
-                timeout.cancel();
-            }
-            EXPIRATION_RENEWAL_MAP.remove(getEntryName());
-        }
-    }
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">//设置看门狗 ，可以看到会有一个EXPIRATION_RENEWAL_MAP map来维护每个看门狗
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">private void renewExpiration() {
+</span></span><span class="line"><span class="cl">    ExpirationEntry ee = EXPIRATION_RENEWAL_MAP.get(getEntryName());
+</span></span><span class="line"><span class="cl">    if (ee == null) {
+</span></span><span class="line"><span class="cl">        return;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    Timeout task = commandExecutor.getConnectionManager().newTimeout(new TimerTask() {
+</span></span><span class="line"><span class="cl">        @Override
+</span></span><span class="line"><span class="cl">        public void run(Timeout timeout) throws Exception {
+</span></span><span class="line"><span class="cl">            ExpirationEntry ent = EXPIRATION_RENEWAL_MAP.get(getEntryName());
+</span></span><span class="line"><span class="cl">            if (ent == null) {
+</span></span><span class="line"><span class="cl">                return;
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            Long threadId = ent.getFirstThreadId();
+</span></span><span class="line"><span class="cl">            if (threadId == null) {
+</span></span><span class="line"><span class="cl">                return;
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            RFuture&lt;Boolean&gt; future = renewExpirationAsync(threadId);
+</span></span><span class="line"><span class="cl">            future.onComplete((res, e) -&gt; {
+</span></span><span class="line"><span class="cl">                if (e != null) {
+</span></span><span class="line"><span class="cl">                    log.error(&#34;Can&#39;t update lock &#34; + getName() + &#34; expiration&#34;, e);
+</span></span><span class="line"><span class="cl">                    return;
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">                if (res) {
+</span></span><span class="line"><span class="cl">                    // reschedule itself
+</span></span><span class="line"><span class="cl">                    renewExpiration();
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">            });
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }, internalLockLeaseTime / 3, TimeUnit.MILLISECONDS);
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    ee.setTimeout(task);
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> //重置锁 有效期！
+</span></span><span class="line"><span class="cl"> protected RFuture&lt;Boolean&gt; renewExpirationAsync(long threadId) {
+</span></span><span class="line"><span class="cl">     return evalWriteAsync(getName(), LongCodec.INSTANCE, RedisCommands.EVAL_BOOLEAN,
+</span></span><span class="line"><span class="cl">             &#34;if (redis.call(&#39;hexists&#39;, KEYS[1], ARGV[2]) == 1) then &#34; +
+</span></span><span class="line"><span class="cl">                     &#34;redis.call(&#39;pexpire&#39;, KEYS[1], ARGV[1]); &#34; +
+</span></span><span class="line"><span class="cl">                     &#34;return 1; &#34; +
+</span></span><span class="line"><span class="cl">                     &#34;end; &#34; +
+</span></span><span class="line"><span class="cl">                     &#34;return 0;&#34;,
+</span></span><span class="line"><span class="cl">             Collections.singletonList(getName()),
+</span></span><span class="line"><span class="cl">             internalLockLeaseTime, getLockName(threadId));
+</span></span><span class="line"><span class="cl"> }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">//取消看门狗
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> @Override
+</span></span><span class="line"><span class="cl">    public RFuture&lt;Void&gt; unlockAsync(long threadId) {
+</span></span><span class="line"><span class="cl">        RPromise&lt;Void&gt; result = new RedissonPromise&lt;Void&gt;();
+</span></span><span class="line"><span class="cl">        RFuture&lt;Boolean&gt; future = unlockInnerAsync(threadId);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        future.onComplete((opStatus, e) -&gt; {
+</span></span><span class="line"><span class="cl">            cancelExpirationRenewal(threadId);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            if (e != null) {
+</span></span><span class="line"><span class="cl">                result.tryFailure(e);
+</span></span><span class="line"><span class="cl">                return;
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            if (opStatus == null) {
+</span></span><span class="line"><span class="cl">                IllegalMonitorStateException cause = new IllegalMonitorStateException(&#34;attempt to unlock lock, not locked by current thread by node id: &#34;
+</span></span><span class="line"><span class="cl">                        + id + &#34; thread-id: &#34; + threadId);
+</span></span><span class="line"><span class="cl">                result.tryFailure(cause);
+</span></span><span class="line"><span class="cl">                return;
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            result.trySuccess(null);
+</span></span><span class="line"><span class="cl">        });
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        return result;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">        void cancelExpirationRenewal(Long threadId) {
+</span></span><span class="line"><span class="cl">        ExpirationEntry task = EXPIRATION_RENEWAL_MAP.get(getEntryName());
+</span></span><span class="line"><span class="cl">        if (task == null) {
+</span></span><span class="line"><span class="cl">            return;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        if (threadId != null) {
+</span></span><span class="line"><span class="cl">            task.removeThreadId(threadId);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        if (threadId == null || task.hasNoThreads()) {
+</span></span><span class="line"><span class="cl">            Timeout timeout = task.getTimeout();
+</span></span><span class="line"><span class="cl">            if (timeout != null) {
+</span></span><span class="line"><span class="cl">                timeout.cancel();
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            EXPIRATION_RENEWAL_MAP.remove(getEntryName());
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="2api使用">2.api使用</h3>
 <p>redisson有多个lock和trylock方法.</p>
@@ -984,11 +984,11 @@ private void renewExpiration() {
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">//lock()如果线程一直没有执行完，会在剩 2/3的 持有锁时间时，重新续上完整的持有锁时间，直到线程结束运行
-lock.lock(); 默认持有锁时间30s，到ttl 20s时，会再续到30s，会一直续下去，直到线程结束运行
-//lock(90L, TimeUnit.SECONDS) 不会续期，超过了设定的释放时间，锁就会释放
-lock.lock(90L, TimeUnit.SECONDS);  设置持有锁时间90s，90s过了程序没执行完，锁也会被释放
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">//lock()如果线程一直没有执行完，会在剩 2/3的 持有锁时间时，重新续上完整的持有锁时间，直到线程结束运行
+</span></span><span class="line"><span class="cl">lock.lock(); 默认持有锁时间30s，到ttl 20s时，会再续到30s，会一直续下去，直到线程结束运行
+</span></span><span class="line"><span class="cl">//lock(90L, TimeUnit.SECONDS) 不会续期，超过了设定的释放时间，锁就会释放
+</span></span><span class="line"><span class="cl">lock.lock(90L, TimeUnit.SECONDS);  设置持有锁时间90s，90s过了程序没执行完，锁也会被释放
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>tryLock()</p>
 <div class="highlight"><div class="chroma">
@@ -1007,19 +1007,19 @@ lock.lock(90L, TimeUnit.SECONDS);  设置持有锁时间90s，90s过了程序没
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">//tryLock()如果锁可用，则获取锁并立即返回值 true。 如果锁不可用，则此方法将立即返回值 false。
-//获得锁后，默认持有锁时间30s，到ttl 20s时，会再续到30s，会一直续下去，直到线程结束运行
-lock.tryLock();
-
-
-//tryLock()如果在设置时间内获取到了锁，返回值 true。 如果锁不可用，会等待设定的时间，超过时间返回false
-//获得锁后，默认持有锁时间30s，到ttl 20s时，会再续到30s，会一直续下去，直到线程结束运行
-lock.tryLock(100L, TimeUnit.SECONDS);
-
-//tryLock()如果锁可用，如果在设置时间内获取到了锁，返回值 true。 如果锁不可用，会等待设定的时间，超过时间返回false
-//不会续期，超过了设定的释放时间，锁就会释放
-boolean b2 = lock.tryLock(10,90L, TimeUnit.SECONDS);
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">//tryLock()如果锁可用，则获取锁并立即返回值 true。 如果锁不可用，则此方法将立即返回值 false。
+</span></span><span class="line"><span class="cl">//获得锁后，默认持有锁时间30s，到ttl 20s时，会再续到30s，会一直续下去，直到线程结束运行
+</span></span><span class="line"><span class="cl">lock.tryLock();
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">//tryLock()如果在设置时间内获取到了锁，返回值 true。 如果锁不可用，会等待设定的时间，超过时间返回false
+</span></span><span class="line"><span class="cl">//获得锁后，默认持有锁时间30s，到ttl 20s时，会再续到30s，会一直续下去，直到线程结束运行
+</span></span><span class="line"><span class="cl">lock.tryLock(100L, TimeUnit.SECONDS);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">//tryLock()如果锁可用，如果在设置时间内获取到了锁，返回值 true。 如果锁不可用，会等待设定的时间，超过时间返回false
+</span></span><span class="line"><span class="cl">//不会续期，超过了设定的释放时间，锁就会释放
+</span></span><span class="line"><span class="cl">boolean b2 = lock.tryLock(10,90L, TimeUnit.SECONDS);
+</span></span></code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1032,14 +1032,14 @@ boolean b2 = lock.tryLock(10,90L, TimeUnit.SECONDS);
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">//**但是 这种情况 先lock()后lock.lock(90L, TimeUnit.SECONDS); .lock(90L, TimeUnit.SECONDS)可以续签
-lock.lock();
-System.out.println(&#34;lock.lock() 获取到了锁&#34;);
-Thread.sleep(100*1000);
-lock.lock(90L, TimeUnit.SECONDS);
-System.out.println(&#34;lock.lock(90L, TimeUnit.SECONDS) 获取到了锁&#34;);
-Thread.sleep(300*1000);
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">//**但是 这种情况 先lock()后lock.lock(90L, TimeUnit.SECONDS); .lock(90L, TimeUnit.SECONDS)可以续签
+</span></span><span class="line"><span class="cl">lock.lock();
+</span></span><span class="line"><span class="cl">System.out.println(&#34;lock.lock() 获取到了锁&#34;);
+</span></span><span class="line"><span class="cl">Thread.sleep(100*1000);
+</span></span><span class="line"><span class="cl">lock.lock(90L, TimeUnit.SECONDS);
+</span></span><span class="line"><span class="cl">System.out.println(&#34;lock.lock(90L, TimeUnit.SECONDS) 获取到了锁&#34;);
+</span></span><span class="line"><span class="cl">Thread.sleep(300*1000);
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="3流程">3.流程</h3>
 <h2 id="三multilock联锁">三.MultiLock（联锁）</h2>
@@ -1069,7 +1069,7 @@ Thread.sleep(300*1000);
 </div>
 </article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.92.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.105.0-DEV">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
                 </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ricky</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>

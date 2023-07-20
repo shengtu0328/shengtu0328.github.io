@@ -4,7 +4,7 @@
         <link>https://shengtu0328.github.io/posts/</link>
         <description>All Posts | ricky的网站</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1007@qq.com (ricky)</managingEditor>
-            <webMaster>1007@qq.com (ricky)</webMaster><lastBuildDate>Tue, 27 Jun 2023 16:28:53 &#43;0800</lastBuildDate><atom:link href="https://shengtu0328.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>1007@qq.com (ricky)</webMaster><lastBuildDate>Mon, 17 Jul 2023 22:10:47 &#43;0800</lastBuildDate><atom:link href="https://shengtu0328.github.io/posts/" rel="self" type="application/rss+xml" /><item>
     <title>线程池</title>
     <link>https://shengtu0328.github.io/posts/threadpool/</link>
     <pubDate>Thu, 01 Dec 2022 14:14:25 &#43;0800</pubDate>
@@ -35,6 +35,14 @@
     <author>ricky</author>
     <guid>https://shengtu0328.github.io/posts/english_writing/</guid>
     <description><![CDATA[Why i learned English I recently watched some interesting videos on bilibli which is about communicating with foreigners in English on website. The videos was so funny that it made me have the idea of relearning the skill of English language . You know，i recently started to practise my english from multiple aspects 。Literally,m]]></description>
+</item>
+<item>
+    <title>English_writing_daily_001</title>
+    <link>https://shengtu0328.github.io/posts/english_writing_daily_001/</link>
+    <pubDate>Mon, 17 Jul 2023 22:10:47 &#43;0800</pubDate>
+    <author>ricky</author>
+    <guid>https://shengtu0328.github.io/posts/english_writing_daily_001/</guid>
+    <description><![CDATA[This post has been polished by chatgpt 这篇文章已经被chatgpt润色 Title: Navigating Unemployment with a Well-Planned Approach 标题：通过准备好策划的方法应对失业问题 Recently, many companies, including the one I worked for, have been forced to lay off employees, and unfortunately, I am among]]></description>
 </item>
 <item>
     <title>English_phrases</title>
@@ -75,16 +83,6 @@
     <author>ricky</author>
     <guid>https://shengtu0328.github.io/posts/english_grammar_subjective_mood/</guid>
     <description><![CDATA[一.if开头 1.与现在事实相反的虚拟语气——过去时 条件句：过去式 主句：would/might/should/+动词原形 不论主语为第几人称，i]]></description>
-</item>
-<item>
-    <title>Resume_english</title>
-    <link>https://shengtu0328.github.io/posts/resume_english/</link>
-    <pubDate>Wed, 31 May 2023 15:27:05 &#43;0800</pubDate>
-    <author>ricky</author>
-    <guid>https://shengtu0328.github.io/posts/resume_english/</guid>
-    <description><![CDATA[EXECUTIVE SUMMARY Accomplished Java Developer with &gt;5 years’ experience in designing, developing, testing and maintaining enterprise web applications. Passionate about learning new technologies.
-Project Experience  | Eye of God System | Jun.2022 - Jan.2023 | Project Description:
- Eye of God System is a content review system based on AI learning algorithms, which detects sensitive and risky content in internet videos/audio/images/texts. Technical Solution: SpringBoot, SpringSecurity, Nacos, ELK, RocketMQ, Redis, MySQL  My Responsibilities:]]></description>
 </item>
 </channel>
 </rss>
