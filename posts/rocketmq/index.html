@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/shengtu0328.github.io\/posts\/rocketmq\/"
-        },"genre": "posts","wordcount":  1837 ,
+        },"genre": "posts","wordcount":  2034 ,
         "url": "https:\/\/shengtu0328.github.io\/posts\/rocketmq\/","datePublished": "2023-01-17T17:21:36+08:00","dateModified": "2023-01-17T17:21:36+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -102,8 +102,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">RocketMQ</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-01-17">2023-01-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1837 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-01-17">2023-01-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2034 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -144,6 +144,8 @@
         </li>
         <li><a href="#零拷贝">零拷贝</a></li>
         <li><a href="#同步刷盘异步刷盘同步复制异步复制">同步刷盘，异步刷盘，同步复制，异步复制</a></li>
+        <li><a href="#heading"></a></li>
+        <li><a href="#怎么保证消息不丢失">怎么保证消息不丢失</a></li>
       </ul>
     </li>
   </ul>
@@ -295,8 +297,17 @@ NOTICE		benchmark	conf</p>
 <p><a href="https://www.cnblogs.com/toUpdating/p/10021372.html" target="_blank" rel="noopener noreffer ">https://www.cnblogs.com/toUpdating/p/10021372.html</a></p>
 <p>通常情况下，应该把Master和Slave设置成ASYNC_FLUSH的刷盘方式，</p>
 <p>主从之间配置成SYNC_MASTER的复制方式，这样即使有一台机器出故障，仍然可以保证数据不丢。</p>
-<p>也就是推荐 同步双写，异步刷盘。</p>
+<p><strong>也就是推荐 同步双写，异步刷盘。</strong></p>
 <p>DirectBuffer.png</p>
+<h3 id="heading"></h3>
+<h3 id="怎么保证消息不丢失">怎么保证消息不丢失</h3>
+<p>一.Producer 新建消息，然后通过网络将消息投递给 MQ Broker</p>
+<p>1.同步发送/异步发送 同步还是异步的方式，都会碰到网络问题导致发送失败的情况。针对这种情况，我们可以设置合理的重试次数，当出现网络问</p>
+<p>二.Broker 存储阶段</p>
+<p>消息只要到了 Broker 端，将会优先保存到内存中，然后立刻返回确认响应给生产者。 同步双写，异步刷盘、、</p>
+<p>三.消费者从 broker 拉取消息</p>
+<p>消息队列 RocketMQ 默认允许每条消息最多重试 16 次</p>
+<p>ACK确认</p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
