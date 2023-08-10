@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <title>Springboot启动流程 - ricky的网站</title><meta name="Description" content="The best time to plant a tree was 10 years ago, the second is now"><meta property="og:title" content="Springboot启动流程" />
-<meta property="og:description" content="几个重要的类 AnnotationConfigServletWebServerApplicationContext 包含了beanFactory beanFactory 包含了singletonObjects 总结springboot 启动流程 在new SpringApplication() 构造方法中，会解" />
+<meta property="og:description" content="几个重要的类 AnnotationConfigServletWebServerApplicationContext 包含了beanFactory beanFactory 包含了singletonObjects 总结springboot 启动流程 1 2 3 public static void main(String[] args) { SpringApplication.run(Application.class, args); } 首" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://shengtu0328.github.io/posts/springboot_startup_process/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-05-24T10:38:27+08:00" />
@@ -13,7 +13,7 @@
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Springboot启动流程"/>
-<meta name="twitter:description" content="几个重要的类 AnnotationConfigServletWebServerApplicationContext 包含了beanFactory beanFactory 包含了singletonObjects 总结springboot 启动流程 在new SpringApplication() 构造方法中，会解"/>
+<meta name="twitter:description" content="几个重要的类 AnnotationConfigServletWebServerApplicationContext 包含了beanFactory beanFactory 包含了singletonObjects 总结springboot 启动流程 1 2 3 public static void main(String[] args) { SpringApplication.run(Application.class, args); } 首"/>
 <meta name="application-name" content="我的网站">
 <meta name="apple-mobile-web-app-title" content="我的网站"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/shengtu0328.github.io\/posts\/springboot_startup_process\/"
-        },"genre": "posts","wordcount":  1056 ,
+        },"genre": "posts","wordcount":  1169 ,
         "url": "https:\/\/shengtu0328.github.io\/posts\/springboot_startup_process\/","datePublished": "2023-05-24T10:38:27+08:00","dateModified": "2023-05-24T10:38:27+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -102,7 +102,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Springboot启动流程</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-05-24">2023-05-24</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1056 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-05-24">2023-05-24</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1169 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -119,9 +119,21 @@
 <p>AnnotationConfigServletWebServerApplicationContext 包含了beanFactory</p>
 <p>beanFactory 包含了singletonObjects</p>
 <h2 id="总结springboot-启动流程">总结springboot 启动流程</h2>
-<ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">	public static void main(String[] args) {
+</span></span><span class="line"><span class="cl">		SpringApplication.run(Application.class, args);
+</span></span><span class="line"><span class="cl">	}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol>
 <li>
-<p>在new SpringApplication() 构造方法中，会解析当前ClassLoader中所有jar包下的spring.factories文件，包括我们项目里自定义的spring.factories文件。将文件中的内容即 &ldquo;接口全限定名-实现类全限定名（1对多的关系）&quot;，</p>
+<p>首先會創建一个 SpringApplication对象，在new SpringApplication() 构造方法中，会解析当前ClassLoader中所有jar包下的spring.factories文件，包括我们项目里自定义的spring.factories文件。将文件中的内容即 &ldquo;接口全限定名-实现类全限定名（1对多的关系）&quot;，</p>
 <p>将这些className 的List<!-- raw HTML omitted -->放入缓存的名为cache 的map中，static final Map&lt;ClassLoader, Map&lt;String, List<!-- raw HTML omitted -->&raquo; cache = new ConcurrentReferenceHashMap&lt;&gt;();以供后续使用，</p>
 <p>并且还实例化了几个默认的bean。</p>
 </li>
@@ -150,6 +162,7 @@
 <ol>
 <li>
 <p>prepareRefresh();</p>
+<p>创建 environment对象，一些系统的，java 系统的 ，自定义的key value信息，</p>
 </li>
 <li>
 <p>obtainFreshBeanFactory();</p>
@@ -166,7 +179,7 @@
 <ol>
 <li><strong>ConfigurationClassParser</strong>解析启动类上的@Configuration注解， @PropertySource 注解， @import注解(包括启动类上的@import注解里的AutoConfigurationImportSelector)
 <ol>
-<li>调用<strong>AutoConfigurationImportSelector <strong>process()方法，从SpringFactoriesLoader.loadFactoryNames 缓存加载</strong>EnableAutoConfiguration</strong>的 自动配置实现类，加载到<strong>BeanDefinition</strong>缓存</li>
+<li>调用<strong>AutoConfigurationImportSelector&amp;AutoConfigurationGroup类的 <strong>process()方法，从SpringFactoriesLoader.loadFactoryNames 缓存加载</strong>EnableAutoConfiguration</strong>的 自动配置实现类，加载到<strong>BeanDefinition</strong>缓存</li>
 </ol>
 </li>
 </ol>

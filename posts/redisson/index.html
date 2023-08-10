@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/shengtu0328.github.io\/posts\/redisson\/"
-        },"genre": "posts","wordcount":  3659 ,
+        },"genre": "posts","wordcount":  3701 ,
         "url": "https:\/\/shengtu0328.github.io\/posts\/redisson\/","datePublished": "2022-12-30T10:09:27+08:00","dateModified": "2022-12-30T10:09:27+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -102,7 +102,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Redisson</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-12-30">2022-12-30</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3659 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-12-30">2022-12-30</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3701 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;8 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -748,6 +748,7 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>3.看门狗代码</p>
+<p>如果tryLock方法自己设置了leaseTime， 那就没有看门狗了（锁续期功能）。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">  1
@@ -1043,6 +1044,14 @@
 </div>
 </div><h3 id="3流程">3.流程</h3>
 <h2 id="三multilock联锁">三.MultiLock（联锁）</h2>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="%e7%ba%a2%e9%94%81.png"
+        data-srcset="%e7%ba%a2%e9%94%81.png, %e7%ba%a2%e9%94%81.png 1.5x, %e7%ba%a2%e9%94%81.png 2x"
+        data-sizes="auto"
+        alt="红锁.png"
+        title="红锁.png" /></p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">

@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/shengtu0328.github.io\/posts\/hugo\/"
-        },"genre": "posts","wordcount":  518 ,
+        },"genre": "posts","wordcount":  522 ,
         "url": "https:\/\/shengtu0328.github.io\/posts\/hugo\/","datePublished": "2022-10-14T10:03:11+08:00","dateModified": "2022-10-14T10:03:11+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -102,7 +102,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Hugo</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-10-14">2022-10-14</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;518 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-10-14">2022-10-14</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;522 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -113,8 +113,8 @@
   <ul>
     <li><a href="#重新克隆包含子模块的项目">重新克隆包含子模块的项目</a>
       <ul>
-        <li><a href="#一是先克隆父项目再更新子模块">一。是先克隆父项目，再更新子模块</a></li>
-        <li><a href="#二递归克隆整个项目">二。递归克隆整个项目</a></li>
+        <li><a href="#第一种递归克隆整个项目">第一种。递归克隆整个项目</a></li>
+        <li><a href="#第二种是先克隆父项目再更新子模块">第二种。是先克隆父项目，再更新子模块</a></li>
       </ul>
     </li>
   </ul>
@@ -142,7 +142,72 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="重新克隆包含子模块的项目">重新克隆包含子模块的项目</h2>
-<h3 id="一是先克隆父项目再更新子模块">一。是先克隆父项目，再更新子模块</h3>
+<h3 id="第一种递归克隆整个项目">第一种。递归克隆整个项目</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-v" data-lang="v"><span class="line"><span class="cl"><span class="nv">videopls</span><span class="o">@</span><span class="nv">f01898564faf</span> <span class="nv">ideaProjectsBackup</span> <span class="o">%</span> <span class="nv">git</span> <span class="nv">clone</span> <span class="nv">git</span><span class="o">@</span><span class="nv">github</span><span class="p">.</span><span class="nv">com</span><span class="p">:</span><span class="nv">shengtu0328</span><span class="o">/</span><span class="nv">myHugo</span><span class="p">.</span><span class="nv">git</span> <span class="nv">myHugo</span> <span class="o">--</span><span class="nv">recursive</span>
+</span></span><span class="line"><span class="cl"><span class="nc">Cloning</span> <span class="nv">into</span> <span class="s1">&#39;myHugo&#39;</span><span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="nv">remote</span><span class="p">:</span> <span class="nc">Enumerating</span> <span class="nv">objects</span><span class="p">:</span> <span class="mi">611</span><span class="p">,</span> <span class="nv">done</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl"><span class="nv">remote</span><span class="p">:</span> <span class="nc">Counting</span> <span class="nv">objects</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">20</span><span class="o">/</span><span class="mi">20</span><span class="p">),</span> <span class="nv">done</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl"><span class="nv">remote</span><span class="p">:</span> <span class="nc">Compressing</span> <span class="nv">objects</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">14</span><span class="o">/</span><span class="mi">14</span><span class="p">),</span> <span class="nv">done</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl"><span class="nv">remote</span><span class="p">:</span> <span class="nc">Total</span> <span class="mi">611</span> <span class="p">(</span><span class="nv">delta</span> <span class="mi">4</span><span class="p">),</span> <span class="nv">reused</span> <span class="mi">15</span> <span class="p">(</span><span class="nv">delta</span> <span class="mi">4</span><span class="p">),</span> <span class="nv">pack</span><span class="o">-</span><span class="nv">reused</span> <span class="mi">591</span>
+</span></span><span class="line"><span class="cl"><span class="nc">Receiving</span> <span class="nv">objects</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">611</span><span class="o">/</span><span class="mi">611</span><span class="p">),</span> <span class="mf">37.62</span> <span class="nc">MiB</span> <span class="o">|</span> <span class="mf">4.30</span> <span class="nc">MiB</span><span class="o">/</span><span class="nv">s</span><span class="p">,</span> <span class="nv">done</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl"><span class="nc">Resolving</span> <span class="nv">deltas</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">199</span><span class="o">/</span><span class="mi">199</span><span class="p">),</span> <span class="nv">done</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl"><span class="nc">Submodule</span> <span class="s1">&#39;github_blog/public&#39;</span> <span class="p">(</span><span class="nv">git</span><span class="o">@</span><span class="nv">github</span><span class="p">.</span><span class="nv">com</span><span class="p">:</span><span class="nv">shengtu0328</span><span class="o">/</span><span class="nv">shengtu0328</span><span class="p">.</span><span class="nv">github</span><span class="p">.</span><span class="nv">io</span><span class="p">.</span><span class="nv">git</span><span class="p">)</span> <span class="nv">registered</span> <span class="k">for</span> <span class="nv">path</span> <span class="s1">&#39;github_blog/public&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nc">Submodule</span> <span class="s1">&#39;github_blog/themes/LoveIt&#39;</span> <span class="p">(</span><span class="nv">https</span><span class="p">:</span><span class="c1">//github.com/dillonzq/LoveIt.git) registered for path &#39;github_blog/themes/LoveIt&#39;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nc">Cloning</span> <span class="nv">into</span> <span class="s1">&#39;/Users/videopls/ideaProjectsBackup/myHugo/github_blog/public&#39;</span><span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="nv">remote</span><span class="p">:</span> <span class="nc">Enumerating</span> <span class="nv">objects</span><span class="p">:</span> <span class="mi">910</span><span class="p">,</span> <span class="nv">done</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl"><span class="nv">remote</span><span class="p">:</span> <span class="nc">Counting</span> <span class="nv">objects</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">36</span><span class="o">/</span><span class="mi">36</span><span class="p">),</span> <span class="nv">done</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl"><span class="nv">remote</span><span class="p">:</span> <span class="nc">Compressing</span> <span class="nv">objects</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">24</span><span class="o">/</span><span class="mi">24</span><span class="p">),</span> <span class="nv">done</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl"><span class="nv">remote</span><span class="p">:</span> <span class="nc">Total</span> <span class="mi">910</span> <span class="p">(</span><span class="nv">delta</span> <span class="mi">14</span><span class="p">),</span> <span class="nv">reused</span> <span class="mi">20</span> <span class="p">(</span><span class="nv">delta</span> <span class="mi">4</span><span class="p">),</span> <span class="nv">pack</span><span class="o">-</span><span class="nv">reused</span> <span class="mi">874</span>
+</span></span><span class="line"><span class="cl"><span class="nc">Receiving</span> <span class="nv">objects</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">910</span><span class="o">/</span><span class="mi">910</span><span class="p">),</span> <span class="mf">39.17</span> <span class="nc">MiB</span> <span class="o">|</span> <span class="mf">81.00</span> <span class="nc">KiB</span><span class="o">/</span><span class="nv">s</span><span class="p">,</span> <span class="nv">done</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl"><span class="nc">Resolving</span> <span class="nv">deltas</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">418</span><span class="o">/</span><span class="mi">418</span><span class="p">),</span> <span class="nv">done</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl"><span class="nc">Cloning</span> <span class="nv">into</span> <span class="s1">&#39;/Users/videopls/ideaProjectsBackup/myHugo/github_blog/themes/LoveIt&#39;</span><span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="nv">fatal</span><span class="p">:</span> <span class="nv">unable</span> <span class="nv">to</span> <span class="nv">access</span> <span class="s1">&#39;https://github.com/dillonzq/LoveIt.git/&#39;</span><span class="p">:</span> <span class="nc">LibreSSL</span> <span class="nc">SSL_connect</span><span class="p">:</span> <span class="nc">SSL_ERROR_SYSCALL</span> <span class="k">in</span> <span class="nv">connection</span> <span class="nv">to</span> <span class="nv">github</span><span class="p">.</span><span class="nv">com</span><span class="p">:</span><span class="mi">443</span>
+</span></span><span class="line"><span class="cl"><span class="nv">fatal</span><span class="p">:</span> <span class="nv">clone</span> <span class="nv">of</span> <span class="s1">&#39;https://github.com/dillonzq/LoveIt.git&#39;</span> <span class="nv">into</span> <span class="nv">submodule</span> <span class="nv">path</span> <span class="s1">&#39;/Users/videopls/ideaProjectsBackup/myHugo/github_blog/themes/LoveIt&#39;</span> <span class="nv">failed</span>
+</span></span><span class="line"><span class="cl"><span class="nc">Failed</span> <span class="nv">to</span> <span class="nv">clone</span> <span class="s1">&#39;github_blog/themes/LoveIt&#39;</span><span class="p">.</span> <span class="nc">Retry</span> <span class="nv">scheduled</span>
+</span></span><span class="line"><span class="cl"><span class="nc">Cloning</span> <span class="nv">into</span> <span class="s1">&#39;/Users/videopls/ideaProjectsBackup/myHugo/github_blog/themes/LoveIt&#39;</span><span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="nv">remote</span><span class="p">:</span> <span class="nc">Enumerating</span> <span class="nv">objects</span><span class="p">:</span> <span class="mi">14632</span><span class="p">,</span> <span class="nv">done</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl"><span class="nv">remote</span><span class="p">:</span> <span class="nc">Total</span> <span class="mi">14632</span> <span class="p">(</span><span class="nv">delta</span> <span class="mi">0</span><span class="p">),</span> <span class="nv">reused</span> <span class="mi">0</span> <span class="p">(</span><span class="nv">delta</span> <span class="mi">0</span><span class="p">),</span> <span class="nv">pack</span><span class="o">-</span><span class="nv">reused</span> <span class="mi">14632</span>
+</span></span><span class="line"><span class="cl"><span class="nc">Receiving</span> <span class="nv">objects</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">14632</span><span class="o">/</span><span class="mi">14632</span><span class="p">),</span> <span class="mf">45.84</span> <span class="nc">MiB</span> <span class="o">|</span> <span class="mf">7.91</span> <span class="nc">MiB</span><span class="o">/</span><span class="nv">s</span><span class="p">,</span> <span class="nv">done</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl"><span class="nc">Resolving</span> <span class="nv">deltas</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">7216</span><span class="o">/</span><span class="mi">7216</span><span class="p">),</span> <span class="nv">done</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl"><span class="nc">Submodule</span> <span class="nv">path</span> <span class="s1">&#39;github_blog/public&#39;</span><span class="p">:</span> <span class="nv">checked</span> <span class="nv">out</span> <span class="s1">&#39;4c7446185276829a0eb6ff29c839994885163a33&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nc">Submodule</span> <span class="nv">path</span> <span class="s1">&#39;github_blog/themes/LoveIt&#39;</span><span class="p">:</span> <span class="nv">checked</span> <span class="nv">out</span> <span class="s1">&#39;e9e89a4613baee823596822b7d246f5931263491&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nc">Submodule</span> <span class="nv">path</span> <span class="s1">&#39;github_blog/themes/LoveIt&#39;</span><span class="p">:</span> <span class="nv">checked</span> <span class="nv">out</span> <span class="s1">&#39;e9e89a4613baee823596822b7d246f5931263491&#39;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="第二种是先克隆父项目再更新子模块">第二种。是先克隆父项目，再更新子模块</h3>
 <ol>
 <li>克隆父项目</li>
 </ol>
@@ -215,71 +280,6 @@
 </span></span><span class="line"><span class="cl"><span class="nc">Cloning</span> <span class="nv">into</span> <span class="s1">&#39;/Users/videopls/xrqProjects/myHugo/github_blog/public&#39;</span><span class="o">...</span>
 </span></span><span class="line"><span class="cl"><span class="nc">Cloning</span> <span class="nv">into</span> <span class="s1">&#39;/Users/videopls/xrqProjects/myHugo/github_blog/themes/LoveIt&#39;</span><span class="o">...</span>
 </span></span><span class="line"><span class="cl"><span class="nc">Submodule</span> <span class="nv">path</span> <span class="s1">&#39;github_blog/public&#39;</span><span class="p">:</span> <span class="nv">checked</span> <span class="nv">out</span> <span class="s1">&#39;7bf4bb367cd252b7b99bcbf4c5bbd26aaff7d9e0&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="nc">Submodule</span> <span class="nv">path</span> <span class="s1">&#39;github_blog/themes/LoveIt&#39;</span><span class="p">:</span> <span class="nv">checked</span> <span class="nv">out</span> <span class="s1">&#39;e9e89a4613baee823596822b7d246f5931263491&#39;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="二递归克隆整个项目">二。递归克隆整个项目</h3>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-v" data-lang="v"><span class="line"><span class="cl"><span class="nv">videopls</span><span class="o">@</span><span class="nv">f01898564faf</span> <span class="nv">ideaProjectsBackup</span> <span class="o">%</span> <span class="nv">git</span> <span class="nv">clone</span> <span class="nv">git</span><span class="o">@</span><span class="nv">github</span><span class="p">.</span><span class="nv">com</span><span class="p">:</span><span class="nv">shengtu0328</span><span class="o">/</span><span class="nv">myHugo</span><span class="p">.</span><span class="nv">git</span> <span class="nv">myHugo</span> <span class="o">--</span><span class="nv">recursive</span>
-</span></span><span class="line"><span class="cl"><span class="nc">Cloning</span> <span class="nv">into</span> <span class="s1">&#39;myHugo&#39;</span><span class="o">...</span>
-</span></span><span class="line"><span class="cl"><span class="nv">remote</span><span class="p">:</span> <span class="nc">Enumerating</span> <span class="nv">objects</span><span class="p">:</span> <span class="mi">611</span><span class="p">,</span> <span class="nv">done</span><span class="p">.</span>
-</span></span><span class="line"><span class="cl"><span class="nv">remote</span><span class="p">:</span> <span class="nc">Counting</span> <span class="nv">objects</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">20</span><span class="o">/</span><span class="mi">20</span><span class="p">),</span> <span class="nv">done</span><span class="p">.</span>
-</span></span><span class="line"><span class="cl"><span class="nv">remote</span><span class="p">:</span> <span class="nc">Compressing</span> <span class="nv">objects</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">14</span><span class="o">/</span><span class="mi">14</span><span class="p">),</span> <span class="nv">done</span><span class="p">.</span>
-</span></span><span class="line"><span class="cl"><span class="nv">remote</span><span class="p">:</span> <span class="nc">Total</span> <span class="mi">611</span> <span class="p">(</span><span class="nv">delta</span> <span class="mi">4</span><span class="p">),</span> <span class="nv">reused</span> <span class="mi">15</span> <span class="p">(</span><span class="nv">delta</span> <span class="mi">4</span><span class="p">),</span> <span class="nv">pack</span><span class="o">-</span><span class="nv">reused</span> <span class="mi">591</span>
-</span></span><span class="line"><span class="cl"><span class="nc">Receiving</span> <span class="nv">objects</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">611</span><span class="o">/</span><span class="mi">611</span><span class="p">),</span> <span class="mf">37.62</span> <span class="nc">MiB</span> <span class="o">|</span> <span class="mf">4.30</span> <span class="nc">MiB</span><span class="o">/</span><span class="nv">s</span><span class="p">,</span> <span class="nv">done</span><span class="p">.</span>
-</span></span><span class="line"><span class="cl"><span class="nc">Resolving</span> <span class="nv">deltas</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">199</span><span class="o">/</span><span class="mi">199</span><span class="p">),</span> <span class="nv">done</span><span class="p">.</span>
-</span></span><span class="line"><span class="cl"><span class="nc">Submodule</span> <span class="s1">&#39;github_blog/public&#39;</span> <span class="p">(</span><span class="nv">git</span><span class="o">@</span><span class="nv">github</span><span class="p">.</span><span class="nv">com</span><span class="p">:</span><span class="nv">shengtu0328</span><span class="o">/</span><span class="nv">shengtu0328</span><span class="p">.</span><span class="nv">github</span><span class="p">.</span><span class="nv">io</span><span class="p">.</span><span class="nv">git</span><span class="p">)</span> <span class="nv">registered</span> <span class="k">for</span> <span class="nv">path</span> <span class="s1">&#39;github_blog/public&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="nc">Submodule</span> <span class="s1">&#39;github_blog/themes/LoveIt&#39;</span> <span class="p">(</span><span class="nv">https</span><span class="p">:</span><span class="c1">//github.com/dillonzq/LoveIt.git) registered for path &#39;github_blog/themes/LoveIt&#39;
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nc">Cloning</span> <span class="nv">into</span> <span class="s1">&#39;/Users/videopls/ideaProjectsBackup/myHugo/github_blog/public&#39;</span><span class="o">...</span>
-</span></span><span class="line"><span class="cl"><span class="nv">remote</span><span class="p">:</span> <span class="nc">Enumerating</span> <span class="nv">objects</span><span class="p">:</span> <span class="mi">910</span><span class="p">,</span> <span class="nv">done</span><span class="p">.</span>
-</span></span><span class="line"><span class="cl"><span class="nv">remote</span><span class="p">:</span> <span class="nc">Counting</span> <span class="nv">objects</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">36</span><span class="o">/</span><span class="mi">36</span><span class="p">),</span> <span class="nv">done</span><span class="p">.</span>
-</span></span><span class="line"><span class="cl"><span class="nv">remote</span><span class="p">:</span> <span class="nc">Compressing</span> <span class="nv">objects</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">24</span><span class="o">/</span><span class="mi">24</span><span class="p">),</span> <span class="nv">done</span><span class="p">.</span>
-</span></span><span class="line"><span class="cl"><span class="nv">remote</span><span class="p">:</span> <span class="nc">Total</span> <span class="mi">910</span> <span class="p">(</span><span class="nv">delta</span> <span class="mi">14</span><span class="p">),</span> <span class="nv">reused</span> <span class="mi">20</span> <span class="p">(</span><span class="nv">delta</span> <span class="mi">4</span><span class="p">),</span> <span class="nv">pack</span><span class="o">-</span><span class="nv">reused</span> <span class="mi">874</span>
-</span></span><span class="line"><span class="cl"><span class="nc">Receiving</span> <span class="nv">objects</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">910</span><span class="o">/</span><span class="mi">910</span><span class="p">),</span> <span class="mf">39.17</span> <span class="nc">MiB</span> <span class="o">|</span> <span class="mf">81.00</span> <span class="nc">KiB</span><span class="o">/</span><span class="nv">s</span><span class="p">,</span> <span class="nv">done</span><span class="p">.</span>
-</span></span><span class="line"><span class="cl"><span class="nc">Resolving</span> <span class="nv">deltas</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">418</span><span class="o">/</span><span class="mi">418</span><span class="p">),</span> <span class="nv">done</span><span class="p">.</span>
-</span></span><span class="line"><span class="cl"><span class="nc">Cloning</span> <span class="nv">into</span> <span class="s1">&#39;/Users/videopls/ideaProjectsBackup/myHugo/github_blog/themes/LoveIt&#39;</span><span class="o">...</span>
-</span></span><span class="line"><span class="cl"><span class="nv">fatal</span><span class="p">:</span> <span class="nv">unable</span> <span class="nv">to</span> <span class="nv">access</span> <span class="s1">&#39;https://github.com/dillonzq/LoveIt.git/&#39;</span><span class="p">:</span> <span class="nc">LibreSSL</span> <span class="nc">SSL_connect</span><span class="p">:</span> <span class="nc">SSL_ERROR_SYSCALL</span> <span class="k">in</span> <span class="nv">connection</span> <span class="nv">to</span> <span class="nv">github</span><span class="p">.</span><span class="nv">com</span><span class="p">:</span><span class="mi">443</span>
-</span></span><span class="line"><span class="cl"><span class="nv">fatal</span><span class="p">:</span> <span class="nv">clone</span> <span class="nv">of</span> <span class="s1">&#39;https://github.com/dillonzq/LoveIt.git&#39;</span> <span class="nv">into</span> <span class="nv">submodule</span> <span class="nv">path</span> <span class="s1">&#39;/Users/videopls/ideaProjectsBackup/myHugo/github_blog/themes/LoveIt&#39;</span> <span class="nv">failed</span>
-</span></span><span class="line"><span class="cl"><span class="nc">Failed</span> <span class="nv">to</span> <span class="nv">clone</span> <span class="s1">&#39;github_blog/themes/LoveIt&#39;</span><span class="p">.</span> <span class="nc">Retry</span> <span class="nv">scheduled</span>
-</span></span><span class="line"><span class="cl"><span class="nc">Cloning</span> <span class="nv">into</span> <span class="s1">&#39;/Users/videopls/ideaProjectsBackup/myHugo/github_blog/themes/LoveIt&#39;</span><span class="o">...</span>
-</span></span><span class="line"><span class="cl"><span class="nv">remote</span><span class="p">:</span> <span class="nc">Enumerating</span> <span class="nv">objects</span><span class="p">:</span> <span class="mi">14632</span><span class="p">,</span> <span class="nv">done</span><span class="p">.</span>
-</span></span><span class="line"><span class="cl"><span class="nv">remote</span><span class="p">:</span> <span class="nc">Total</span> <span class="mi">14632</span> <span class="p">(</span><span class="nv">delta</span> <span class="mi">0</span><span class="p">),</span> <span class="nv">reused</span> <span class="mi">0</span> <span class="p">(</span><span class="nv">delta</span> <span class="mi">0</span><span class="p">),</span> <span class="nv">pack</span><span class="o">-</span><span class="nv">reused</span> <span class="mi">14632</span>
-</span></span><span class="line"><span class="cl"><span class="nc">Receiving</span> <span class="nv">objects</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">14632</span><span class="o">/</span><span class="mi">14632</span><span class="p">),</span> <span class="mf">45.84</span> <span class="nc">MiB</span> <span class="o">|</span> <span class="mf">7.91</span> <span class="nc">MiB</span><span class="o">/</span><span class="nv">s</span><span class="p">,</span> <span class="nv">done</span><span class="p">.</span>
-</span></span><span class="line"><span class="cl"><span class="nc">Resolving</span> <span class="nv">deltas</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">7216</span><span class="o">/</span><span class="mi">7216</span><span class="p">),</span> <span class="nv">done</span><span class="p">.</span>
-</span></span><span class="line"><span class="cl"><span class="nc">Submodule</span> <span class="nv">path</span> <span class="s1">&#39;github_blog/public&#39;</span><span class="p">:</span> <span class="nv">checked</span> <span class="nv">out</span> <span class="s1">&#39;4c7446185276829a0eb6ff29c839994885163a33&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="nc">Submodule</span> <span class="nv">path</span> <span class="s1">&#39;github_blog/themes/LoveIt&#39;</span><span class="p">:</span> <span class="nv">checked</span> <span class="nv">out</span> <span class="s1">&#39;e9e89a4613baee823596822b7d246f5931263491&#39;</span>
 </span></span><span class="line"><span class="cl"><span class="nc">Submodule</span> <span class="nv">path</span> <span class="s1">&#39;github_blog/themes/LoveIt&#39;</span><span class="p">:</span> <span class="nv">checked</span> <span class="nv">out</span> <span class="s1">&#39;e9e89a4613baee823596822b7d246f5931263491&#39;</span>
 </span></span></code></pre></td></tr></table>
 </div>

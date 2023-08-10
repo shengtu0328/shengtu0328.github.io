@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <title>RocketMQ - ricky的网站</title><meta name="Description" content="The best time to plant a tree was 10 years ago, the second is now"><meta property="og:title" content="RocketMQ" />
-<meta property="og:description" content="RoctetMQ基本架构 几种MQ对比 rocketmq 支持集群模型，负载均衡，水平扩容 采用零拷贝原理，顺序写盘，随机读 丰富API（顺序消息，延迟消息，事物消" />
+<meta property="og:description" content="RoctetMQ基本架构 几种MQ对比 Kafka：追求高吞吐量，一开始的目的就是用于日志收集和传输，适合产生大量数据的互联网服务的数据收集业务" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://shengtu0328.github.io/posts/rocketmq/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-01-17T17:21:36+08:00" />
@@ -13,7 +13,7 @@
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="RocketMQ"/>
-<meta name="twitter:description" content="RoctetMQ基本架构 几种MQ对比 rocketmq 支持集群模型，负载均衡，水平扩容 采用零拷贝原理，顺序写盘，随机读 丰富API（顺序消息，延迟消息，事物消"/>
+<meta name="twitter:description" content="RoctetMQ基本架构 几种MQ对比 Kafka：追求高吞吐量，一开始的目的就是用于日志收集和传输，适合产生大量数据的互联网服务的数据收集业务"/>
 <meta name="application-name" content="我的网站">
 <meta name="apple-mobile-web-app-title" content="我的网站"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/shengtu0328.github.io\/posts\/rocketmq\/"
-        },"genre": "posts","wordcount":  2034 ,
+        },"genre": "posts","wordcount":  3437 ,
         "url": "https:\/\/shengtu0328.github.io\/posts\/rocketmq\/","datePublished": "2023-01-17T17:21:36+08:00","dateModified": "2023-01-17T17:21:36+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -102,8 +102,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">RocketMQ</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-01-17">2023-01-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2034 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-01-17">2023-01-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3437 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;7 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -137,20 +137,34 @@
         <li><a href="#rocketmq-dashboard控制台">rocketmq-dashboard(控制台)</a></li>
         <li><a href="#消息的存储结构">消息的存储结构</a>
           <ul>
+            <li><a href="#存储">存储</a></li>
             <li><a href="#commitlog">commitLog</a></li>
-            <li><a href="#consumequeue">consumequeue</a></li>
-            <li><a href="#index">index</a></li>
+            <li><a href="#检索">检索</a>
+              <ul>
+                <li><a href="#consumequeue根据tag查询">consumequeue根据tag查询</a></li>
+                <li><a href="#indexfile根据-messageid查询">indexFile根据 MessageID查询</a></li>
+              </ul>
+            </li>
           </ul>
         </li>
         <li><a href="#零拷贝">零拷贝</a></li>
         <li><a href="#同步刷盘异步刷盘同步复制异步复制">同步刷盘，异步刷盘，同步复制，异步复制</a></li>
         <li><a href="#heading"></a></li>
         <li><a href="#怎么保证消息不丢失">怎么保证消息不丢失</a></li>
+        <li><a href="#消息重试">消息重试</a></li>
       </ul>
     </li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h3 id="roctetmq基本架构">RoctetMQ基本架构</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://rocketmq.apache.org/zh/assets/images/RocketMQ%E5%9F%BA%E6%9C%AC%E6%A8%A1%E5%9E%8B-ebcf3458d04b36f47f4c9633c1e36bf7.png"
+        data-srcset="https://rocketmq.apache.org/zh/assets/images/RocketMQ%E5%9F%BA%E6%9C%AC%E6%A8%A1%E5%9E%8B-ebcf3458d04b36f47f4c9633c1e36bf7.png, https://rocketmq.apache.org/zh/assets/images/RocketMQ%E5%9F%BA%E6%9C%AC%E6%A8%A1%E5%9E%8B-ebcf3458d04b36f47f4c9633c1e36bf7.png 1.5x, https://rocketmq.apache.org/zh/assets/images/RocketMQ%E5%9F%BA%E6%9C%AC%E6%A8%A1%E5%9E%8B-ebcf3458d04b36f47f4c9633c1e36bf7.png 2x"
+        data-sizes="auto"
+        alt="https://rocketmq.apache.org/zh/assets/images/RocketMQ%E5%9F%BA%E6%9C%AC%E6%A8%A1%E5%9E%8B-ebcf3458d04b36f47f4c9633c1e36bf7.png"
+        title="RocketMQ基本模型" /></p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -160,6 +174,13 @@
         alt="https://cdn.tobebetterjavaer.com/tobebetterjavaer/images/nice-article/weixin-mianznxrocketmqessw-d4c0e036-0f0e-466f-bd4b-7e6ee10daca4.jpg"
         title="RocketMQ架构" /></p>
 <h3 id="几种mq对比">几种MQ对比</h3>
+<p>Kafka：追求高吞吐量，一开始的目的就是用于日志收集和传输，<strong>适合产生大量数据的互联网服务的数据收集业务</strong>，大型公司建议可以选用，<strong>如果有日志采集功能，肯定是首选 kafka。</strong></p>
+<p>RocketMQ：<strong>天生为金融互联网领域而生，对于可靠性要求很高的场景</strong>，尤其是电商里面的订单扣款，以及业务削峰，在大量交易涌入时，后端可能无法及时处理的情况。RoketMQ 在稳定性上可能更值得信赖，这些业务场景在阿里双 11 已经经历了多次考验，<strong>如果你的业务有上述并发场景，建议可以选择 RocketMQ。</strong></p>
+<p>RabbitMQ：结合 erlang 语言本身的并发优势，性能较好，社区活跃度也比较高，但是不利于做二次开发和维护，不过 RabbitMQ 的社区十分活跃，可以解决开发过程中遇到的 bug。<strong>如果你的数据量没有那么大，小公司优先选择功能比较完备的 RabbitMQ。</strong></p>
+<p>作者：楼仔
+链接：https://juejin.cn/post/7096095180536676365
+来源：稀土掘金
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
 <h4 id="rocketmq">rocketmq</h4>
 <p>支持集群模型，负载均衡，水平扩容</p>
 <p>采用零拷贝原理，顺序写盘，随机读</p>
@@ -167,10 +188,14 @@
 <p>消息失败自动重试机制</p>
 <p>消息可查询 messagekey，messageid</p>
 <p>java写的</p>
+<p>数据持久化：RocketMQ将消息存储在磁盘上，保证消息的可靠性</p>
 <h4 id="kafka">Kafka</h4>
 <p>会丢数据，主要用于日志</p>
 <h4 id="rabbitmq">rabbitmq</h4>
-<p>吞吐量比较低？</p>
+<p>erlang</p>
+<p>吞吐量比较低</p>
+<p>支持优先级队列</p>
+<p>RabbitMQ默认将消息保存在内存中</p>
 <h3 id="producer-group有什么用">Producer Group有什么用</h3>
 <p>Rroducer Group：生产者集合，一般用于发送一类消息。</p>
 <p>1.一个组里多个生产者并行发消息，提高性能</p>
@@ -252,16 +277,29 @@ NOTICE		benchmark	conf</p>
 <h3 id="rocketmq-dashboard控制台">rocketmq-dashboard(控制台)</h3>
 <p><a href="https://github.com/apache/rocketmq-dashboard" target="_blank" rel="noopener noreffer ">https://github.com/apache/rocketmq-dashboard</a></p>
 <h3 id="消息的存储结构">消息的存储结构</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://img-blog.csdnimg.cn/54b0b787ca1a4860ba7c7353025fdc55.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ1NDA2MDky,size_16,color_FFFFFF,t_70"
+        data-srcset="https://img-blog.csdnimg.cn/54b0b787ca1a4860ba7c7353025fdc55.png?x-oss-process=image/watermark%2ctype_ZmFuZ3poZW5naGVpdGk%2cshadow_10%2ctext_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ1NDA2MDky%2csize_16%2ccolor_FFFFFF%2ct_70, https://img-blog.csdnimg.cn/54b0b787ca1a4860ba7c7353025fdc55.png?x-oss-process=image/watermark%2ctype_ZmFuZ3poZW5naGVpdGk%2cshadow_10%2ctext_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ1NDA2MDky%2csize_16%2ccolor_FFFFFF%2ct_70 1.5x, https://img-blog.csdnimg.cn/54b0b787ca1a4860ba7c7353025fdc55.png?x-oss-process=image/watermark%2ctype_ZmFuZ3poZW5naGVpdGk%2cshadow_10%2ctext_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ1NDA2MDky%2csize_16%2ccolor_FFFFFF%2ct_70 2x"
+        data-sizes="auto"
+        alt="https://img-blog.csdnimg.cn/54b0b787ca1a4860ba7c7353025fdc55.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ1NDA2MDky,size_16,color_FFFFFF,t_70"
+        title="在这里插入图片描述" /></p>
+<h4 id="存储">存储</h4>
 <h4 id="commitlog">commitLog</h4>
-<p>实际存储消息数据（物理文件）多个Topic的消息实体内容都存储于一个CommitLog中</p>
+<p>实际存储消息数据（物理文件）<strong>所有的Topic</strong>的消息实体内容都存储于一个CommitLog中</p>
 <p>顺序写（写入效率高），随机读</p>
 <p>commitLog 除了保存了消息信息，还包含了consumequeue的信息</p>
-<h4 id="consumequeue">consumequeue</h4>
+<h4 id="检索">检索</h4>
+<h5 id="consumequeue根据tag查询">consumequeue根据tag查询</h5>
+<p>ConsumeQueue文件可以看做是基于topic的CommitLog索引文件，所以ConsumeQueue文件夹的组织方式如下：topic/queue/file三层组织结构；具体存储路径为：$HOME/store/consumequeue/{topic}/{queueId}/{fileName}。</p>
 <p>Consumer 消费时使用，存储了消息在commitLog中的位置 （类似数据库索引文件）</p>
 <ol>
 <li>通过broker保存的offset（offsetTable.offset json文件中保存的ConsumerQueue的下标）可以在ConsumeQueue中获取消息，从而快速的定位到commitLog的消息位置</li>
 </ol>
-<h4 id="index">index</h4>
+<h5 id="indexfile根据-messageid查询">indexFile根据 MessageID查询</h5>
+<p>因为MessagelD就是用broker+-offset生成的（这里Msgld指的是服务端的），所以很容易就找到对应的commitLog.文件来读取消息。</p>
+<p>index</p>
 <p>通过MessageID或者MessageKey消息会使用到</p>
 <p>如果我们需要根据消息ID，来查找消息，consumequeue 中没有存储消息ID,如果不采取其他措施，又得遍历 commitlog文件了，indexFile就是为了解决这个问题的文件</p>
 <h3 id="零拷贝">零拷贝</h3>
@@ -303,11 +341,29 @@ NOTICE		benchmark	conf</p>
 <h3 id="怎么保证消息不丢失">怎么保证消息不丢失</h3>
 <p>一.Producer 新建消息，然后通过网络将消息投递给 MQ Broker</p>
 <p>1.同步发送/异步发送 同步还是异步的方式，都会碰到网络问题导致发送失败的情况。针对这种情况，我们可以设置合理的重试次数，当出现网络问</p>
+<p>2.记录失败日志，保存到数据库后定时重发</p>
 <p>二.Broker 存储阶段</p>
-<p>消息只要到了 Broker 端，将会优先保存到内存中，然后立刻返回确认响应给生产者。 同步双写，异步刷盘、、</p>
+<p>消息只要到了 Broker 端，将会优先保存到内存中，然后立刻返回确认响应给生产者。</p>
+<p>同步刷盘：当消息持久化到broker的磁盘后才算是消息写入成功。
+异步刷盘：当消息写入到broker的内存后即表示消息写入成功，无需等待消息持久化到磁盘。异步刷盘策略会降低系统的写入延迟，RT变小，提高了系统的吞吐量 。消息写入到Broker的内存，一般是写入到了PageCache。对于异步刷盘策略，消息会写入到PageCache后立即返回成功ACK。但并不会立即做落盘操 作，而是当PageCache到达一定量时会自动进行落盘</p>
 <p>三.消费者从 broker 拉取消息</p>
 <p>消息队列 RocketMQ 默认允许每条消息最多重试 16 次</p>
 <p>ACK确认</p>
+<h3 id="消息重试">消息重试</h3>
+<p>若Consumer消费某条消息失败，则RocketMQ会在重试间隔时间后，将消息重新投递给Consumer消费，若达到最大重试次数后消息还没有成功被消费，则消息将被投递至死信队列</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://rocketmq.apache.org/zh/assets/images/%E6%B6%88%E8%B4%B9%E4%BD%8D%E7%82%B9-3b0320b183d4318d6b75e3504027e436.png"
+        data-srcset="https://rocketmq.apache.org/zh/assets/images/%E6%B6%88%E8%B4%B9%E4%BD%8D%E7%82%B9-3b0320b183d4318d6b75e3504027e436.png, https://rocketmq.apache.org/zh/assets/images/%E6%B6%88%E8%B4%B9%E4%BD%8D%E7%82%B9-3b0320b183d4318d6b75e3504027e436.png 1.5x, https://rocketmq.apache.org/zh/assets/images/%E6%B6%88%E8%B4%B9%E4%BD%8D%E7%82%B9-3b0320b183d4318d6b75e3504027e436.png 2x"
+        data-sizes="auto"
+        alt="https://rocketmq.apache.org/zh/assets/images/%E6%B6%88%E8%B4%B9%E4%BD%8D%E7%82%B9-3b0320b183d4318d6b75e3504027e436.png"
+        title="消费位点" /></p>
+<p>如上图所示，在Apache RocketMQ中每个队列都会记录自己的最小位点、最大位点。针对于消费组，还有消费位点的概念，</p>
+<p><strong>在集群模式下，消费位点是由客户端提给交服务端保存的，</strong></p>
+<p><strong>在广播模式下，消费位点是由客户端自己保存的。</strong></p>
+<p>一般情况下消费位点正常更新，不会出现消息重复，但如果消费者发生崩溃或有新的消费者加入群组，就会触发重平衡，重平衡完成后，每个消费者可能会分配到新的队列，而不是之前处理的队列。为了能继续之前的工作，消费者需要读取每个队列最后一次的提交的消费位点，然后从消费位点处继续拉取消息。但在实际执行过程中，由于客户端提交给服务端的消费位点并不是实时的，所以重平衡就可能会导致消息少量重复。</p>
+<p>一个 Topic 可能有多个队列，并且可能分布在不同的 Broker 上。</p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">

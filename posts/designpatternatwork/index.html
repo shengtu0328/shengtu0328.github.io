@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/shengtu0328.github.io\/posts\/designpatternatwork\/"
-        },"genre": "posts","wordcount":  575 ,
+        },"genre": "posts","wordcount":  852 ,
         "url": "https:\/\/shengtu0328.github.io\/posts\/designpatternatwork\/","datePublished": "2022-11-25T18:30:10+08:00","dateModified": "2022-11-25T18:30:10+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -102,7 +102,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">工作中使用到的设计模式</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-25">2022-11-25</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;575 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-25">2022-11-25</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;852 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -117,6 +117,8 @@
     <li><a href="#观察者模式observer-pattern">观察者模式(Observer Pattern)</a></li>
     <li><a href="#责任链模式chain-of-responsibility-pattern">责任链模式Chain of Responsibility Pattern）</a></li>
     <li><a href="#享元模式flyweight-pattern">享元模式(Flyweight Pattern)</a></li>
+    <li><a href="#装饰器模式decorator-pattern">装饰器模式(Decorator Pattern）</a></li>
+    <li><a href="#单例模式singleton-pattern">单例模式(Singleton Pattern)</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h2 id="策略模式strategy-pattern">策略模式(Strategy Pattern)</h2>
@@ -147,7 +149,108 @@
 <p>象：</p>
 <p><strong>2.2 String</strong> <strong>串池</strong>，连接池</p>
 <p><strong>2.3 BigDecimal BigInteger</strong></p>
-</div><div class="post-footer" id="post-footer">
+<h2 id="装饰器模式decorator-pattern">装饰器模式(Decorator Pattern）</h2>
+<p>ReentrantLock  用了AQS</p>
+<p>优点:</p>
+<p>饰类和被装饰类可以独立发展，不会相互耦合，装饰模式是继承的一个替代模式，装饰模式可以动态扩展一个实现类的功能。</p>
+<h2 id="单例模式singleton-pattern">单例模式(Singleton Pattern)</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">public class Runtime {
+</span></span><span class="line"><span class="cl">    private static Runtime currentRuntime = new Runtime();
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    /**
+</span></span><span class="line"><span class="cl">     * Returns the runtime object associated with the current Java application.
+</span></span><span class="line"><span class="cl">     * Most of the methods of class &lt;code&gt;Runtime&lt;/code&gt; are instance
+</span></span><span class="line"><span class="cl">     * methods and must be invoked with respect to the current runtime object.
+</span></span><span class="line"><span class="cl">     *
+</span></span><span class="line"><span class="cl">     * @return  the &lt;code&gt;Runtime&lt;/code&gt; object associated with the current
+</span></span><span class="line"><span class="cl">     *          Java application.
+</span></span><span class="line"><span class="cl">     */
+</span></span><span class="line"><span class="cl">    public static Runtime getRuntime() {
+</span></span><span class="line"><span class="cl">        return currentRuntime;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">private static volatile Console cons = null;
+</span></span><span class="line"><span class="cl">    /**
+</span></span><span class="line"><span class="cl">     * Returns the unique {@link java.io.Console Console} object associated
+</span></span><span class="line"><span class="cl">     * with the current Java virtual machine, if any.
+</span></span><span class="line"><span class="cl">     *
+</span></span><span class="line"><span class="cl">     * @return  The system console, if any, otherwise &lt;tt&gt;null&lt;/tt&gt;.
+</span></span><span class="line"><span class="cl">     *
+</span></span><span class="line"><span class="cl">     * @since   1.6
+</span></span><span class="line"><span class="cl">     */
+</span></span><span class="line"><span class="cl">     public static Console console() {
+</span></span><span class="line"><span class="cl">         if (cons == null) {
+</span></span><span class="line"><span class="cl">             synchronized (System.class) {
+</span></span><span class="line"><span class="cl">                 cons = sun.misc.SharedSecrets.getJavaIOAccess().console();
+</span></span><span class="line"><span class="cl">             }
+</span></span><span class="line"><span class="cl">         }
+</span></span><span class="line"><span class="cl">         return cons;
+</span></span><span class="line"><span class="cl">     }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">

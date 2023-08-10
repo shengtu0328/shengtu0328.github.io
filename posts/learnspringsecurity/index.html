@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/shengtu0328.github.io\/posts\/learnspringsecurity\/"
-        },"genre": "posts","wordcount":  6967 ,
+        },"genre": "posts","wordcount":  7055 ,
         "url": "https:\/\/shengtu0328.github.io\/posts\/learnspringsecurity\/","datePublished": "2022-11-03T14:22:04+08:00","dateModified": "2022-11-03T14:22:04+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -102,8 +102,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">学习SpringSecurity</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-03">2022-11-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;6967 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;14 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-03">2022-11-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;7055 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;15 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -117,6 +117,7 @@
     <li><a href="#一些重要的对象">一些重要的对象</a></li>
     <li><a href="#过滤器链">过滤器链</a></li>
     <li><a href="#securitycontextpersistencefilter">SecurityContextPersistenceFilter</a></li>
+    <li><a href="#threadlocalsecuritycontextholderstrategy">ThreadLocalSecurityContextHolderStrategy</a></li>
     <li><a href="#session和cookie">Session和Cookie</a></li>
     <li><a href="#logoutfilter">LogoutFilter</a></li>
     <li><a href="#formlogin认证模式">FormLogin认证模式</a></li>
@@ -363,6 +364,26 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><hr>
+<h2 id="threadlocalsecuritycontextholderstrategy">ThreadLocalSecurityContextHolderStrategy</h2>
+<p>默认策略是把当前登录信息存在 threadlocal里，</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="ThreadLocalSecurityContextHolderStrategy.png"
+        data-srcset="ThreadLocalSecurityContextHolderStrategy.png, ThreadLocalSecurityContextHolderStrategy.png 1.5x, ThreadLocalSecurityContextHolderStrategy.png 2x"
+        data-sizes="auto"
+        alt="ThreadLocalSecurityContextHolderStrategy.png"
+        title="ThreadLocalSecurityContextHolderStrategy.png" /></p>
+<p>并且在外层的 SecurityContextPersistenceFilter里 ，会及时手动清理threadlocal 对象</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="SecurityContextPersistenceFilter_ThreadLocal.png"
+        data-srcset="SecurityContextPersistenceFilter_ThreadLocal.png, SecurityContextPersistenceFilter_ThreadLocal.png 1.5x, SecurityContextPersistenceFilter_ThreadLocal.png 2x"
+        data-sizes="auto"
+        alt="SecurityContextPersistenceFilter_ThreadLocal.png"
+        title="SecurityContextPersistenceFilter_ThreadLocal.png" /></p>
+<hr>
 <h2 id="session和cookie">Session和Cookie</h2>
 <p>servlet中 HttpSession是在tomcat中实现的。生成sessionId，并将sessionId set进cookie，用来区分不同的用户请求。</p>
 <p><img

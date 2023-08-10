@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/shengtu0328.github.io\/posts\/mysql\/"
-        },"genre": "posts","wordcount":  16957 ,
+        },"genre": "posts","wordcount":  17546 ,
         "url": "https:\/\/shengtu0328.github.io\/posts\/mysql\/","datePublished": "2023-05-15T11:23:16+08:00","dateModified": "2023-05-15T11:23:16+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -102,8 +102,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Mysql</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-05-15">2023-05-15</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;16957 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;34 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-05-15">2023-05-15</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;17546 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;36 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -1951,12 +1951,12 @@ B-Tree (多路平衡查找树) 以一棵最大度数（max-degree，指一个节
 <blockquote>
 <p>演示地址：https://www.cs.usfca.edu/~galles/visualization/BPlusTree.html</p>
 </blockquote>
-<p>与 B-Tree 的区别：</p>
+<p><strong>与 B-Tree 的区别：</strong></p>
 <ul>
-<li>所有的数据都会出现在叶子节点</li>
-<li>叶子节点形成一个单向链表</li>
+<li><strong>所有的数据都会出现在叶子节点,非叶子节点都是用来索引的</strong></li>
+<li><strong>叶子节点形成一个单向链表</strong></li>
 </ul>
-<p>MySQL 索引数据结构对经典的 B+Tree 进行了优化。在原 B+Tree 的基础上，增加一个指向相邻叶子节点的链表指针，就形成了带有顺序指针的 B+Tree，提高区间访问的性能。</p>
+<p><strong>MySQL 索引数据结构对经典的 B+Tree 进行了优化。在原 B+Tree 的基础上，增加一个指向相邻叶子节点的链表指针</strong>，就形成了带有顺序指针的 B+Tree，提高区间访问的性能。</p>
 <p><figure><a class="lightgallery" href="https://dhc.pythonanywhere.com/media/editor/%e7%bb%93%e6%9e%84%e5%9b%be_20220316171730865611.png" title="MySQL B&#43;Tree 结构图" data-thumbnail="https://dhc.pythonanywhere.com/media/editor/结构图_20220316171730865611.png" data-sub-html="<h2>MySQL B&#43;Tree 结构图</h2><p>MySQL B&#43;Tree 结构图</p>">
         <img
             class="lazyload"
@@ -2904,7 +2904,34 @@ InnoDB 在执行 count(*) 时，需要把数据一行一行地从引擎里面读
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">table_schema</span><span class="p">;</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div></div><div class="post-footer" id="post-footer">
+</div><h1 id="undo-log和redo-log的区别">undo log和redo log的区别</h1>
+<p>●redo log:记录的是数据页的物理变化，服务宕机可用来同步数据
+●undo log:记录的是逻辑日志，当事务回滚时，通过逆操作恢复原来的数据
+●redo log保证了事务的持久性，undo log保证了事务的原子性和一致性</p>
+<h1 id="事务中的隔离性是如何保证的呢">事务中的隔离性是如何保证的呢？</h1>
+<p>锁：排他锁（如一个事务获取了一个数据行的排他锁，其他事务就不能再获取该行的其他锁）
+mvcc:多版本并发控制
+你解释一下MVCC?</p>
+<h1 id="mvcc">MVCC</h1>
+<p>全称Multi&ndash;Version Concurrency Control,多版本并发控制。指维护一个数据的多个版本，使得读写操作没有冲突
+MVCC的具体实现，主要依赖于数据库记录中的  <em><strong>隐式字段</strong>、<strong>undo log日志</strong>、<strong>readView</strong>。</em></p>
+<p><strong>undo log</strong>
+回滚日志，在insert、update、delete的时候产生的便于数据回滚的日志。
+当insert的时候，产生的undo log日志只在回滚时需要，在事务提交后，可被立即删除。
+而update、deletel的时候，产生的undo log日志不仅在回滚时需要，mvcc版本访问也需要，不会立即被删除。</p>
+<p>做记录</p>
+<p>不同事务或相同事务对同一条记录进行修改，会导致该记录的undolog生成一条记录版本链表，链表的头部是最新的旧记录，链表尾部是
+最早的日记录。</p>
+<p><strong>readView</strong>（具体查询的时候 返回undolog版本中的哪个版本 要根据readview）</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="mvcc.png"
+        data-srcset="mvcc.png, mvcc.png 1.5x, mvcc.png 2x"
+        data-sizes="auto"
+        alt="mvcc.png"
+        title="mvcc.png" /></p>
+</div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
