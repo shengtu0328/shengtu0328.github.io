@@ -17,7 +17,7 @@
 <meta name="application-name" content="我的网站">
 <meta name="apple-mobile-web-app-title" content="我的网站"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://shengtu0328.github.io/posts/interview_questions/" /><link rel="prev" href="https://shengtu0328.github.io/posts/english_writing_daily_003/" /><link rel="next" href="https://shengtu0328.github.io/posts/english_writing/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://shengtu0328.github.io/posts/interview_questions/" /><link rel="prev" href="https://shengtu0328.github.io/posts/english_writing_daily_003/" /><link rel="next" href="https://shengtu0328.github.io/posts/spring_session/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
     {
@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/shengtu0328.github.io\/posts\/interview_questions\/"
-        },"genre": "posts","wordcount":  487 ,
+        },"genre": "posts","wordcount":  1592 ,
         "url": "https:\/\/shengtu0328.github.io\/posts\/interview_questions\/","datePublished": "2023-08-03T09:32:04+08:00","dateModified": "2023-08-03T09:32:04+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -102,8 +102,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Interview_questions</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-08-03">2023-08-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;487 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;One minute&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-08-03">2023-08-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1592 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -115,6 +115,14 @@
       <ul>
         <li><a href="#java代码执行流程">java代码执行流程</a></li>
         <li><a href="#类加载执行流程">类加载执行流程</a></li>
+        <li><a href="#aop有几种实现">AOP有几种实现</a></li>
+        <li><a href="#代理创建时机">代理创建时机</a>
+          <ul>
+            <li><a href="#代码参考">代码参考</a></li>
+            <li><a href="#收获">收获💡</a></li>
+          </ul>
+        </li>
+        <li><a href="#线上接口响应慢怎么排查">线上接口响应慢怎么排查</a></li>
       </ul>
     </li>
   </ul>
@@ -155,21 +163,184 @@
 </ol>
 <h3 id="类加载执行流程">类加载执行流程</h3>
 <p>●类加载过程分为三个阶段
-1.加载
-①将类的字节码载入方法区，并创建类.class对象
-②如果此类的父类没有加载，先加载父类
-③加载是懒惰执行
-2.链接
-①验证-验证类是否符合Class规范，合法性、安全性检查
-②准备-为static变量分配空间，设置默认值
-③解析-将常量池的符号引用解析为直接引用
-3.初始化
-①执行静态代码块与非final静态变量的赋值
-②切始化是赖惰执行</p>
-<p>●何为双亲委派 
-所谓的双亲委派，就是指优先委派上级类加载器进行加载，如果上级类加载器
-①能找到这个类，由上级加载，加载后该类也对下级加载器可见
-②找不到这个类，则下级类加载器才有资格执行加载</p>
+1.加载</p>
+<ol>
+<li>
+<p>①将类的字节码载入方法区，并创建类.class对象</p>
+</li>
+<li>
+<p>②如果此类的父类没有加载，先加载父类</p>
+</li>
+<li>
+<p>③加载是懒惰执行</p>
+</li>
+</ol>
+<p>2.链接</p>
+<ol>
+<li>①验证-验证类是否符合Class规范，合法性、安全性检查</li>
+<li>②准备-为static变量分配空间，设置默认值</li>
+<li>③解析-将常量池的符号引用解析为直接引用</li>
+</ol>
+<p>3.初始化</p>
+<ol>
+<li>①执行静态代码块与非final静态变量的赋值</li>
+<li>②切始化是赖惰执行</li>
+</ol>
+<p>●何为双亲委派</p>
+<ol>
+<li>所谓的双亲委派，就是指优先委派上级类加载器进行加载，如果上级类加载器</li>
+<li>①能找到这个类，由上级加载，加载后该类也对下级加载器可见</li>
+<li>②找不到这个类，则下级类加载器才有资格执行加载</li>
+</ol>
+<h3 id="aop有几种实现">AOP有几种实现</h3>
+<p>有三种aop的实现</p>
+<ol>
+<li>
+<p>aspectj实现 是在 编译时产生修改原来的类</p>
+</li>
+<li>
+<p>agent实现 是在 类加载时产生修改原来的类</p>
+</li>
+<li>
+<p>proxy实现 是 动态生成了一个新的代理类，前两种没有生成新的类</p>
+<p>普通类是通过 A.java-&gt;A.class-&gt;类加载</p>
+<p>proxy代理是  没有.java的第一步   A$proxy.class-&gt;类加载</p>
+</li>
+</ol>
+<p><strong>JDK实现</strong></p>
+<ol>
+<li>
+<p>jdk的目标类可以是final类型</p>
+</li>
+<li>
+<p>jdk 代理类 和 目标类是 兄弟关系</p>
+</li>
+<li>
+<p>Object result = method.invoke(target, args); 反射方法调用</p>
+</li>
+<li>
+<p>原理是asm，在运行期间动态生成字节码，用java代码生成一个类，主要是有一个ClassWriter</p>
+</li>
+<li>
+<p>反射在多次调用后，实现类会有优化  java本地代码-&gt;第17次调用变成正常调用 类.静态方法  （代价是生成一个新的代理类.）</p>
+</li>
+<li>
+<p>一个方法调用就生成一个代理</p>
+</li>
+</ol>
+<p><strong>cglib实现</strong></p>
+<ol>
+<li>
+<p>cglib的目标类不可以是final类型(如果是final 会报错)</p>
+</li>
+<li>
+<p>cglib 代理类是子类型 ，目标类是父类型</p>
+</li>
+<li>
+<p>Object result = proxy.invoke(target, args); // 避免反射效率高，需要传目标类 （spring用的是这种）</p>
+</li>
+<li>
+<p>cglib 和jdk 的区别</p>
+<p>cglib一上来就生成代理类，一个类的所有方法代理就只会生成两个代理类</p>
+<p>主要是在  MethodProxy  不经过反射调用方法  save1Proxy = MethodProxy.create(Target.class, Proxy.class, &ldquo;(I)V&rdquo;, &ldquo;save&rdquo;, &ldquo;saveSuper&rdquo;);</p>
+<p>下面两个 是用了   FastClass 实现无反射 
+return   methodProxy.invoke( target,p);  //无反射调用，需要代理类
+return methodProxy.invoke(target, args);  //无反射调用，需要Target类  ，args是方法参数</p>
+<p>用一句话来说 就是 cglib会当调用 MethodProxy 的 invoke 或 invokeSuper 方法时, 会动态生成两个类，期中一个方式叫getindex，里面记录了目标方法且与下标做映射，另一个就是   public Object invoke(int index, Object proxy, Object[] args)  根据方法编号, 正常调用目标对象方法   。</p>
+<p>//           在调用的时候调用了   这个 invoke方法避免了反射</p>
+<p>//              return   methodProxy.invoke( target,p);  //无反射调用，需要代理类
+return methodProxy.invoke(target, args);  //无反射调用，需要Target类  ，args是方法参数</p>
+</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">        Proxy proxy = new Proxy();
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        Target target = new Target();
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        proxy.setMethodInterceptor(new MethodInterceptor() {
+</span></span><span class="line"><span class="cl">            @Override
+</span></span><span class="line"><span class="cl">            public Object intercept(Object p, Method method, Object[] args, MethodProxy methodProxy) throws Throwable {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                System.out.println(&#34;before&#34;);
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">   
+</span></span><span class="line"><span class="cl">   
+</span></span><span class="line"><span class="cl">   
+</span></span><span class="line"><span class="cl">//                return  method.invoke(target,args);   //反射调用
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">//              下面两个 是用了   FastClass 实现无反射 
+</span></span><span class="line"><span class="cl">//              return   methodProxy.invoke( target,p);  //无反射调用，需要代理类
+</span></span><span class="line"><span class="cl">                return methodProxy.invoke(target, args);  //无反射调用，需要Target类  ，args是方法参数
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        });
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        proxy.save();
+</span></span><span class="line"><span class="cl">        proxy.save(1);
+</span></span><span class="line"><span class="cl">        proxy.save(2L);
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="代理创建时机">代理创建时机</h3>
+<h4 id="代码参考">代码参考</h4>
+<p><strong>org.springframework.aop.framework.autoproxy.A17_1</strong></p>
+<h4 id="收获">收获💡</h4>
+<ol>
+<li>代理的创建时机
+<ul>
+<li>初始化之后 (无循环依赖时)  AspectJAwareAdvisorAutoProxyCreator.postProcessAfterInitialization. wrapIfNecessary( )</li>
+<li>实例创建后, 依赖注入前 (有循环依赖时), 并暂存于二级缓存</li>
+</ul>
+</li>
+</ol>
+<h3 id="线上接口响应慢怎么排查">线上接口响应慢怎么排查</h3>
+<ol>
+<li>看日志，检查监控，分布式服务一般都是服务治理的，skywalking可以看整个调用链的时间图。</li>
+<li>确认JVM配置</li>
+<li>对dump的堆内存文件进行分析, 有没有大对象</li>
+<li>如果是数据库访问慢，那么就要看是不是有锁表的情况、是不是有全表扫描、索引加得是否合适、是否有JOIN操作、需不需要加缓存，数据库连接有没有用完</li>
+<li>rocketmq 里有没有消息堆积</li>
+<li>通过jstack工具和其他指令，来定位CPU飙升问题</li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="oom.png"
+        data-srcset="oom.png, oom.png 1.5x, oom.png 2x"
+        data-sizes="auto"
+        alt="oom.png"
+        title="oom.png" /></p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
@@ -192,7 +363,7 @@
     </div>
 
     <div class="post-nav"><a href="/posts/english_writing_daily_003/" class="prev" rel="prev" title="English_writing_daily_003"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>English_writing_daily_003</a>
-            <a href="/posts/english_writing/" class="next" rel="next" title="Learing English is not a rocket science.">Learing English is not a rocket science.<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+            <a href="/posts/spring_session/" class="next" rel="next" title="Spring_session">Spring_session<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 </article></div>
             </main><footer class="footer">

@@ -4,7 +4,7 @@
         <link>https://shengtu0328.github.io/posts/</link>
         <description>All Posts | ricky的网站</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1007@qq.com (ricky)</managingEditor>
-            <webMaster>1007@qq.com (ricky)</webMaster><lastBuildDate>Thu, 03 Aug 2023 09:32:04 &#43;0800</lastBuildDate><atom:link href="https://shengtu0328.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>1007@qq.com (ricky)</webMaster><lastBuildDate>Sun, 03 Sep 2023 15:20:27 &#43;0800</lastBuildDate><atom:link href="https://shengtu0328.github.io/posts/" rel="self" type="application/rss+xml" /><item>
     <title>线程池</title>
     <link>https://shengtu0328.github.io/posts/threadpool/</link>
     <pubDate>Thu, 01 Dec 2022 14:14:25 &#43;0800</pubDate>
@@ -35,6 +35,22 @@
     <author>ricky</author>
     <guid>https://shengtu0328.github.io/posts/english_writing/</guid>
     <description><![CDATA[Why i learned English I recently watched some interesting videos on bilibli which is about communicating with foreigners in English on website. The videos was so funny that it made me have the idea of relearning the skill of English language . You know，i recently started to practise my english from multiple aspects 。Literally,m]]></description>
+</item>
+<item>
+    <title>K8s</title>
+    <link>https://shengtu0328.github.io/posts/k8s/</link>
+    <pubDate>Sun, 03 Sep 2023 15:20:27 &#43;0800</pubDate>
+    <author>ricky</author>
+    <guid>https://shengtu0328.github.io/posts/k8s/</guid>
+    <description><![CDATA[启动集群 minikube start minikube start &ndash;kubernetes-version=v1.23.0 查看节点。kubectl 是一个用来跟 K8S 集群进行交互的命令行工具 kubectl get node 停止集群 minikube stop 清空集群 minikube delete &ndash;all 安装集群可视化 Web UI 控制台 minikube dashboard]]></description>
+</item>
+<item>
+    <title>Spring_session</title>
+    <link>https://shengtu0328.github.io/posts/spring_session/</link>
+    <pubDate>Fri, 25 Aug 2023 10:15:37 &#43;0800</pubDate>
+    <author>ricky</author>
+    <guid>https://shengtu0328.github.io/posts/spring_session/</guid>
+    <description><![CDATA[没登录帐号，只是打开页面 10:36分创建 ，1692932760000 代表了 2023-08-25 11:06:00 差了正好半小时 localhost:0&gt;keys * \1) &ldquo;spring:session:sessions:a10709ca-3f18-46b8-b69b-c0194e116ad9&rdquo; \2) &ldquo;spring:session:sessions:expires:a10709ca-3f18-46b8-b69b-c0194e116ad9&rdquo; \3) &ldquo;spring:session:expirations:1692932760000&rdquo; hash结构 \1) &ldquo;spring:session:sessions:a10709ca-3f18-46b8-b69b-c0194e116ad9&rdquo; ​ 其中 creat]]></description>
 </item>
 <item>
     <title>Interview_questions</title>
@@ -69,22 +85,6 @@ i need to prepare for interview more sufficiently for making a good performance 
     <author>ricky</author>
     <guid>https://shengtu0328.github.io/posts/cap/</guid>
     <description><![CDATA[CAP 理论： CAP 定理（CAP theorem）又被称作布鲁尔定理（Brewer&rsquo;s theorem），是加州大学伯克利分校的计算机科学家埃]]></description>
-</item>
-<item>
-    <title>English_writing_daily_001</title>
-    <link>https://shengtu0328.github.io/posts/english_writing_daily_001/</link>
-    <pubDate>Mon, 17 Jul 2023 22:10:47 &#43;0800</pubDate>
-    <author>ricky</author>
-    <guid>https://shengtu0328.github.io/posts/english_writing_daily_001/</guid>
-    <description><![CDATA[This post has been polished by chatgpt 这篇文章已经被chatgpt润色 Title: Navigating Unemployment with a Well-Planned Approach 标题：通过准备好策划的方法应对失业问题 Recently, many companies, including the one I worked for, have been forced to lay off employees, and unfortunately, I am among]]></description>
-</item>
-<item>
-    <title>English_phrases</title>
-    <link>https://shengtu0328.github.io/posts/english_phrases/</link>
-    <pubDate>Tue, 27 Jun 2023 16:28:53 &#43;0800</pubDate>
-    <author>ricky</author>
-    <guid>https://shengtu0328.github.io/posts/english_phrases/</guid>
-    <description><![CDATA[Get to grips with 认真考虑并着手处理，掌握 one every couple of days 每隔几天一次 look beyond 不仅限于 As such, 因此 blocks of time 大量时间 picking up 从事 side gig 副业 competitive compensation, 竞争力的薪酬 ，补偿 fast-paced 快节奏 make a significant]]></description>
 </item>
 </channel>
 </rss>

@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/shengtu0328.github.io\/posts\/spring\/"
-        },"genre": "posts","wordcount":  264 ,
+        },"genre": "posts","wordcount":  1377 ,
         "url": "https:\/\/shengtu0328.github.io\/posts\/spring\/","datePublished": "2022-10-12T17:55:52+08:00","dateModified": "2022-10-12T17:55:52+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -102,8 +102,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Spring</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-10-12">2022-10-12</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;264 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;One minute&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-10-12">2022-10-12</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1377 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -159,23 +159,365 @@
 <p>a创建结束</p>
 </li>
 </ol>
-<p><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="C:%5cUsers%5crqxiao%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20230721093956970.png"
-        data-srcset="C:%5cUsers%5crqxiao%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20230721093956970.png, C:%5cUsers%5crqxiao%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20230721093956970.png 1.5x, C:%5cUsers%5crqxiao%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20230721093956970.png 2x"
-        data-sizes="auto"
-        alt="C:\Users\rqxiao\AppData\Roaming\Typora\typora-user-images\image-20230721093956970.png"
-        title="image-20230721093956970" /></p>
-<p><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="C:%5cUsers%5crqxiao%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20230721095408496.png"
-        data-srcset="C:%5cUsers%5crqxiao%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20230721095408496.png, C:%5cUsers%5crqxiao%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20230721095408496.png 1.5x, C:%5cUsers%5crqxiao%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20230721095408496.png 2x"
-        data-sizes="auto"
-        alt="C:\Users\rqxiao\AppData\Roaming\Typora\typora-user-images\image-20230721095408496.png"
-        title="image-20230721095408496" /></p>
-<h4 id="构造循环依赖">构造循环依赖</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-zed" data-lang="zed"><span class="line"><span class="cl"><span class="n">AbstractAutowireCapableBeanFactory</span><span class="p">.</span><span class="n">class</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">@</span><span class="n">Override</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">protected</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="n">createBean</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">beanName</span><span class="p">,</span><span class="w"> </span><span class="n">RootBeanDefinition</span><span class="w"> </span><span class="n">mbd</span><span class="p">,</span><span class="w"> </span><span class="err">@</span><span class="n">Nullable</span><span class="w"> </span><span class="n">Object</span><span class="p">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">throws</span><span class="w"> </span><span class="n">BeanCreationException</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="n">if</span><span class="w"> </span><span class="p">(</span><span class="n">logger</span><span class="p">.</span><span class="n">isTraceEnabled</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">logger</span><span class="p">.</span><span class="n">trace</span><span class="p">(</span><span class="err">&#34;</span><span class="n">Creating</span><span class="w"> </span><span class="n">instance</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">bean</span><span class="w"> </span><span class="err">&#39;&#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">beanName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="err">&#34;&#39;&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="n">RootBeanDefinition</span><span class="w"> </span><span class="n">mbdToUse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mbd</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="c1">// Make sure bean class is actually resolved at this point, and
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">   </span><span class="c1">// clone the bean definition in case of a dynamically resolved Class
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">   </span><span class="c1">// which cannot be stored in the shared merged bean definition.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">   </span><span class="n">Class</span><span class="o">&lt;?&gt;</span><span class="w"> </span><span class="n">resolvedClass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">resolveBeanClass</span><span class="p">(</span><span class="n">mbd</span><span class="p">,</span><span class="w"> </span><span class="n">beanName</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="n">if</span><span class="w"> </span><span class="p">(</span><span class="n">resolvedClass</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">null</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">!</span><span class="n">mbd</span><span class="p">.</span><span class="n">hasBeanClass</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">mbd</span><span class="p">.</span><span class="n">getBeanClassName</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">mbdToUse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">new</span><span class="w"> </span><span class="n">RootBeanDefinition</span><span class="p">(</span><span class="n">mbd</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">mbdToUse</span><span class="p">.</span><span class="n">setBeanClass</span><span class="p">(</span><span class="n">resolvedClass</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="c1">// Prepare method overrides.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">   </span><span class="n">try</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">mbdToUse</span><span class="p">.</span><span class="n">prepareMethodOverrides</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="n">catch</span><span class="w"> </span><span class="p">(</span><span class="n">BeanDefinitionValidationException</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">throw</span><span class="w"> </span><span class="n">new</span><span class="w"> </span><span class="n">BeanDefinitionStoreException</span><span class="p">(</span><span class="n">mbdToUse</span><span class="p">.</span><span class="n">getResourceDescription</span><span class="p">(),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">beanName</span><span class="p">,</span><span class="w"> </span><span class="err">&#34;</span><span class="n">Validation</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">method</span><span class="w"> </span><span class="n">overrides</span><span class="w"> </span><span class="n">failed</span><span class="err">&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">ex</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="n">try</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c1">// Give BeanPostProcessors a chance to return a proxy instead of the target bean instance.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">      </span><span class="n">Object</span><span class="w"> </span><span class="n">bean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">resolveBeforeInstantiation</span><span class="p">(</span><span class="n">beanName</span><span class="p">,</span><span class="w"> </span><span class="n">mbdToUse</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">if</span><span class="w"> </span><span class="p">(</span><span class="n">bean</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">         </span><span class="n">return</span><span class="w"> </span><span class="n">bean</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="n">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Throwable</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">throw</span><span class="w"> </span><span class="n">new</span><span class="w"> </span><span class="n">BeanCreationException</span><span class="p">(</span><span class="n">mbdToUse</span><span class="p">.</span><span class="n">getResourceDescription</span><span class="p">(),</span><span class="w"> </span><span class="n">beanName</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="err">&#34;</span><span class="n">BeanPostProcessor</span><span class="w"> </span><span class="n">before</span><span class="w"> </span><span class="n">instantiation</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">bean</span><span class="w"> </span><span class="n">failed</span><span class="err">&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">ex</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="n">try</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">       </span><span class="c1">//==================doCreateBean==================
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">      </span><span class="n">Object</span><span class="w"> </span><span class="n">beanInstance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">doCreateBean</span><span class="p">(</span><span class="n">beanName</span><span class="p">,</span><span class="w"> </span><span class="n">mbdToUse</span><span class="p">,</span><span class="w"> </span><span class="n">args</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">if</span><span class="w"> </span><span class="p">(</span><span class="n">logger</span><span class="p">.</span><span class="n">isTraceEnabled</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">         </span><span class="n">logger</span><span class="p">.</span><span class="n">trace</span><span class="p">(</span><span class="err">&#34;</span><span class="n">Finished</span><span class="w"> </span><span class="n">creating</span><span class="w"> </span><span class="n">instance</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">bean</span><span class="w"> </span><span class="err">&#39;&#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">beanName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="err">&#34;&#39;&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">return</span><span class="w"> </span><span class="n">beanInstance</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="n">catch</span><span class="w"> </span><span class="p">(</span><span class="n">BeanCreationException</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ImplicitlyAppearedSingletonException</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c1">// A previously detected exception with proper bean creation context already,
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">      </span><span class="c1">// or illegal singleton state to be communicated up to DefaultSingletonBeanRegistry.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">      </span><span class="n">throw</span><span class="w"> </span><span class="n">ex</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="n">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Throwable</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">throw</span><span class="w"> </span><span class="n">new</span><span class="w"> </span><span class="n">BeanCreationException</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">mbdToUse</span><span class="p">.</span><span class="n">getResourceDescription</span><span class="p">(),</span><span class="w"> </span><span class="n">beanName</span><span class="p">,</span><span class="w"> </span><span class="err">&#34;</span><span class="n">Unexpected</span><span class="w"> </span><span class="n">exception</span><span class="w"> </span><span class="n">during</span><span class="w"> </span><span class="n">bean</span><span class="w"> </span><span class="n">creation</span><span class="err">&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">ex</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span><span class="lnt">87
+</span><span class="lnt">88
+</span><span class="lnt">89
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-zed" data-lang="zed"><span class="line"><span class="cl"><span class="n">AbstractAutowireCapableBeanFactory</span><span class="p">.</span><span class="n">class</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">protected</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="n">doCreateBean</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">beanName</span><span class="p">,</span><span class="w"> </span><span class="n">RootBeanDefinition</span><span class="w"> </span><span class="n">mbd</span><span class="p">,</span><span class="w"> </span><span class="err">@</span><span class="n">Nullable</span><span class="w"> </span><span class="n">Object</span><span class="p">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">throws</span><span class="w"> </span><span class="n">BeanCreationException</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="n">BeanWrapper</span><span class="w"> </span><span class="n">instanceWrapper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">null</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="n">if</span><span class="w"> </span><span class="p">(</span><span class="n">mbd</span><span class="p">.</span><span class="n">isSingleton</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">instanceWrapper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">factoryBeanInstanceCache</span><span class="p">.</span><span class="n">remove</span><span class="p">(</span><span class="n">beanName</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="n">if</span><span class="w"> </span><span class="p">(</span><span class="n">instanceWrapper</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c1">//================== bean 的实例创建==============================
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">      </span><span class="n">instanceWrapper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">createBeanInstance</span><span class="p">(</span><span class="n">beanName</span><span class="p">,</span><span class="w"> </span><span class="n">mbd</span><span class="p">,</span><span class="w"> </span><span class="n">args</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="n">Object</span><span class="w"> </span><span class="n">bean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">instanceWrapper</span><span class="p">.</span><span class="n">getWrappedInstance</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="n">Class</span><span class="o">&lt;?&gt;</span><span class="w"> </span><span class="n">beanType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">instanceWrapper</span><span class="p">.</span><span class="n">getWrappedClass</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="n">if</span><span class="w"> </span><span class="p">(</span><span class="n">beanType</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">NullBean</span><span class="p">.</span><span class="n">class</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">mbd</span><span class="p">.</span><span class="n">resolvedTargetType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">beanType</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="n">synchronized</span><span class="w"> </span><span class="p">(</span><span class="n">mbd</span><span class="p">.</span><span class="n">postProcessingLock</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">mbd</span><span class="p">.</span><span class="n">postProcessed</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">         </span><span class="n">try</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">applyMergedBeanDefinitionPostProcessors</span><span class="p">(</span><span class="n">mbd</span><span class="p">,</span><span class="w"> </span><span class="n">beanType</span><span class="p">,</span><span class="w"> </span><span class="n">beanName</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">         </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">         </span><span class="n">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Throwable</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">throw</span><span class="w"> </span><span class="n">new</span><span class="w"> </span><span class="n">BeanCreationException</span><span class="p">(</span><span class="n">mbd</span><span class="p">.</span><span class="n">getResourceDescription</span><span class="p">(),</span><span class="w"> </span><span class="n">beanName</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="err">&#34;</span><span class="n">Post</span><span class="o">-</span><span class="n">processing</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">merged</span><span class="w"> </span><span class="n">bean</span><span class="w"> </span><span class="kt">definition</span><span class="w"> </span><span class="n">failed</span><span class="err">&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">ex</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">         </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">         </span><span class="n">mbd</span><span class="p">.</span><span class="n">postProcessed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">true</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="c1">//==================== 往三级缓存（工厂map）存入当前对象 ==============================
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">   </span><span class="n">boolean</span><span class="w"> </span><span class="n">earlySingletonExposure</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">mbd</span><span class="p">.</span><span class="n">isSingleton</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">allowCircularReferences</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">         </span><span class="n">isSingletonCurrentlyInCreation</span><span class="p">(</span><span class="n">beanName</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="n">if</span><span class="w"> </span><span class="p">(</span><span class="n">earlySingletonExposure</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">if</span><span class="w"> </span><span class="p">(</span><span class="n">logger</span><span class="p">.</span><span class="n">isTraceEnabled</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">         </span><span class="n">logger</span><span class="p">.</span><span class="n">trace</span><span class="p">(</span><span class="err">&#34;</span><span class="n">Eagerly</span><span class="w"> </span><span class="n">caching</span><span class="w"> </span><span class="n">bean</span><span class="w"> </span><span class="err">&#39;&#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">beanName</span><span class="w"> </span><span class="o">+</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">               </span><span class="err">&#34;&#39;</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">allow</span><span class="w"> </span><span class="n">for</span><span class="w"> </span><span class="n">resolving</span><span class="w"> </span><span class="n">potential</span><span class="w"> </span><span class="n">circular</span><span class="w"> </span><span class="n">references</span><span class="err">&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c1">//==================== 往三级缓存（工厂map）存入当前对象 存入的lambda表达式==============================
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">      </span><span class="n">addSingletonFactory</span><span class="p">(</span><span class="n">beanName</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">getEarlyBeanReference</span><span class="p">(</span><span class="n">beanName</span><span class="p">,</span><span class="w"> </span><span class="n">mbd</span><span class="p">,</span><span class="w"> </span><span class="n">bean</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="n">Object</span><span class="w"> </span><span class="n">exposedObject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bean</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="n">try</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">       </span><span class="c1">//==================== 依赖注入 ==============================
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">      </span><span class="n">populateBean</span><span class="p">(</span><span class="n">beanName</span><span class="p">,</span><span class="w"> </span><span class="n">mbd</span><span class="p">,</span><span class="w"> </span><span class="n">instanceWrapper</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c1">//==================== 执行初始化方法 ==============================
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">      </span><span class="n">exposedObject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">initializeBean</span><span class="p">(</span><span class="n">beanName</span><span class="p">,</span><span class="w"> </span><span class="n">exposedObject</span><span class="p">,</span><span class="w"> </span><span class="n">mbd</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="n">if</span><span class="w"> </span><span class="p">(</span><span class="n">earlySingletonExposure</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c1">//==================== 如果a依赖b b依赖a，并且a是代理对象  a一开始会createBeanInstance ，但到这一步时，b已经创建完成了，a会去检查半成品缓存中有没有在b创建对象时候，创建好的代理对象a ===================
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">      </span><span class="c1">//==============第二个参数为false，不会去三级缓存拿==============
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">      </span><span class="n">Object</span><span class="w"> </span><span class="n">earlySingletonReference</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getSingleton</span><span class="p">(</span><span class="n">beanName</span><span class="p">,</span><span class="w"> </span><span class="n">false</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c1">// ==================== 是否发生循环依赖==================== 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">      </span><span class="n">if</span><span class="w"> </span><span class="p">(</span><span class="n">earlySingletonReference</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="c1">//================如果当前bean是个 需要代理的对象 exposedObject ！= bean==============================
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">         </span><span class="n">if</span><span class="w"> </span><span class="p">(</span><span class="n">exposedObject</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">bean</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">exposedObject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">earlySingletonReference</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">         </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">         </span><span class="n">else</span><span class="w"> </span><span class="n">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">this</span><span class="p">.</span><span class="n">allowRawInjectionDespiteWrapping</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">hasDependentBean</span><span class="p">(</span><span class="n">beanName</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">String</span><span class="p">[]</span><span class="w"> </span><span class="n">dependentBeans</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getDependentBeans</span><span class="p">(</span><span class="n">beanName</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">actualDependentBeans</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">new</span><span class="w"> </span><span class="n">LinkedHashSet</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">dependentBeans</span><span class="p">.</span><span class="n">length</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">for</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">dependentBean</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">dependentBeans</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">               </span><span class="n">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">removeSingletonIfCreatedForTypeCheckOnly</span><span class="p">(</span><span class="n">dependentBean</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="n">actualDependentBeans</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">dependentBean</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">               </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">actualDependentBeans</span><span class="p">.</span><span class="n">isEmpty</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">               </span><span class="n">throw</span><span class="w"> </span><span class="n">new</span><span class="w"> </span><span class="n">BeanCurrentlyInCreationException</span><span class="p">(</span><span class="n">beanName</span><span class="p">,</span><span class="err">&#34;</span><span class="n">B</span><span class="p">....</span><span class="err">“”</span><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">         </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="n">try</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">registerDisposableBeanIfNecessary</span><span class="p">(</span><span class="n">beanName</span><span class="p">,</span><span class="w"> </span><span class="n">bean</span><span class="p">,</span><span class="w"> </span><span class="n">mbd</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="n">catch</span><span class="w"> </span><span class="p">(</span><span class="n">BeanDefinitionValidationException</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">throw</span><span class="w"> </span><span class="n">new</span><span class="w"> </span><span class="n">BeanCreationException</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">mbd</span><span class="p">.</span><span class="n">getResourceDescription</span><span class="p">(),</span><span class="w"> </span><span class="n">beanName</span><span class="p">,</span><span class="w"> </span><span class="err">&#34;</span><span class="n">Invalid</span><span class="w"> </span><span class="n">destruction</span><span class="w"> </span><span class="n">signature</span><span class="err">&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">ex</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="n">return</span><span class="w"> </span><span class="n">exposedObject</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">protected void populateBean(String beanName, RootBeanDefinition mbd, @Nullable BeanWrapper bw) {
+</span></span><span class="line"><span class="cl">   if (bw == null) {
+</span></span><span class="line"><span class="cl">      if (mbd.hasPropertyValues()) {
+</span></span><span class="line"><span class="cl">         throw new BeanCreationException(
+</span></span><span class="line"><span class="cl">               mbd.getResourceDescription(), beanName, &#34;Cannot apply property values to null instance&#34;);
+</span></span><span class="line"><span class="cl">      }
+</span></span><span class="line"><span class="cl">      else {
+</span></span><span class="line"><span class="cl">         // Skip property population phase for null instance.
+</span></span><span class="line"><span class="cl">         return;
+</span></span><span class="line"><span class="cl">      }
+</span></span><span class="line"><span class="cl">   }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">   // Give any InstantiationAwareBeanPostProcessors the opportunity to modify the
+</span></span><span class="line"><span class="cl">   // state of the bean before properties are set. This can be used, for example,
+</span></span><span class="line"><span class="cl">   // to support styles of field injection.
+</span></span><span class="line"><span class="cl">   if (!mbd.isSynthetic() &amp;&amp; hasInstantiationAwareBeanPostProcessors()) {
+</span></span><span class="line"><span class="cl">      for (InstantiationAwareBeanPostProcessor bp : getBeanPostProcessorCache().instantiationAware) {
+</span></span><span class="line"><span class="cl">         if (!bp.postProcessAfterInstantiation(bw.getWrappedInstance(), beanName)) {
+</span></span><span class="line"><span class="cl">            return;
+</span></span><span class="line"><span class="cl">         }
+</span></span><span class="line"><span class="cl">      }
+</span></span><span class="line"><span class="cl">   }
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="构造循环依赖">构造循环依赖</h4>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">

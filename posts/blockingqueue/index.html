@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/shengtu0328.github.io\/posts\/blockingqueue\/"
-        },"genre": "posts","wordcount":  1288 ,
+        },"genre": "posts","wordcount":  1345 ,
         "url": "https:\/\/shengtu0328.github.io\/posts\/blockingqueue\/","datePublished": "2023-06-16T16:14:17+08:00","dateModified": "2023-06-16T16:14:17+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -102,7 +102,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">阻塞队列-双锁实现</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span>&nbsp;<span class="post-category">included in <a href="/categories/juc/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>JUC</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-06-16">2023-06-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1288 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-06-16">2023-06-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1345 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -149,6 +149,8 @@
 <p>尽量减少offer方法中对headLock的加锁次数，在poll方法中自己唤醒自己。</p>
 <p>offer方法中改为了元素个数从0-&gt;1的时候，即空-&gt;非空的时候，才会对headLock的加锁然后唤醒。poll方法还可以消费元素的话，poll方法的最后面还要自己signal()</p>
 <p>poll方法中改为了元素个数从满到不满 array.length-&gt;array.length-1 的时候，才会对tailLock的加锁然后唤醒。offer方法还可以添加元素的话，offer方法的最后面 还要自己signal自己</p>
+<p>队列从满-&gt;不满时   由poll唤醒等待不满的 offer 线程</p>
+<p>如果从0变为非空，由offer这边唤醒等待非空的poll线程</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">  1

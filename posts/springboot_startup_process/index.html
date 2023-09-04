@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/shengtu0328.github.io\/posts\/springboot_startup_process\/"
-        },"genre": "posts","wordcount":  1169 ,
+        },"genre": "posts","wordcount":  1511 ,
         "url": "https:\/\/shengtu0328.github.io\/posts\/springboot_startup_process\/","datePublished": "2023-05-24T10:38:27+08:00","dateModified": "2023-05-24T10:38:27+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -102,8 +102,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Springboot启动流程</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-05-24">2023-05-24</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1169 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-05-24">2023-05-24</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1511 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -113,6 +113,7 @@
   <ul>
     <li><a href="#几个重要的类">几个重要的类</a></li>
     <li><a href="#总结springboot-启动流程">总结springboot 启动流程</a></li>
+    <li><a href="#7-springboot-自动配置原理">7. SpringBoot 自动配置原理</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h2 id="几个重要的类">几个重要的类</h2>
@@ -216,6 +217,42 @@
 </ol>
 </li>
 </ol>
+<h2 id="7-springboot-自动配置原理">7. SpringBoot 自动配置原理</h2>
+<p><strong>要求</strong></p>
+<ul>
+<li>掌握 SpringBoot 自动配置原理</li>
+</ul>
+<p><strong>自动配置原理</strong></p>
+<p>@SpringBootConfiguration 是一个组合注解，由 @ComponentScan、@EnableAutoConfiguration 和 @SpringBootConfiguration 组成</p>
+<ol>
+<li>
+<p>@SpringBootConfiguration 与普通 @Configuration 相比，唯一区别是前者要求整个 app 中只出现一次</p>
+</li>
+<li>
+<p>@ComponentScan</p>
+<ul>
+<li>excludeFilters - 用来在组件扫描时进行排除，也会排除自动配置类</li>
+</ul>
+</li>
+<li>
+<p>@EnableAutoConfiguration 也是一个组合注解，由下面注解组成</p>
+<ul>
+<li>@AutoConfigurationPackage – 用来记住扫描的起始包</li>
+<li>@Import(AutoConfigurationImportSelector.class) 用来加载 <code>META-INF/spring.factories</code> 中的自动配置类</li>
+</ul>
+</li>
+</ol>
+<p><strong>为什么不使用 @Import 直接引入自动配置类</strong></p>
+<p>有两个原因：</p>
+<ol>
+<li>让主配置类和自动配置类变成了强耦合，主配置类不应该知道有哪些从属配置</li>
+<li>直接用 <code>@Import(自动配置类.class)</code>，引入的配置解析优先级较高，自动配置类的解析应该在主配置没提供时作为默认配置</li>
+</ol>
+<p>因此，采用了 <code>@Import(AutoConfigurationImportSelector.class)</code></p>
+<ul>
+<li>由 <code>AutoConfigurationImportSelector.class</code> 去读取 <code>META-INF/spring.factories</code> 中的自动配置类，实现了弱耦合。</li>
+<li>另外 <code>AutoConfigurationImportSelector.class</code> 实现了 DeferredImportSelector 接口，让自动配置的解析晚于主配置的解析</li>
+</ul>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">

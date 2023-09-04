@@ -1,0 +1,1467 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>K8s - ricky的网站</title><meta name="Description" content="The best time to plant a tree was 10 years ago, the second is now"><meta property="og:title" content="K8s" />
+<meta property="og:description" content="启动集群 minikube start minikube start &ndash;kubernetes-version=v1.23.0 查看节点。kubectl 是一个用来跟 K8S 集群进行交互的命令行工具 kubectl get node 停止集群 minikube stop 清空集群 minikube delete &ndash;all 安装集群可视化 Web UI 控制台 minikube dashboard" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://shengtu0328.github.io/posts/k8s/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-09-03T15:20:27+08:00" />
+<meta property="article:modified_time" content="2023-09-03T15:20:27+08:00" /><meta property="og:site_name" content="我的网站" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="K8s"/>
+<meta name="twitter:description" content="启动集群 minikube start minikube start &ndash;kubernetes-version=v1.23.0 查看节点。kubectl 是一个用来跟 K8S 集群进行交互的命令行工具 kubectl get node 停止集群 minikube stop 清空集群 minikube delete &ndash;all 安装集群可视化 Web UI 控制台 minikube dashboard"/>
+<meta name="application-name" content="我的网站">
+<meta name="apple-mobile-web-app-title" content="我的网站"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://shengtu0328.github.io/posts/k8s/" /><link rel="prev" href="https://shengtu0328.github.io/posts/spring_session/" /><link rel="next" href="https://shengtu0328.github.io/posts/english_writing/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "K8s",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/shengtu0328.github.io\/posts\/k8s\/"
+        },"genre": "posts","wordcount":  4104 ,
+        "url": "https:\/\/shengtu0328.github.io\/posts\/k8s\/","datePublished": "2023-09-03T15:20:27+08:00","dateModified": "2023-09-03T15:20:27+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "ricky"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="ricky的网站">Ricky’s blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="ricky的网站">Ricky’s blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">K8s</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-09-03">2023-09-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;4104 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;9 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li>
+          <ul>
+            <li>
+              <ul>
+                <li><a href="#1直接命令参数-运行在启动dokerdesk启动minikube之后-再运行">1.直接命令参数 运行（在启动dokerdesk，启动minikube之后 再运行）</a></li>
+                <li><a href="#2查看pod"><strong>2.查看pod</strong></a></li>
+                <li><a href="#3可以用命令配置文件运行pod">3.可以用命令配置文件运行（pod）</a></li>
+                <li><a href="#4可以用命令配置文件运行deployment">4.可以用命令配置文件运行（Deployment）</a></li>
+                <li><a href="#5查看-pod-详情">5.查看 pod 详情</a></li>
+                <li><a href="#6查看pod的log">6.查看pod的log</a></li>
+                <li><a href="#7进入pod中的容器">7.进入pod中的容器</a></li>
+                <li><a href="#8-伸缩扩展副本配置文件">8. 伸缩扩展副本（配置文件）</a></li>
+                <li><a href="#9伸缩扩展副本命令行参数">9.伸缩扩展副本（命令行参数）</a></li>
+                <li><a href="#10把集群内端口映射到节点把pod的端口映射到外面">10.把集群内端口映射到节点（把pod的端口映射到外面）</a></li>
+                <li><a href="#11-查看历史">11. 查看历史</a></li>
+                <li><a href="#12--回到上个版本灰度更新">12.  回到上个版本（灰度更新）</a></li>
+                <li><a href="#13回到指定版本">13.回到指定版本</a></li>
+                <li><a href="#14回到指定版本">14.回到指定版本</a></li>
+                <li><a href="#更多命令">更多命令</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#现存问题">现存问题</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#特性">特性</a></li>
+        <li><a href="#启动-service">启动 Service</a></li>
+        <li><a href="#查看服务">查看服务</a></li>
+        <li><a href="#服务的默认类型是clusterip只能在集群内部访问我们可以进入到-pod-里面访问-意思是进入到-pod里面-可以访问-sevice">服务的默认类型是<code>ClusterIP</code>，只能在集群内部访问，我们可以进入到 Pod 里面访问： 意思是进入到 pod里面 可以访问 sevice</a></li>
+        <li><a href="#如果要在集群外部访问可以通过端口转发实现只适合临时测试用">如果要在集群外部访问，可以通过端口转发实现（只适合临时测试用）：</a></li>
+        <li><a href="#对外暴露服务">对外暴露服务</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#部署-statefulset-类型的-mongodb">部署 StatefulSet 类型的 Mongodb</a>
+          <ul>
+            <li>
+              <ul>
+                <li><a href="#1创建-statefulset-配置文件mongoyamlservice-和-statefulset-都在一个yaml里">1.创建 StatefulSet 配置文件mongo.yaml（service 和 StatefulSet 都在一个yaml里）</a></li>
+                <li><a href="#启动">启动</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#statefulset-特性">StatefulSet 特性</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="启动集群">启动集群</h1>
+<p>minikube start</p>
+<p>minikube start &ndash;kubernetes-version=v1.23.0</p>
+<h1 id="查看节点kubectl-是一个用来跟-k8s-集群进行交互的命令行工具">查看节点。kubectl 是一个用来跟 K8S 集群进行交互的命令行工具</h1>
+<p>kubectl get node</p>
+<h1 id="停止集群">停止集群</h1>
+<p>minikube stop</p>
+<h1 id="清空集群">清空集群</h1>
+<p>minikube delete &ndash;all</p>
+<h1 id="安装集群可视化-web-ui-控制台">安装集群可视化 Web UI 控制台</h1>
+<p>minikube dashboard</p>
+<h1 id="部署应用到集群中">部署应用到集群中</h1>
+<p>项目地址，里面包含了一个k8s启动pod，启动development的yaml文件  <a href="https://github.com/gzyunke/test-k8s" target="_blank" rel="noopener noreffer ">https://github.com/gzyunke/test-k8s</a></p>
+<h5 id="1直接命令参数-运行在启动dokerdesk启动minikube之后-再运行">1.直接命令参数 运行（在启动dokerdesk，启动minikube之后 再运行）</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">kubectl run testapp --image=ccr.ccs.tencentyun.com/k8s-tutorial/test-k8s:v1
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>运行一个pod</p>
+<p>pod的名字是testapp</p>
+<p>镜像是  &ndash;image=ccr.ccs.tencentyun.com/k8s-tutorial/test-k8s:v1</p>
+<h5 id="2查看pod"><strong>2.查看pod</strong></h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">kubectl get pod
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>可以看到有个启动的过程 READY 0/1变成1/1</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">PS C:\WINDOWS\system32&gt; kubectl get pod
+</span></span><span class="line"><span class="cl">NAME      READY   STATUS              RESTARTS   AGE
+</span></span><span class="line"><span class="cl">testapp   0/1     ContainerCreating   0          45s
+</span></span><span class="line"><span class="cl">PS C:\WINDOWS\system32&gt; kubectl get pod
+</span></span><span class="line"><span class="cl">NAME      READY   STATUS    RESTARTS   AGE
+</span></span><span class="line"><span class="cl">testapp   1/1     Running   0          77s
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="3可以用命令配置文件运行pod">3.可以用命令配置文件运行（pod）</h5>
+<p>找到配置文件所在的目录，执行命令</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"> kubectl apply -f .\pod.yaml
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>配置文件如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">apiVersion: v1
+</span></span><span class="line"><span class="cl">kind: Pod  # 类型是Pod
+</span></span><span class="line"><span class="cl">metadata:
+</span></span><span class="line"><span class="cl">  name: test-pod #Pod的名字
+</span></span><span class="line"><span class="cl">spec:
+</span></span><span class="line"><span class="cl">  # 一个pod可以定义多个容器
+</span></span><span class="line"><span class="cl">  containers:
+</span></span><span class="line"><span class="cl">    - name: test-k8s # 容器名字
+</span></span><span class="line"><span class="cl">      image: ccr.ccs.tencentyun.com/k8s-tutorial/test-k8s:v1 # 镜像
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="4可以用命令配置文件运行deployment">4.可以用命令配置文件运行（Deployment）</h5>
+<p>找到配置文件所在的目录，执行命令</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"> kubectl apply -f .\app.yaml
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>配置文件如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">apiVersion: apps/v1
+</span></span><span class="line"><span class="cl">kind: Deployment
+</span></span><span class="line"><span class="cl">metadata:
+</span></span><span class="line"><span class="cl">  # 部署名字
+</span></span><span class="line"><span class="cl">  name: test-k8s
+</span></span><span class="line"><span class="cl">spec:
+</span></span><span class="line"><span class="cl">  # 运行副本的数量，pod的数量
+</span></span><span class="line"><span class="cl">  replicas: 5
+</span></span><span class="line"><span class="cl">  # 用来查找关联的 Pod，所有标签都匹配才行
+</span></span><span class="line"><span class="cl">  selector:
+</span></span><span class="line"><span class="cl">    matchLabels:
+</span></span><span class="line"><span class="cl">      app: test-k8s
+</span></span><span class="line"><span class="cl">  # 定义 Pod 相关数据
+</span></span><span class="line"><span class="cl">  template:
+</span></span><span class="line"><span class="cl">    metadata:
+</span></span><span class="line"><span class="cl">      labels:
+</span></span><span class="line"><span class="cl">        app: test-k8s
+</span></span><span class="line"><span class="cl">    spec:
+</span></span><span class="line"><span class="cl">      # 定义容器，可以多个
+</span></span><span class="line"><span class="cl">      containers:
+</span></span><span class="line"><span class="cl">      - name: test-k8s # 容器名字
+</span></span><span class="line"><span class="cl">        image: ccr.ccs.tencentyun.com/k8s-tutorial/test-k8s:v1 # 镜像
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>可以看到replicas 配了几，就有几个pod</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">PS C:\WINDOWS\system32&gt; kubectl get pod
+</span></span><span class="line"><span class="cl">NAME                        READY   STATUS    RESTARTS   AGE
+</span></span><span class="line"><span class="cl">test-k8s                    1/1     Running   0          10m
+</span></span><span class="line"><span class="cl">test-k8s-8598bbb8c6-8dk69   1/1     Running   0          8s
+</span></span><span class="line"><span class="cl">test-k8s-8598bbb8c6-hl8xj   1/1     Running   0          8s
+</span></span><span class="line"><span class="cl">test-k8s-8598bbb8c6-jkdtd   1/1     Running   0          8s
+</span></span><span class="line"><span class="cl">test-k8s-8598bbb8c6-kjrfk   1/1     Running   0          8s
+</span></span><span class="line"><span class="cl">test-k8s-8598bbb8c6-z4dt6   1/1     Running   0          8s
+</span></span><span class="line"><span class="cl">testapp                     1/1     Running   0          28m
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>加上 -o wide 可以看到pod的ip，在哪个节点上运行</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">PS C:\WINDOWS\system32&gt; kubectl get pod -o wide
+</span></span><span class="line"><span class="cl">NAME                        READY   STATUS    RESTARTS   AGE     IP           NODE       NOMINATED NODE   READINESS GATES
+</span></span><span class="line"><span class="cl">test-k8s                    1/1     Running   0          14m     172.17.0.4   minikube   &lt;none&gt;           &lt;none&gt;
+</span></span><span class="line"><span class="cl">test-k8s-8598bbb8c6-8dk69   1/1     Running   0          3m47s   172.17.0.8   minikube   &lt;none&gt;           &lt;none&gt;
+</span></span><span class="line"><span class="cl">test-k8s-8598bbb8c6-hl8xj   1/1     Running   0          3m47s   172.17.0.7   minikube   &lt;none&gt;           &lt;none&gt;
+</span></span><span class="line"><span class="cl">test-k8s-8598bbb8c6-jkdtd   1/1     Running   0          3m47s   172.17.0.9   minikube   &lt;none&gt;           &lt;none&gt;
+</span></span><span class="line"><span class="cl">test-k8s-8598bbb8c6-kjrfk   1/1     Running   0          3m47s   172.17.0.6   minikube   &lt;none&gt;           &lt;none&gt;
+</span></span><span class="line"><span class="cl">test-k8s-8598bbb8c6-z4dt6   1/1     Running   0          3m47s   172.17.0.5   minikube   &lt;none&gt;           &lt;none&gt;
+</span></span><span class="line"><span class="cl">testapp                     1/1     Running   0          32m     172.17.0.3   minikube   &lt;none&gt;           &lt;none&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>Deployment 通过 label 关联起来 Pods</strong></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://sjwx.easydoc.xyz/46901064/files/kwpt8p8o.png"
+        data-srcset="https://sjwx.easydoc.xyz/46901064/files/kwpt8p8o.png, https://sjwx.easydoc.xyz/46901064/files/kwpt8p8o.png 1.5x, https://sjwx.easydoc.xyz/46901064/files/kwpt8p8o.png 2x"
+        data-sizes="auto"
+        alt="https://sjwx.easydoc.xyz/46901064/files/kwpt8p8o.png"
+        title="deployment.png" /></p>
+<h5 id="5查看-pod-详情">5.查看 pod 详情</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">kubectl describe pod pod-name
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">PS C:\WINDOWS\system32&gt; kubectl describe pod test-k8s-8598bbb8c6-z4dt6
+</span></span><span class="line"><span class="cl">Name:             test-k8s-8598bbb8c6-z4dt6
+</span></span><span class="line"><span class="cl">Namespace:        default
+</span></span><span class="line"><span class="cl">Priority:         0
+</span></span><span class="line"><span class="cl">Service Account:  default
+</span></span><span class="line"><span class="cl">Node:             minikube/192.168.49.2
+</span></span><span class="line"><span class="cl">Start Time:       Sun, 03 Sep 2023 16:08:44 +0800
+</span></span><span class="line"><span class="cl">Labels:           app=test-k8s
+</span></span><span class="line"><span class="cl">                  pod-template-hash=8598bbb8c6
+</span></span><span class="line"><span class="cl">Annotations:      &lt;none&gt;
+</span></span><span class="line"><span class="cl">Status:           Running
+</span></span><span class="line"><span class="cl">IP:               172.17.0.5
+</span></span><span class="line"><span class="cl">IPs:
+</span></span><span class="line"><span class="cl">  IP:           172.17.0.5
+</span></span><span class="line"><span class="cl">Controlled By:  ReplicaSet/test-k8s-8598bbb8c6
+</span></span><span class="line"><span class="cl">Containers:
+</span></span><span class="line"><span class="cl">  test-k8s:
+</span></span><span class="line"><span class="cl">    Container ID:   docker://acc7370f8f643ce9ae3cad32b2e73a724b82f734990826e11cd435d20bfa7073
+</span></span><span class="line"><span class="cl">    Image:          ccr.ccs.tencentyun.com/k8s-tutorial/test-k8s:v1
+</span></span><span class="line"><span class="cl">    Image ID:       docker-pullable://ccr.ccs.tencentyun.com/k8s-tutorial/test-k8s@sha256:9b452816d6493045a21d8b3d6a851f21ca2e50c86cd57ba8c41141f001d9911d
+</span></span><span class="line"><span class="cl">    Port:           &lt;none&gt;
+</span></span><span class="line"><span class="cl">    Host Port:      &lt;none&gt;
+</span></span><span class="line"><span class="cl">    State:          Running
+</span></span><span class="line"><span class="cl">      Started:      Sun, 03 Sep 2023 16:08:45 +0800
+</span></span><span class="line"><span class="cl">    Ready:          True
+</span></span><span class="line"><span class="cl">    Restart Count:  0
+</span></span><span class="line"><span class="cl">    Environment:    &lt;none&gt;
+</span></span><span class="line"><span class="cl">    Mounts:
+</span></span><span class="line"><span class="cl">      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-lm545 (ro)
+</span></span><span class="line"><span class="cl">Conditions:
+</span></span><span class="line"><span class="cl">  Type              Status
+</span></span><span class="line"><span class="cl">  Initialized       True
+</span></span><span class="line"><span class="cl">  Ready             True
+</span></span><span class="line"><span class="cl">  ContainersReady   True
+</span></span><span class="line"><span class="cl">  PodScheduled      True
+</span></span><span class="line"><span class="cl">Volumes:
+</span></span><span class="line"><span class="cl">  kube-api-access-lm545:
+</span></span><span class="line"><span class="cl">    Type:                    Projected (a volume that contains injected data from multiple sources)
+</span></span><span class="line"><span class="cl">    TokenExpirationSeconds:  3607
+</span></span><span class="line"><span class="cl">    ConfigMapName:           kube-root-ca.crt
+</span></span><span class="line"><span class="cl">    ConfigMapOptional:       &lt;nil&gt;
+</span></span><span class="line"><span class="cl">    DownwardAPI:             true
+</span></span><span class="line"><span class="cl">QoS Class:                   BestEffort
+</span></span><span class="line"><span class="cl">Node-Selectors:              &lt;none&gt;
+</span></span><span class="line"><span class="cl">Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+</span></span><span class="line"><span class="cl">                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+</span></span><span class="line"><span class="cl">Events:
+</span></span><span class="line"><span class="cl">  Type    Reason     Age    From               Message
+</span></span><span class="line"><span class="cl">  ----    ------     ----   ----               -------
+</span></span><span class="line"><span class="cl">  Normal  Scheduled  8m58s  default-scheduler  Successfully assigned default/test-k8s-8598bbb8c6-z4dt6 to minikube
+</span></span><span class="line"><span class="cl">  Normal  Pulled     8m58s  kubelet            Container image &#34;ccr.ccs.tencentyun.com/k8s-tutorial/test-k8s:v1&#34; already present on machine
+</span></span><span class="line"><span class="cl">  Normal  Created    8m58s  kubelet            Created container test-k8s
+</span></span><span class="line"><span class="cl">  Normal  Started    8m57s  kubelet            Started container test-k8s
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="6查看pod的log">6.查看pod的log</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">kubectl logs pod-name
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">PS C:\WINDOWS\system32&gt; kubectl logs test-k8s-8598bbb8c6-z4dt6
+</span></span><span class="line"><span class="cl">[32m[2023-09-03T08:08:46.147] [INFO] app - [39mrun in docker
+</span></span><span class="line"><span class="cl">[32m[2023-09-03T08:08:46.153] [INFO] app - [39mServer started successfully and listened on 8080
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">kubectl logs pod-name -f  
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>持续不断的查看日志</p>
+<h5 id="7进入pod中的容器">7.进入pod中的容器</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">kubectl exec -it pod-name -- bash
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>进入 Pod 容器终端，如果一个pod里有多个容器 -c container-name 可以指定进入哪个容器。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">PS D:\minikube&gt; kubectl exec -it test-k8s-8598bbb8c6-z4dt6 -- bash
+</span></span><span class="line"><span class="cl">root@test-k8s-8598bbb8c6-z4dt6:/app# ls
+</span></span><span class="line"><span class="cl">app.js  docker-compose.yml  draw  log  log.js  log4js.json  node_modules  package-lock.json  package.json  yaml
+</span></span><span class="line"><span class="cl">root@test-k8s-8598bbb8c6-z4dt6:/app# pwd
+</span></span><span class="line"><span class="cl">/app
+</span></span><span class="line"><span class="cl">root@test-k8s-8598bbb8c6-z4dt6:/app# cd ..
+</span></span><span class="line"><span class="cl">root@test-k8s-8598bbb8c6-z4dt6:/# ls
+</span></span><span class="line"><span class="cl">app  bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+</span></span><span class="line"><span class="cl">root@test-k8s-8598bbb8c6-z4dt6:/# cd app/log
+</span></span><span class="line"><span class="cl">root@test-k8s-8598bbb8c6-z4dt6:/app/log# ls
+</span></span><span class="line"><span class="cl">access  app.log  errors.log
+</span></span><span class="line"><span class="cl">root@test-k8s-8598bbb8c6-z4dt6:/app/log# tail -f app.log
+</span></span><span class="line"><span class="cl">[2021-12-02T17:22:27.289] [INFO] app - on index page
+</span></span><span class="line"><span class="cl">[2021-12-02T17:22:31.337] [INFO] app - on hello page
+</span></span><span class="line"><span class="cl">[2021-12-02T17:22:32.750] [INFO] app - on hello page
+</span></span><span class="line"><span class="cl">[2021-12-02T17:22:35.918] [INFO] app - on hello page
+</span></span><span class="line"><span class="cl">[2021-12-02T17:22:39.464] [INFO] app - on hello page
+</span></span><span class="line"><span class="cl">[2021-12-02T17:22:56.888] [INFO] app - on index page
+</span></span><span class="line"><span class="cl">[2021-12-02T17:23:09.312] [INFO] app - on index page
+</span></span><span class="line"><span class="cl">[2023-09-04T00:10:59.180] [INFO] app - run in docker
+</span></span><span class="line"><span class="cl">[2023-09-04T00:10:59.186] [INFO] app - Server started successfully and listened on 8080
+</span></span><span class="line"><span class="cl">http://localhost:8080
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="8-伸缩扩展副本配置文件">8. 伸缩扩展副本（配置文件）</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">kubectl apply -f .\app.yaml
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在 app.yaml中把 replicas 数量从5个改成6个，查看pod数量也发生相应的变化</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">PS G:\xrqProjects\test-k8s-main\yaml\deployment&gt; kubectl get pod
+</span></span><span class="line"><span class="cl">NAME                        READY   STATUS    RESTARTS      AGE
+</span></span><span class="line"><span class="cl">test-k8s                    1/1     Running   1 (17m ago)   16h
+</span></span><span class="line"><span class="cl">test-k8s-8598bbb8c6-8dk69   1/1     Running   1 (17m ago)   16h
+</span></span><span class="line"><span class="cl">test-k8s-8598bbb8c6-hl8xj   1/1     Running   1 (17m ago)   16h
+</span></span><span class="line"><span class="cl">test-k8s-8598bbb8c6-jkdtd   1/1     Running   1 (17m ago)   16h
+</span></span><span class="line"><span class="cl">test-k8s-8598bbb8c6-kjrfk   1/1     Running   1 (17m ago)   16h
+</span></span><span class="line"><span class="cl">test-k8s-8598bbb8c6-z4dt6   1/1     Running   1 (17m ago)   16h
+</span></span><span class="line"><span class="cl">testapp                     1/1     Running   1 (17m ago)   16h
+</span></span><span class="line"><span class="cl">PS G:\xrqProjects\test-k8s-main\yaml\deployment&gt; kubectl apply -f .\app.yaml
+</span></span><span class="line"><span class="cl">deployment.apps/test-k8s configured
+</span></span><span class="line"><span class="cl">PS G:\xrqProjects\test-k8s-main\yaml\deployment&gt; kubectl get pod
+</span></span><span class="line"><span class="cl">NAME                        READY   STATUS    RESTARTS      AGE
+</span></span><span class="line"><span class="cl">test-k8s                    1/1     Running   1 (18m ago)   16h
+</span></span><span class="line"><span class="cl">test-k8s-8598bbb8c6-8dk69   1/1     Running   1 (18m ago)   16h
+</span></span><span class="line"><span class="cl">test-k8s-8598bbb8c6-hl8xj   1/1     Running   1 (18m ago)   16h
+</span></span><span class="line"><span class="cl">test-k8s-8598bbb8c6-jkdtd   1/1     Running   1 (18m ago)   16h
+</span></span><span class="line"><span class="cl">test-k8s-8598bbb8c6-kjrfk   1/1     Running   1 (18m ago)   16h
+</span></span><span class="line"><span class="cl">test-k8s-8598bbb8c6-skz8x   1/1     Running   0             2s
+</span></span><span class="line"><span class="cl">test-k8s-8598bbb8c6-z4dt6   1/1     Running   1 (18m ago)   16h
+</span></span><span class="line"><span class="cl">testapp                     1/1     Running   1 (18m ago)   16h
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="9伸缩扩展副本命令行参数">9.伸缩扩展副本（命令行参数）</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">kubectl scale deployment test-k8s --replicas=10
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">PS G:\xrqProjects\test-k8s-main\yaml\deployment&gt; kubectl get pod
+</span></span><span class="line"><span class="cl">NAME                        READY   STATUS    RESTARTS      AGE
+</span></span><span class="line"><span class="cl">test-k8s                    1/1     Running   1 (21m ago)   16h
+</span></span><span class="line"><span class="cl">test-k8s-8598bbb8c6-8dk69   1/1     Running   1 (21m ago)   16h
+</span></span><span class="line"><span class="cl">test-k8s-8598bbb8c6-hl8xj   1/1     Running   1 (21m ago)   16h
+</span></span><span class="line"><span class="cl">test-k8s-8598bbb8c6-jkdtd   1/1     Running   1 (21m ago)   16h
+</span></span><span class="line"><span class="cl">test-k8s-8598bbb8c6-kjrfk   1/1     Running   1 (21m ago)   16h
+</span></span><span class="line"><span class="cl">test-k8s-8598bbb8c6-skz8x   1/1     Running   0             3m37s
+</span></span><span class="line"><span class="cl">test-k8s-8598bbb8c6-z4dt6   1/1     Running   1 (21m ago)   16h
+</span></span><span class="line"><span class="cl">testapp                     1/1     Running   1 (21m ago)   16h
+</span></span><span class="line"><span class="cl">PS G:\xrqProjects\test-k8s-main\yaml\deployment&gt; kubectl scale deployment test-k8s --replicas=10
+</span></span><span class="line"><span class="cl">deployment.apps/test-k8s scaled
+</span></span><span class="line"><span class="cl">PS G:\xrqProjects\test-k8s-main\yaml\deployment&gt; kubectl get pod
+</span></span><span class="line"><span class="cl">NAME                        READY   STATUS    RESTARTS      AGE
+</span></span><span class="line"><span class="cl">test-k8s                    1/1     Running   1 (21m ago)   16h
+</span></span><span class="line"><span class="cl">test-k8s-8598bbb8c6-8dk69   1/1     Running   1 (21m ago)   16h
+</span></span><span class="line"><span class="cl">test-k8s-8598bbb8c6-92k7b   1/1     Running   0             4s
+</span></span><span class="line"><span class="cl">test-k8s-8598bbb8c6-b684w   1/1     Running   0             4s
+</span></span><span class="line"><span class="cl">test-k8s-8598bbb8c6-g77gw   1/1     Running   0             4s
+</span></span><span class="line"><span class="cl">test-k8s-8598bbb8c6-hl8xj   1/1     Running   1 (21m ago)   16h
+</span></span><span class="line"><span class="cl">test-k8s-8598bbb8c6-jkdtd   1/1     Running   1 (21m ago)   16h
+</span></span><span class="line"><span class="cl">test-k8s-8598bbb8c6-kjrfk   1/1     Running   1 (21m ago)   16h
+</span></span><span class="line"><span class="cl">test-k8s-8598bbb8c6-skz8x   1/1     Running   0             3m50s
+</span></span><span class="line"><span class="cl">test-k8s-8598bbb8c6-xhjzx   1/1     Running   0             4s
+</span></span><span class="line"><span class="cl">test-k8s-8598bbb8c6-z4dt6   1/1     Running   1 (21m ago)   16h
+</span></span><span class="line"><span class="cl">testapp                     1/1     Running   1 (21m ago)   16h
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="10把集群内端口映射到节点把pod的端口映射到外面">10.把集群内端口映射到节点（把pod的端口映射到外面）</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">kubectl port-forward pod-name 8090:8080
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>8090是外面的端口，8080是容器端口</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">PS G:\xrqProjects\test-k8s-main\yaml\deployment&gt; kubectl port-forward test-k8s-8598bbb8c6-hl8xj 8090:8080
+</span></span><span class="line"><span class="cl">Forwarding from 127.0.0.1:8090 -&gt; 8080
+</span></span><span class="line"><span class="cl">Forwarding from [::1]:8090 -&gt; 8080
+</span></span><span class="line"><span class="cl">Handling connection for 8090
+</span></span><span class="line"><span class="cl">Handling connection for 8090
+</span></span><span class="line"><span class="cl">Handling connection for 8090
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="11-查看历史">11. 查看历史</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">kubectl rollout history deployment test-k8s 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">PS G:\xrqProjects\test-k8s-main\yaml\deployment&gt; kubectl rollout history deployment test-k8s
+</span></span><span class="line"><span class="cl">deployment.apps/test-k8s
+</span></span><span class="line"><span class="cl">REVISION  CHANGE-CAUSE
+</span></span><span class="line"><span class="cl">1         &lt;none&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>现在只有一个历史版本</p>
+<p>修改下 app.yaml 的镜像地址 image: ccr.ccs.tencentyun.com/k8s-tutorial/test-k8s:v2-with-error # 镜像，会报错的一个代码版本</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">kubectl apply -f .\app.yaml
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>重新部署下，灰度更新(灰度更新是指创建一个新pod，销毁一个旧的pod)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">PS G:\xrqProjects\test-k8s-main\yaml\deployment&gt; kubectl get pod
+</span></span><span class="line"><span class="cl">NAME                        READY   STATUS    RESTARTS      AGE
+</span></span><span class="line"><span class="cl">test-k8s                    1/1     Running   1 (60m ago)   17h
+</span></span><span class="line"><span class="cl">test-k8s-5dd85b6897-2dxs2   1/1     Running   0             88s
+</span></span><span class="line"><span class="cl">test-k8s-5dd85b6897-9g8md   1/1     Running   0             95s
+</span></span><span class="line"><span class="cl">test-k8s-5dd85b6897-b5t2k   1/1     Running   0             95s
+</span></span><span class="line"><span class="cl">test-k8s-5dd85b6897-h4p2x   1/1     Running   0             95s
+</span></span><span class="line"><span class="cl">test-k8s-5dd85b6897-hj6vj   1/1     Running   0             87s
+</span></span><span class="line"><span class="cl">test-k8s-5dd85b6897-vqnwd   1/1     Running   0             87s
+</span></span><span class="line"><span class="cl">testapp                     1/1     Running   1 (60m ago)   17h
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>查看下pod 详情</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">kubectl describe pod test-k8s-5dd85b6897-h4p2x
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>发现image已经修改</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Events:
+</span></span><span class="line"><span class="cl">  Type    Reason     Age    From               Message
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">----    ------     ----   ----               -------
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  Normal  Scheduled  2m39s  default-scheduler  Successfully assigned default/test-k8s-5dd85b6897-h4p2x to minikube
+</span></span><span class="line"><span class="cl">  Normal  Pulling    2m39s  kubelet            Pulling image &#34;ccr.ccs.tencentyun.com/k8s-tutorial/test-k8s:v2-with-error&#34;
+</span></span><span class="line"><span class="cl">  Normal  Pulled     2m33s  kubelet            Successfully pulled image &#34;ccr.ccs.tencentyun.com/k8s-tutorial/test-k8s:v2-with-error&#34; in 6.110508402s
+</span></span><span class="line"><span class="cl">  Normal  Created    2m33s  kubelet            Created container test-k8s
+</span></span><span class="line"><span class="cl">  Normal  Started    2m32s  kubelet            Started container test-k8s
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>再次查看历史</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">kubectl rollout history deployment test-k8s 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">PS G:\xrqProjects\test-k8s-main\yaml\deployment&gt; kubectl rollout history deployment test-k8s
+</span></span><span class="line"><span class="cl">deployment.apps/test-k8s
+</span></span><span class="line"><span class="cl">REVISION  CHANGE-CAUSE
+</span></span><span class="line"><span class="cl">1         &lt;none&gt;
+</span></span><span class="line"><span class="cl">2         &lt;none&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>发现已经有2个版本了</p>
+<p>为了检验下新版本的代码功能，把集群内端口映射到节点（把pod的端口映射到外面）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">kubectl port-forward test-k8s-5dd85b6897-b5t2k 8080:8080
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在主机访问接口 http://localhost:8080/hello/aasdasd 发现是报错的，需要紧急的回退</p>
+<h5 id="12--回到上个版本灰度更新">12.  回到上个版本（灰度更新）</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">kubectl rollout undo deployment test-k8s 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">PS G:\xrqProjects\test-k8s-main\yaml\deployment&gt; kubectl rollout undo deployment test-k8s
+</span></span><span class="line"><span class="cl">deployment.apps/test-k8s rolled back
+</span></span><span class="line"><span class="cl">PS G:\xrqProjects\test-k8s-main\yaml\deployment&gt; kubectl get pod
+</span></span><span class="line"><span class="cl">NAME                        READY   STATUS              RESTARTS      AGE
+</span></span><span class="line"><span class="cl">test-k8s                    1/1     Running             1 (73m ago)   17h
+</span></span><span class="line"><span class="cl">test-k8s-5dd85b6897-2dxs2   1/1     Running             0             14m
+</span></span><span class="line"><span class="cl">test-k8s-5dd85b6897-9g8md   1/1     Terminating         0             14m
+</span></span><span class="line"><span class="cl">test-k8s-5dd85b6897-b5t2k   1/1     Running             0             14m
+</span></span><span class="line"><span class="cl">test-k8s-5dd85b6897-h4p2x   1/1     Running             0             14m
+</span></span><span class="line"><span class="cl">test-k8s-5dd85b6897-hj6vj   1/1     Running             0             14m
+</span></span><span class="line"><span class="cl">test-k8s-5dd85b6897-vqnwd   1/1     Terminating         0             14m
+</span></span><span class="line"><span class="cl">test-k8s-8598bbb8c6-crjwp   0/1     ContainerCreating   0             2s
+</span></span><span class="line"><span class="cl">test-k8s-8598bbb8c6-kxj4q   0/1     ContainerCreating   0             1s
+</span></span><span class="line"><span class="cl">test-k8s-8598bbb8c6-sgmnv   1/1     Running             0             2s
+</span></span><span class="line"><span class="cl">test-k8s-8598bbb8c6-wqj99   0/1     ContainerCreating   0             2s
+</span></span><span class="line"><span class="cl">testapp                     1/1     Running             1 (73m ago)   17h
+</span></span><span class="line"><span class="cl">PS G:\xrqProjects\test-k8s-main\yaml\deployment&gt; kubectl get pod
+</span></span><span class="line"><span class="cl">NAME                        READY   STATUS    RESTARTS      AGE
+</span></span><span class="line"><span class="cl">test-k8s                    1/1     Running   1 (74m ago)   17h
+</span></span><span class="line"><span class="cl">test-k8s-8598bbb8c6-crjwp   1/1     Running   0             108s
+</span></span><span class="line"><span class="cl">test-k8s-8598bbb8c6-jkw9g   1/1     Running   0             106s
+</span></span><span class="line"><span class="cl">test-k8s-8598bbb8c6-kxj4q   1/1     Running   0             107s
+</span></span><span class="line"><span class="cl">test-k8s-8598bbb8c6-rfpfl   1/1     Running   0             106s
+</span></span><span class="line"><span class="cl">test-k8s-8598bbb8c6-sgmnv   1/1     Running   0             108s
+</span></span><span class="line"><span class="cl">test-k8s-8598bbb8c6-wqj99   1/1     Running   0             108s
+</span></span><span class="line"><span class="cl">testapp                     1/1     Running   1 (74m ago)   17h
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>转发一个新的pod ，检查其代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">PS G:\xrqProjects\test-k8s-main\yaml\deployment&gt; kubectl port-forward test-k8s-8598bbb8c6-rfpfl  8080:8080
+</span></span><span class="line"><span class="cl">Forwarding from 127.0.0.1:8090 -&gt; 8080
+</span></span><span class="line"><span class="cl">Forwarding from [::1]:8090 -&gt; 8080
+</span></span><span class="line"><span class="cl">Handling connection for 8090
+</span></span><span class="line"><span class="cl">Handling connection for 8090
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在主机访问接口 http://localhost:8080/hello/aasdasd 发现是正常的版本了</p>
+<p>现在又多了 3 号版本了，但是1号版本没了？</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">PS G:\xrqProjects\test-k8s-main\yaml\deployment&gt; kubectl rollout history deployment test-k8s
+</span></span><span class="line"><span class="cl">deployment.apps/test-k8s
+</span></span><span class="line"><span class="cl">REVISION  CHANGE-CAUSE
+</span></span><span class="line"><span class="cl">2         &lt;none&gt;
+</span></span><span class="line"><span class="cl">3         &lt;none&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="13回到指定版本">13.回到指定版本</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">kubectl rollout undo deployment test-k8s --to-revision=2 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="14回到指定版本">14.回到指定版本</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">kubectl delete deployment test-k8s
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="更多命令">更多命令</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># 查看全部
+</span></span><span class="line"><span class="cl">kubectl get all
+</span></span><span class="line"><span class="cl"># 重新部署
+</span></span><span class="line"><span class="cl">kubectl rollout restart deployment test-k8s
+</span></span><span class="line"><span class="cl"># 命令修改镜像，--record 表示把这个命令记录到操作历史中
+</span></span><span class="line"><span class="cl">kubectl set image deployment test-k8s test-k8s=ccr.ccs.tencentyun.com/k8s-tutorial/test-k8s:v2-with-error --record
+</span></span><span class="line"><span class="cl"># 暂停运行，暂停后，对 deployment 的修改不会立刻生效，恢复后才应用设置
+</span></span><span class="line"><span class="cl">kubectl rollout pause deployment test-k8s
+</span></span><span class="line"><span class="cl"># 恢复
+</span></span><span class="line"><span class="cl">kubectl rollout resume deployment test-k8s
+</span></span><span class="line"><span class="cl"># 输出到文件
+</span></span><span class="line"><span class="cl">kubectl get deployment test-k8s -o yaml &gt;&gt; app2.yaml
+</span></span><span class="line"><span class="cl"># 删除全部资源
+</span></span><span class="line"><span class="cl">kubectl delete all --all
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="现存问题">现存问题</h3>
+<ul>
+<li>每次只能访问一个 pod，没有负载均衡自动转发到不同 pod</li>
+<li>访问还需要端口转发</li>
+<li>Pod 重创后 IP 变了，名字也变了</li>
+</ul>
+<h1 id="service">Service</h1>
+<h3 id="特性">特性</h3>
+<ul>
+<li>Service 通过 label 关联对应的 Pod</li>
+<li>Servcie 生命周期不跟 Pod 绑定，不会因为 Pod 重创改变 IP</li>
+<li>提供了负载均衡功能，自动转发流量到不同 Pod</li>
+<li>可对集群外部提供访问端口</li>
+<li>集群内部可通过服务名字访问</li>
+</ul>
+<h3 id="启动-service">启动 Service</h3>
+<p>创建 一个 Service，通过标签<code>test-k8s</code>跟对应的 Pod 关联上
+<code>service.yaml</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">apiVersion: v1
+</span></span><span class="line"><span class="cl">kind: Service
+</span></span><span class="line"><span class="cl">metadata:
+</span></span><span class="line"><span class="cl">  name: test-k8s
+</span></span><span class="line"><span class="cl">spec:
+</span></span><span class="line"><span class="cl">  selector:
+</span></span><span class="line"><span class="cl">    app: test-k8s   # 要和pod的名字对应起来
+</span></span><span class="line"><span class="cl">  type: ClusterIP
+</span></span><span class="line"><span class="cl">  ports:  # 数组类型 可以多个
+</span></span><span class="line"><span class="cl">    - port: 8080        # 本 Service 暴露的端口
+</span></span><span class="line"><span class="cl">      targetPort: 8080  # 容器的端口
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>先启动pod</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">PS G:\xrqProjects\test-k8s-main\yaml\service&gt;  kubectl apply -f .\app.yaml
+</span></span><span class="line"><span class="cl">deployment.apps/test-k8s created
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>再启动service</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">PS G:\xrqProjects\test-k8s-main\yaml\service&gt; kubectl apply -f .\service.yaml
+</span></span><span class="line"><span class="cl">service/test-k8s created
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">PS G:\xrqProjects\test-k8s-main\yaml\service&gt; kubectl get pod
+</span></span><span class="line"><span class="cl">NAME                        READY   STATUS    RESTARTS   AGE
+</span></span><span class="line"><span class="cl">test-k8s-8598bbb8c6-25d2c   1/1     Running   0          9m21s
+</span></span><span class="line"><span class="cl">test-k8s-8598bbb8c6-2llv2   1/1     Running   0          9m21s
+</span></span><span class="line"><span class="cl">test-k8s-8598bbb8c6-2wcgm   1/1     Running   0          9m21s
+</span></span><span class="line"><span class="cl">test-k8s-8598bbb8c6-ggljl   1/1     Running   0          9m21s
+</span></span><span class="line"><span class="cl">test-k8s-8598bbb8c6-px5n7   1/1     Running   0          9m21s
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="查看服务">查看服务</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">PS G:\xrqProjects\test-k8s-main\yaml\service&gt; kubectl get service
+</span></span><span class="line"><span class="cl">NAME         TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
+</span></span><span class="line"><span class="cl">kubernetes   ClusterIP   10.96.0.1        &lt;none&gt;        443/TCP    12m
+</span></span><span class="line"><span class="cl">test-k8s     ClusterIP   10.108.160.222   &lt;none&gt;        8080/TCP   44s
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>test-k8s 这个service 的 ip  10.108.160.22是固定的</p>
+<p>也可以用 <code>kubectl get svc</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">PS G:\xrqProjects\test-k8s-main\yaml\service&gt; kubectl get svc
+</span></span><span class="line"><span class="cl">NAME         TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
+</span></span><span class="line"><span class="cl">kubernetes   ClusterIP   10.96.0.1        &lt;none&gt;        443/TCP    20m
+</span></span><span class="line"><span class="cl">test-k8s     ClusterIP   10.108.160.222   &lt;none&gt;        8080/TCP   8m44s
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>查看服务详情 <code>kubectl describe svc test-k8s</code>， test-k8s是service名字可以发现 Endpoints 是各个 Pod 的 IP，也就是他会把流量转发到这些节点。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">PS G:\xrqProjects\test-k8s-main\yaml\service&gt; kubectl describe svc test-k8s
+</span></span><span class="line"><span class="cl">Name:              test-k8s
+</span></span><span class="line"><span class="cl">Namespace:         default
+</span></span><span class="line"><span class="cl">Labels:            &lt;none&gt;
+</span></span><span class="line"><span class="cl">Annotations:       &lt;none&gt;
+</span></span><span class="line"><span class="cl">Selector:          app=test-k8s
+</span></span><span class="line"><span class="cl">Type:              ClusterIP
+</span></span><span class="line"><span class="cl">IP Family Policy:  SingleStack
+</span></span><span class="line"><span class="cl">IP Families:       IPv4
+</span></span><span class="line"><span class="cl">IP:                10.108.160.222
+</span></span><span class="line"><span class="cl">IPs:               10.108.160.222
+</span></span><span class="line"><span class="cl">Port:              &lt;unset&gt;  8080/TCP
+</span></span><span class="line"><span class="cl">TargetPort:        8080/TCP
+</span></span><span class="line"><span class="cl">Endpoints:         172.17.0.2:8080,172.17.0.3:8080,172.17.0.4:8080 + 2 more...
+</span></span><span class="line"><span class="cl">Session Affinity:  None
+</span></span><span class="line"><span class="cl">Events:            &lt;none&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">PS G:\xrqProjects\test-k8s-main\yaml\service&gt; kubectl get pod -o wide
+</span></span><span class="line"><span class="cl">NAME                        READY   STATUS    RESTARTS   AGE   IP           NODE       NOMINATED NODE   READINESS GATES
+</span></span><span class="line"><span class="cl">test-k8s-8598bbb8c6-25d2c   1/1     Running   0          25m   172.17.0.6   minikube   &lt;none&gt;           &lt;none&gt;
+</span></span><span class="line"><span class="cl">test-k8s-8598bbb8c6-2llv2   1/1     Running   0          25m   172.17.0.7   minikube   &lt;none&gt;           &lt;none&gt;
+</span></span><span class="line"><span class="cl">test-k8s-8598bbb8c6-2wcgm   1/1     Running   0          25m   172.17.0.4   minikube   &lt;none&gt;           &lt;none&gt;
+</span></span><span class="line"><span class="cl">test-k8s-8598bbb8c6-ggljl   1/1     Running   0          25m   172.17.0.3   minikube   &lt;none&gt;           &lt;none&gt;
+</span></span><span class="line"><span class="cl">test-k8s-8598bbb8c6-px5n7   1/1     Running   0          25m   172.17.0.2   minikube   &lt;none&gt;           &lt;none&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="服务的默认类型是clusterip只能在集群内部访问我们可以进入到-pod-里面访问-意思是进入到-pod里面-可以访问-sevice">服务的默认类型是<code>ClusterIP</code>，只能在集群内部访问，我们可以进入到 Pod 里面访问： 意思是进入到 pod里面 可以访问 sevice</h3>
+<p><code>kubectl exec -it pod-name -- bash</code>
+<code>curl http://test-k8s:8080</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">PS G:\xrqProjects\test-k8s-main\yaml\service&gt; kubectl exec -it test-k8s-8598bbb8c6-ggljl -- bash
+</span></span><span class="line"><span class="cl">root@test-k8s-8598bbb8c6-ggljl:/app# curl http://test-k8s:8080
+</span></span><span class="line"><span class="cl">index page
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">IP lo172.17.0.4, hostname: test-k8s-8598bbb8c6-2wcgm
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="如果要在集群外部访问可以通过端口转发实现只适合临时测试用">如果要在集群外部访问，可以通过端口转发实现（只适合临时测试用）：</h3>
+<p><code>kubectl port-forward service/test-k8s 8888:8080</code></p>
+<blockquote>
+<p>如果你用 minikube，也可以这样<code>minikube service test-k8s</code></p>
+</blockquote>
+<p>直接弹出页面访问</p>
+<h3 id="对外暴露服务">对外暴露服务</h3>
+<p>上面我们是通过端口转发的方式可以在外面访问到集群里的服务，如果想要直接把集群服务暴露出来，我们可以使用<code>NodePort</code> 和 <code>Loadbalancer</code> 类型的 Service</p>
+<p>将service.yaml修改为</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">apiVersion: v1
+</span></span><span class="line"><span class="cl">kind: Service
+</span></span><span class="line"><span class="cl">metadata:
+</span></span><span class="line"><span class="cl">  name: test-k8s
+</span></span><span class="line"><span class="cl">spec:
+</span></span><span class="line"><span class="cl">  selector:
+</span></span><span class="line"><span class="cl">    app: test-k8s
+</span></span><span class="line"><span class="cl">  # 默认 ClusterIP 集群内可访问，NodePort 节点可访问，LoadBalancer 负载均衡模式（需要负载均衡器才可用）
+</span></span><span class="line"><span class="cl">#  type: ClusterIP
+</span></span><span class="line"><span class="cl">  type: NodePort
+</span></span><span class="line"><span class="cl">  ports:
+</span></span><span class="line"><span class="cl">    - port: 8080        # 本 Service对外暴露 的端口
+</span></span><span class="line"><span class="cl">      targetPort: 8080  # 服务访问容器 的 容器端口
+</span></span><span class="line"><span class="cl">      nodePort: 31000   # 节点（如果是裸机，需要到对应的node节点）端口，范围固定 30000 ~ 32767
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在minikube中 是进入dokcer中的这个minikube 容器 ，如果是裸机，需要到对应的node节点去运行该curl命令</p>
+<p>http://localhost:31000/</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="NodePort.png"
+        data-srcset="NodePort.png, NodePort.png 1.5x, NodePort.png 2x"
+        data-sizes="auto"
+        alt="NodePort.png"
+        title="NodePort.png" /></p>
+<h1 id="statefulset">StatefulSet</h1>
+<h3 id="部署-statefulset-类型的-mongodb">部署 StatefulSet 类型的 Mongodb</h3>
+<h5 id="1创建-statefulset-配置文件mongoyamlservice-和-statefulset-都在一个yaml里">1.创建 StatefulSet 配置文件mongo.yaml（service 和 StatefulSet 都在一个yaml里）</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">apiVersion: apps/v1
+</span></span><span class="line"><span class="cl">kind: StatefulSet
+</span></span><span class="line"><span class="cl">metadata:
+</span></span><span class="line"><span class="cl">  name: mongodb
+</span></span><span class="line"><span class="cl">spec:
+</span></span><span class="line"><span class="cl">  serviceName: mongodb
+</span></span><span class="line"><span class="cl">  replicas: 3
+</span></span><span class="line"><span class="cl">  selector:
+</span></span><span class="line"><span class="cl">    matchLabels:
+</span></span><span class="line"><span class="cl">      app: mongodb
+</span></span><span class="line"><span class="cl">  template:
+</span></span><span class="line"><span class="cl">    metadata:
+</span></span><span class="line"><span class="cl">      labels:
+</span></span><span class="line"><span class="cl">        app: mongodb
+</span></span><span class="line"><span class="cl">    spec:
+</span></span><span class="line"><span class="cl">      containers:
+</span></span><span class="line"><span class="cl">        - name: mongo
+</span></span><span class="line"><span class="cl">          image: mongo:4.4
+</span></span><span class="line"><span class="cl">          # IfNotPresent 仅本地没有镜像时才远程拉，Always 永远都是从远程拉，Never 永远只用本地镜像，本地没有则报错
+</span></span><span class="line"><span class="cl">          imagePullPolicy: IfNotPresent
+</span></span><span class="line"><span class="cl">---
+</span></span><span class="line"><span class="cl">apiVersion: v1
+</span></span><span class="line"><span class="cl">kind: Service
+</span></span><span class="line"><span class="cl">metadata:
+</span></span><span class="line"><span class="cl">  name: mongodb
+</span></span><span class="line"><span class="cl">spec:
+</span></span><span class="line"><span class="cl">  selector:
+</span></span><span class="line"><span class="cl">    app: mongodb
+</span></span><span class="line"><span class="cl">  type: ClusterIP
+</span></span><span class="line"><span class="cl">  # HeadLess  不会分配集群的ip了 ，只能通过服务名字来访问
+</span></span><span class="line"><span class="cl">  clusterIP: None
+</span></span><span class="line"><span class="cl">  ports:
+</span></span><span class="line"><span class="cl">    - port: 27017
+</span></span><span class="line"><span class="cl">      targetPort: 27017
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="启动">启动</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">PS G:\xrqProjects\test-k8s-main\yaml\statefulset&gt; kubectl apply -f mongo.yaml
+</span></span><span class="line"><span class="cl">statefulset.apps/mongodb created
+</span></span><span class="line"><span class="cl">service/mongodb created
+</span></span><span class="line"><span class="cl">PS G:\xrqProjects\test-k8s-main\yaml\statefulset&gt; kubectl get pod
+</span></span><span class="line"><span class="cl">NAME        READY   STATUS    RESTARTS   AGE
+</span></span><span class="line"><span class="cl">mongodb-0   1/1     Running   0          5m30s
+</span></span><span class="line"><span class="cl">mongodb-1   1/1     Running   0          4m43s
+</span></span><span class="line"><span class="cl">mongodb-2   1/1     Running   0          4m41s
+</span></span><span class="line"><span class="cl">PS G:\xrqProjects\test-k8s-main\yaml\statefulset&gt; kubectl get statefulset
+</span></span><span class="line"><span class="cl">NAME      READY   AGE
+</span></span><span class="line"><span class="cl">mongodb   3/3     7m24s
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="statefulset-特性">StatefulSet 特性</h3>
+<ul>
+<li>Service 的 <code>CLUSTER-IP</code> 是空的，Pod 名字也是固定的。</li>
+<li>Pod 创建和销毁是有序的，创建是顺序的，销毁是逆序的。</li>
+<li>Pod 重建不会改变名字，除了IP，所以不要用IP直连</li>
+</ul>
+<p>访问时，如果直接使用 Service 名字连接，会随机转发请求
+要连接指定 Pod，可以这样<code>pod-name.service-name</code>
+运行一个临时 Pod 连接数据测试下</p>
+<p>kubectl run mongodb-client &ndash;rm &ndash;tty -i &ndash;restart=&lsquo;Never&rsquo; &ndash;image docker.io/bitnami/mongodb:4.4.10-debian-10-r20 &ndash;command &ndash; bash</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">I have no name!@mongodb-client:/$ mongo --host mongodb-0.mongodb
+</span></span><span class="line"><span class="cl">MongoDB shell version v4.4.10
+</span></span><span class="line"><span class="cl">connecting to: mongodb://mongodb-0.mongodb:27017/?compressors=disabled&amp;gssapiServiceName=mongodb
+</span></span><span class="line"><span class="cl">Implicit session: session { &#34;id&#34; : UUID(&#34;2904e96c-22e9-4a6e-a969-85467c83a68f&#34;) }
+</span></span><span class="line"><span class="cl">MongoDB server version: 4.4.24
+</span></span><span class="line"><span class="cl">---
+</span></span><span class="line"><span class="cl">The server generated these startup warnings when booting:
+</span></span><span class="line"><span class="cl">        2023-09-04T05:31:54.964+00:00: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem
+</span></span><span class="line"><span class="cl">        2023-09-04T05:31:55.667+00:00: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+</span></span><span class="line"><span class="cl">        2023-09-04T05:31:55.667+00:00: /sys/kernel/mm/transparent_hugepage/enabled is &#39;always&#39;. We suggest setting it to &#39;never&#39;
+</span></span><span class="line"><span class="cl">---
+</span></span><span class="line"><span class="cl">&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-09-03</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://shengtu0328.github.io/posts/k8s/" data-title="K8s"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://shengtu0328.github.io/posts/k8s/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://shengtu0328.github.io/posts/k8s/" data-title="K8s"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://shengtu0328.github.io/posts/k8s/" data-title="K8s"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://shengtu0328.github.io/posts/k8s/" data-title="K8s"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/spring_session/" class="prev" rel="prev" title="Spring_session"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Spring_session</a>
+            <a href="/posts/english_writing/" class="next" rel="next" title="Learing English is not a rocket science.">Learing English is not a rocket science.<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.105.0-DEV">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ricky</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

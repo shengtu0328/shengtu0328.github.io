@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/shengtu0328.github.io\/posts\/redisson\/"
-        },"genre": "posts","wordcount":  3701 ,
+        },"genre": "posts","wordcount":  3704 ,
         "url": "https:\/\/shengtu0328.github.io\/posts\/redisson\/","datePublished": "2022-12-30T10:09:27+08:00","dateModified": "2022-12-30T10:09:27+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -102,7 +102,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Redisson</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-12-30">2022-12-30</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3701 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-12-30">2022-12-30</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3704 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;8 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -233,8 +233,16 @@
 </thead>
 <tbody>
 <tr>
-<td>SETNX lock1 thread1<!-- raw HTML omitted -->EXPIRE lock1 10<!-- raw HTML omitted -->DEL lock1<!-- raw HTML omitted --></td>
+<td>SETNX lock1 thread</td>
 <td>value用线程id即可，可以知道是哪个线程获得了锁。SETNX命令锁的是key<!-- raw HTML omitted -->SETNX 和 EXPIRE分成了两部，并不是一个完整的原子性操作。可能会在执行 EXPIRE前服务宕机，锁一直不释放</td>
+</tr>
+<tr>
+<td>EXPIRE lock1 10</td>
+<td></td>
+</tr>
+<tr>
+<td>DEL lock1</td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -248,8 +256,12 @@
 </thead>
 <tbody>
 <tr>
-<td>SET lock1 thread1 EX 10 NX<!-- raw HTML omitted -->DEL lock1</td>
+<td>SET lock1 thread1 EX 10 NX</td>
 <td>将 NX 和EX 整合进一个原子操作中</td>
+</tr>
+<tr>
+<td>DEL lock1</td>
+<td></td>
 </tr>
 </tbody>
 </table>
