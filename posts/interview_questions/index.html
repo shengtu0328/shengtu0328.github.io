@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <title>Interview_questions - ricky的网站</title><meta name="Description" content="The best time to plant a tree was 10 years ago, the second is now"><meta property="og:title" content="Interview_questions" />
-<meta property="og:description" content="java代码执行流程 1 2 3 4 5 6 7 8 public class Main{ public static void main(string[]args){ Student stu new Student(); stu.study(); stu.hashCode(); stu=null; } } java源代码编译成字节码 执行 java命令就会创建java虚拟机，创建了" />
+<meta property="og:description" content="java代码执行流程 1 2 3 4 5 6 7 8 public class Main{ public static void main(string[]args){ Student stu=new Student(); stu.study(); stu.hashCode(); stu=null; } } java源代码编译成字节码 执行 java命令，就会创建java虚拟机 创建了一" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://shengtu0328.github.io/posts/interview_questions/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-08-03T09:32:04+08:00" />
@@ -13,7 +13,7 @@
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Interview_questions"/>
-<meta name="twitter:description" content="java代码执行流程 1 2 3 4 5 6 7 8 public class Main{ public static void main(string[]args){ Student stu new Student(); stu.study(); stu.hashCode(); stu=null; } } java源代码编译成字节码 执行 java命令就会创建java虚拟机，创建了"/>
+<meta name="twitter:description" content="java代码执行流程 1 2 3 4 5 6 7 8 public class Main{ public static void main(string[]args){ Student stu=new Student(); stu.study(); stu.hashCode(); stu=null; } } java源代码编译成字节码 执行 java命令，就会创建java虚拟机 创建了一"/>
 <meta name="application-name" content="我的网站">
 <meta name="apple-mobile-web-app-title" content="我的网站"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/shengtu0328.github.io\/posts\/interview_questions\/"
-        },"genre": "posts","wordcount":  1592 ,
+        },"genre": "posts","wordcount":  1949 ,
         "url": "https:\/\/shengtu0328.github.io\/posts\/interview_questions\/","datePublished": "2023-08-03T09:32:04+08:00","dateModified": "2023-08-03T09:32:04+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -102,7 +102,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Interview_questions</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-08-03">2023-08-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1592 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-08-03">2023-08-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1949 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -123,11 +123,20 @@
           </ul>
         </li>
         <li><a href="#线上接口响应慢怎么排查">线上接口响应慢怎么排查</a></li>
+        <li><a href="#aop有几种实现-1">AOP有几种实现</a></li>
       </ul>
     </li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h3 id="java代码执行流程">java代码执行流程</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="jvm.png"
+        data-srcset="jvm.png, jvm.png 1.5x, jvm.png 2x"
+        data-sizes="auto"
+        alt="jvm.png"
+        title="jvm.png" /></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -142,7 +151,7 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">public class Main{
 </span></span><span class="line"><span class="cl">    public static void main(string[]args){
-</span></span><span class="line"><span class="cl">    Student stu new Student();
+</span></span><span class="line"><span class="cl">    Student stu=new Student();
 </span></span><span class="line"><span class="cl">    stu.study();
 </span></span><span class="line"><span class="cl">    stu.hashCode();
 </span></span><span class="line"><span class="cl">    stu=null;
@@ -151,15 +160,36 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><ol>
-<li>java源代码编译成<strong>字节码</strong></li>
-<li>执行 java命令就会创建java虚拟机，创建了一个main 主<strong>线程</strong>，从jvm虚拟机栈分配<strong>栈内存</strong>,线程内的局部变量也都会存储在栈内存</li>
-<li>从<strong>方法区</strong>加载类信息</li>
-<li>在<strong>堆</strong>内存创建对象</li>
-<li>普通java方法（栈），本地方法（hashcode ）</li>
-<li>线程切换，用程序计数器记录代码执行行数</li>
-<li>不再使用 会被 <strong>垃圾回收</strong></li>
-<li><strong>解释器</strong>将字节码翻译成机器码</li>
-<li><strong>JIT即时编译器</strong>负责热点代码</li>
+<li>
+<p>java源代码编译成<strong>字节码</strong></p>
+</li>
+<li>
+<p>执行 java命令，就会创建java<strong>虚拟机</strong></p>
+<p>创建了一个main 主<strong>线程</strong>，从jvm虚拟机栈分配<strong>栈内存</strong>,</p>
+<p>方法中的<strong>局部变量，对象引用</strong> 和<strong>方法参数</strong>和也都会存储在线程内栈内存</p>
+</li>
+<li>
+<p>发现了没有加载过的类，<strong>类加载器</strong>就会从<strong>方法区</strong>加载类<strong>字节码信息</strong>(类里的成员变量，方法，引用的其他类都会在方法区)</p>
+</li>
+<li>
+<p>在<strong>堆</strong>内存new对象</p>
+</li>
+<li>
+<p>普通java方法（栈）</p>
+<p>本地方法（hashcode，wait，notify）</p>
+</li>
+<li>
+<p>线程切换，用程序计数器记录代码执行行数</p>
+</li>
+<li>
+<p>不再使用 会被 <strong>垃圾回收</strong></p>
+</li>
+<li>
+<p><strong>解释器</strong>将字节码翻译成机器码</p>
+</li>
+<li>
+<p><strong>JIT即时编译器</strong>负责热点代码</p>
+</li>
 </ol>
 <h3 id="类加载执行流程">类加载执行流程</h3>
 <p>●类加载过程分为三个阶段
@@ -209,24 +239,13 @@
 </ol>
 <p><strong>JDK实现</strong></p>
 <ol>
-<li>
-<p>jdk的目标类可以是final类型</p>
-</li>
-<li>
-<p>jdk 代理类 和 目标类是 兄弟关系</p>
-</li>
-<li>
-<p>Object result = method.invoke(target, args); 反射方法调用</p>
-</li>
-<li>
-<p>原理是asm，在运行期间动态生成字节码，用java代码生成一个类，主要是有一个ClassWriter</p>
-</li>
-<li>
-<p>反射在多次调用后，实现类会有优化  java本地代码-&gt;第17次调用变成正常调用 类.静态方法  （代价是生成一个新的代理类.）</p>
-</li>
-<li>
-<p>一个方法调用就生成一个代理</p>
-</li>
+<li>jdk的目标类可以是final类型</li>
+<li>jdk的动态代理，只能针对接口代理</li>
+<li>jdk 代理类 和 目标类是 兄弟关系</li>
+<li>Object result = method.invoke(target, args); 反射方法调用</li>
+<li>原理是asm，在运行期间动态生成字节码，用java代码生成一个类，主要是有一个ClassWriter</li>
+<li>反射在多次调用后，实现类会有优化  java本地代码-&gt;第17次调用变成正常调用 类.静态方法  （代价是生成一个新的代理类.）</li>
+<li>一个方法调用就生成一个代理</li>
 </ol>
 <p><strong>cglib实现</strong></p>
 <ol>
@@ -332,6 +351,7 @@ return methodProxy.invoke(target, args);  //无反射调用，需要Target类  �
 <li>如果是数据库访问慢，那么就要看是不是有锁表的情况、是不是有全表扫描、索引加得是否合适、是否有JOIN操作、需不需要加缓存，数据库连接有没有用完</li>
 <li>rocketmq 里有没有消息堆积</li>
 <li>通过jstack工具和其他指令，来定位CPU飙升问题</li>
+<li>arths命令 trace 和 火焰图</li>
 </ol>
 <p><img
         class="lazyload"
@@ -341,6 +361,8 @@ return methodProxy.invoke(target, args);  //无反射调用，需要Target类  �
         data-sizes="auto"
         alt="oom.png"
         title="oom.png" /></p>
+<h3 id="aop有几种实现-1">AOP有几种实现</h3>
+<p>OAuth 是一个开放标准，该标准允许用户让第三方应用访问该用户在某一网站上存储的私密资源 （如头像、照片、视频等），并且在这个过程中无须将用户名和密码提供给第三方应用。通过令牌 （token） 可以实现这一功能。每一个令牌授权一个特定的网站在特定的时间段内允许可访问特定的资源。OAuth 让用户可以授权第三方网站灵活访问它们存储在另外一些资源服务器上的特定信息，而非所有的内容。对于用户而言，我们在互联网应用中最常见的 OAuth 应用就是各种第三方登录，例如 QQ授权登录、微信授权登录、微博授权登录、GitHub 授权登录等。</p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">

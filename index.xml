@@ -60,7 +60,7 @@
     <pubDate>Thu, 03 Aug 2023 09:32:04 &#43;0800</pubDate>
     <author>ricky</author>
     <guid>https://shengtu0328.github.io/posts/interview_questions/</guid>
-    <description><![CDATA[java代码执行流程 1 2 3 4 5 6 7 8 public class Main{ public static void main(string[]args){ Student stu new Student(); stu.study(); stu.hashCode(); stu=null; } } java源代码编译成字节码 执行 java命令就会创建java虚拟机，创建了]]></description>
+    <description><![CDATA[java代码执行流程 1 2 3 4 5 6 7 8 public class Main{ public static void main(string[]args){ Student stu=new Student(); stu.study(); stu.hashCode(); stu=null; } } java源代码编译成字节码 执行 java命令，就会创建java虚拟机 创建了一]]></description>
 </item>
 <item>
     <title>English_writing_daily_003</title>

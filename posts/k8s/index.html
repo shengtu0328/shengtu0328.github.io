@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/shengtu0328.github.io\/posts\/k8s\/"
-        },"genre": "posts","wordcount":  4104 ,
+        },"genre": "posts","wordcount":  4138 ,
         "url": "https:\/\/shengtu0328.github.io\/posts\/k8s\/","datePublished": "2023-09-03T15:20:27+08:00","dateModified": "2023-09-03T15:20:27+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -102,7 +102,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">K8s</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-09-03">2023-09-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;4104 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-09-03">2023-09-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;4138 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;9 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -111,7 +111,12 @@
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li>
+    <li><a href="#启动集群">启动集群</a></li>
+    <li><a href="#查看节点kubectl-是一个用来跟-k8s-集群进行交互的命令行工具">查看节点。kubectl 是一个用来跟 K8S 集群进行交互的命令行工具</a></li>
+    <li><a href="#停止集群">停止集群</a></li>
+    <li><a href="#清空集群">清空集群</a></li>
+    <li><a href="#安装集群可视化-web-ui-控制台">安装集群可视化 Web UI 控制台</a></li>
+    <li><a href="#部署应用到集群中">部署应用到集群中</a>
       <ul>
         <li>
           <ul>
@@ -139,10 +144,7 @@
         <li><a href="#现存问题">现存问题</a></li>
       </ul>
     </li>
-  </ul>
-
-  <ul>
-    <li>
+    <li><a href="#service">Service</a>
       <ul>
         <li><a href="#特性">特性</a></li>
         <li><a href="#启动-service">启动 Service</a></li>
@@ -152,10 +154,7 @@
         <li><a href="#对外暴露服务">对外暴露服务</a></li>
       </ul>
     </li>
-  </ul>
-
-  <ul>
-    <li>
+    <li><a href="#statefulset">StatefulSet</a>
       <ul>
         <li><a href="#部署-statefulset-类型的-mongodb">部署 StatefulSet 类型的 Mongodb</a>
           <ul>
@@ -172,19 +171,19 @@
     </li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><h1 id="启动集群">启动集群</h1>
+            </div><div class="content" id="content"><h2 id="启动集群">启动集群</h2>
 <p>minikube start</p>
 <p>minikube start &ndash;kubernetes-version=v1.23.0</p>
-<h1 id="查看节点kubectl-是一个用来跟-k8s-集群进行交互的命令行工具">查看节点。kubectl 是一个用来跟 K8S 集群进行交互的命令行工具</h1>
+<h2 id="查看节点kubectl-是一个用来跟-k8s-集群进行交互的命令行工具">查看节点。kubectl 是一个用来跟 K8S 集群进行交互的命令行工具</h2>
 <p>kubectl get node</p>
-<h1 id="停止集群">停止集群</h1>
+<h2 id="停止集群">停止集群</h2>
 <p>minikube stop</p>
-<h1 id="清空集群">清空集群</h1>
+<h2 id="清空集群">清空集群</h2>
 <p>minikube delete &ndash;all</p>
-<h1 id="安装集群可视化-web-ui-控制台">安装集群可视化 Web UI 控制台</h1>
+<h2 id="安装集群可视化-web-ui-控制台">安装集群可视化 Web UI 控制台</h2>
 <p>minikube dashboard</p>
-<h1 id="部署应用到集群中">部署应用到集群中</h1>
-<p>项目地址，里面包含了一个k8s启动pod，启动development的yaml文件  <a href="https://github.com/gzyunke/test-k8s" target="_blank" rel="noopener noreffer ">https://github.com/gzyunke/test-k8s</a></p>
+<h2 id="部署应用到集群中">部署应用到集群中</h2>
+<p>项目地址https://github.com/gzyunke/test-k8s，里面包含了一个k8s启动pod，启动development的yaml文件</p>
 <h5 id="1直接命令参数-运行在启动dokerdesk启动minikube之后-再运行">1.直接命令参数 运行（在启动dokerdesk，启动minikube之后 再运行）</h5>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1037,7 +1036,7 @@
 <li>访问还需要端口转发</li>
 <li>Pod 重创后 IP 变了，名字也变了</li>
 </ul>
-<h1 id="service">Service</h1>
+<h2 id="service">Service</h2>
 <h3 id="特性">特性</h3>
 <ul>
 <li>Service 通过 label 关联对应的 Pod</li>
@@ -1281,7 +1280,7 @@
         data-sizes="auto"
         alt="NodePort.png"
         title="NodePort.png" /></p>
-<h1 id="statefulset">StatefulSet</h1>
+<h2 id="statefulset">StatefulSet</h2>
 <h3 id="部署-statefulset-类型的-mongodb">部署 StatefulSet 类型的 Mongodb</h3>
 <h5 id="1创建-statefulset-配置文件mongoyamlservice-和-statefulset-都在一个yaml里">1.创建 StatefulSet 配置文件mongo.yaml（service 和 StatefulSet 都在一个yaml里）</h5>
 <div class="highlight"><div class="chroma">

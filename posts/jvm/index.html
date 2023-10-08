@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/shengtu0328.github.io\/posts\/jvm\/"
-        },"genre": "posts","wordcount":  13006 ,
+        },"genre": "posts","wordcount":  13174 ,
         "url": "https:\/\/shengtu0328.github.io\/posts\/jvm\/","datePublished": "2022-10-11T18:23:30+08:00","dateModified": "2022-10-11T18:23:30+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -102,8 +102,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">JVM学习</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span>&nbsp;<span class="post-category">included in <a href="/categories/tech/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>tech</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-10-11">2022-10-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;13006 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;26 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-10-11">2022-10-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;13174 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;27 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -230,6 +230,7 @@
             </li>
           </ul>
         </li>
+        <li><a href="#5直接内存">5、直接内存</a></li>
       </ul>
     </li>
   </ul>
@@ -2308,7 +2309,72 @@
         alt="069_01_串行.jpg"
         title="069_01_串行.jpg" /></p>
 <h4 id="吞吐量优先多线程的垃圾回收器">吞吐量优先(多线程的垃圾回收器)</h4>
-<p>让<strong>单位时间</strong>内，STW 的时间最短 0.2 0.2 = 0.4，垃圾回收时间占程序运行时间比最低，这样就称吞吐量高</p>
+<p>java -server -XX:+ScavengeBeforeFullGC -XX:+PrintGCDetails -XX:+PrintTenuringDistribution -XX:+PrintGCTimeStamps -Dspring.profiles.active=prd -Dfile.encoding=utf-8 -Djava.net.preferIPv6Addresses=false -Djava.net.preferIPv4Stack=true -Duser.timezone=Asia/Shanghai -jar -Xms2048m -Xmx2048m -Xss512m -XX:SurvivorRatio=8 -XX:+UseCMSInitiatingOccupancyOnly -XX:CMSInitiatingOccupancyFraction=50 -XX:+UseParallelGC -XX:+UseParallelOldGC -XX:ParallelGCThreads=4 -XX:+UseAdaptiveSizePolicy -XX:MaxNewSize=128m -XX:NewSize=128m -Dnacos.config.server-addr=10.32.11.32:8849 -Dnacos.discovery.server-addr=10.32.11.32:8849 ${project.build.finalName}.jar</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">java -server -XX:+ScavengeBeforeFullGC -
+</span></span><span class="line"><span class="cl">XX:+PrintGCDetails 
+</span></span><span class="line"><span class="cl">-XX:+PrintTenuringDistribution 
+</span></span><span class="line"><span class="cl">-XX:+PrintGCTimeStamps
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">-Dspring.profiles.active=prd 
+</span></span><span class="line"><span class="cl">-Dfile.encoding=utf-8 
+</span></span><span class="line"><span class="cl">-Djava.net.preferIPv6Addresses=false 
+</span></span><span class="line"><span class="cl">-Djava.net.preferIPv4Stack=true 
+</span></span><span class="line"><span class="cl">-Duser.timezone=Asia/Shanghai -jar 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">-Xms2048m -Xmx2048m 
+</span></span><span class="line"><span class="cl">-Xss512m 
+</span></span><span class="line"><span class="cl">-XX:SurvivorRatio=8 
+</span></span><span class="line"><span class="cl">-XX:+UseCMSInitiatingOccupancyOnly 
+</span></span><span class="line"><span class="cl">-XX:CMSInitiatingOccupancyFraction=50 
+</span></span><span class="line"><span class="cl">-XX:+UseParallelGC -XX:+UseParallelOldGC 
+</span></span><span class="line"><span class="cl">-XX:ParallelGCThreads=4 
+</span></span><span class="line"><span class="cl">-XX:+UseAdaptiveSizePolicy 
+</span></span><span class="line"><span class="cl">-XX:MaxNewSize=128m 
+</span></span><span class="line"><span class="cl">-XX:NewSize=128m
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> -Dnacos.config.server-addr=10.32.11.32:8849
+</span></span><span class="line"><span class="cl"> -Dnacos.discovery.server-addr=10.32.11.32:8849
+</span></span><span class="line"><span class="cl"> ${project.build.finalName}.jar
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>让<strong>单位时间</strong>内，STW 的时间最短 0.2 0.2 = 0.4，垃圾回收时间占程序运行时间比最低，这样就称吞吐量高</p>
 <p>堆内存较大，多核cpu</p>
 <p>但用户线程不能运行了</p>
 <p>​    <img
@@ -2447,6 +2513,25 @@
         alt="076_g1_01.png"
         title="076_g1_01.png" /></p>
 <p><a href="https://juejin.cn/post/7010034105165299725" target="_blank" rel="noopener noreffer ">https://juejin.cn/post/7010034105165299725</a></p>
+<h3 id="5直接内存">5、直接内存</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="directbuff-io.png"
+        data-srcset="directbuff-io.png, directbuff-io.png 1.5x, directbuff-io.png 2x"
+        data-sizes="auto"
+        alt="directbuff-io.png"
+        title="directbuff-io.png" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="directbuff-nio.png"
+        data-srcset="directbuff-nio.png, directbuff-nio.png 1.5x, directbuff-nio.png 2x"
+        data-sizes="auto"
+        alt="directbuff-nio.png"
+        title="directbuff-nio.png" /></p>
+<p>并不属于JVM中的内存结构，不由JVM进行管理。是虚拟机的系统内存</p>
+<p>常见于NIO操作时，用于数据缓冲区，分配回收成本较高，但读写性能高，不受JVM内存回收管理</p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
