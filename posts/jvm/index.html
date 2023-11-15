@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/shengtu0328.github.io\/posts\/jvm\/"
-        },"genre": "posts","wordcount":  13174 ,
+        },"genre": "posts","wordcount":  13195 ,
         "url": "https:\/\/shengtu0328.github.io\/posts\/jvm\/","datePublished": "2022-10-11T18:23:30+08:00","dateModified": "2022-10-11T18:23:30+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -102,7 +102,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">JVM学习</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span>&nbsp;<span class="post-category">included in <a href="/categories/tech/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>tech</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-10-11">2022-10-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;13174 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-10-11">2022-10-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;13195 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;27 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -338,7 +338,7 @@
 </div>
 </div></li>
 <li>
-<p>禁用显示辣鸡回收，如System.gc() 注意：System.gc()是full gc，新生代，老年代。</p>
+<p>禁用显示垃圾回收，如System.gc() 注意：System.gc()是full gc，新生代，老年代。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -375,7 +375,7 @@
 <p>即时的编译器:热点代码执行</p>
 </li>
 <li>
-<p>辣鸡回收:回收在堆中不被引用的对象</p>
+<p>垃圾回收:回收在堆中不被引用的对象</p>
 </li>
 <li>
 <p>本地方法接口:操作系统的功能方法</p>
@@ -1716,16 +1716,17 @@
 </li>
 <li>
 <p>扫描 <strong>堆</strong> 中的对象，看能否沿着GC Root对象为起点的引用链找到该对象，如果<strong>找不到，则表示可以回收</strong></p>
-<p>例子：抓住葡萄的根，连着的葡萄就是不可辣鸡回收的对象，落下的葡萄就是可辣鸡回收的对象</p>
+<p>例子：抓住葡萄的根，连着的葡萄就是不可垃圾回收的对象，落下的葡萄就是可垃圾回收的对象</p>
 </li>
 </ul>
 <h4 id="可以作为gc-root的对象">可以作为GC Root的对象</h4>
-<p>-指肯定不能被辣鸡回收 的对象</p>
+<p>-指肯定不能被垃圾回收 的对象</p>
 <ul>
 <li>虚拟机栈（栈帧中的本地变量表）中引用的对象。　</li>
 <li>方法区中类静态属性引用的对象</li>
 <li>方法区中常量引用的对象</li>
 <li>本地方法栈中JNI（即一般说的Native方法）引用的对象</li>
+<li>被synchronized关键字持有的对象</li>
 </ul>
 <h4 id="五种引用">五种引用</h4>
 <p><img
@@ -1749,7 +1750,7 @@
 <p>可以配合引用队列来释放软引用自身</p>
 </li>
 <li>
-<p>当GC Root指向软引用对象，软引用对象引用了一个对象，在触发了辣鸡回收,且内存不足时，会<strong>回收软引用所引用的对象</strong></p>
+<p>当GC Root指向软引用对象，软引用对象引用了一个对象，在触发了垃圾回收,且内存不足时，会<strong>回收软引用所引用的对象</strong></p>
 </li>
 </ul>
 <p>就如 list &ndash;&gt; SoftReference &ndash;&gt; byte[]</p>
@@ -2019,7 +2020,7 @@
 </div><h5 id="弱引用">弱引用</h5>
 <p>只有弱引用引用该对象时，在垃圾回收时，<strong>无论内存是否充足</strong>，都会回收<strong>弱引用对象所引用的对象</strong></p>
 <ul>
-<li>当GC Root指向弱引用对象，弱引用对象引用了一个对象，在触发了辣鸡回收,无论内存是否充足，都会<strong>回收弱引用所引用的对象</strong></li>
+<li>当GC Root指向弱引用对象，弱引用对象引用了一个对象，在触发了垃圾回收,无论内存是否充足，都会<strong>回收弱引用所引用的对象</strong></li>
 <li>可以配合引用队列来释放弱引用自身</li>
 <li>如上图如果B对象不再引用A3对象，则A3对象会被回收</li>
 </ul>

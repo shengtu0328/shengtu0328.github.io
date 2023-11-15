@@ -4,7 +4,7 @@
         <link>https://shengtu0328.github.io/</link>
         <description>The best time to plant a tree was 10 years ago, the second is now</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1007@qq.com (ricky)</managingEditor>
-            <webMaster>1007@qq.com (ricky)</webMaster><lastBuildDate>Sun, 03 Sep 2023 15:20:27 &#43;0800</lastBuildDate>
+            <webMaster>1007@qq.com (ricky)</webMaster><lastBuildDate>Thu, 09 Nov 2023 14:02:05 &#43;0800</lastBuildDate>
             <atom:link href="https://shengtu0328.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
     <title>线程池</title>
@@ -37,6 +37,14 @@
     <author>ricky</author>
     <guid>https://shengtu0328.github.io/posts/english_writing/</guid>
     <description><![CDATA[Why i learned English I recently watched some interesting videos on bilibli which is about communicating with foreigners in English on website. The videos was so funny that it made me have the idea of relearning the skill of English language . You know，i recently started to practise my english from multiple aspects 。Literally,m]]></description>
+</item>
+<item>
+    <title>Netty</title>
+    <link>https://shengtu0328.github.io/posts/netty/</link>
+    <pubDate>Thu, 09 Nov 2023 14:02:05 &#43;0800</pubDate>
+    <author>ricky</author>
+    <guid>https://shengtu0328.github.io/posts/netty/</guid>
+    <description><![CDATA[简单的说下nio是什么 一个线程（对应一个selector） ，可以监听多个channel上发生的事件 与传统的一个线程处理一个channel 以及]]></description>
 </item>
 <item>
     <title>K8s</title>
@@ -73,20 +81,12 @@ Last 2 weeks,I browsed many job openings on several job sites. Sensing there&rsq
 i need to prepare for interview more sufficiently for making a good performance because this is the most difficult time i have even encounter.]]></description>
 </item>
 <item>
-    <title>English_writing_daily_003</title>
+    <title>English_writing_daily_004</title>
     <link>https://shengtu0328.github.io/posts/english_writing_daily_004/</link>
     <pubDate>Thu, 27 Jul 2023 15:45:03 &#43;0800</pubDate>
     <author>ricky</author>
     <guid>https://shengtu0328.github.io/posts/english_writing_daily_004/</guid>
     <description><![CDATA[mock interview self-introduction Good morning/afternoon, it&rsquo;s great to be here. Thank you for the opportunity to this interview. I hope I can make a good performance today. My Chinese name is XXX and you can call me XXX which is my English name .I am 28 years old living in Shanghai. I graduated from Shanghai Dianji University and my major is software engineering. After i graduated, I started working as]]></description>
-</item>
-<item>
-    <title>Cap</title>
-    <link>https://shengtu0328.github.io/posts/cap/</link>
-    <pubDate>Thu, 20 Jul 2023 08:41:06 &#43;0800</pubDate>
-    <author>ricky</author>
-    <guid>https://shengtu0328.github.io/posts/cap/</guid>
-    <description><![CDATA[CAP 理论： CAP 定理（CAP theorem）又被称作布鲁尔定理（Brewer&rsquo;s theorem），是加州大学伯克利分校的计算机科学家埃]]></description>
 </item>
 </channel>
 </rss>
