@@ -4,7 +4,7 @@
         <link>https://shengtu0328.github.io/posts/</link>
         <description>All Posts | ricky的网站</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1007@qq.com (ricky)</managingEditor>
-            <webMaster>1007@qq.com (ricky)</webMaster><lastBuildDate>Thu, 09 Nov 2023 14:02:05 &#43;0800</lastBuildDate><atom:link href="https://shengtu0328.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>1007@qq.com (ricky)</webMaster><lastBuildDate>Tue, 21 Nov 2023 16:01:04 &#43;0800</lastBuildDate><atom:link href="https://shengtu0328.github.io/posts/" rel="self" type="application/rss+xml" /><item>
     <title>线程池</title>
     <link>https://shengtu0328.github.io/posts/threadpool/</link>
     <pubDate>Thu, 01 Dec 2022 14:14:25 &#43;0800</pubDate>
@@ -37,6 +37,30 @@
     <description><![CDATA[Why i learned English I recently watched some interesting videos on bilibli which is about communicating with foreigners in English on website. The videos was so funny that it made me have the idea of relearning the skill of English language . You know，i recently started to practise my english from multiple aspects 。Literally,m]]></description>
 </item>
 <item>
+    <title>English_grammar_sentence</title>
+    <link>https://shengtu0328.github.io/posts/english_grammar_sentence/</link>
+    <pubDate>Tue, 21 Nov 2023 16:01:04 &#43;0800</pubDate>
+    <author>ricky</author>
+    <guid>https://shengtu0328.github.io/posts/english_grammar_sentence/</guid>
+    <description><![CDATA[简单句+简单句 名词性从句 同位语从句 如何区分that引导的同位语从句和that引导的定语从句？ 同位语: that 在从句中不担任成分 定语从句: that 在从句中]]></description>
+</item>
+<item>
+    <title>English_grammar_simple_sentence</title>
+    <link>https://shengtu0328.github.io/posts/english_grammar_simple_sentence/</link>
+    <pubDate>Mon, 20 Nov 2023 11:04:47 &#43;0800</pubDate>
+    <author>ricky</author>
+    <guid>https://shengtu0328.github.io/posts/english_grammar_simple_sentence/</guid>
+    <description><![CDATA[状语（就是副词性成分 用来修饰 形容词，副词，动词成分） 补语（能当形容词 或者 名词） 宾语 或者 主语 与 补语能形成 a is b的关系 主语+谓语/表语+主语补语]]></description>
+</item>
+<item>
+    <title>English_grammar_part_of_speech</title>
+    <link>https://shengtu0328.github.io/posts/english_grammar_part_of_speech/</link>
+    <pubDate>Mon, 20 Nov 2023 10:18:09 &#43;0800</pubDate>
+    <author>ricky</author>
+    <guid>https://shengtu0328.github.io/posts/english_grammar_part_of_speech/</guid>
+    <description><![CDATA[形容词，名词，副词 介词 分词介词 由动词发展而来，比如 providing conj. 如果;]]></description>
+</item>
+<item>
     <title>Netty</title>
     <link>https://shengtu0328.github.io/posts/netty/</link>
     <pubDate>Thu, 09 Nov 2023 14:02:05 &#43;0800</pubDate>
@@ -59,32 +83,6 @@
     <author>ricky</author>
     <guid>https://shengtu0328.github.io/posts/spring_session/</guid>
     <description><![CDATA[没登录帐号，只是打开页面 10:36分创建 ，1692932760000 代表了 2023-08-25 11:06:00 差了正好半小时 localhost:0&gt;keys * \1) &ldquo;spring:session:sessions:a10709ca-3f18-46b8-b69b-c0194e116ad9&rdquo; \2) &ldquo;spring:session:sessions:expires:a10709ca-3f18-46b8-b69b-c0194e116ad9&rdquo; \3) &ldquo;spring:session:expirations:1692932760000&rdquo; hash结构 \1) &ldquo;spring:session:sessions:a10709ca-3f18-46b8-b69b-c0194e116ad9&rdquo; ​ 其中 creat]]></description>
-</item>
-<item>
-    <title>Interview_questions</title>
-    <link>https://shengtu0328.github.io/posts/interview_questions/</link>
-    <pubDate>Thu, 03 Aug 2023 09:32:04 &#43;0800</pubDate>
-    <author>ricky</author>
-    <guid>https://shengtu0328.github.io/posts/interview_questions/</guid>
-    <description><![CDATA[java代码执行流程 1 2 3 4 5 6 7 8 public class Main{ public static void main(string[]args){ Student stu=new Student(); stu.study(); stu.hashCode(); stu=null; } } java源代码编译成字节码 执行 java命令，就会创建java虚拟机 创建了一]]></description>
-</item>
-<item>
-    <title>English_writing_daily_003</title>
-    <link>https://shengtu0328.github.io/posts/english_writing_daily_003/</link>
-    <pubDate>Thu, 27 Jul 2023 15:45:03 &#43;0800</pubDate>
-    <author>ricky</author>
-    <guid>https://shengtu0328.github.io/posts/english_writing_daily_003/</guid>
-    <description><![CDATA[I do believe in people being able to do what they want to do succesfully, providing they&rsquo;re committed to this thing and pay considerable time and effort.
-Last 2 weeks,I browsed many job openings on several job sites. Sensing there&rsquo;s still chances for developer job perfered in english literally, i decides to practice learing English consictencely.
-i need to prepare for interview more sufficiently for making a good performance because this is the most difficult time i have even encounter.]]></description>
-</item>
-<item>
-    <title>English_writing_daily_004</title>
-    <link>https://shengtu0328.github.io/posts/english_writing_daily_004/</link>
-    <pubDate>Thu, 27 Jul 2023 15:45:03 &#43;0800</pubDate>
-    <author>ricky</author>
-    <guid>https://shengtu0328.github.io/posts/english_writing_daily_004/</guid>
-    <description><![CDATA[mock interview self-introduction Good morning/afternoon, it&rsquo;s great to be here. Thank you for the opportunity to this interview. I hope I can make a good performance today. My Chinese name is XXX and you can call me XXX which is my English name .I am 28 years old living in Shanghai. I graduated from Shanghai Dianji University and my major is software engineering. After i graduated, I started working as]]></description>
 </item>
 </channel>
 </rss>

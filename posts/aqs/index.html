@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <title>AQS - ricky的网站</title><meta name="Description" content="The best time to plant a tree was 10 years ago, the second is now"><meta property="og:title" content="AQS" />
-<meta property="og:description" content="CountDownLatch-&gt;AQS-&gt;Park-&gt;Unsfae 1. 概述 全称是 AbstractQueuedSynchronizer，是阻塞式锁和相关的同步器工具的框架 用cas 机制 来获取锁 和释放锁 state 属性 用L" />
+<meta property="og:description" content="CountDownLatch-&gt;AQS-&gt;Park-&gt;Unsfae 1. 概述 全称是 AbstractQueuedSynchronizer，是阻塞式锁和相关的同步器工具的框架 用 state 属性来表示资源的状态（分独占模式和" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://shengtu0328.github.io/posts/aqs/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-10-27T14:29:43+08:00" />
@@ -13,7 +13,7 @@
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="AQS"/>
-<meta name="twitter:description" content="CountDownLatch-&gt;AQS-&gt;Park-&gt;Unsfae 1. 概述 全称是 AbstractQueuedSynchronizer，是阻塞式锁和相关的同步器工具的框架 用cas 机制 来获取锁 和释放锁 state 属性 用L"/>
+<meta name="twitter:description" content="CountDownLatch-&gt;AQS-&gt;Park-&gt;Unsfae 1. 概述 全称是 AbstractQueuedSynchronizer，是阻塞式锁和相关的同步器工具的框架 用 state 属性来表示资源的状态（分独占模式和"/>
 <meta name="application-name" content="我的网站">
 <meta name="apple-mobile-web-app-title" content="我的网站"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/shengtu0328.github.io\/posts\/aqs\/"
-        },"genre": "posts","wordcount":  1099 ,
+        },"genre": "posts","wordcount":  1278 ,
         "url": "https:\/\/shengtu0328.github.io\/posts\/aqs\/","datePublished": "2022-10-27T14:29:43+08:00","dateModified": "2022-10-27T14:29:43+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -102,7 +102,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">AQS</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-10-27">2022-10-27</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1099 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-10-27">2022-10-27</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1278 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -125,37 +125,6 @@
 <p><strong>全称是 AbstractQueuedSynchronizer，是阻塞式锁和相关的同步器工具的框架</strong></p>
 <ol>
 <li>
-<p>用cas 机制 来获取锁 和释放锁   state 属性</p>
-</li>
-<li>
-<p>用LockSupport.park(this);来实现线程阻塞（park是由Unsafe实现）</p>
-</li>
-<li>
-<p>用LockSupport.unpark(s.thread);唤醒锁</p>
-</li>
-<li>
-<p>可重入 就是 state++来实现</p>
-</li>
-<li>
-<p>不可打断  等待线程被inerrupt 也能正常执行.</p>
-<p>可打断    等待线程被inerrupt 抛出异常</p>
-</li>
-<li>
-<p>条件变量  也是用 一个 单向链表存储，链表元素 关联了线程，Node.CONDITION 状态</p>
-</li>
-<li>
-<p>await 方法      1.加入condition队列，2.释放掉锁 3.唤醒线程</p>
-<p>signal 方法    1.让condition 第一个元素断开后，加入等待队列中，</p>
-</li>
-</ol>
-<p><strong>ReentrantLock实现</strong>，ReentrantLock首先用到了aqs的 7部，其次还实现公平和非公平锁</p>
-<ol>
-<li>公平锁   获取锁的时候直接去抢锁，会去检查aqs队列，队列中其他的线程在等待就排队</li>
-<li>非公平锁   获取锁的时候直接去抢锁，不会去看等待队列</li>
-</ol>
-<p>特点：</p>
-<ol>
-<li>
 <p>用 state 属性来表示资源的状态（分独占模式和共享模式），子类需要定义如何维护这个状态，控制如何获取</p>
 <p>锁和释放锁</p>
 <p>getState - 获取 state 状态</p>
@@ -164,10 +133,42 @@
 <p>独占模式是只有一个线程能够访问资源，而共享模式可以允许多个线程访问资源</p>
 </li>
 <li>
-<p>提供了基于 FIFO 的等待队列，类似于 Monitor 的 EntryList</p>
+<p>如果加锁成功</p>
+<p>用cas 机制来设置state 来获取锁 和释放锁   state 属性由子类维护状态，state表示释放锁和获取锁</p>
 </li>
 <li>
+<p>如果加锁失败</p>
+<p>提供了基于 FIFO 的等待队列，类似于 Monitor 的 EntryList</p>
+<p>把没有获取到锁的线程添加到队列中,用LockSupport.park(this);来实现此线程阻塞（park是由Unsafe实现）</p>
+</li>
+<li>
+<p>释放锁时，如何唤醒其他锁？</p>
+<p>用LockSupport.unpark(s.thread);唤醒其他线程</p>
+</li>
+<li>
+<p>await流程？</p>
 <p>条件变量来实现等待、唤醒机制，支持多个条件变量，类似于 Monitor 的 WaitSet</p>
+<p>实现类是ConditionObject条件变量  也是用 一个 单向链表存储，链表元素 关联了Node ，一个Node=（线程+Node.CONDITION 状态）</p>
+<p>await 方法</p>
+<p>持有取锁时，条件不满足进入等待。   1.此线程加入ConditionObject队列，2.释放掉锁（可重入的次数全部释放掉） 3.唤醒第等待获取锁的队列的线程</p>
+<p>signal 方法</p>
+<p>持有取锁时，1.让ConditionObject第一个元素断开后，加入等待获取锁的队列尾部，</p>
+</li>
+</ol>
+<p><strong>ReentrantLock实现</strong>，ReentrantLock首先用到了aqs的 5 步，其次还实现公平和非公平锁</p>
+<ol>
+<li>
+<p>公平锁   获取锁的时候直接去抢锁，会去检查aqs队列，队列中其他的线程在等待就排队</p>
+</li>
+<li>
+<p>非公平锁   获取锁的时候直接去抢锁，不会去看等待队列</p>
+</li>
+<li>
+<p>可重入 就是 state++来实现</p>
+</li>
+<li>
+<p>不可打断  等待线程被inerrupt 也能正常执行.</p>
+<p>可打断    等待线程被inerrupt 抛出异常</p>
 </li>
 </ol>
 <p>子类主要实现这样一些方法（默认抛出 UnsupportedOperationException）</p>
@@ -394,14 +395,6 @@
 </div><h3 id="reentrantlock">ReentrantLock</h3>
 <p>公平锁 与 非公平锁</p>
 <p>cas失败 添加一个node 到队列里</p>
-<p><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="C:%5cUsers%5crqxiao%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20230805084904517.png"
-        data-srcset="C:%5cUsers%5crqxiao%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20230805084904517.png, C:%5cUsers%5crqxiao%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20230805084904517.png 1.5x, C:%5cUsers%5crqxiao%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20230805084904517.png 2x"
-        data-sizes="auto"
-        alt="C:\Users\rqxiao\AppData\Roaming\Typora\typora-user-images\image-20230805084904517.png"
-        title="img" /></p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">

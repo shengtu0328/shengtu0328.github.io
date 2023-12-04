@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/shengtu0328.github.io\/posts\/interview_questions\/"
-        },"genre": "posts","wordcount":  3950 ,
+        },"genre": "posts","wordcount":  5546 ,
         "url": "https:\/\/shengtu0328.github.io\/posts\/interview_questions\/","datePublished": "2023-08-03T09:32:04+08:00","dateModified": "2023-08-03T09:32:04+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -102,8 +102,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Interview_questions</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-08-03">2023-08-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3950 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;8 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-08-03">2023-08-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;5546 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;12 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -121,6 +121,7 @@
             <li><a href="#3初始化">3.初始化</a></li>
           </ul>
         </li>
+        <li><a href="#java线程有几种状态">java线程有几种状态</a></li>
         <li><a href="#双亲委派">双亲委派</a></li>
         <li><a href="#classloader的原理">ClassLoader的原理</a></li>
         <li><a href="#字节码-ii和ii-的问题">字节码 i=i++和i=++i 的问题</a></li>
@@ -139,9 +140,12 @@
         <li><a href="#gc调优">GC调优</a></li>
         <li><a href="#redis主从同步">redis主从同步</a></li>
         <li><a href="#redis脑裂">redis脑裂</a></li>
+        <li><a href="#synchronized">synchronized</a></li>
+        <li><a href="#java对象头-markword">java对象头 MarkWord</a></li>
+        <li><a href="#查看日志命令">查看日志命令</a></li>
+        <li><a href="#该怎么对比选择mq">该怎么对比选择MQ</a></li>
       </ul>
     </li>
-    <li><a href="#heading"></a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h3 id="java代码执行流程">java代码执行流程</h3>
@@ -261,7 +265,222 @@
 <li>执行Main方法的当前类。</li>
 <li>new, clone, 反序列化时</li>
 </ol>
-<h3 id="双亲委派">双亲委派</h3>
+<h3 id="java线程有几种状态">java线程有几种状态</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="os.thread.state.png"
+        data-srcset="os.thread.state.png, os.thread.state.png 1.5x, os.thread.state.png 2x"
+        data-sizes="auto"
+        alt="os.thread.state.png"
+        title="os.thread.state.png" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="Thread.State.png"
+        data-srcset="Thread.State.png, Thread.State.png 1.5x, Thread.State.png 2x"
+        data-sizes="auto"
+        alt="Thread.State.png"
+        title="Thread.State.png" /></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">import lombok.extern.slf4j.Slf4j;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">import java.io.IOException;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">@Slf4j(topic = &#34;c.TestState&#34;)
+</span></span><span class="line"><span class="cl">public class TestState {
+</span></span><span class="line"><span class="cl">    public static void main(String[] args) throws IOException {
+</span></span><span class="line"><span class="cl">        Thread t1 = new Thread(&#34;t1&#34;) {
+</span></span><span class="line"><span class="cl">            @Override
+</span></span><span class="line"><span class="cl">            public void run() {
+</span></span><span class="line"><span class="cl">                log.debug(&#34;running...&#34;);
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        };
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        Thread t2 = new Thread(&#34;t2&#34;) {
+</span></span><span class="line"><span class="cl">            @Override
+</span></span><span class="line"><span class="cl">            public void run() {
+</span></span><span class="line"><span class="cl">                while(true) { // runnable
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        };
+</span></span><span class="line"><span class="cl">        t2.start();
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        Thread t3 = new Thread(&#34;t3&#34;) {
+</span></span><span class="line"><span class="cl">            @Override
+</span></span><span class="line"><span class="cl">            public void run() {
+</span></span><span class="line"><span class="cl">                log.debug(&#34;running...&#34;);
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        };
+</span></span><span class="line"><span class="cl">        t3.start();
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        Thread t4 = new Thread(&#34;t4&#34;) {
+</span></span><span class="line"><span class="cl">            @Override
+</span></span><span class="line"><span class="cl">            public void run() {
+</span></span><span class="line"><span class="cl">                synchronized (TestState.class) {
+</span></span><span class="line"><span class="cl">                    try {
+</span></span><span class="line"><span class="cl">                        Thread.sleep(1000000); // timed_waiting
+</span></span><span class="line"><span class="cl">                    } catch (InterruptedException e) {
+</span></span><span class="line"><span class="cl">                        e.printStackTrace();
+</span></span><span class="line"><span class="cl">                    }
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        };
+</span></span><span class="line"><span class="cl">        t4.start();
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        Thread t5 = new Thread(&#34;t5&#34;) {
+</span></span><span class="line"><span class="cl">            @Override
+</span></span><span class="line"><span class="cl">            public void run() {
+</span></span><span class="line"><span class="cl">                try {
+</span></span><span class="line"><span class="cl">                    t2.join(); // waiting
+</span></span><span class="line"><span class="cl">                } catch (InterruptedException e) {
+</span></span><span class="line"><span class="cl">                    e.printStackTrace();
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        };
+</span></span><span class="line"><span class="cl">        t5.start();
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        Thread t6 = new Thread(&#34;t6&#34;) {
+</span></span><span class="line"><span class="cl">            @Override
+</span></span><span class="line"><span class="cl">            public void run() {
+</span></span><span class="line"><span class="cl">                synchronized (TestState.class) { // blocked
+</span></span><span class="line"><span class="cl">                    try {
+</span></span><span class="line"><span class="cl">                        Thread.sleep(1000000);
+</span></span><span class="line"><span class="cl">                    } catch (InterruptedException e) {
+</span></span><span class="line"><span class="cl">                        e.printStackTrace();
+</span></span><span class="line"><span class="cl">                    }
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        };
+</span></span><span class="line"><span class="cl">        t6.start();
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        try {
+</span></span><span class="line"><span class="cl">            Thread.sleep(500);
+</span></span><span class="line"><span class="cl">        } catch (InterruptedException e) {
+</span></span><span class="line"><span class="cl">            e.printStackTrace();
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        log.debug(&#34;t1 state {}&#34;, t1.getState());
+</span></span><span class="line"><span class="cl">        log.debug(&#34;t2 state {}&#34;, t2.getState());
+</span></span><span class="line"><span class="cl">        log.debug(&#34;t3 state {}&#34;, t3.getState());
+</span></span><span class="line"><span class="cl">        log.debug(&#34;t4 state {}&#34;, t4.getState());
+</span></span><span class="line"><span class="cl">        log.debug(&#34;t5 state {}&#34;, t5.getState());
+</span></span><span class="line"><span class="cl">        log.debug(&#34;t6 state {}&#34;, t6.getState());
+</span></span><span class="line"><span class="cl">        System.in.read();
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">10:03:16.549 c.TestState [t3] - running...
+</span></span><span class="line"><span class="cl">10:03:17.064 c.TestState [main] - t1 state NEW
+</span></span><span class="line"><span class="cl">10:03:17.065 c.TestState [main] - t2 state RUNNABLE
+</span></span><span class="line"><span class="cl">10:03:17.065 c.TestState [main] - t3 state TERMINATED
+</span></span><span class="line"><span class="cl">10:03:17.065 c.TestState [main] - t4 state TIMED_WAITING
+</span></span><span class="line"><span class="cl">10:03:17.065 c.TestState [main] - t5 state WAITING
+</span></span><span class="line"><span class="cl">10:03:17.065 c.TestState [main] - t6 state BLOCKED
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="双亲委派">双亲委派</h3>
 <p>在类加载的过程中，每个类加载器都会先检查是否已经加载了该类，如果已经加载则直接返回，否则会将加载请求委派给父类加载器。</p>
 <p>如果所有的父类加载器都无法加载该类，则由当前类加载器自己尝试加载。所以看上去是自顶向下尝试加载</p>
 <p>第二次再去加载相同的类，仍然会向上进行委派，如果某个类加载器加载过就会直接返回</p>
@@ -498,6 +717,14 @@ return methodProxy.invoke(target, args);  //无反射调用，需要Target类  �
         data-sizes="auto"
         alt="oom.png"
         title="oom.png" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="%e7%ba%bf%e4%b8%8a%e9%97%ae%e9%a2%98%e6%8e%92%e6%9f%a5.png"
+        data-srcset="%e7%ba%bf%e4%b8%8a%e9%97%ae%e9%a2%98%e6%8e%92%e6%9f%a5.png, %e7%ba%bf%e4%b8%8a%e9%97%ae%e9%a2%98%e6%8e%92%e6%9f%a5.png 1.5x, %e7%ba%bf%e4%b8%8a%e9%97%ae%e9%a2%98%e6%8e%92%e6%9f%a5.png 2x"
+        data-sizes="auto"
+        alt="线上问题排查.png"
+        title="线上问题排查.png" /></p>
 <h3 id="oauth2">Oauth2</h3>
 <p>OAuth 是一个开放标准，该标准允许用户让第三方应用访问该用户在某一网站上存储的私密资源 （如头像、照片、视频等），并且在这个过程中无须将用户名和密码提供给第三方应用。通过令牌 （token） 可以实现这一功能。每一个令牌授权一个特定的网站在特定的时间段内允许可访问特定的资源。OAuth 让用户可以授权第三方网站灵活访问它们存储在另外一些资源服务器上的特定信息，而非所有的内容。对于用户而言，我们在互联网应用中最常见的 OAuth 应用就是各种第三方登录，例如 QQ授权登录、微信授权登录、微博授权登录、GitHub 授权登录等。</p>
 <h3 id="gc调优">GC调优</h3>
@@ -551,7 +778,6 @@ return methodProxy.invoke(target, args);  //无反射调用，需要Target类  �
         alt="redis_replica_increment.png"
         title="redis_replica_increment.png" /></p>
 <h3 id="redis脑裂">redis脑裂</h3>
-<h2 id="heading"></h2>
 <p>脑裂，主从集群中，同时有两个主能接收写请求。Redis主从切换过程中，若发生脑裂，客户端数据就会写入原主，若原主被降为从库，这些新写入数据就丢了。</p>
 <p>脑裂主要是因为原主库发生了假故障，假故障的原因：</p>
 <ul>
@@ -565,6 +791,92 @@ return methodProxy.invoke(target, args);  //无反射调用，需要Target类  �
 <li>min-slaves-to-write设置为K/2+1（如果K等于1，就设为1）</li>
 <li>min-slaves-max-lag设置为十几秒（例如10～20s）</li>
 </ul>
+<h3 id="synchronized">synchronized</h3>
+<p>偏向锁出现在（已过时）：
+只有一个线程加锁的情况下，此时一定没有竞争！没有竞争！没有竞争！
+加锁后markword里存储此线程地址（操作系统线程）</p>
+<p>轻量级锁出现在：
+有两（多）个线程都试图对此对象交替加锁色，没有竞争
+加锁后markword里存储加锁线程地址（java线程）</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="synchronized_thread_0.png"
+        data-srcset="synchronized_thread_0.png, synchronized_thread_0.png 1.5x, synchronized_thread_0.png 2x"
+        data-sizes="auto"
+        alt="synchronized_thread_0.png"
+        title="synchronized_thread_0.png" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="synchronized_thread_1.png"
+        data-srcset="synchronized_thread_1.png, synchronized_thread_1.png 1.5x, synchronized_thread_1.png 2x"
+        data-sizes="auto"
+        alt="synchronized_thread_1.png"
+        title="synchronized_thread_1.png" /></p>
+<p>重量级锁出现在：
+有两（多）个线程都试图对此对象加锁酒，并且发生了竞争
+加锁后markword里存储Monitor地址</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="synchronized_monitor.png"
+        data-srcset="synchronized_monitor.png, synchronized_monitor.png 1.5x, synchronized_monitor.png 2x"
+        data-sizes="auto"
+        alt="synchronized_monitor.png"
+        title="synchronized_monitor.png" /></p>
+<p>自旋出现在重量级锁之后：</p>
+<p>只要发生竞争，轻量级锁就会升级为重量级锁
+升级（膨胀）成重量锁之后，未获得锁的线程，会进入_cXq
+链表，自旋尝试获取锁
+~如果自旋期间，能获取锁，则避免阻塞
+如果自旋若干次，仍不能获取锁，则进入阻塞，将来由持锁线程唤醒</p>
+<h3 id="java对象头-markword">java对象头 MarkWord</h3>
+<p>无论是加了轻锁还是重锁，前面的内容就会被替换掉，什么hash码，分代年龄都会被替换掉。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="markword.png"
+        data-srcset="markword.png, markword.png 1.5x, markword.png 2x"
+        data-sizes="auto"
+        alt="markword.png"
+        title="markword.png" /></p>
+<p>对象分为</p>
+<p>对象头 object header 和  对象体 object body</p>
+<p>object body =成员变量</p>
+<p>object header=Mark Word+Klass Word （类型指针也就是类对象）</p>
+<p>Mark Word =hashcode+分代年龄（age）+是不是偏向锁（biased_lock）+加锁状态位</p>
+<p>加锁状态位</p>
+<p>01  : 无锁</p>
+<p>00 : 轻量锁</p>
+<p>10  : 重量级锁</p>
+<p>Mark Word 中轻量锁 和 重量级锁存的东西是不一样的。</p>
+<p>轻量级：lockRecord 对象</p>
+<p>重量级：monitor对象</p>
+<h3 id="查看日志命令">查看日志命令</h3>
+<p>less app.properties | grep comp -C 5</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="log.png"
+        data-srcset="log.png, log.png 1.5x, log.png 2x"
+        data-sizes="auto"
+        alt="log.png"
+        title="log.png" /></p>
+<h3 id="该怎么对比选择mq">该怎么对比选择MQ</h3>
+<ol>
+<li>如果我们业务只是收发消息这种单一类型的需求，而且可以允许小部分数据丢失的可能性，但是又要求极高的吞吐量和高性能的话，就直接选Kafka就行了，就好比我们公司想要收集和传输用户行为日志以及其他相关日志的处理，就选用的Kafka中间件。</li>
+<li>如果自己所处公司业务比较平稳，未来几年内不会出现飞速发展，而且没有什么改源码的特殊需求的话，在面对选择MQ的时候就可以选用RabbitMQ。毕竟如今这样的中小公司也就是这么干的。</li>
+<li>如果自己所处公司发展迅猛，一年经常搞一些特别大的促销秒杀活动，公司技术栈主要是Java语言的话，就直接一步到位选择RocketMQ，这样会省很多事情。</li>
+</ol>
+<p>Kafka：追求高吞吐量，一开始的目的就是用于日志收集和传输，<strong>适合产生大量数据的互联网服务的数据收集业务</strong>，大型公司建议可以选用，<strong>如果有日志采集功能，肯定是首选 kafka。</strong></p>
+<p>RocketMQ：<strong>天生为金融互联网领域而生，对于可靠性要求很高的场景</strong>，尤其是电商里面的订单扣款，以及业务削峰，在大量交易涌入时，后端可能无法及时处理的情况。RoketMQ 在稳定性上可能更值得信赖，这些业务场景在阿里双 11 已经经历了多次考验，<strong>如果你的业务有上述并发场景，建议可以选择 RocketMQ。</strong></p>
+<p>RabbitMQ：结合 erlang 语言本身的并发优势，性能较好，社区活跃度也比较高，但是不利于做二次开发和维护，不过 RabbitMQ 的社区十分活跃，可以解决开发过程中遇到的 bug。<strong>如果你的数据量没有那么大，小公司优先选择功能比较完备的 RabbitMQ。</strong></p>
+<p>作者：楼仔
+链接：https://juejin.cn/post/7096095180536676365
+来源：稀土掘金
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<p><a href="https://www.cnblogs.com/lyhsblog/p/16113202.html" target="_blank" rel="noopener noreffer ">https://www.cnblogs.com/lyhsblog/p/16113202.html</a></p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
