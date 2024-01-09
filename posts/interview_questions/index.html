@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/shengtu0328.github.io\/posts\/interview_questions\/"
-        },"genre": "posts","wordcount":  5546 ,
+        },"genre": "posts","wordcount":  6464 ,
         "url": "https:\/\/shengtu0328.github.io\/posts\/interview_questions\/","datePublished": "2023-08-03T09:32:04+08:00","dateModified": "2023-08-03T09:32:04+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -102,8 +102,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Interview_questions</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-08-03">2023-08-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;5546 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;12 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-08-03">2023-08-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;6464 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;13 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -144,6 +144,8 @@
         <li><a href="#java对象头-markword">java对象头 MarkWord</a></li>
         <li><a href="#查看日志命令">查看日志命令</a></li>
         <li><a href="#该怎么对比选择mq">该怎么对比选择MQ</a></li>
+        <li><a href="#elasticsearch的特点优点-为什么比mysql快">Elasticsearch的特点/优点 为什么比MySQL快？</a></li>
+        <li><a href="#为什么说mysql单表行数不要超过2000w">为什么说MySQL单表行数不要超过2000w?</a></li>
       </ul>
     </li>
   </ul>
@@ -877,6 +879,21 @@ return methodProxy.invoke(target, args);  //无反射调用，需要Target类  �
 来源：稀土掘金
 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
 <p><a href="https://www.cnblogs.com/lyhsblog/p/16113202.html" target="_blank" rel="noopener noreffer ">https://www.cnblogs.com/lyhsblog/p/16113202.html</a></p>
+<h3 id="elasticsearch的特点优点-为什么比mysql快">Elasticsearch的特点/优点 为什么比MySQL快？</h3>
+<p>Elasticsearch会对所有输入的文本进行处理，建立索引放入内存中，从而提高搜索效率。在这一点上ES要优于MySQL的B+树的结构，MySQL需要将索引放入磁盘，每次读取需要先从磁盘读取索引然后寻找对应的数据节点，但是ES能够直接在内存中就找到目标文档对应的大致位置，最大化提高效率。 并且在进行组合查询的时候MySQL的劣势更加明显，它不支持复杂的组合查询比如聚合操作，即使要组合查询也要事先建好索引，但是ES就可以完成这种复杂的操作，默认每个字段都是有索引的，在查询的时候可以各种互相组合。</p>
+<p>对比： 1）基于分词后的全文检索：例如select * from test where name like &lsquo;%张三%&rsquo;，对于mysql来说，因为索引失效，会进行全表检索；对es而言分词后，每个字都可以利用FST高速找到倒排索引的位置，并迅速获取文档id列表，大大的提升了性能，减少了磁盘IO。 2）精确检索：进行精确检索，有些时候可能mysql要快一些，当mysql的非聚合索引引用上了聚合索引，无需回表，则速度上可能更快；es还是通过FST找到倒排索引的位置比获取文档id列表，再根据文档id获取文档并根据相关度进行排序。但是es还有个优势，就是es即天然的分布式能够在大量数据搜索时可以通过分片降低检索规模，并且可以通过并行检索提升效率，用filter时，更是可以直接跳过检索直接走缓存。</p>
+<p><a href="https://www.51cto.com/article/646093.html" target="_blank" rel="noopener noreffer ">https://www.51cto.com/article/646093.html</a></p>
+<p>作者：锥栗
+链接：https://juejin.cn/post/6998411731210879012
+来源：稀土掘金
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<h3 id="为什么说mysql单表行数不要超过2000w">为什么说MySQL单表行数不要超过2000w?</h3>
+<ol>
+<li>Mysql 的表数据是以页的形式存放的，页在磁盘中不一定是连续的。</li>
+<li>页的空间是 16K, 并不是所有的空间都是用来存放数据的，会有一些固定的信息，如，页头，页尾，页码，校验码等等。</li>
+<li>在 B+ 树中，叶子节点和非叶子节点的数据结构是一样的，区别在于，叶子节点存放的是实际的行数据，而非叶子节点存放的是主键和页号。</li>
+<li>索引结构不会影响单表最大行数，2kw 也只是推荐值，超过了这个值可能会导致 B + 树层级更高，影响查询性能</li>
+</ol>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
@@ -904,7 +921,7 @@ return methodProxy.invoke(target, args);  //无反射调用，需要Target类  �
 </article></div>
             </main><footer class="footer">
         <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.105.0-DEV">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
-                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ricky</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ricky</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>
 

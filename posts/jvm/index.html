@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <title>JVM学习 - ricky的网站</title><meta name="Description" content="The best time to plant a tree was 10 years ago, the second is now"><meta property="og:title" content="JVM学习" />
-<meta property="og:description" content="一、什么是JVM 定义 Java Virtual Machine，JAVA程序的运行环境（JAVA二进制字节码的运行环境） 好处 一次编写，到处运行 (屏蔽了字节码和操作系" />
+<meta property="og:description" content="一、什么是JVM 定义 Java Virtual Machine，JAVA程序的运行环境（JAVA二进制字节码的运行环境） 功能 解释和运行 对字节码文件中的指令，实时的解" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://shengtu0328.github.io/posts/jvm/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-10-11T18:23:30+08:00" />
@@ -13,7 +13,7 @@
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="JVM学习"/>
-<meta name="twitter:description" content="一、什么是JVM 定义 Java Virtual Machine，JAVA程序的运行环境（JAVA二进制字节码的运行环境） 好处 一次编写，到处运行 (屏蔽了字节码和操作系"/>
+<meta name="twitter:description" content="一、什么是JVM 定义 Java Virtual Machine，JAVA程序的运行环境（JAVA二进制字节码的运行环境） 功能 解释和运行 对字节码文件中的指令，实时的解"/>
 <meta name="application-name" content="我的网站">
 <meta name="apple-mobile-web-app-title" content="我的网站"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/shengtu0328.github.io\/posts\/jvm\/"
-        },"genre": "posts","wordcount":  13195 ,
+        },"genre": "posts","wordcount":  13561 ,
         "url": "https:\/\/shengtu0328.github.io\/posts\/jvm\/","datePublished": "2022-10-11T18:23:30+08:00","dateModified": "2022-10-11T18:23:30+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -102,8 +102,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">JVM学习</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span>&nbsp;<span class="post-category">included in <a href="/categories/tech/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>tech</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-10-11">2022-10-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;13195 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;27 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-10-11">2022-10-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;13561 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;28 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -114,6 +114,7 @@
     <li><a href="#一什么是jvm">一、什么是JVM</a>
       <ul>
         <li><a href="#定义">定义</a></li>
+        <li><a href="#功能">功能</a></li>
         <li><a href="#好处">好处</a></li>
         <li><a href="#jvm参数">jvm参数</a></li>
       </ul>
@@ -182,6 +183,8 @@
             <li><a href="#可以作为gc-root的对象">可以作为GC Root的对象</a></li>
             <li><a href="#五种引用">五种引用</a>
               <ul>
+                <li><a href="#引用队列的作用">引用队列的作用</a></li>
+                <li><a href="#软引用或者弱引是怎么被回收的">软引用或者弱引是怎么被回收的</a></li>
                 <li><a href="#强引用">强引用</a></li>
                 <li><a href="#软引用">软引用</a></li>
                 <li><a href="#弱引用">弱引用</a></li>
@@ -238,6 +241,18 @@
             </div><div class="content" id="content"><h2 id="一什么是jvm">一、什么是JVM</h2>
 <h3 id="定义">定义</h3>
 <p>Java Virtual Machine，JAVA程序的<strong>运行环境</strong>（JAVA二进制字节码的运行环境）</p>
+<h3 id="功能">功能</h3>
+<p><strong>解释和运行</strong>  对字节码文件中的指令，实时的解释成机器码，让计算机执行</p>
+<p><strong>内存管理</strong>    自动为对象、方法等分配内存，自动的垃圾回收机制</p>
+<p><strong>即时编译</strong>   对热点代码进行优化，提升执行效率 ( java 语言需要将字节码指令实时地通过jvm解释成机器码，才可以交给计算机运行，随着程序的执行，需要反复地去进行)</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="jit.png"
+        data-srcset="jit.png, jit.png 1.5x, jit.png 2x"
+        data-sizes="auto"
+        alt="jit.png"
+        title="jit.png" /></p>
 <h3 id="好处">好处</h3>
 <ul>
 <li>
@@ -1729,6 +1744,12 @@
 <li>被synchronized关键字持有的对象</li>
 </ul>
 <h4 id="五种引用">五种引用</h4>
+<h5 id="引用队列的作用">引用队列的作用</h5>
+<p>回收软引用或者弱引用本身</p>
+<p>回收虚引用本身，并且释放直接内存</p>
+<p>回收终结器引用，对象被垃圾回收，会加入引用队列，但是还不能被直接垃圾回收</p>
+<h5 id="软引用或者弱引是怎么被回收的">软引用或者弱引是怎么被回收的</h5>
+<p>就比如ByteBuffer对象会被jvm gc回收掉，但包装ByteBuffer对象的SoftReference对象不会被马上回收，要配合引用队列回收</p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -1756,6 +1777,7 @@
 <p>就如 list &ndash;&gt; SoftReference &ndash;&gt; byte[]</p>
 <ul>
 <li>如上图如果B对象不再引用 且 A2对象且内存不足时，软引用所引用的A2对象就会被回收</li>
+<li>反射中的一些方法就用到了软引用</li>
 </ul>
 <p>软引用的使用</p>
 <div class="highlight"><div class="chroma">
@@ -2083,14 +2105,15 @@
 <ul>
 <li>
 <p>创建ByteBuffer对象时，就会创建一个Cleaner虚引用对象，并把ByteBuffer对象直接内存地址传给 Cleaner虚引用对象。当引用的对象ByteBuffer被垃圾回收以后，虚引用对象Cleaner就会被放入引用队列中，然后调用Cleaner的clean方法来释放直接内存</p>
-<p>虚引用的一个体现是<strong>释放直接内存所分配的内存</strong>，</p>
+<p>虚引用作用的一个体现是<strong>释放直接内存所分配的内存</strong>，</p>
 </li>
 <li>
 <p>如上图，B对象不再引用ByteBuffer对象，ByteBuffer就会被回收。但是直接内存中的内存还未被回收。这时需要将虚引用对象Cleaner放入引用队列中，然后调用它的clean方法来释放直接内存</p>
 </li>
 </ul>
 <h5 id="终结器引用">终结器引用</h5>
-<p>无需手动编码，但其内部配合引用队列使用，在垃圾回收时，终结器引用入队（被引用对象暂时没有被回收），再由 Finalizer 线程通过终结器引用找到被引用对象并调用它的 finalize方法，第二次 GC 时才能回收被引用对象</p>
+<p>无需手动编码，但其内部配合引用队列使用，在垃圾回收时，终结器引用入队（被引用对象暂时没有被回收），再由 Finalizer 线程通过终结器引用找到被引用对象并调用它的 finalize方法，第二次 GC 时才能回收被引用对象。</p>
+<p><strong>只有执行了 finalize方法 ，此对象才能被垃圾回收，不然这个虽然不被引用了，但是一直没有被回收，已被废弃</strong></p>
 <ul>
 <li>
 <p>所有的类都继承自Object类，Object类有一个finalize方法。当某个对象重写了finalize方法，不再被其他的对象所引用时，会先创建终结器引用对象并放入引用队列中。会有一个优先级很低的 finalize线程查看这个队列，然后根据终结器引用对象找到它所引用的对象，然后调用该对象的finalize方法。调用以后，该对象就可以被垃圾回收了</p>
@@ -2560,7 +2583,7 @@
 </article></div>
             </main><footer class="footer">
         <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.105.0-DEV">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
-                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ricky</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ricky</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>
 

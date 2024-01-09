@@ -10,7 +10,7 @@
     <pubDate>Tue, 11 Oct 2022 18:23:30 &#43;0800</pubDate>
     <author>ricky</author>
     <guid>https://shengtu0328.github.io/posts/jvm/</guid>
-    <description><![CDATA[一、什么是JVM 定义 Java Virtual Machine，JAVA程序的运行环境（JAVA二进制字节码的运行环境） 好处 一次编写，到处运行 (屏蔽了字节码和操作系]]></description>
+    <description><![CDATA[一、什么是JVM 定义 Java Virtual Machine，JAVA程序的运行环境（JAVA二进制字节码的运行环境） 功能 解释和运行 对字节码文件中的指令，实时的解]]></description>
 </item>
 </channel>
 </rss>
