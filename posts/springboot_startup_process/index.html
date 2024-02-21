@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <title>Springboot启动流程 - ricky的网站</title><meta name="Description" content="The best time to plant a tree was 10 years ago, the second is now"><meta property="og:title" content="Springboot启动流程" />
-<meta property="og:description" content="几个重要的类 AnnotationConfigServletWebServerApplicationContext 包含了beanFactory beanFactory 包含了singletonObjects 总结springboot 启动流程 1 2 3 public static void main(String[] args) { SpringApplication.run(Application.class, args); } 首" />
+<meta property="og:description" content="几个重要的类 AnnotationConfigServletWebServerApplicationContext 包含了beanFactory beanFactory 包含了singletonObjects 总结springboot 启动流程 1 2 3 public static void main(String[] args) { SpringApplication.run(Application.class, args); } new" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://shengtu0328.github.io/posts/springboot_startup_process/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-05-24T10:38:27+08:00" />
@@ -13,7 +13,7 @@
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Springboot启动流程"/>
-<meta name="twitter:description" content="几个重要的类 AnnotationConfigServletWebServerApplicationContext 包含了beanFactory beanFactory 包含了singletonObjects 总结springboot 启动流程 1 2 3 public static void main(String[] args) { SpringApplication.run(Application.class, args); } 首"/>
+<meta name="twitter:description" content="几个重要的类 AnnotationConfigServletWebServerApplicationContext 包含了beanFactory beanFactory 包含了singletonObjects 总结springboot 启动流程 1 2 3 public static void main(String[] args) { SpringApplication.run(Application.class, args); } new"/>
 <meta name="application-name" content="我的网站">
 <meta name="apple-mobile-web-app-title" content="我的网站"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/shengtu0328.github.io\/posts\/springboot_startup_process\/"
-        },"genre": "posts","wordcount":  1538 ,
+        },"genre": "posts","wordcount":  2282 ,
         "url": "https:\/\/shengtu0328.github.io\/posts\/springboot_startup_process\/","datePublished": "2023-05-24T10:38:27+08:00","dateModified": "2023-05-24T10:38:27+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -102,8 +102,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Springboot启动流程</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-05-24">2023-05-24</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1538 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-05-24">2023-05-24</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2282 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -134,9 +134,29 @@
 </div>
 </div><ol>
 <li>
-<p>首先會創建一个 SpringApplication对象，在new SpringApplication() 构造方法中，会解析当前ClassLoader中所有jar包下的spring.factories文件，包括我们项目里自定义的spring.factories文件。将文件中的内容即 &ldquo;接口全限定名-实现类全限定名（1对多的关系）&quot;，</p>
-<p>将这些className 的List<!-- raw HTML omitted -->放入缓存的名为cache 的map中，static final Map&lt;ClassLoader, Map&lt;String, List<!-- raw HTML omitted -->&raquo; cache = new ConcurrentReferenceHashMap&lt;&gt;();以供后续使用，</p>
-<p>并且还实例化了几个默认的bean。</p>
+<p>new SpringApplication()</p>
+<p>首先會創建一个 SpringApplication对象，在new SpringApplication() 构造方法中，</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">this.bootstrapRegistryInitializers = new ArrayList&lt;&gt;(
+</span></span><span class="line"><span class="cl">      getSpringFactoriesInstances(BootstrapRegistryInitializer.class));
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这里是第一次调用SgetSpringFactoriesInstances 方法，首次调用时，  SpringFactoriesLoader.loadSpringFactories 会解析当前ClassLoader中所有jar包下的spring.factories文件，包括我们项目里自定义的spring.factories文件。将文件中的内容即 &ldquo;接口全限定名-实现类全限定名（1对多的关系）&quot;，</p>
+<p>SpringFactoriesLoader.loadSpringFactories 将这些className 的List<!-- raw HTML omitted -->放入缓存的名为cache 的map中，static final Map&lt;ClassLoader, Map&lt;String, List<!-- raw HTML omitted -->&raquo; cache = new ConcurrentReferenceHashMap&lt;&gt;();<strong>以供后续使用，</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">String[] getBeanNamesForType 返回的是字符串
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>并且还实例化了几个默认的bean。</p>
 </li>
 <li>
 <p>在run方法中</p>
@@ -144,6 +164,12 @@
 <li>
 <p>createApplicationContext()</p>
 <p>创建上下文对象</p>
+<p>AnnotationConfigUtils.registerAnnotationConfigProcessors 注册以下几个<strong>BeanDefinition</strong></p>
+<p>1.org.springframework.context.annotation.internalConfigurationAnnotationProcessor（也就是<strong>ConfigurationClassPostProcessor</strong> 实现了BeanFactoryPostProcessor）</p>
+<p>2.org.springframework.context.annotation.internalAutowiredAnnotationProcessor</p>
+<p>3.org.springframework.context.annotation.internalCommonAnnotationProcessor</p>
+<p>4.org.springframework.context.event.internalEventListenerProcessor</p>
+<p>5.org.springframework.context.event.internalEventListenerFactory</p>
 </li>
 <li>
 <p>prepareEnvironment()</p>
@@ -152,11 +178,31 @@
 <li>
 <p>prepareContext() 准备上下文</p>
 <ol>
-<li>加载当前系统的Environment的一些变量</li>
-<li>创建BeanDefinitionLoader</li>
-<li>主要就是  <strong>BeanDefinitionLoader</strong> 注册 <strong>“启动类”</strong> 的 <strong>BeanDefinition</strong></li>
-</ol>
+<li>
+<p>加载当前系统的Environment的一些变量</p>
 </li>
+<li>
+<p>创建BeanDefinitionLoader</p>
+</li>
+<li>
+<p>load(context, sources.toArray(new Object[0]));</p>
+</li>
+</ol>
+<p>主要就是 注册 <strong>启动类</strong> 的 <strong>BeanDefinition</strong>   <strong>用BeanDefinitionLoader注册</strong></p>
+<p><strong>BeanDefinition</strong>   就是一个map和一个list</p>
+</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">private final Map&lt;String, BeanDefinition&gt; beanDefinitionMap = new ConcurrentHashMap&lt;&gt;(256);
+</span></span><span class="line"><span class="cl">private volatile List&lt;String&gt; beanDefinitionNames = new ArrayList&lt;&gt;(256);
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol>
 <li>
 <p><strong>refreshContext()</strong></p>
 <p><strong>spring的核心方法，springboot也是依托于此</strong></p>
@@ -171,21 +217,53 @@
 </li>
 <li>
 <p>postProcessBeanFactory(beanFactory);</p>
+<p>对BeanFactory set属性</p>
 </li>
 <li>
 <p><strong>invokeBeanFactoryPostProcessors（）</strong></p>
 <p>也算是<strong>springboot 自动装配</strong>的起点</p>
 <ol>
-<li><strong>ConfigurationClassPostProcessor</strong> 执行，带着启动类参数
+<li>
+<p>beanFactory.getBeanNamesForType(BeanDefinitionRegistryPostProcessor.class, true, false)</p>
+<p>找到了实现了<strong>BeanDefinitionRegistryPostProcessor</strong> 接口 的<strong>ConfigurationClassPostProcessor</strong> 的 String</p>
+<p>String[] getBeanNamesForType 返回的是字符串</p>
+</li>
+<li>
+<p>currentRegistryProcessors.add(beanFactory.getBean(ppName, BeanDefinitionRegistryPostProcessor.class));</p>
+<p>进行实例化，currentRegistryProcessors就是 ConfigurationClassPostProcessor</p>
+</li>
+<li>
+<p>invokeBeanDefinitionRegistryPostProcessors(currentRegistryProcessors, registry, beanFactory.getApplicationStartup());</p>
+<p><strong>概括一下 就是  在ConfigurationClassPostProcessor 类中用   ConfigurationClassParser 解析启动类</strong></p>
+<p>3.1 <strong>ConfigurationClassPostProcessor</strong>.postProcessBeanDefinitionRegistry()</p>
+<p>3.1.1 ConfigurationClassUtils.checkConfigurationClassCandidate(beanDef, this.metadataReaderFactory))</p>
+<p>通过bd是否有被@Configuration 修饰 ，过滤出  <strong>启动类</strong>的  <strong>String名字</strong></p>
+<p>3.1.1.1 <strong>ConfigurationClassParser</strong> parser.parse(candidates);</p>
+<p>ConfigurationClassParser.解析 <strong>启动类</strong></p>
+<p><strong>ConfigurationClassParser</strong>.doProcessConfigurationClass 方法 解析启动类上的@Configuration注解，  @ComponentScan @PropertySource 注解，</p>
+<p><strong>ConfigurationClassParser</strong>.collectImports 解析启动类上的 import注解，并获取import@import注解里的value  即 <strong>AutoConfigurationImportSelector</strong>，然后会对AutoConfigurationImportSelector实例化</p>
+<p><strong>概括一下 就是  在AutoConfigurationImportSelector类中用  注册BeanDefinition</strong></p>
+<p>DeferredImportSelectorHandler.process()</p>
+<p>DeferredImportSelectorHandler.processGroupImports()</p>
 <ol>
-<li><strong>ConfigurationClassParser</strong>解析启动类上的@Configuration注解， @PropertySource 注解， @import注解(包括启动类上的@import注解里的AutoConfigurationImportSelector)
-<ol>
-<li>调用<strong>AutoConfigurationImportSelector&amp;AutoConfigurationGroup类的 <strong>process()方法，从SpringFactoriesLoader.loadFactoryNames 缓存加载</strong>EnableAutoConfiguration</strong>的 自动配置实现类，加载到<strong>BeanDefinition</strong>缓存</li>
+<li>调用<strong>AutoConfigurationImportSelector&amp;AutoConfigurationGroup类的 <strong>process()方法，从SpringFactoriesLoader.loadFactoryNames 缓存加载</strong>EnableAutoConfiguration.class</strong>的 自动配置实现类，加载到<strong>BeanDefinition</strong>缓存</li>
 </ol>
 </li>
-</ol>
+<li>
+<p>实例化一些第三方的、自定义的 BeanFactoryPostProcessors ,如Mybatis 的<strong>MapperScannerConfigurer</strong>。并且这些BeanFactoryPostProcessors如果没有创建bean，就会在此时为他们实例化。 并且调用他们的<strong>postProcessBeanDefinitionRegistry</strong>()方法，<strong>主要作用是加载BeanDefinition</strong></p>
 </li>
-<li>实例化一些第三方的、自定义的 BeanFactoryPostProcessors ,如Mybatis 的<strong>MapperScannerConfigurer</strong>。并且这些BeanFactoryPostProcessors如果没有创建bean，就会在此时为他们实例化。 并且调用他们的<strong>postProcessBeanDefinitionRegistry</strong>()方法，<strong>主要作用是加载BeanDefinition</strong></li>
+<li>
+<p>1</p>
+</li>
+<li>
+<p>5</p>
+</li>
+<li>
+<p>888</p>
+</li>
+<li>
+<p>99</p>
+</li>
 </ol>
 </li>
 <li>
@@ -194,7 +272,7 @@
 </li>
 <li>
 <p><strong>onRefresh();</strong></p>
-<p>启动内嵌的tomcat</p>
+<p>启动内嵌的<strong>tomcat</strong></p>
 </li>
 <li>
 <p><strong>finishBeanFactoryInitialization(beanFactory);</strong></p>
@@ -205,19 +283,30 @@
 <p>构造方法调用</p>
 </li>
 <li>
-<p>populateBean(beanName, mbd, instanceWrapper); 也就是 AutowiredAnnotationBeanPostProcessor.postProcessProperties()</p>
+<p>populateBean(beanName, mbd, instanceWrapper);</p>
+<p>也就是 AutowiredAnnotationBeanPostProcessor.postProcessProperties()   会调用 beanFactory.getBean(beanName)  获取需要autowired 的对象，如果还没有实例化，就实例化需要autowired的对象</p>
 </li>
 <li>
-<p>ApplicationContextAware.setApplicationContext()</p>
+<p>initializeBean</p>
+<p>3.1 invokeAwareMethods</p>
+<p>((BeanNameAware) bean).setBeanName(beanName);</p>
+<p>=================</p>
+<p>3.2 iapplyBeanPostProcessorsBeforeInitialization</p>
+<p>1.((ApplicationContextAware) bean).setApplicationContext(this.applicationContext);</p>
+<p>2.@PostConstruct</p>
+<p>=================</p>
+<p>3.3 invokeInitMethods</p>
+<p>1.InitializingBean. afterPropertiesSet()   初始化方法</p>
+<p>=================</p>
+<p>3.4 applyBeanPostProcessorsAfterInitialization</p>
 </li>
 </ol>
 </li>
 <li>
 <p><strong>finishRefresh();</strong></p>
+<p>对 ApplicationListener  onApplicationEvent方法 进行回调</p>
 </li>
 </ol>
-<pre><code>对 ApplicationListener  onApplicationEvent方法 进行回调
-</code></pre>
 </li>
 </ol>
 </li>
@@ -258,7 +347,16 @@
 <li>由 <code>AutoConfigurationImportSelector.class</code> 去读取 <code>META-INF/spring.factories</code> 中的自动配置类，实现了弱耦合。</li>
 <li>另外 <code>AutoConfigurationImportSelector.class</code> 实现了 DeferredImportSelector 接口，让自动配置的解析晚于主配置的解析</li>
 </ul>
-</div><div class="post-footer" id="post-footer">
+<p>beanFactory是获取bean的</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">currentRegistryProcessors.add(beanFactory.getBean(ppName, BeanDefinitionRegistryPostProcessor.class));
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">

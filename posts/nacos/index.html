@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/shengtu0328.github.io\/posts\/nacos\/"
-        },"genre": "posts","wordcount":  1939 ,
+        },"genre": "posts","wordcount":  1973 ,
         "url": "https:\/\/shengtu0328.github.io\/posts\/nacos\/","datePublished": "2023-12-25T09:02:21+08:00","dateModified": "2023-12-25T09:02:21+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -102,7 +102,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Nacos</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-25">2023-12-25</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1939 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-25">2023-12-25</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1973 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -124,6 +124,7 @@
           </ul>
         </li>
         <li><a href="#服务发现">服务发现</a></li>
+        <li><a href="#获取配置">获取配置</a></li>
       </ul>
     </li>
   </ul>
@@ -294,6 +295,8 @@
 <p>服务a 调用服务b 的时候 也是通过 懒加载的形式 ，会在第一次fegin调用时,使用DynamicServerListLoadBalancer 开启定时任务，每次定时执行都会将实例列表暂存到本地， 之后每次fegin调用时，直接从本地实例列表获取服务b的地址</p>
 <p><strong>服务端</strong></p>
 <p>服务端接受http 心跳请求， 使用udp和客户端进行定时的服务列表消息推送</p>
+<h3 id="获取配置">获取配置</h3>
+<p>客户端会通过 ScheduledExecutorService 定时发起http请求访问 nacos中的配置信息</p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
