@@ -4,7 +4,7 @@
         <link>https://shengtu0328.github.io/</link>
         <description>The best time to plant a tree was 10 years ago, the second is now</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1007@qq.com (ricky)</managingEditor>
-            <webMaster>1007@qq.com (ricky)</webMaster><lastBuildDate>Mon, 25 Dec 2023 09:03:16 &#43;0800</lastBuildDate>
+            <webMaster>1007@qq.com (ricky)</webMaster><lastBuildDate>Mon, 11 Mar 2024 19:56:45 &#43;0800</lastBuildDate>
             <atom:link href="https://shengtu0328.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
     <title>线程池</title>
@@ -39,6 +39,22 @@
     <description><![CDATA[Why i learned English I recently watched some interesting videos on bilibli which is about communicating with foreigners in English on website. The videos was so funny that it made me have the idea of relearning the skill of English language . You know，i recently started to practise my english from multiple aspects 。Literally,m]]></description>
 </item>
 <item>
+    <title>english_new_concept_english3</title>
+    <link>https://shengtu0328.github.io/posts/english_new_concept_english3/</link>
+    <pubDate>Mon, 11 Mar 2024 19:56:45 &#43;0800</pubDate>
+    <author>ricky</author>
+    <guid>https://shengtu0328.github.io/posts/english_new_concept_english3/</guid>
+    <description><![CDATA[Lesson 1 A puma at large 逃遁的美洲狮 Pumas are large, cat-like animals which are found in America. When reports came into London Zoo that a wild puma had been spotted forty-five miles south of London, they were not taken seriously. However（加了逗号however是副词，没有]]></description>
+</item>
+<item>
+    <title>Go</title>
+    <link>https://shengtu0328.github.io/posts/go/</link>
+    <pubDate>Tue, 27 Feb 2024 12:47:18 &#43;0800</pubDate>
+    <author>ricky</author>
+    <guid>https://shengtu0328.github.io/posts/go/</guid>
+    <description><![CDATA[问题1 协程模型中 m:n 是怎么个m比n 问题2 必须指定main package才能运行 Error: Package awesomeProject/goroutine contains more than one main function Consider using File kind instead 问题3 大叔大婶]]></description>
+</item>
+<item>
     <title>Sentinel</title>
     <link>https://shengtu0328.github.io/posts/sentinel/</link>
     <pubDate>Mon, 25 Dec 2023 09:03:16 &#43;0800</pubDate>
@@ -69,22 +85,6 @@
     <author>ricky</author>
     <guid>https://shengtu0328.github.io/posts/completablefuture/</guid>
     <description><![CDATA[CompletableFuture和Future区别 Future 只有阻塞才能获取结果，即get方法 CompletableFuture 支持异步方法回调， 支持多任务编排 支持异常处理 创建异]]></description>
-</item>
-<item>
-    <title>English_grammar_sentence</title>
-    <link>https://shengtu0328.github.io/posts/english_grammar_sentence/</link>
-    <pubDate>Tue, 21 Nov 2023 16:01:04 &#43;0800</pubDate>
-    <author>ricky</author>
-    <guid>https://shengtu0328.github.io/posts/english_grammar_sentence/</guid>
-    <description><![CDATA[简单句+简单句 名词性从句 同位语从句 如何区分that引导的同位语从句和that引导的定语从句？ 同位语: that 在从句中不担任成分 定语从句: that 在从句中]]></description>
-</item>
-<item>
-    <title>English_grammar_simple_sentence</title>
-    <link>https://shengtu0328.github.io/posts/english_grammar_simple_sentence/</link>
-    <pubDate>Mon, 20 Nov 2023 11:04:47 &#43;0800</pubDate>
-    <author>ricky</author>
-    <guid>https://shengtu0328.github.io/posts/english_grammar_simple_sentence/</guid>
-    <description><![CDATA[状语（就是副词性成分 用来修饰 形容词，副词，动词成分） 补语（能当形容词 或者 名词） 宾语 或者 主语 与 补语能形成 a is b的关系 主语+谓语/表语+主语补语]]></description>
 </item>
 </channel>
 </rss>

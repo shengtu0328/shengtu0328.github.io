@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/shengtu0328.github.io\/posts\/interview_questions\/"
-        },"genre": "posts","wordcount":  6464 ,
+        },"genre": "posts","wordcount":  7029 ,
         "url": "https:\/\/shengtu0328.github.io\/posts\/interview_questions\/","datePublished": "2023-08-03T09:32:04+08:00","dateModified": "2023-08-03T09:32:04+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -102,8 +102,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Interview_questions</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-08-03">2023-08-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;6464 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;13 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-08-03">2023-08-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;7029 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;15 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -146,6 +146,13 @@
         <li><a href="#该怎么对比选择mq">该怎么对比选择MQ</a></li>
         <li><a href="#elasticsearch的特点优点-为什么比mysql快">Elasticsearch的特点/优点 为什么比MySQL快？</a></li>
         <li><a href="#为什么说mysql单表行数不要超过2000w">为什么说MySQL单表行数不要超过2000w?</a></li>
+        <li><a href="#concurrenthashmap">ConcurrentHashMap</a>
+          <ul>
+            <li><a href="#put方法">put方法</a></li>
+            <li><a href="#transfer方法">transfer方法</a></li>
+          </ul>
+        </li>
+        <li><a href="#项目亮点">项目亮点</a></li>
       </ul>
     </li>
   </ul>
@@ -894,6 +901,24 @@ return methodProxy.invoke(target, args);  //无反射调用，需要Target类  �
 <li>在 B+ 树中，叶子节点和非叶子节点的数据结构是一样的，区别在于，叶子节点存放的是实际的行数据，而非叶子节点存放的是主键和页号。</li>
 <li>索引结构不会影响单表最大行数，2kw 也只是推荐值，超过了这个值可能会导致 B + 树层级更高，影响查询性能</li>
 </ol>
+<h3 id="concurrenthashmap">ConcurrentHashMap</h3>
+<p>扩容</p>
+<h4 id="put方法">put方法</h4>
+<p>如果table都没初始化，会调用initTable() CAS实现</p>
+<p>如果桶下标头节点是空，会用cas添加头元素</p>
+<p>如果发现当前桶下标代表扩容，就会去帮助扩容 如果是迁移之前的下标区间，可以直接put，如果是数组下标正在迁移只能阻塞，如果访问了处理完成的链表可以帮忙扩容</p>
+<p>如果通下标头节点不是空, 用synchronized关键词加锁 ，只对当前链表的头节点加锁，key相同覆盖，没有找到追加到链表最后，如果是红黑树按照红黑树的添加逻辑</p>
+<h4 id="transfer方法">transfer方法</h4>
+<p>元素个数&gt;=3/4的capacity时就会扩容</p>
+<p>capacity  并不是数组的长度，如果capacity  是16，factor  =3/4 .则是 数组长度是32，因为32的3/4是24 ，16小于24，所以capacity  =16 ， 数组长度32满足</p>
+<p>factor  扩容因子 默认0.75，只是第一次构造中会用到，以后都是按照3/4扩容，如果factor不是3/4的话</p>
+<h3 id="项目亮点">项目亮点</h3>
+<p>1.引入了rokcetmq，将复杂的业务任务步骤解耦，也将一些耗时耗cpu内存的步骤独立到某一个topic方法后续节点扩展</p>
+<p>2.引入了异步线程池去处理任务，</p>
+<p>3.优化数据库慢sql</p>
+<p>4.开了一个日志模块的starter组件给其他的项目中使用</p>
+<p>5，与其他部门接口进行api联调测试</p>
+<p>6，对一些视频文件预处理进行了调研，选择了jave2降低了 ffmepg的 部署复杂度</p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">

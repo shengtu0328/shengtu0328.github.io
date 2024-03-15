@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/shengtu0328.github.io\/posts\/pay_service\/"
-        },"genre": "posts","wordcount":  1010 ,
+        },"genre": "posts","wordcount":  1956 ,
         "url": "https:\/\/shengtu0328.github.io\/posts\/pay_service\/","datePublished": "2023-02-13T11:09:37+08:00","dateModified": "2023-02-13T11:09:37+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -102,8 +102,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">支付业务</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-02-13">2023-02-13</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1010 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-02-13">2023-02-13</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1956 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -123,7 +123,26 @@
         </li>
         <li><a href="#支付业务">支付业务</a></li>
         <li><a href="#密码">密码</a></li>
-        <li><a href="#微信">微信</a></li>
+      </ul>
+    </li>
+    <li><a href="#b站课程地址">b站课程地址</a>
+      <ul>
+        <li><a href="#微信">微信</a>
+          <ul>
+            <li><a href="#支付产品">支付产品</a>
+              <ul>
+                <li><a href="#jsapi">JSAPI</a></li>
+                <li><a href="#小程序支付">小程序支付</a></li>
+                <li><a href="#native支付">Native支付</a></li>
+                <li><a href="#app支付">APP支付</a></li>
+              </ul>
+            </li>
+            <li><a href="#接入指引">接入指引</a></li>
+            <li><a href="#微信支既用到了对称加密-也用到了非对称加密">微信支既用到了对称加密 也用到了非对称加密</a></li>
+            <li><a href="#平台证书是在sdk中是怎么下载的">平台证书是在sdk中是怎么下载的？</a></li>
+            <li><a href="#sdk主要做了什么">sdk主要做了什么？</a></li>
+          </ul>
+        </li>
         <li><a href="#支付宝">支付宝</a></li>
       </ul>
     </li>
@@ -220,10 +239,76 @@
 </tr>
 </tbody>
 </table>
+<h2 id="b站课程地址">b站课程地址</h2>
+<p><a href="https://www.bilibili.com/video/BV1US4y1D77m?p=3&amp;vd_source=429ff5cbebe69e9917bdeda0424404db" target="_blank" rel="noopener noreffer ">https://www.bilibili.com/video/BV1US4y1D77m?p=3&vd_source=429ff5cbebe69e9917bdeda0424404db</a></p>
 <h3 id="微信">微信</h3>
+<h4 id="支付产品">支付产品</h4>
+<p><a href="https://pay.weixin.qq.com/static/product/product_intro.shtml?name=jsapi" target="_blank" rel="noopener noreffer ">https://pay.weixin.qq.com/static/product/product_intro.shtml?name=jsapi</a></p>
+<h5 id="jsapi">JSAPI</h5>
+<ul>
+<li>线下 用户扫码</li>
+<li>公众号 支付订单</li>
+<li>pc 弹出个码，让用户扫 （用户自己输入金额）</li>
+</ul>
+<h5 id="小程序支付">小程序支付</h5>
+<ul>
+<li>小程序内支付订单</li>
+</ul>
+<h5 id="native支付">Native支付</h5>
+<ul>
+<li>pc 弹出个码，让用户扫（由商户指定金额）</li>
+</ul>
+<h5 id="app支付">APP支付</h5>
+<ul>
+<li>app内支付</li>
+</ul>
+<h4 id="接入指引">接入指引</h4>
+<p><a href="https://pay.weixin.qq.com/static/applyment_guide/applyment_index.shtml" target="_blank" rel="noopener noreffer ">https://pay.weixin.qq.com/static/applyment_guide/applyment_index.shtml</a></p>
+<p>准备好材料接入微信支付，由管理员自己的微信在网页上执行这一系列的流程</p>
+<p>商户号 （https://pay.weixin.qq.com/static/applyment_guide/applyment_index.shtml 接入微信指引后获取）</p>
+<p>APPid  （https://mp.weixin.qq.com/  上注册获得，注册一个服务号）</p>
+<p>登录商户号https://pay.weixin.qq.com，在APPID帐号管理 将Appid和 商户号绑定</p>
+<p>开发人员需要</p>
+<ol>
+<li>商户号</li>
+<li>APPid</li>
+</ol>
+<p>v2接口只有部分接口需要api证书</p>
+<p>v3接口必须使用api证书</p>
+<p>申请证书需要下载一个软件，</p>
+<p>一共有两个证书一个是商户调用微信使用（私钥加密），一个是商户接收微信异步回调使用（公钥解密）</p>
+<p><strong>商户API证书</strong></p>
+<p>商户证书是微信提供的二进制文件，<strong>商户系统发起与微信支付后台服务器通信请求的时候</strong>，作为微信支付后台识别商户真实身份的凭据。</p>
+<p><strong>微信平台证书</strong></p>
+<p>可以预先下载，也可以通过编程的方式获取。后面的课程中，我们会通过编程的方式来获取。</p>
+<p>微信支付平台证书是由 <strong>微信支付</strong> 负责申请和管理的，该证书包含了微信支付平台的身份标识和公钥信息。</p>
+<p>每位商户都会分配到一个或多个微信支付平台证书。<strong>在处理接口响应或回调通知时</strong>，商户需要根据证书序列号选择对应的平台证书，并使用其中的公钥进行签名验证。</p>
+<p>为什么要使用平台证书</p>
+<p>金融类互联网应用的消息真实性和完整性至关重要。商户系统在收到微信支付的应答或回调通知时，需要验证消息的真实性（确保来自微信支付）和完整性（未被第三方篡改）。</p>
 <p>商户证书？</p>
 <p>商户证书是微信提供的二进制文件，商户系统发起与微信支付后台服务器通信请求的时候，作为微信支付后台识别商户真实身份的凭据。</p>
+<h4 id="微信支既用到了对称加密-也用到了非对称加密">微信支既用到了对称加密 也用到了非对称加密</h4>
+<p>1.非对称</p>
+<p>商户平台api证书（发起下单api时调用）</p>
+<p>2.对称</p>
+<p>apiv2秘钥 apiv3秘钥（下载平台证书接口的时候用）</p>
+<h4 id="平台证书是在sdk中是怎么下载的">平台证书是在sdk中是怎么下载的？</h4>
+<p>executor.scheduleAtFixedRate（..）</p>
+<h4 id="sdk主要做了什么">sdk主要做了什么？</h4>
+<p>发送下单请求做了签名</p>
+<p>接受相应结果做了验签</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="wx_apiv3%e8%af%81%e4%b9%a6%e5%92%8c%e7%a7%98%e9%92%a5.png"
+        data-srcset="wx_apiv3%e8%af%81%e4%b9%a6%e5%92%8c%e7%a7%98%e9%92%a5.png, wx_apiv3%e8%af%81%e4%b9%a6%e5%92%8c%e7%a7%98%e9%92%a5.png 1.5x, wx_apiv3%e8%af%81%e4%b9%a6%e5%92%8c%e7%a7%98%e9%92%a5.png 2x"
+        data-sizes="auto"
+        alt="wx_apiv3证书和秘钥.png"
+        title="wx_apiv3证书和秘钥.png" /></p>
 <h3 id="支付宝">支付宝</h3>
+<p>支付宝认证验签的流程应该和 微信差不多</p>
+<p>商户私钥加密请求    支付宝用商户公钥验签</p>
+<p>支付宝私钥加密回调  商户用支付宝公钥验签</p>
 <p><a href="https://github.com/alipay/alipay-sdk-java-all/blob/master/v2/README.md" target="_blank" rel="noopener noreffer ">https://github.com/alipay/alipay-sdk-java-all/blob/master/v2/README.md</a></p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
