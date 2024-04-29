@@ -199,7 +199,14 @@
 <p>FFmpeg 转换命令 : /var/folders/fp/fg__cpln099g08625c1vf0xm0000gn/T/jave/ffmpeg-x86_64-3.2.0-osx -i /Users/videopls/develop/ffmpeg/input.avi -codec:v h264 -codec:a aac -map 0 -f ssegment -segment_format mpegts -segment_list /Users/videopls/develop/ffmpeg/input.avi.m3u8 -segment_time 8 /Users/videopls/develop/ffmpeg/input.avi.%d.ts</p>
 <p>你想知道米的味道吗</p>
 <h2 id="2mp4转成m3u8及ts文件带加密">2.mp4转成m3u8及ts文件（带加密）</h2>
-<p>/Users/videopls/develop/ffmpeg/ffmpeg -i /Users/videopls/develop/ffmpeg/input.avi -f hls -hls_time 10 -hls_key_info_file /Users/videopls/develop/ffmpeg/enctest/enc.keyinfo -hls_playlist_type vod -hls_segment_filename /Users/videopls/develop/ffmpeg/encoutput/xrq111%d.ts /Users/videopls/develop/ffmpeg/encoutput/xrq2222.m3u8</p>
+<p>/Users/videopls/develop/ffmpeg/ffmpeg</p>
+<p>-i /Users/videopls/develop/ffmpeg/input.avi</p>
+<p>-f hls -hls_time 10</p>
+<p>-hls_key_info_file /Users/videopls/develop/ffmpeg/enctest/enc.keyinfo</p>
+<p>-hls_playlist_type vod</p>
+<p>-hls_segment_filename</p>
+<p>/Users/videopls/develop/ffmpeg/encoutput/xrq111%d.ts</p>
+<p>/Users/videopls/develop/ffmpeg/encoutput/xrq2222.m3u8</p>
 <p>用ffplay可以播放</p>
 <p>ffplay <a href="https://shengtu0328.github.io/posts/ffmpeg/xrq2222.m3u8" target="_blank" rel="noopener noreffer ">https://shengtu0328.github.io/posts/ffmpeg/xrq2222.m3u8</a></p>
 <p><a href="https://shengtu0328.github.io/posts/ffmpeg/xrq2222.m3u8" target="_blank" rel="noopener noreffer ">https://shengtu0328.github.io/posts/ffmpeg/xrq2222.m3u8</a></p>

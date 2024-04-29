@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/shengtu0328.github.io\/posts\/spring\/"
-        },"genre": "posts","wordcount":  1628 ,
+        },"genre": "posts","wordcount":  2207 ,
         "url": "https:\/\/shengtu0328.github.io\/posts\/spring\/","datePublished": "2022-10-12T17:55:52+08:00","dateModified": "2022-10-12T17:55:52+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -102,8 +102,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Spring</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-10-12">2022-10-12</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1628 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-10-12">2022-10-12</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2207 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -119,6 +119,7 @@
             <li><a href="#构造循环依赖">构造循环依赖</a></li>
           </ul>
         </li>
+        <li><a href="#springmvc">springmvc</a></li>
       </ul>
     </li>
   </ul>
@@ -552,6 +553,8 @@
 </span><span class="lnt">31
 </span><span class="lnt">32
 </span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">protected Object initializeBean(String beanName, Object bean, @Nullable RootBeanDefinition mbd) {
@@ -562,6 +565,8 @@
 </span></span><span class="line"><span class="cl">      }, getAccessControlContext());
 </span></span><span class="line"><span class="cl">   }
 </span></span><span class="line"><span class="cl">   else {
+</span></span><span class="line"><span class="cl">   
+</span></span><span class="line"><span class="cl">     // =============BeanNameAware,BeanClassLoaderAware,BeanFactoryAware方法================
 </span></span><span class="line"><span class="cl">      invokeAwareMethods(beanName, bean);
 </span></span><span class="line"><span class="cl">   }
 </span></span><span class="line"><span class="cl">
@@ -589,7 +594,32 @@
 </span></span><span class="line"><span class="cl">}
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="构造循环依赖">构造循环依赖</h4>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="applyBeanPostProcessorsBeforeInitialization.png"
+        data-srcset="applyBeanPostProcessorsBeforeInitialization.png, applyBeanPostProcessorsBeforeInitialization.png 1.5x, applyBeanPostProcessorsBeforeInitialization.png 2x"
+        data-sizes="auto"
+        alt="applyBeanPostProcessorsBeforeInitialization.png"
+        title="applyBeanPostProcessorsBeforeInitialization.png" /></p>
+<h4 id="构造循环依赖">构造循环依赖</h4>
+<h3 id="springmvc">springmvc</h3>
+<p>总: 使用了SpringMvc后，所有的请求都需要经过DispatcherServlet前端控制器，该类中提供了一个doDispatch方法，有关请求处理和结果响应的所有流程都在该方法中完成</p>
+<p>分：
+首先，借助于HandlerMapping处理器映射器得到处理器执行链，里面封装了HandlerMethod代表目标Controller的方法，同时还通过一个集合记录了要执行的拦截器
+接下来，会根据HandlerMethod获取对应的HandlerAdapter处理器适配器，里面封装了参数解析器以及结果处理器
+然后，执行拦截器的preHandle方法
+接下来是核心，通过HandlerAdapter处理器适配器执行目标Controller的方法，在这个过程中会通过参数解析器和结果处理器分别解析浏览器提交的数据以及处理Controller方法返回的结果
+然后，执行拦截器的postHandle方法，
+最后处理响应，在这个过程中如果有异常抛出，会执行异常的逻辑，这里还会执行全局异常处理器的逻辑，并通过视图解析器ViewResolver解析视图，再渲染视图，最后再执行拦截器的afterCompletion</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="springmvc.png"
+        data-srcset="springmvc.png, springmvc.png 1.5x, springmvc.png 2x"
+        data-sizes="auto"
+        alt="springmvc.png"
+        title="springmvc.png" /></p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">

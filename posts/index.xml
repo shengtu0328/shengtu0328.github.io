@@ -4,7 +4,7 @@
         <link>https://shengtu0328.github.io/posts/</link>
         <description>All Posts | ricky的网站</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1007@qq.com (ricky)</managingEditor>
-            <webMaster>1007@qq.com (ricky)</webMaster><lastBuildDate>Mon, 11 Mar 2024 19:56:45 &#43;0800</lastBuildDate><atom:link href="https://shengtu0328.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>1007@qq.com (ricky)</webMaster><lastBuildDate>Thu, 11 Apr 2024 15:18:11 &#43;0800</lastBuildDate><atom:link href="https://shengtu0328.github.io/posts/" rel="self" type="application/rss+xml" /><item>
     <title>线程池</title>
     <link>https://shengtu0328.github.io/posts/threadpool/</link>
     <pubDate>Thu, 01 Dec 2022 14:14:25 &#43;0800</pubDate>
@@ -35,6 +35,14 @@
     <author>ricky</author>
     <guid>https://shengtu0328.github.io/posts/english_writing/</guid>
     <description><![CDATA[Why i learned English I recently watched some interesting videos on bilibli which is about communicating with foreigners in English on website. The videos was so funny that it made me have the idea of relearning the skill of English language . You know，i recently started to practise my english from multiple aspects 。Literally,m]]></description>
+</item>
+<item>
+    <title>MyBatis</title>
+    <link>https://shengtu0328.github.io/posts/mybatis/</link>
+    <pubDate>Thu, 11 Apr 2024 15:18:11 &#43;0800</pubDate>
+    <author>ricky</author>
+    <guid>https://shengtu0328.github.io/posts/mybatis/</guid>
+    <description><![CDATA[MybatisAutoConfiguration 解析 xml文件 ![](SqlSessionFactoryBean .png) 在springboot启动阶段 ，在注册 mybatis的 mapperbean时， 是通过 一个实现了FactoryBean接口]]></description>
 </item>
 <item>
     <title>english_new_concept_english3</title>
@@ -75,14 +83,6 @@
     <author>ricky</author>
     <guid>https://shengtu0328.github.io/posts/english_grammar_non_predicate_verbs/</guid>
     <description><![CDATA[非谓语动词本质 不定式 不定式做名词 例二： 考研英语一2014年阅读第三篇：For example, the Long Now Foundation has as its flagship project/a mechanical clockthatis designed to still be marking time thousands of yearshence. 【分析】1. the Long Now Foundationhas as]]></description>
-</item>
-<item>
-    <title>CompletableFuture</title>
-    <link>https://shengtu0328.github.io/posts/completablefuture/</link>
-    <pubDate>Wed, 13 Dec 2023 08:28:26 &#43;0800</pubDate>
-    <author>ricky</author>
-    <guid>https://shengtu0328.github.io/posts/completablefuture/</guid>
-    <description><![CDATA[CompletableFuture和Future区别 Future 只有阻塞才能获取结果，即get方法 CompletableFuture 支持异步方法回调， 支持多任务编排 支持异常处理 创建异]]></description>
 </item>
 </channel>
 </rss>

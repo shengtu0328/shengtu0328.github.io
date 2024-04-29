@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/shengtu0328.github.io\/posts\/interview_questions\/"
-        },"genre": "posts","wordcount":  7029 ,
+        },"genre": "posts","wordcount":  7619 ,
         "url": "https:\/\/shengtu0328.github.io\/posts\/interview_questions\/","datePublished": "2023-08-03T09:32:04+08:00","dateModified": "2023-08-03T09:32:04+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -102,8 +102,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Interview_questions</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-08-03">2023-08-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;7029 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;15 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-08-03">2023-08-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;7619 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;16 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -601,9 +601,129 @@
 </li>
 </ol>
 <p><strong>JDK实现</strong></p>
-<ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">public class AopJdkProxyTest {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    /**
+</span></span><span class="line"><span class="cl">     * jdk的动态代理，只能针对接口代理
+</span></span><span class="line"><span class="cl">     * 总结：代理对象和目标对象是兄弟关系，都继承了Foo接口，代理对象类型不能强转成目标对象类型。
+</span></span><span class="line"><span class="cl">     *
+</span></span><span class="line"><span class="cl">     * jdk的代理类可以是final类型
+</span></span><span class="line"><span class="cl">     */
+</span></span><span class="line"><span class="cl">    @Test
+</span></span><span class="line"><span class="cl">    public void testJdkProxy() throws IOException {
+</span></span><span class="line"><span class="cl">        // 目标对象
+</span></span><span class="line"><span class="cl">        Target target = new Target();
+</span></span><span class="line"><span class="cl">        // 用来加载在运行期间动态生成的字节码
+</span></span><span class="line"><span class="cl">        ClassLoader loader = AopJdkProxyTest.class.getClassLoader();
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        // 参数1: 类加载器加载运行时期生成的字节码
+</span></span><span class="line"><span class="cl">        // 参数2: 代理类要实现哪个接口，是一个数组
+</span></span><span class="line"><span class="cl">        // 参数3：InvocationHandler类，具体的代理类方法的实现
+</span></span><span class="line"><span class="cl">        // 代理类是实现Foo接口的，所以可以返回接口类型
+</span></span><span class="line"><span class="cl">        Foo fooProxy = (Foo) Proxy.newProxyInstance(
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                loader,
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                new Class[]{Foo.class},
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                // 参数1: 代理对象自己
+</span></span><span class="line"><span class="cl">                // 参数2：正在执行的方法对象
+</span></span><span class="line"><span class="cl">                // 参数3：正在执行的方法参数
+</span></span><span class="line"><span class="cl">                (proxy, method, args) -&gt; {
+</span></span><span class="line"><span class="cl">                    System.out.println(&#34;before...&#34;);
+</span></span><span class="line"><span class="cl">                    //这个方法在哪个目标对象上被执行+参数 。反射调用
+</span></span><span class="line"><span class="cl">                    Object result = method.invoke(target, args);
+</span></span><span class="line"><span class="cl">                    System.out.println(&#34;after...&#34;);
+</span></span><span class="line"><span class="cl">                    return result;  // 让代理也返回目标方法执行的结果
+</span></span><span class="line"><span class="cl">                });
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        System.out.println(fooProxy.getClass());
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        fooProxy.foo();
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        System.in.read();
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">interface Foo {
+</span></span><span class="line"><span class="cl">    void foo();
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">@Slf4j
+</span></span><span class="line"><span class="cl">final class Target implements Foo {
+</span></span><span class="line"><span class="cl">    @Override
+</span></span><span class="line"><span class="cl">    public void foo() {
+</span></span><span class="line"><span class="cl">        log.debug(&#34;target foo&#34;);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol>
 <li>jdk的目标类可以是final类型</li>
-<li>jdk的动态代理，只能针对接口代理</li>
+<li>jdk的动态代理，只能针对接口代理，目标类必须实现接口</li>
 <li>jdk 代理类 和 目标类是 兄弟关系</li>
 <li>Object result = method.invoke(target, args); 反射方法调用</li>
 <li>原理是asm，在运行期间动态生成字节码，用java代码生成一个类，主要是有一个ClassWriter</li>
@@ -613,7 +733,7 @@
 <p><strong>cglib实现</strong></p>
 <ol>
 <li>
-<p>cglib的目标类不可以是final类型(如果是final 会报错)</p>
+<p>cglib的目标类不可以是final类型(如果是final 会报错)，方法也不能用final修饰</p>
 </li>
 <li>
 <p>cglib 代理类是子类型 ，目标类是父类型</p>
@@ -694,7 +814,12 @@ return methodProxy.invoke(target, args);  //无反射调用，需要Target类  �
 </span></span><span class="line"><span class="cl">        proxy.save(2L);
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="代理创建时机">代理创建时机</h3>
+</div><p><strong>spring选择代理</strong></p>
+<p>proxyTargetclass默认false</p>
+<p>a,proxyTargetclass=false,月标实现∫接口，用jdk实现
+b.proxyTargetClass=false,目标没有实现接I,用cglib实现
+c.proxyTargetclass=trUe,总是使用cglib实跑</p>
+<h3 id="代理创建时机">代理创建时机</h3>
 <h4 id="代码参考">代码参考</h4>
 <p><strong>org.springframework.aop.framework.autoproxy.A17_1</strong></p>
 <h4 id="收获">收获💡</h4>

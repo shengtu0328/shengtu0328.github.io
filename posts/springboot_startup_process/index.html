@@ -28,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/shengtu0328.github.io\/posts\/springboot_startup_process\/"
-        },"genre": "posts","wordcount":  2282 ,
+        },"genre": "posts","wordcount":  2412 ,
         "url": "https:\/\/shengtu0328.github.io\/posts\/springboot_startup_process\/","datePublished": "2023-05-24T10:38:27+08:00","dateModified": "2023-05-24T10:38:27+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -102,7 +102,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Springboot启动流程</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-05-24">2023-05-24</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2282 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-05-24">2023-05-24</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2412 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -182,14 +182,14 @@
 <p>加载当前系统的Environment的一些变量</p>
 </li>
 <li>
-<p>创建BeanDefinitionLoader</p>
+<p>ApplicationContextInitializer实现类方法调用</p>
 </li>
 <li>
-<p>load(context, sources.toArray(new Object[0]));</p>
-</li>
-</ol>
+<p>调用load(context, sources.toArray(new Object[0]));创建BeanDefinitionLoader</p>
 <p>主要就是 注册 <strong>启动类</strong> 的 <strong>BeanDefinition</strong>   <strong>用BeanDefinitionLoader注册</strong></p>
 <p><strong>BeanDefinition</strong>   就是一个map和一个list</p>
+</li>
+</ol>
 </li>
 </ol>
 <div class="highlight"><div class="chroma">
@@ -216,12 +216,15 @@
 <p>获取BeanFactory</p>
 </li>
 <li>
+<p>prepareBeanFactory(beanFactory);</p>
+</li>
+<li>
 <p>postProcessBeanFactory(beanFactory);</p>
 <p>对BeanFactory set属性</p>
 </li>
 <li>
 <p><strong>invokeBeanFactoryPostProcessors（）</strong></p>
-<p>也算是<strong>springboot 自动装配</strong>的起点</p>
+<p><strong>实例化BeanFactoryPostProcessors。  扫描需要放入容器中的bean，放入bd里</strong>。也算是<strong>springboot 自动装配</strong>的起点</p>
 <ol>
 <li>
 <p>beanFactory.getBeanNamesForType(BeanDefinitionRegistryPostProcessor.class, true, false)</p>
@@ -234,6 +237,15 @@
 </li>
 <li>
 <p>invokeBeanDefinitionRegistryPostProcessors(currentRegistryProcessors, registry, beanFactory.getApplicationStartup());</p>
+<p><strong>先解析 启动类包下的 再解析自动装配的 类</strong></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="deferredImportSelectorHandler.process%28%29.png"
+        data-srcset="deferredImportSelectorHandler.process%28%29.png, deferredImportSelectorHandler.process%28%29.png 1.5x, deferredImportSelectorHandler.process%28%29.png 2x"
+        data-sizes="auto"
+        alt="deferredImportSelectorHandler.process().png"
+        title="img" /></p>
 <p><strong>概括一下 就是  在ConfigurationClassPostProcessor 类中用   ConfigurationClassParser 解析启动类</strong></p>
 <p>3.1 <strong>ConfigurationClassPostProcessor</strong>.postProcessBeanDefinitionRegistry()</p>
 <p>3.1.1 ConfigurationClassUtils.checkConfigurationClassCandidate(beanDef, this.metadataReaderFactory))</p>

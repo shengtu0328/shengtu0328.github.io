@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>MyBatis - ricky的网站</title><meta name="Description" content="The best time to plant a tree was 10 years ago, the second is now"><meta property="og:title" content="MyBatis" />
+<meta property="og:description" content="MybatisAutoConfiguration 解析 xml文件 ![](SqlSessionFactoryBean .png) 在springboot启动阶段 ，在注册 mybatis的 mapperbean时， 是通过 一个实现了FactoryBean接口" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://shengtu0328.github.io/posts/mybatis/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-04-11T15:18:11+08:00" />
+<meta property="article:modified_time" content="2024-04-11T15:18:11+08:00" /><meta property="og:site_name" content="我的网站" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="MyBatis"/>
+<meta name="twitter:description" content="MybatisAutoConfiguration 解析 xml文件 ![](SqlSessionFactoryBean .png) 在springboot启动阶段 ，在注册 mybatis的 mapperbean时， 是通过 一个实现了FactoryBean接口"/>
+<meta name="application-name" content="我的网站">
+<meta name="apple-mobile-web-app-title" content="我的网站"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://shengtu0328.github.io/posts/mybatis/" /><link rel="prev" href="https://shengtu0328.github.io/posts/english_new_concept_english3/" /><link rel="next" href="https://shengtu0328.github.io/posts/english_writing/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "MyBatis",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/shengtu0328.github.io\/posts\/mybatis\/"
+        },"genre": "posts","wordcount":  757 ,
+        "url": "https:\/\/shengtu0328.github.io\/posts\/mybatis\/","datePublished": "2024-04-11T15:18:11+08:00","dateModified": "2024-04-11T15:18:11+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "ricky"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="ricky的网站">Ricky’s blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="ricky的网站">Ricky’s blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">MyBatis</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-04-11">2024-04-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;757 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
+            </div><div class="content" id="content"><p>MybatisAutoConfiguration</p>
+<p>解析 xml文件</p>
+<p>![](SqlSessionFactoryBean .png)</p>
+<p>在springboot启动阶段 ，在注册 mybatis的 mapperbean时，  是通过 一个实现了FactoryBean接口 的 MapperFactoryBean 调用了期中的 xxx方法</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="factorygetObject.png"
+        data-srcset="factorygetObject.png, factorygetObject.png 1.5x, factorygetObject.png 2x"
+        data-sizes="auto"
+        alt="factorygetObject.png"
+        title="factorygetObject.png" /></p>
+<p>然后再MapperProxyFactory 通过jdk的动态代理 创建动态代理的 dao代理实现类</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">public class MapperProxyFactory&lt;T&gt; {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  private final Class&lt;T&gt; mapperInterface;
+</span></span><span class="line"><span class="cl">  private final Map&lt;Method, MapperMethod&gt; methodCache = new ConcurrentHashMap&lt;&gt;();
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  public MapperProxyFactory(Class&lt;T&gt; mapperInterface) {
+</span></span><span class="line"><span class="cl">    this.mapperInterface = mapperInterface;
+</span></span><span class="line"><span class="cl">  }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  public Class&lt;T&gt; getMapperInterface() {
+</span></span><span class="line"><span class="cl">    return mapperInterface;
+</span></span><span class="line"><span class="cl">  }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  public Map&lt;Method, MapperMethod&gt; getMethodCache() {
+</span></span><span class="line"><span class="cl">    return methodCache;
+</span></span><span class="line"><span class="cl">  }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  @SuppressWarnings(&#34;unchecked&#34;)
+</span></span><span class="line"><span class="cl">  protected T newInstance(MapperProxy&lt;T&gt; mapperProxy) {
+</span></span><span class="line"><span class="cl">    //=============================jdk的动态代理实现=============================
+</span></span><span class="line"><span class="cl">    return (T) Proxy.newProxyInstance(mapperInterface.getClassLoader(), new Class[] { mapperInterface }, mapperProxy);
+</span></span><span class="line"><span class="cl">  }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  public T newInstance(SqlSession sqlSession) {
+</span></span><span class="line"><span class="cl">    final MapperProxy&lt;T&gt; mapperProxy = new MapperProxy&lt;&gt;(sqlSession, mapperInterface, methodCache);
+</span></span><span class="line"><span class="cl">    return newInstance(mapperProxy);
+</span></span><span class="line"><span class="cl">  }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="mappermethodexecute.png"
+        data-srcset="mappermethodexecute.png, mappermethodexecute.png 1.5x, mappermethodexecute.png 2x"
+        data-sizes="auto"
+        alt="mappermethodexecute.png"
+        title="mappermethodexecute.png" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="sqlSessionProxy.png"
+        data-srcset="sqlSessionProxy.png, sqlSessionProxy.png 1.5x, sqlSessionProxy.png 2x"
+        data-sizes="auto"
+        alt="sqlSessionProxy.png"
+        title="sqlSessionProxy.png" /></p>
+<p>SqlSessionTemplate 里sqlSessionProxy也是个代理类</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">public SqlSessionTemplate(SqlSessionFactory sqlSessionFactory, ExecutorType executorType,
+</span></span><span class="line"><span class="cl">    PersistenceExceptionTranslator exceptionTranslator) {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  notNull(sqlSessionFactory, &#34;Property &#39;sqlSessionFactory&#39; is required&#34;);
+</span></span><span class="line"><span class="cl">  notNull(executorType, &#34;Property &#39;executorType&#39; is required&#34;);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  this.sqlSessionFactory = sqlSessionFactory;
+</span></span><span class="line"><span class="cl">  this.executorType = executorType;
+</span></span><span class="line"><span class="cl">  this.exceptionTranslator = exceptionTranslator;
+</span></span><span class="line"><span class="cl">  this.sqlSessionProxy = (SqlSession) newProxyInstance(
+</span></span><span class="line"><span class="cl">      SqlSessionFactory.class.getClassLoader(),
+</span></span><span class="line"><span class="cl">      new Class[] { SqlSession.class },
+</span></span><span class="line"><span class="cl">      new SqlSessionInterceptor());
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>DefaultSqlSession里 用到了 executor</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">@Override
+</span></span><span class="line"><span class="cl">public &lt;E&gt; List&lt;E&gt; selectList(String statement, Object parameter, RowBounds rowBounds) {
+</span></span><span class="line"><span class="cl">  try {
+</span></span><span class="line"><span class="cl">    MappedStatement ms = configuration.getMappedStatement(statement);
+</span></span><span class="line"><span class="cl">    return executor.query(ms, wrapCollection(parameter), rowBounds, Executor.NO_RESULT_HANDLER);
+</span></span><span class="line"><span class="cl">  } catch (Exception e) {
+</span></span><span class="line"><span class="cl">    throw ExceptionFactory.wrapException(&#34;Error querying database.  Cause: &#34; + e, e);
+</span></span><span class="line"><span class="cl">  } finally {
+</span></span><span class="line"><span class="cl">    ErrorContext.instance().reset();
+</span></span><span class="line"><span class="cl">  }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>调用了 SimpleExecutor</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">@SuppressWarnings(&#34;unchecked&#34;)
+</span></span><span class="line"><span class="cl">@Override
+</span></span><span class="line"><span class="cl">public &lt;E&gt; List&lt;E&gt; query(MappedStatement ms, Object parameter, RowBounds rowBounds, ResultHandler resultHandler, CacheKey key, BoundSql boundSql) throws SQLException {
+</span></span><span class="line"><span class="cl">  ErrorContext.instance().resource(ms.getResource()).activity(&#34;executing a query&#34;).object(ms.getId());
+</span></span><span class="line"><span class="cl">  if (closed) {
+</span></span><span class="line"><span class="cl">    throw new ExecutorException(&#34;Executor was closed.&#34;);
+</span></span><span class="line"><span class="cl">  }
+</span></span><span class="line"><span class="cl">  if (queryStack == 0 &amp;&amp; ms.isFlushCacheRequired()) {
+</span></span><span class="line"><span class="cl">    clearLocalCache();
+</span></span><span class="line"><span class="cl">  }
+</span></span><span class="line"><span class="cl">  List&lt;E&gt; list;
+</span></span><span class="line"><span class="cl">  try {
+</span></span><span class="line"><span class="cl">    queryStack++;
+</span></span><span class="line"><span class="cl">    list = resultHandler == null ? (List&lt;E&gt;) localCache.getObject(key) : null;
+</span></span><span class="line"><span class="cl">    if (list != null) {
+</span></span><span class="line"><span class="cl">      handleLocallyCachedOutputParameters(ms, key, parameter, boundSql);
+</span></span><span class="line"><span class="cl">    } else {
+</span></span><span class="line"><span class="cl">      //=================================================查询数据库=================================================、
+</span></span><span class="line"><span class="cl">      list = queryFromDatabase(ms, parameter, rowBounds, resultHandler, key, boundSql);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">  } finally {
+</span></span><span class="line"><span class="cl">    queryStack--;
+</span></span><span class="line"><span class="cl">  }
+</span></span><span class="line"><span class="cl">  if (queryStack == 0) {
+</span></span><span class="line"><span class="cl">    for (DeferredLoad deferredLoad : deferredLoads) {
+</span></span><span class="line"><span class="cl">      deferredLoad.load();
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    // issue #601
+</span></span><span class="line"><span class="cl">    deferredLoads.clear();
+</span></span><span class="line"><span class="cl">    if (configuration.getLocalCacheScope() == LocalCacheScope.STATEMENT) {
+</span></span><span class="line"><span class="cl">      // issue #482
+</span></span><span class="line"><span class="cl">      clearLocalCache();
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">  }
+</span></span><span class="line"><span class="cl">  return list;
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>最终会调用 PreparedStatementHandler ，使用jdbc进行数据库查询</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">@Override
+</span></span><span class="line"><span class="cl">public &lt;E&gt; List&lt;E&gt; query(Statement statement, ResultHandler resultHandler) throws SQLException {
+</span></span><span class="line"><span class="cl">  PreparedStatement ps = (PreparedStatement) statement;
+</span></span><span class="line"><span class="cl">  ps.execute();
+</span></span><span class="line"><span class="cl">  return resultSetHandler.handleResultSets(ps);
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2024-04-11</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://shengtu0328.github.io/posts/mybatis/" data-title="MyBatis"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://shengtu0328.github.io/posts/mybatis/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://shengtu0328.github.io/posts/mybatis/" data-title="MyBatis"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://shengtu0328.github.io/posts/mybatis/" data-title="MyBatis"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://shengtu0328.github.io/posts/mybatis/" data-title="MyBatis"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/english_new_concept_english3/" class="prev" rel="prev" title="english_new_concept_english3"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>english_new_concept_english3</a>
+            <a href="/posts/english_writing/" class="next" rel="next" title="Learing English is not a rocket science.">Learing English is not a rocket science.<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.105.0-DEV">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ricky</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
