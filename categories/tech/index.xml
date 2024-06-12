@@ -1,8 +1,8 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>tech - Category - ricky的网站</title>
+        <title>Tech - Category - ricky的网站</title>
         <link>https://shengtu0328.github.io/categories/tech/</link>
-        <description>tech - Category - ricky的网站</description>
+        <description>Tech - Category - ricky的网站</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1007@qq.com (ricky)</managingEditor>
             <webMaster>1007@qq.com (ricky)</webMaster><lastBuildDate>Tue, 11 Oct 2022 18:23:30 &#43;0800</lastBuildDate><atom:link href="https://shengtu0328.github.io/categories/tech/" rel="self" type="application/rss+xml" /><item>
     <title>JVM学习</title>

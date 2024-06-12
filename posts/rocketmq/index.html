@@ -4,22 +4,23 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>RocketMQ - ricky的网站</title><meta name="Description" content="The best time to plant a tree was 10 years ago, the second is now"><meta property="og:title" content="RocketMQ" />
-<meta property="og:description" content="RoctetMQ基本架构 几种MQ对比 Kafka：追求高吞吐量，一开始的目的就是用于日志收集和传输，适合产生大量数据的互联网服务的数据收集业务" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://shengtu0328.github.io/posts/rocketmq/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2023-01-17T17:21:36+08:00" />
-<meta property="article:modified_time" content="2023-01-17T17:21:36+08:00" /><meta property="og:site_name" content="我的网站" />
+        <title>RocketMQ - ricky的网站</title><meta name="Description" content="The best time to plant a tree was 10 years ago, the second is now"><meta property="og:url" content="https://shengtu0328.github.io/posts/rocketmq/">
+  <meta property="og:site_name" content="ricky的网站">
+  <meta property="og:title" content="RocketMQ">
+  <meta property="og:description" content="RoctetMQ基本架构 几种MQ对比 Kafka：追求高吞吐量，一开始的目的就是用于日志收集和传输，适合产生大量数据的互联网服务的数据收集业务">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2023-01-17T17:21:36+08:00">
+    <meta property="article:modified_time" content="2023-01-17T17:21:36+08:00">
 
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="RocketMQ"/>
-<meta name="twitter:description" content="RoctetMQ基本架构 几种MQ对比 Kafka：追求高吞吐量，一开始的目的就是用于日志收集和传输，适合产生大量数据的互联网服务的数据收集业务"/>
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="RocketMQ">
+  <meta name="twitter:description" content="RoctetMQ基本架构 几种MQ对比 Kafka：追求高吞吐量，一开始的目的就是用于日志收集和传输，适合产生大量数据的互联网服务的数据收集业务">
 <meta name="application-name" content="我的网站">
 <meta name="apple-mobile-web-app-title" content="我的网站"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://shengtu0328.github.io/posts/rocketmq/" /><link rel="prev" href="https://shengtu0328.github.io/posts/redis/" /><link rel="next" href="https://shengtu0328.github.io/posts/english_grammar_non_predicate_verb/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://shengtu0328.github.io/posts/rocketmq/" /><link rel="prev" href="https://shengtu0328.github.io/posts/redis/" /><link rel="next" href="https://shengtu0328.github.io/posts/english_grammar_non_predicate_verb/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -58,7 +59,8 @@
                         </span>
                     </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
                     <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
-                </a></div>
+                </a>
+            </div>
         </div>
     </div>
 </header><header class="mobile" id="header-mobile">
@@ -101,7 +103,8 @@
             <h2 class="toc-title">Contents</h2>
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">RocketMQ</h1><div class="post-meta">
-            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span></div>
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a>
+</span></div>
             <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-01-17">2023-01-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;4276 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;9 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
@@ -194,11 +197,11 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="Kafka%e9%ab%98%e5%8f%af%e7%94%a8.png"
-        data-srcset="Kafka%e9%ab%98%e5%8f%af%e7%94%a8.png, Kafka%e9%ab%98%e5%8f%af%e7%94%a8.png 1.5x, Kafka%e9%ab%98%e5%8f%af%e7%94%a8.png 2x"
+        data-src="/posts/rocketmq/posts/rocketmq/Kafka%E9%AB%98%E5%8F%AF%E7%94%A8.png"
+        data-srcset="/posts/rocketmq/posts/rocketmq/Kafka%E9%AB%98%E5%8F%AF%E7%94%A8.png, /posts/rocketmq/posts/rocketmq/Kafka%E9%AB%98%E5%8F%AF%E7%94%A8.png 1.5x, /posts/rocketmq/posts/rocketmq/Kafka%E9%AB%98%E5%8F%AF%E7%94%A8.png 2x"
         data-sizes="auto"
-        alt="Kafka高可用.png"
-        title="Kafka高可用.png" /></p>
+        alt="/posts/rocketmq/posts/rocketmq/Kafka%E9%AB%98%E5%8F%AF%E7%94%A8.png"
+        title="/posts/rocketmq/posts/rocketmq/Kafka%E9%AB%98%E5%8F%AF%E7%94%A8.png" width="876" height="419" /></p>
 <h4 id="rabbitmq">rabbitmq</h4>
 <p>erlang</p>
 <p>吞吐量比较低</p>
@@ -215,11 +218,11 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="Kafka_Partition.png"
-        data-srcset="Kafka_Partition.png, Kafka_Partition.png 1.5x, Kafka_Partition.png 2x"
+        data-src="/posts/rocketmq/posts/rocketmq/Kafka_Partition.png"
+        data-srcset="/posts/rocketmq/posts/rocketmq/Kafka_Partition.png, /posts/rocketmq/posts/rocketmq/Kafka_Partition.png 1.5x, /posts/rocketmq/posts/rocketmq/Kafka_Partition.png 2x"
         data-sizes="auto"
-        alt="Kafka_Partition.png"
-        title="Kafka_Partition.png" /></p>
+        alt="/posts/rocketmq/posts/rocketmq/Kafka_Partition.png"
+        title="/posts/rocketmq/posts/rocketmq/Kafka_Partition.png" width="1020" height="752" /></p>
 <h3 id="message">Message</h3>
 <p>messageId 自动生成，唯一</p>
 <p>messagekey 手动指定的业务key，最好也设置成唯一</p>
@@ -251,11 +254,11 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="transactionMessage.png"
-        data-srcset="transactionMessage.png, transactionMessage.png 1.5x, transactionMessage.png 2x"
+        data-src="/posts/rocketmq/posts/rocketmq/transactionMessage.png"
+        data-srcset="/posts/rocketmq/posts/rocketmq/transactionMessage.png, /posts/rocketmq/posts/rocketmq/transactionMessage.png 1.5x, /posts/rocketmq/posts/rocketmq/transactionMessage.png 2x"
         data-sizes="auto"
-        alt="transactionMessage.png"
-        title="transactionMessage.png" /></p>
+        alt="/posts/rocketmq/posts/rocketmq/transactionMessage.png"
+        title="/posts/rocketmq/posts/rocketmq/transactionMessage.png" width="1472" height="670" /></p>
 <h3 id="producer">Producer</h3>
 <h3 id="consumer">Consumer</h3>
 <p>消费者的监听 默认要实现 MessageListenerConcurrently接口</p>
@@ -291,7 +294,8 @@ NOTICE		benchmark	conf</p>
 <p>#修改rocketmq配置文件
 #mkdir store</p>
 <h3 id="rocketmq-dashboard控制台">rocketmq-dashboard(控制台)</h3>
-<p><a href="https://github.com/apache/rocketmq-dashboard" target="_blank" rel="noopener noreffer ">https://github.com/apache/rocketmq-dashboard</a></p>
+<p><a href="https://github.com/apache/rocketmq-dashboard" target="_blank" rel="noopener noreffer">https://github.com/apache/rocketmq-dashboard</a>
+</p>
 <h3 id="消息的存储结构">消息的存储结构</h3>
 <p><img
         class="lazyload"
@@ -330,11 +334,11 @@ NOTICE		benchmark	conf</p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="ByteBuffer.png"
-        data-srcset="ByteBuffer.png, ByteBuffer.png 1.5x, ByteBuffer.png 2x"
+        data-src="/posts/rocketmq/posts/rocketmq/ByteBuffer.png"
+        data-srcset="/posts/rocketmq/posts/rocketmq/ByteBuffer.png, /posts/rocketmq/posts/rocketmq/ByteBuffer.png 1.5x, /posts/rocketmq/posts/rocketmq/ByteBuffer.png 2x"
         data-sizes="auto"
-        alt="ByteBuffer.png"
-        title="ByteBuffer.png" /></p>
+        alt="/posts/rocketmq/posts/rocketmq/ByteBuffer.png"
+        title="/posts/rocketmq/posts/rocketmq/ByteBuffer.png" width="511" height="248" /></p>
 <ul>
 <li>
 <p>Java 本身并不具备 IO 读写能力，因此 read 方法调用后，要从 Java 程序的<strong>用户态切换至内核态</strong>，去调用操作系统（Kernel）的读能力，将数据读入<strong>内核缓冲区</strong>。这期间用户线程阻塞，操作系统使用 DMA（Direct Memory Access）来实现文件读，其间也不会使用 CPU</p>
@@ -347,16 +351,17 @@ NOTICE		benchmark	conf</p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="DirectByteBuffer.png"
-        data-srcset="DirectByteBuffer.png, DirectByteBuffer.png 1.5x, DirectByteBuffer.png 2x"
+        data-src="/posts/rocketmq/posts/rocketmq/DirectByteBuffer.png"
+        data-srcset="/posts/rocketmq/posts/rocketmq/DirectByteBuffer.png, /posts/rocketmq/posts/rocketmq/DirectByteBuffer.png 1.5x, /posts/rocketmq/posts/rocketmq/DirectByteBuffer.png 2x"
         data-sizes="auto"
-        alt="DirectByteBuffer.png"
-        title="DirectByteBuffer.png" /></p>
+        alt="/posts/rocketmq/posts/rocketmq/DirectByteBuffer.png"
+        title="/posts/rocketmq/posts/rocketmq/DirectByteBuffer.png" width="485" height="269" /></p>
 </li>
 </ul>
 <p>大部分步骤与优化前相同，唯有一点：<strong>Java 可以使用 DirectByteBuffer 将堆外内存映射到 JVM 内存中来直接访问使用</strong></p>
 <h3 id="同步刷盘异步刷盘同步复制异步复制">同步刷盘，异步刷盘，同步复制，异步复制</h3>
-<p><a href="https://www.cnblogs.com/toUpdating/p/10021372.html" target="_blank" rel="noopener noreffer ">https://www.cnblogs.com/toUpdating/p/10021372.html</a></p>
+<p><a href="https://www.cnblogs.com/toUpdating/p/10021372.html" target="_blank" rel="noopener noreffer">https://www.cnblogs.com/toUpdating/p/10021372.html</a>
+</p>
 <p>通常情况下，应该把Master和Slave设置成ASYNC_FLUSH的刷盘方式，</p>
 <p>主从之间配置成SYNC_MASTER的复制方式，这样即使有一台机器出故障，仍然可以保证数据不丢。</p>
 <p><strong>也就是推荐 同步双写，异步刷盘。</strong></p>
@@ -397,7 +402,7 @@ NOTICE		benchmark	conf</p>
         <div class="post-info-line">
             <div class="post-info-md"></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://shengtu0328.github.io/posts/rocketmq/" data-title="RocketMQ"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://shengtu0328.github.io/posts/rocketmq/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://shengtu0328.github.io/posts/rocketmq/" data-title="RocketMQ"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://shengtu0328.github.io/posts/rocketmq/" data-title="RocketMQ"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://shengtu0328.github.io/posts/rocketmq/" data-title="RocketMQ"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://shengtu0328.github.io/posts/rocketmq/" data-title="RocketMQ"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://shengtu0328.github.io/posts/rocketmq/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://shengtu0328.github.io/posts/rocketmq/" data-title="RocketMQ"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://shengtu0328.github.io/posts/rocketmq/" data-title="RocketMQ"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@6.20.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://shengtu0328.github.io/posts/rocketmq/" data-title="RocketMQ"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
             </div>
         </div>
     </div>
@@ -414,7 +419,7 @@ NOTICE		benchmark	conf</p>
 </div>
 </article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.105.0-DEV">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.127.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
                 </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ricky</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>
@@ -424,5 +429,5 @@ NOTICE		benchmark	conf</p>
             </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
                 <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
             </a>
-        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.1/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
 </html>

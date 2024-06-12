@@ -4,22 +4,23 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>Redisson - ricky的网站</title><meta name="Description" content="The best time to plant a tree was 10 years ago, the second is now"><meta property="og:title" content="Redisson" />
-<meta property="og:description" content="Redis分布式锁（悲观锁） 假设需求是商品下单，并且一人只能买一单。 mysql update行锁可以限制操作单张库存中表库存字段不超卖，但这只适用于单" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://shengtu0328.github.io/posts/redisson/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2022-12-30T10:09:27+08:00" />
-<meta property="article:modified_time" content="2022-12-30T10:09:27+08:00" /><meta property="og:site_name" content="我的网站" />
+        <title>Redisson - ricky的网站</title><meta name="Description" content="The best time to plant a tree was 10 years ago, the second is now"><meta property="og:url" content="https://shengtu0328.github.io/posts/redisson/">
+  <meta property="og:site_name" content="ricky的网站">
+  <meta property="og:title" content="Redisson">
+  <meta property="og:description" content="Redis分布式锁（悲观锁） 假设需求是商品下单，并且一人只能买一单。 mysql update行锁可以限制操作单张库存中表库存字段不超卖，但这只适用于单">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2022-12-30T10:09:27+08:00">
+    <meta property="article:modified_time" content="2022-12-30T10:09:27+08:00">
 
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Redisson"/>
-<meta name="twitter:description" content="Redis分布式锁（悲观锁） 假设需求是商品下单，并且一人只能买一单。 mysql update行锁可以限制操作单张库存中表库存字段不超卖，但这只适用于单"/>
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Redisson">
+  <meta name="twitter:description" content="Redis分布式锁（悲观锁） 假设需求是商品下单，并且一人只能买一单。 mysql update行锁可以限制操作单张库存中表库存字段不超卖，但这只适用于单">
 <meta name="application-name" content="我的网站">
 <meta name="apple-mobile-web-app-title" content="我的网站"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://shengtu0328.github.io/posts/redisson/" /><link rel="prev" href="https://shengtu0328.github.io/posts/juc/" /><link rel="next" href="https://shengtu0328.github.io/posts/session/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://shengtu0328.github.io/posts/redisson/" /><link rel="prev" href="https://shengtu0328.github.io/posts/juc/" /><link rel="next" href="https://shengtu0328.github.io/posts/session/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -58,7 +59,8 @@
                         </span>
                     </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
                     <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
-                </a></div>
+                </a>
+            </div>
         </div>
     </div>
 </header><header class="mobile" id="header-mobile">
@@ -101,7 +103,8 @@
             <h2 class="toc-title">Contents</h2>
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Redisson</h1><div class="post-meta">
-            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span></div>
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a>
+</span></div>
             <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-12-30">2022-12-30</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3704 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;8 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
@@ -338,11 +341,11 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="unlockByAnotherThread.png"
-        data-srcset="unlockByAnotherThread.png, unlockByAnotherThread.png 1.5x, unlockByAnotherThread.png 2x"
+        data-src="/posts/redisson/unlockByAnotherThread.png"
+        data-srcset="/posts/redisson/unlockByAnotherThread.png, /posts/redisson/unlockByAnotherThread.png 1.5x, /posts/redisson/unlockByAnotherThread.png 2x"
         data-sizes="auto"
-        alt="unlockByAnotherThread.png"
-        title="unlockByAnotherThread.png" /></p>
+        alt="/posts/redisson/unlockByAnotherThread.png"
+        title="/posts/redisson/unlockByAnotherThread.png" width="1582" height="670" /></p>
 <p>为了解决有可能产生的 锁 被非当前线程释放的问题，</p>
 <p>#SimpleRedisLockStage2.class</p>
 <div class="highlight"><div class="chroma">
@@ -425,11 +428,11 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="unlockBlock.png"
-        data-srcset="unlockBlock.png, unlockBlock.png 1.5x, unlockBlock.png 2x"
+        data-src="/posts/redisson/unlockBlock.png"
+        data-srcset="/posts/redisson/unlockBlock.png, /posts/redisson/unlockBlock.png 1.5x, /posts/redisson/unlockBlock.png 2x"
         data-sizes="auto"
-        alt="unlockBlock.png"
-        title="unlockBlock.png" /></p>
+        alt="/posts/redisson/unlockBlock.png"
+        title="/posts/redisson/unlockBlock.png" width="1642" height="676" /></p>
 <p>因为判断锁是不是当前线程1自己的 和 释放锁 不是在一个原子性操作里，在释放锁前，如果jvm发生GC STW，导致锁过期，从而让线程2由获得了锁。但线程1阻塞结束后直接 进行释放锁操作，导致线程2执行到一半锁却被释放。导致其他线程获得锁与线程2并行执行。</p>
 <p>但实际上线程1的事物已经提交了才会释放锁，所以在本次一人一单的场景中，线程2包括其他线程获取到锁之后，会进行校验，能够保持正确逻辑？但是只要出现并行 就有可能影响？</p>
 <p>解决办法：使用lua 整合redis多条命令为一个原子性操作。即判断锁+释放锁 整合为一条命令</p>
@@ -437,11 +440,11 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="lua.png"
-        data-srcset="lua.png, lua.png 1.5x, lua.png 2x"
+        data-src="/posts/redisson/lua.png"
+        data-srcset="/posts/redisson/lua.png, /posts/redisson/lua.png 1.5x, /posts/redisson/lua.png 2x"
         data-sizes="auto"
-        alt="lua.png"
-        title="lua.png" /></p>
+        alt="/posts/redisson/lua.png"
+        title="/posts/redisson/lua.png" width="1110" height="148" /></p>
 <p>#SimpleRedisLockStage3.class</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -496,68 +499,69 @@
 </span><span class="lnt">49
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">import cn.hutool.core.lang.UUID;
-</span></span><span class="line"><span class="cl">import org.springframework.core.io.ClassPathResource;
-</span></span><span class="line"><span class="cl">import org.springframework.data.redis.core.StringRedisTemplate;
-</span></span><span class="line"><span class="cl">import org.springframework.data.redis.core.script.DefaultRedisScript;
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">import</span> <span class="n">cn</span><span class="o">.</span><span class="n">hutool</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">lang</span><span class="o">.</span><span class="n">UUID</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="n">org</span><span class="o">.</span><span class="n">springframework</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">ClassPathResource</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="n">org</span><span class="o">.</span><span class="n">springframework</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">redis</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">StringRedisTemplate</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="n">org</span><span class="o">.</span><span class="n">springframework</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">redis</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">script</span><span class="o">.</span><span class="n">DefaultRedisScript</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">import java.util.Collections;
-</span></span><span class="line"><span class="cl">import java.util.concurrent.TimeUnit;
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="n">java</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">Collections</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="n">java</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">concurrent</span><span class="o">.</span><span class="n">TimeUnit</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">public class SimpleRedisLockStage3 implements ILock {
+</span></span><span class="line"><span class="cl"><span class="n">public</span> <span class="k">class</span> <span class="n">SimpleRedisLockStage3</span> <span class="n">implements</span> <span class="n">ILock</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    private String name;
-</span></span><span class="line"><span class="cl">    private StringRedisTemplate stringRedisTemplate;
+</span></span><span class="line"><span class="cl">    <span class="n">private</span> <span class="ne">String</span> <span class="n">name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">private</span> <span class="n">StringRedisTemplate</span> <span class="n">stringRedisTemplate</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    public SimpleRedisLockStage3(String name, StringRedisTemplate stringRedisTemplate) {
-</span></span><span class="line"><span class="cl">        this.name = name;
-</span></span><span class="line"><span class="cl">        this.stringRedisTemplate = stringRedisTemplate;
-</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    <span class="n">public</span> <span class="n">SimpleRedisLockStage3</span><span class="p">(</span><span class="ne">String</span> <span class="n">name</span><span class="p">,</span> <span class="n">StringRedisTemplate</span> <span class="n">stringRedisTemplate</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">this</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">this</span><span class="o">.</span><span class="n">stringRedisTemplate</span> <span class="o">=</span> <span class="n">stringRedisTemplate</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    private static final String KEY_PREFIX = &#34;lock:&#34;;
-</span></span><span class="line"><span class="cl">    private static final String ID_PREFIX = UUID.randomUUID().toString(true) + &#34;-&#34;;
-</span></span><span class="line"><span class="cl">    private static final DefaultRedisScript&lt;Long&gt; UNLOCK_SCRIPT;
-</span></span><span class="line"><span class="cl">    static {
-</span></span><span class="line"><span class="cl">        UNLOCK_SCRIPT = new DefaultRedisScript&lt;&gt;();
-</span></span><span class="line"><span class="cl">        UNLOCK_SCRIPT.setLocation(new ClassPathResource(&#34;unlock.lua&#34;));
-</span></span><span class="line"><span class="cl">        UNLOCK_SCRIPT.setResultType(Long.class);
-</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    <span class="n">private</span> <span class="k">static</span> <span class="n">final</span> <span class="ne">String</span> <span class="n">KEY_PREFIX</span> <span class="o">=</span> <span class="s2">&#34;lock:&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">private</span> <span class="k">static</span> <span class="n">final</span> <span class="ne">String</span> <span class="n">ID_PREFIX</span> <span class="o">=</span> <span class="n">UUID</span><span class="o">.</span><span class="n">randomUUID</span><span class="p">()</span><span class="o">.</span><span class="n">toString</span><span class="p">(</span><span class="bp">true</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&#34;-&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">private</span> <span class="k">static</span> <span class="n">final</span> <span class="n">DefaultRedisScript</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;</span> <span class="n">UNLOCK_SCRIPT</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">static</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">UNLOCK_SCRIPT</span> <span class="o">=</span> <span class="n">new</span> <span class="n">DefaultRedisScript</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">UNLOCK_SCRIPT</span><span class="o">.</span><span class="n">setLocation</span><span class="p">(</span><span class="n">new</span> <span class="n">ClassPathResource</span><span class="p">(</span><span class="s2">&#34;unlock.lua&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="n">UNLOCK_SCRIPT</span><span class="o">.</span><span class="n">setResultType</span><span class="p">(</span><span class="n">Long</span><span class="o">.</span><span class="k">class</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    @Override
-</span></span><span class="line"><span class="cl">    public boolean tryLock(long timeoutSec) {
-</span></span><span class="line"><span class="cl">        // 获取线程标示
-</span></span><span class="line"><span class="cl">        String threadId = ID_PREFIX + Thread.currentThread().getId();
-</span></span><span class="line"><span class="cl">        // 获取锁
-</span></span><span class="line"><span class="cl">        Boolean success = stringRedisTemplate.opsForValue()
-</span></span><span class="line"><span class="cl">                .setIfAbsent(KEY_PREFIX + name, threadId, timeoutSec, TimeUnit.SECONDS);
-</span></span><span class="line"><span class="cl">        return Boolean.TRUE.equals(success);
-</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    <span class="err">@</span><span class="n">Override</span>
+</span></span><span class="line"><span class="cl">    <span class="n">public</span> <span class="n">boolean</span> <span class="n">tryLock</span><span class="p">(</span><span class="n">long</span> <span class="n">timeoutSec</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="o">//</span> <span class="err">获取线程标示</span>
+</span></span><span class="line"><span class="cl">        <span class="ne">String</span> <span class="n">threadId</span> <span class="o">=</span> <span class="n">ID_PREFIX</span> <span class="o">+</span> <span class="ne">Thread</span><span class="o">.</span><span class="n">currentThread</span><span class="p">()</span><span class="o">.</span><span class="n">getId</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="o">//</span> <span class="err">获取锁</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Boolean</span> <span class="n">success</span> <span class="o">=</span> <span class="n">stringRedisTemplate</span><span class="o">.</span><span class="n">opsForValue</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">                <span class="o">.</span><span class="n">setIfAbsent</span><span class="p">(</span><span class="n">KEY_PREFIX</span> <span class="o">+</span> <span class="n">name</span><span class="p">,</span> <span class="n">threadId</span><span class="p">,</span> <span class="n">timeoutSec</span><span class="p">,</span> <span class="n">TimeUnit</span><span class="o">.</span><span class="n">SECONDS</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">Boolean</span><span class="o">.</span><span class="n">TRUE</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="n">success</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    @Override
-</span></span><span class="line"><span class="cl">    public void unlock() {
-</span></span><span class="line"><span class="cl">        // 调用lua脚本
-</span></span><span class="line"><span class="cl">        stringRedisTemplate.execute(
-</span></span><span class="line"><span class="cl">                UNLOCK_SCRIPT,
-</span></span><span class="line"><span class="cl">                Collections.singletonList(KEY_PREFIX + name),
-</span></span><span class="line"><span class="cl">                ID_PREFIX + Thread.currentThread().getId());
-</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    <span class="err">@</span><span class="n">Override</span>
+</span></span><span class="line"><span class="cl">    <span class="n">public</span> <span class="n">void</span> <span class="n">unlock</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="o">//</span> <span class="err">调用</span><span class="n">lua脚本</span>
+</span></span><span class="line"><span class="cl">        <span class="n">stringRedisTemplate</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                <span class="n">UNLOCK_SCRIPT</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="n">Collections</span><span class="o">.</span><span class="n">singletonList</span><span class="p">(</span><span class="n">KEY_PREFIX</span> <span class="o">+</span> <span class="n">name</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                <span class="n">ID_PREFIX</span> <span class="o">+</span> <span class="ne">Thread</span><span class="o">.</span><span class="n">currentThread</span><span class="p">()</span><span class="o">.</span><span class="n">getId</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="二rlockredisson分布式锁">二.RLock（Redisson分布式锁）</h2>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="%e8%87%aa%e5%ae%9a%e4%b9%89%e9%94%81%e7%9a%84%e9%97%ae%e9%a2%98.png"
-        data-srcset="%e8%87%aa%e5%ae%9a%e4%b9%89%e9%94%81%e7%9a%84%e9%97%ae%e9%a2%98.png, %e8%87%aa%e5%ae%9a%e4%b9%89%e9%94%81%e7%9a%84%e9%97%ae%e9%a2%98.png 1.5x, %e8%87%aa%e5%ae%9a%e4%b9%89%e9%94%81%e7%9a%84%e9%97%ae%e9%a2%98.png 2x"
+        data-src="/posts/redisson/%E8%87%AA%E5%AE%9A%E4%B9%89%E9%94%81%E7%9A%84%E9%97%AE%E9%A2%98.png"
+        data-srcset="/posts/redisson/%E8%87%AA%E5%AE%9A%E4%B9%89%E9%94%81%E7%9A%84%E9%97%AE%E9%A2%98.png, /posts/redisson/%E8%87%AA%E5%AE%9A%E4%B9%89%E9%94%81%E7%9A%84%E9%97%AE%E9%A2%98.png 1.5x, /posts/redisson/%E8%87%AA%E5%AE%9A%E4%B9%89%E9%94%81%E7%9A%84%E9%97%AE%E9%A2%98.png 2x"
         data-sizes="auto"
-        alt="自定义锁的问题.png"
-        title="自定义锁的问题.png" /></p>
+        alt="/posts/redisson/%E8%87%AA%E5%AE%9A%E4%B9%89%E9%94%81%E7%9A%84%E9%97%AE%E9%A2%98.png"
+        title="/posts/redisson/%E8%87%AA%E5%AE%9A%E4%B9%89%E9%94%81%E7%9A%84%E9%97%AE%E9%A2%98.png" width="1576" height="776" /></p>
 <p>Redisson wiki</p>
-<p><a href="https://github.com/redisson/redisson/wiki/8.-distributed-locks-and-synchronizers" target="_blank" rel="noopener noreffer ">https://github.com/redisson/redisson/wiki/8.-distributed-locks-and-synchronizers</a></p>
+<p><a href="https://github.com/redisson/redisson/wiki/8.-distributed-locks-and-synchronizers" target="_blank" rel="noopener noreffer">https://github.com/redisson/redisson/wiki/8.-distributed-locks-and-synchronizers</a>
+</p>
 <h3 id="1获取锁释放锁原理">1.获取锁释放锁原理</h3>
 <p>1.redisson Rlock是一个实现了可重入的分布式锁。可重入这个部分的实现可以参考jdk里的<strong>ReentrantLock</strong>，利用了redis hash结构的(HSET key field value)。fileld还跟以前一样可以设置成线程id，每次重入锁之后，value会加1。但redis的 hash类型 没有string类型的setnx的命令。所以redisson为了实现操作的原子性，利用了lua脚本，自定义了一组命令来实现互斥。</p>
 <p>并且在持有锁时，如果leaseTime！=-1时，会有一个额外的看门狗线程检查线程scheduleExpirationRenewal() 过期时间续约方法</p>
@@ -567,11 +571,11 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="redissonLock.png"
-        data-srcset="redissonLock.png, redissonLock.png 1.5x, redissonLock.png 2x"
+        data-src="/posts/redisson/redissonLock.png"
+        data-srcset="/posts/redisson/redissonLock.png, /posts/redisson/redissonLock.png 1.5x, /posts/redisson/redissonLock.png 2x"
         data-sizes="auto"
-        alt="redissonLock.png"
-        title="redissonLock.png" /></p>
+        alt="/posts/redisson/redissonLock.png"
+        title="/posts/redisson/redissonLock.png" width="1528" height="788" /></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -714,11 +718,11 @@
 </div><p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="redissonUnlock.png"
-        data-srcset="redissonUnlock.png, redissonUnlock.png 1.5x, redissonUnlock.png 2x"
+        data-src="/posts/redisson/redissonUnlock.png"
+        data-srcset="/posts/redisson/redissonUnlock.png, /posts/redisson/redissonUnlock.png 1.5x, /posts/redisson/redissonUnlock.png 2x"
         data-sizes="auto"
-        alt="redissonUnlock.png"
-        title="redissonUnlock.png" /></p>
+        alt="/posts/redisson/redissonUnlock.png"
+        title="/posts/redisson/redissonUnlock.png" width="1510" height="768" /></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -1059,11 +1063,11 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="%e7%ba%a2%e9%94%81.png"
-        data-srcset="%e7%ba%a2%e9%94%81.png, %e7%ba%a2%e9%94%81.png 1.5x, %e7%ba%a2%e9%94%81.png 2x"
+        data-src="/posts/redisson/%E7%BA%A2%E9%94%81.png"
+        data-srcset="/posts/redisson/%E7%BA%A2%E9%94%81.png, /posts/redisson/%E7%BA%A2%E9%94%81.png 1.5x, /posts/redisson/%E7%BA%A2%E9%94%81.png 2x"
         data-sizes="auto"
-        alt="红锁.png"
-        title="红锁.png" /></p>
+        alt="/posts/redisson/%E7%BA%A2%E9%94%81.png"
+        title="/posts/redisson/%E7%BA%A2%E9%94%81.png" width="980" height="477" /></p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
@@ -1073,7 +1077,7 @@
         <div class="post-info-line">
             <div class="post-info-md"></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://shengtu0328.github.io/posts/redisson/" data-title="Redisson"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://shengtu0328.github.io/posts/redisson/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://shengtu0328.github.io/posts/redisson/" data-title="Redisson"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://shengtu0328.github.io/posts/redisson/" data-title="Redisson"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://shengtu0328.github.io/posts/redisson/" data-title="Redisson"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://shengtu0328.github.io/posts/redisson/" data-title="Redisson"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://shengtu0328.github.io/posts/redisson/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://shengtu0328.github.io/posts/redisson/" data-title="Redisson"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://shengtu0328.github.io/posts/redisson/" data-title="Redisson"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@6.20.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://shengtu0328.github.io/posts/redisson/" data-title="Redisson"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
             </div>
         </div>
     </div>
@@ -1090,7 +1094,7 @@
 </div>
 </article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.105.0-DEV">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.127.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
                 </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ricky</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>
@@ -1100,5 +1104,5 @@
             </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
                 <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
             </a>
-        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.1/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
 </html>

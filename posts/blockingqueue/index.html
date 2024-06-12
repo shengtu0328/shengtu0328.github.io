@@ -4,22 +4,23 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>阻塞队列-双锁实现 - ricky的网站</title><meta name="Description" content="The best time to plant a tree was 10 years ago, the second is now"><meta property="og:title" content="阻塞队列-双锁实现" />
-<meta property="og:description" content="前提摘要 在阻塞队列-单锁的实现中，消费 （poll） 和 生产 （offer） 两个方法都是用了同一个锁，也就是会发生队列中有元素，但消费方却有可能等" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://shengtu0328.github.io/posts/blockingqueue/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2023-06-16T16:14:17+08:00" />
-<meta property="article:modified_time" content="2023-06-16T16:14:17+08:00" /><meta property="og:site_name" content="我的网站" />
+        <title>阻塞队列-双锁实现 - ricky的网站</title><meta name="Description" content="The best time to plant a tree was 10 years ago, the second is now"><meta property="og:url" content="https://shengtu0328.github.io/posts/blockingqueue/">
+  <meta property="og:site_name" content="ricky的网站">
+  <meta property="og:title" content="阻塞队列-双锁实现">
+  <meta property="og:description" content="前提摘要 在阻塞队列-单锁的实现中，消费 （poll） 和 生产 （offer） 两个方法都是用了同一个锁，也就是会发生队列中有元素，但消费方却有可能等">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2023-06-16T16:14:17+08:00">
+    <meta property="article:modified_time" content="2023-06-16T16:14:17+08:00">
 
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="阻塞队列-双锁实现"/>
-<meta name="twitter:description" content="前提摘要 在阻塞队列-单锁的实现中，消费 （poll） 和 生产 （offer） 两个方法都是用了同一个锁，也就是会发生队列中有元素，但消费方却有可能等"/>
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="阻塞队列-双锁实现">
+  <meta name="twitter:description" content="前提摘要 在阻塞队列-单锁的实现中，消费 （poll） 和 生产 （offer） 两个方法都是用了同一个锁，也就是会发生队列中有元素，但消费方却有可能等">
 <meta name="application-name" content="我的网站">
 <meta name="apple-mobile-web-app-title" content="我的网站"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://shengtu0328.github.io/posts/blockingqueue/" /><link rel="prev" href="https://shengtu0328.github.io/posts/learnspringsecurity/" /><link rel="next" href="https://shengtu0328.github.io/posts/threadpool/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://shengtu0328.github.io/posts/blockingqueue/" /><link rel="prev" href="https://shengtu0328.github.io/posts/learnspringsecurity/" /><link rel="next" href="https://shengtu0328.github.io/posts/threadpool/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -58,7 +59,8 @@
                         </span>
                     </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
                     <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
-                </a></div>
+                </a>
+            </div>
         </div>
     </div>
 </header><header class="mobile" id="header-mobile">
@@ -101,7 +103,8 @@
             <h2 class="toc-title">Contents</h2>
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">阻塞队列-双锁实现</h1><div class="post-meta">
-            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a></span>&nbsp;<span class="post-category">included in <a href="/categories/juc/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>JUC</a></span></div>
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a>
+</span>&nbsp;<span class="post-category">included in <a href="/categories/juc/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>JUC</a></span></div>
             <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-06-16">2023-06-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1345 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
@@ -127,11 +130,11 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="deadlock.png"
-        data-srcset="deadlock.png, deadlock.png 1.5x, deadlock.png 2x"
+        data-src="/posts/blockingqueue/deadlock.png"
+        data-srcset="/posts/blockingqueue/deadlock.png, /posts/blockingqueue/deadlock.png 1.5x, /posts/blockingqueue/deadlock.png 2x"
         data-sizes="auto"
-        alt="deadlock.png"
-        title="deadlock.png" /></p>
+        alt="/posts/blockingqueue/deadlock.png"
+        title="/posts/blockingqueue/deadlock.png" width="1738" height="944" /></p>
 <p>在offer方法中向队列添加完元素后 ，唤醒 Condition headWaits</p>
 <p>在poll方法中向队列消费元素后，唤醒 Condition tailWaits</p>
 <p>但因为上面这种写法  在获取了锁A且没有释放的情况下，尝试获取锁B，以及 在获取了锁B且没有释放的情况下，尝试获取锁A 这种情况下会产生死锁。</p>
@@ -139,11 +142,11 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="2.png"
-        data-srcset="2.png, 2.png 1.5x, 2.png 2x"
+        data-src="/posts/blockingqueue/2.png"
+        data-srcset="/posts/blockingqueue/2.png, /posts/blockingqueue/2.png 1.5x, /posts/blockingqueue/2.png 2x"
         data-sizes="auto"
-        alt="2.png"
-        title="2.png" /></p>
+        alt="/posts/blockingqueue/2.png"
+        title="/posts/blockingqueue/2.png" width="1386" height="898" /></p>
 <p>将两个锁改为平级后，可以防止死锁。但并没有减少 在offer方法后 对headLock加锁的次数。希望要尽量减少。</p>
 <h3 id="最终写法级联通知">最终写法（级联通知）</h3>
 <p>尽量减少offer方法中对headLock的加锁次数，在poll方法中自己唤醒自己。</p>
@@ -314,165 +317,165 @@
 </span><span class="lnt">159
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">import java.util.Arrays;
-</span></span><span class="line"><span class="cl">import java.util.concurrent.atomic.AtomicInteger;
-</span></span><span class="line"><span class="cl">import java.util.concurrent.locks.Condition;
-</span></span><span class="line"><span class="cl">import java.util.concurrent.locks.ReentrantLock;
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">import</span> <span class="n">java</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">Arrays</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="n">java</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">concurrent</span><span class="o">.</span><span class="n">atomic</span><span class="o">.</span><span class="n">AtomicInteger</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="n">java</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">concurrent</span><span class="o">.</span><span class="n">locks</span><span class="o">.</span><span class="n">Condition</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="n">java</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">concurrent</span><span class="o">.</span><span class="n">locks</span><span class="o">.</span><span class="n">ReentrantLock</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">/**
-</span></span><span class="line"><span class="cl"> * 双锁实现
-</span></span><span class="line"><span class="cl"> * @param &lt;E&gt; 元素类型
-</span></span><span class="line"><span class="cl"> */
-</span></span><span class="line"><span class="cl">@SuppressWarnings(&#34;all&#34;)
-</span></span><span class="line"><span class="cl">public class BlockingQueue2&lt;E&gt; implements BlockingQueue&lt;E&gt; {
+</span></span><span class="line"><span class="cl"><span class="o">/**</span>
+</span></span><span class="line"><span class="cl"> <span class="o">*</span> <span class="err">双锁实现</span>
+</span></span><span class="line"><span class="cl"> <span class="o">*</span> <span class="err">@</span><span class="n">param</span> <span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="err">元素类型</span>
+</span></span><span class="line"><span class="cl"> <span class="o">*/</span>
+</span></span><span class="line"><span class="cl"><span class="err">@</span><span class="n">SuppressWarnings</span><span class="p">(</span><span class="s2">&#34;all&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">public</span> <span class="k">class</span> <span class="n">BlockingQueue2</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">implements</span> <span class="n">BlockingQueue</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    private final E[] array;
-</span></span><span class="line"><span class="cl">    private int head;
-</span></span><span class="line"><span class="cl">    private int tail;
-</span></span><span class="line"><span class="cl">    private AtomicInteger size = new AtomicInteger();
+</span></span><span class="line"><span class="cl">    <span class="n">private</span> <span class="n">final</span> <span class="n">E</span><span class="p">[]</span> <span class="n">array</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">private</span> <span class="ne">int</span> <span class="n">head</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">private</span> <span class="ne">int</span> <span class="n">tail</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">private</span> <span class="n">AtomicInteger</span> <span class="n">size</span> <span class="o">=</span> <span class="n">new</span> <span class="n">AtomicInteger</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    private ReentrantLock tailLock = new ReentrantLock();
-</span></span><span class="line"><span class="cl">    private Condition tailWaits = tailLock.newCondition();
+</span></span><span class="line"><span class="cl">    <span class="n">private</span> <span class="n">ReentrantLock</span> <span class="n">tailLock</span> <span class="o">=</span> <span class="n">new</span> <span class="n">ReentrantLock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">private</span> <span class="n">Condition</span> <span class="n">tailWaits</span> <span class="o">=</span> <span class="n">tailLock</span><span class="o">.</span><span class="n">newCondition</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    private ReentrantLock headLock = new ReentrantLock();
-</span></span><span class="line"><span class="cl">    private Condition headWaits = headLock.newCondition();
+</span></span><span class="line"><span class="cl">    <span class="n">private</span> <span class="n">ReentrantLock</span> <span class="n">headLock</span> <span class="o">=</span> <span class="n">new</span> <span class="n">ReentrantLock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">private</span> <span class="n">Condition</span> <span class="n">headWaits</span> <span class="o">=</span> <span class="n">headLock</span><span class="o">.</span><span class="n">newCondition</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    public BlockingQueue2(int capacity) {
-</span></span><span class="line"><span class="cl">        this.array = (E[]) new Object[capacity];
-</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    <span class="n">public</span> <span class="n">BlockingQueue2</span><span class="p">(</span><span class="ne">int</span> <span class="n">capacity</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">this</span><span class="o">.</span><span class="n">array</span> <span class="o">=</span> <span class="p">(</span><span class="n">E</span><span class="p">[])</span> <span class="n">new</span> <span class="ne">Object</span><span class="p">[</span><span class="n">capacity</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    private boolean isEmpty() {
-</span></span><span class="line"><span class="cl">        return size.get() == 0;
-</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    <span class="n">private</span> <span class="n">boolean</span> <span class="n">isEmpty</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">size</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    private boolean isFull() {
-</span></span><span class="line"><span class="cl">        return size.get() == array.length;
-</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    <span class="n">private</span> <span class="n">boolean</span> <span class="n">isFull</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">size</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="o">==</span> <span class="n">array</span><span class="o">.</span><span class="n">length</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    @Override
-</span></span><span class="line"><span class="cl">    public String toString() {
-</span></span><span class="line"><span class="cl">        return Arrays.toString(array);
-</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    <span class="err">@</span><span class="n">Override</span>
+</span></span><span class="line"><span class="cl">    <span class="n">public</span> <span class="ne">String</span> <span class="n">toString</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">Arrays</span><span class="o">.</span><span class="n">toString</span><span class="p">(</span><span class="n">array</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    @Override
-</span></span><span class="line"><span class="cl">    public void offer(E e) throws InterruptedException {
-</span></span><span class="line"><span class="cl">        int c; // 添加前元素个数
-</span></span><span class="line"><span class="cl">        tailLock.lockInterruptibly();
-</span></span><span class="line"><span class="cl">        try {
-</span></span><span class="line"><span class="cl">            // 1. 队列满则等待
-</span></span><span class="line"><span class="cl">            while (isFull()) {
-</span></span><span class="line"><span class="cl">                tailWaits.await(); //  offer2
-</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">    <span class="err">@</span><span class="n">Override</span>
+</span></span><span class="line"><span class="cl">    <span class="n">public</span> <span class="n">void</span> <span class="n">offer</span><span class="p">(</span><span class="n">E</span> <span class="n">e</span><span class="p">)</span> <span class="n">throws</span> <span class="n">InterruptedException</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="ne">int</span> <span class="n">c</span><span class="p">;</span> <span class="o">//</span> <span class="err">添加前元素个数</span>
+</span></span><span class="line"><span class="cl">        <span class="n">tailLock</span><span class="o">.</span><span class="n">lockInterruptibly</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="o">//</span> <span class="mf">1.</span> <span class="err">队列满则等待</span>
+</span></span><span class="line"><span class="cl">            <span class="k">while</span> <span class="p">(</span><span class="n">isFull</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">tailWaits</span><span class="o">.</span><span class="n">await</span><span class="p">();</span> <span class="o">//</span>  <span class="n">offer2</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">            // 2. 不满则入队
-</span></span><span class="line"><span class="cl">            array[tail] = e;
-</span></span><span class="line"><span class="cl">            if (++tail == array.length) {
-</span></span><span class="line"><span class="cl">                tail = 0;
-</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            <span class="o">//</span> <span class="mf">2.</span> <span class="err">不满则入队</span>
+</span></span><span class="line"><span class="cl">            <span class="n">array</span><span class="p">[</span><span class="n">tail</span><span class="p">]</span> <span class="o">=</span> <span class="n">e</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="o">++</span><span class="n">tail</span> <span class="o">==</span> <span class="n">array</span><span class="o">.</span><span class="n">length</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">tail</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">            // 3. 修改 size
-</span></span><span class="line"><span class="cl">            /*
-</span></span><span class="line"><span class="cl">                size = 6
-</span></span><span class="line"><span class="cl">             */
-</span></span><span class="line"><span class="cl">            c = size.getAndIncrement();
-</span></span><span class="line"><span class="cl">            if (c + 1 &lt; array.length) {
-</span></span><span class="line"><span class="cl">                tailWaits.signal();
-</span></span><span class="line"><span class="cl">            }
-</span></span><span class="line"><span class="cl">            /*
-</span></span><span class="line"><span class="cl">                1. 读取成员变量size的值  5
-</span></span><span class="line"><span class="cl">                2. 自增 6
-</span></span><span class="line"><span class="cl">                3. 结果写回成员变量size 6
-</span></span><span class="line"><span class="cl">             */
-</span></span><span class="line"><span class="cl">        } finally {
-</span></span><span class="line"><span class="cl">            tailLock.unlock();
-</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">            <span class="o">//</span> <span class="mf">3.</span> <span class="err">修改</span> <span class="n">size</span>
+</span></span><span class="line"><span class="cl">            <span class="o">/*</span>
+</span></span><span class="line"><span class="cl">                <span class="n">size</span> <span class="o">=</span> <span class="mi">6</span>
+</span></span><span class="line"><span class="cl">             <span class="o">*/</span>
+</span></span><span class="line"><span class="cl">            <span class="n">c</span> <span class="o">=</span> <span class="n">size</span><span class="o">.</span><span class="n">getAndIncrement</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">c</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="n">array</span><span class="o">.</span><span class="n">length</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">tailWaits</span><span class="o">.</span><span class="k">signal</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="o">/*</span>
+</span></span><span class="line"><span class="cl">                <span class="mf">1.</span> <span class="err">读取成员变量</span><span class="n">size的值</span>  <span class="mi">5</span>
+</span></span><span class="line"><span class="cl">                <span class="mf">2.</span> <span class="err">自增</span> <span class="mi">6</span>
+</span></span><span class="line"><span class="cl">                <span class="mf">3.</span> <span class="err">结果写回成员变量</span><span class="n">size</span> <span class="mi">6</span>
+</span></span><span class="line"><span class="cl">             <span class="o">*/</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="n">finally</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">tailLock</span><span class="o">.</span><span class="n">unlock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        // 4. 如果从0变为非空，由offer这边唤醒等待非空的poll线程
-</span></span><span class="line"><span class="cl">        //                       0-&gt;1   1-&gt;2    2-&gt;3
-</span></span><span class="line"><span class="cl">        if(c == 0) {
-</span></span><span class="line"><span class="cl">            headLock.lock(); // offer_1 offer_2 offer_3
-</span></span><span class="line"><span class="cl">            try {
-</span></span><span class="line"><span class="cl">                headWaits.signal();
-</span></span><span class="line"><span class="cl">            } finally {
-</span></span><span class="line"><span class="cl">                headLock.unlock();
-</span></span><span class="line"><span class="cl">            }
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">        <span class="o">//</span> <span class="mf">4.</span> <span class="err">如果从</span><span class="mi">0</span><span class="err">变为非空，由</span><span class="n">offer这边唤醒等待非空的poll线程</span>
+</span></span><span class="line"><span class="cl">        <span class="o">//</span>                       <span class="mi">0</span><span class="o">-&gt;</span><span class="mi">1</span>   <span class="mi">1</span><span class="o">-&gt;</span><span class="mi">2</span>    <span class="mi">2</span><span class="o">-&gt;</span><span class="mi">3</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">c</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">headLock</span><span class="o">.</span><span class="n">lock</span><span class="p">();</span> <span class="o">//</span> <span class="n">offer_1</span> <span class="n">offer_2</span> <span class="n">offer_3</span>
+</span></span><span class="line"><span class="cl">            <span class="n">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">headWaits</span><span class="o">.</span><span class="k">signal</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="n">finally</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">headLock</span><span class="o">.</span><span class="n">unlock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    @Override
-</span></span><span class="line"><span class="cl">    public E poll() throws InterruptedException {
-</span></span><span class="line"><span class="cl">        E e;
-</span></span><span class="line"><span class="cl">        int c; // 取走前的元素个数
-</span></span><span class="line"><span class="cl">        headLock.lockInterruptibly();
-</span></span><span class="line"><span class="cl">        try {
-</span></span><span class="line"><span class="cl">            // 1. 队列空则等待
-</span></span><span class="line"><span class="cl">            while (isEmpty()) {
-</span></span><span class="line"><span class="cl">                headWaits.await(); // poll_4
-</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">    <span class="err">@</span><span class="n">Override</span>
+</span></span><span class="line"><span class="cl">    <span class="n">public</span> <span class="n">E</span> <span class="n">poll</span><span class="p">()</span> <span class="n">throws</span> <span class="n">InterruptedException</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">E</span> <span class="n">e</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="ne">int</span> <span class="n">c</span><span class="p">;</span> <span class="o">//</span> <span class="err">取走前的元素个数</span>
+</span></span><span class="line"><span class="cl">        <span class="n">headLock</span><span class="o">.</span><span class="n">lockInterruptibly</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="o">//</span> <span class="mf">1.</span> <span class="err">队列空则等待</span>
+</span></span><span class="line"><span class="cl">            <span class="k">while</span> <span class="p">(</span><span class="n">isEmpty</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">headWaits</span><span class="o">.</span><span class="n">await</span><span class="p">();</span> <span class="o">//</span> <span class="n">poll_4</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">            // 2. 非空则出队
-</span></span><span class="line"><span class="cl">            e = array[head];
-</span></span><span class="line"><span class="cl">            array[head] = null; // help GC
-</span></span><span class="line"><span class="cl">            if (++head == array.length) {
-</span></span><span class="line"><span class="cl">                head = 0;
-</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            <span class="o">//</span> <span class="mf">2.</span> <span class="err">非空则出队</span>
+</span></span><span class="line"><span class="cl">            <span class="n">e</span> <span class="o">=</span> <span class="n">array</span><span class="p">[</span><span class="n">head</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="n">array</span><span class="p">[</span><span class="n">head</span><span class="p">]</span> <span class="o">=</span> <span class="n">null</span><span class="p">;</span> <span class="o">//</span> <span class="n">help</span> <span class="n">GC</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="o">++</span><span class="n">head</span> <span class="o">==</span> <span class="n">array</span><span class="o">.</span><span class="n">length</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">head</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">            // 3. 修改 size
-</span></span><span class="line"><span class="cl">            c = size.getAndDecrement();
-</span></span><span class="line"><span class="cl">            // 3-&gt;2   2-&gt;1   1-&gt;0
-</span></span><span class="line"><span class="cl">            // poll_1 poll_2 poll_3
-</span></span><span class="line"><span class="cl">            if (c &gt; 1) {
-</span></span><span class="line"><span class="cl">                headWaits.signal();
-</span></span><span class="line"><span class="cl">            }
-</span></span><span class="line"><span class="cl">            /*
-</span></span><span class="line"><span class="cl">                1. 读取成员变量size的值 5
-</span></span><span class="line"><span class="cl">                2. 自减 4
-</span></span><span class="line"><span class="cl">                3. 结果写回成员变量size 4
-</span></span><span class="line"><span class="cl">             */
-</span></span><span class="line"><span class="cl">        } finally {
-</span></span><span class="line"><span class="cl">            headLock.unlock();
-</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">            <span class="o">//</span> <span class="mf">3.</span> <span class="err">修改</span> <span class="n">size</span>
+</span></span><span class="line"><span class="cl">            <span class="n">c</span> <span class="o">=</span> <span class="n">size</span><span class="o">.</span><span class="n">getAndDecrement</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="o">//</span> <span class="mi">3</span><span class="o">-&gt;</span><span class="mi">2</span>   <span class="mi">2</span><span class="o">-&gt;</span><span class="mi">1</span>   <span class="mi">1</span><span class="o">-&gt;</span><span class="mi">0</span>
+</span></span><span class="line"><span class="cl">            <span class="o">//</span> <span class="n">poll_1</span> <span class="n">poll_2</span> <span class="n">poll_3</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">c</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">headWaits</span><span class="o">.</span><span class="k">signal</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="o">/*</span>
+</span></span><span class="line"><span class="cl">                <span class="mf">1.</span> <span class="err">读取成员变量</span><span class="n">size的值</span> <span class="mi">5</span>
+</span></span><span class="line"><span class="cl">                <span class="mf">2.</span> <span class="err">自减</span> <span class="mi">4</span>
+</span></span><span class="line"><span class="cl">                <span class="mf">3.</span> <span class="err">结果写回成员变量</span><span class="n">size</span> <span class="mi">4</span>
+</span></span><span class="line"><span class="cl">             <span class="o">*/</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="n">finally</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">headLock</span><span class="o">.</span><span class="n">unlock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        // 4. 队列从满-&gt;不满时 由poll唤醒等待不满的 offer 线程
-</span></span><span class="line"><span class="cl">        if(c == array.length) {
-</span></span><span class="line"><span class="cl">            tailLock.lock();
-</span></span><span class="line"><span class="cl">            try {
-</span></span><span class="line"><span class="cl">                tailWaits.signal(); // ctrl+alt+t
-</span></span><span class="line"><span class="cl">            } finally {
-</span></span><span class="line"><span class="cl">                tailLock.unlock();
-</span></span><span class="line"><span class="cl">            }
-</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        <span class="o">//</span> <span class="mf">4.</span> <span class="err">队列从满</span><span class="o">-&gt;</span><span class="err">不满时</span> <span class="err">由</span><span class="n">poll唤醒等待不满的</span> <span class="n">offer</span> <span class="err">线程</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">c</span> <span class="o">==</span> <span class="n">array</span><span class="o">.</span><span class="n">length</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">tailLock</span><span class="o">.</span><span class="n">lock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="n">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">tailWaits</span><span class="o">.</span><span class="k">signal</span><span class="p">();</span> <span class="o">//</span> <span class="n">ctrl</span><span class="o">+</span><span class="n">alt</span><span class="o">+</span><span class="n">t</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="n">finally</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">tailLock</span><span class="o">.</span><span class="n">unlock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        return e;
-</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">e</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    @Override
-</span></span><span class="line"><span class="cl">    public boolean offer(E e, long timeout) throws InterruptedException {
-</span></span><span class="line"><span class="cl">        return false;
-</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    <span class="err">@</span><span class="n">Override</span>
+</span></span><span class="line"><span class="cl">    <span class="n">public</span> <span class="n">boolean</span> <span class="n">offer</span><span class="p">(</span><span class="n">E</span> <span class="n">e</span><span class="p">,</span> <span class="n">long</span> <span class="n">timeout</span><span class="p">)</span> <span class="n">throws</span> <span class="n">InterruptedException</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="bp">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    public static void main(String[] args) throws InterruptedException {
-</span></span><span class="line"><span class="cl">        BlockingQueue2&lt;String&gt; queue = new BlockingQueue2&lt;&gt;(3);
-</span></span><span class="line"><span class="cl">        queue.offer(&#34;元素1&#34;);
-</span></span><span class="line"><span class="cl">        queue.offer(&#34;元素2&#34;);
+</span></span><span class="line"><span class="cl">    <span class="n">public</span> <span class="k">static</span> <span class="n">void</span> <span class="n">main</span><span class="p">(</span><span class="ne">String</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span> <span class="n">throws</span> <span class="n">InterruptedException</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">BlockingQueue2</span><span class="o">&lt;</span><span class="ne">String</span><span class="o">&gt;</span> <span class="n">queue</span> <span class="o">=</span> <span class="n">new</span> <span class="n">BlockingQueue2</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">queue</span><span class="o">.</span><span class="n">offer</span><span class="p">(</span><span class="s2">&#34;元素1&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">queue</span><span class="o">.</span><span class="n">offer</span><span class="p">(</span><span class="s2">&#34;元素2&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        new Thread(()-&gt;{
-</span></span><span class="line"><span class="cl">            try {
-</span></span><span class="line"><span class="cl">                queue.offer(&#34;元素3&#34;);
-</span></span><span class="line"><span class="cl">            } catch (InterruptedException e) {
-</span></span><span class="line"><span class="cl">                throw new RuntimeException(e);
-</span></span><span class="line"><span class="cl">            }
-</span></span><span class="line"><span class="cl">        }, &#34;offer&#34;).start();
+</span></span><span class="line"><span class="cl">        <span class="n">new</span> <span class="ne">Thread</span><span class="p">(()</span><span class="o">-&gt;</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">queue</span><span class="o">.</span><span class="n">offer</span><span class="p">(</span><span class="s2">&#34;元素3&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="n">catch</span> <span class="p">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">throw</span> <span class="n">new</span> <span class="n">RuntimeException</span><span class="p">(</span><span class="n">e</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span> <span class="s2">&#34;offer&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">start</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        new Thread(()-&gt;{
-</span></span><span class="line"><span class="cl">            try {
-</span></span><span class="line"><span class="cl">                queue.poll();
-</span></span><span class="line"><span class="cl">            } catch (InterruptedException e) {
-</span></span><span class="line"><span class="cl">                throw new RuntimeException(e);
-</span></span><span class="line"><span class="cl">            }
-</span></span><span class="line"><span class="cl">        }, &#34;poll&#34;).start();
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">        <span class="n">new</span> <span class="ne">Thread</span><span class="p">(()</span><span class="o">-&gt;</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">queue</span><span class="o">.</span><span class="n">poll</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="n">catch</span> <span class="p">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">throw</span> <span class="n">new</span> <span class="n">RuntimeException</span><span class="p">(</span><span class="n">e</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span> <span class="s2">&#34;poll&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">start</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div></div><div class="post-footer" id="post-footer">
@@ -484,7 +487,7 @@
         <div class="post-info-line">
             <div class="post-info-md"></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://shengtu0328.github.io/posts/blockingqueue/" data-title="阻塞队列-双锁实现"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://shengtu0328.github.io/posts/blockingqueue/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://shengtu0328.github.io/posts/blockingqueue/" data-title="阻塞队列-双锁实现"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://shengtu0328.github.io/posts/blockingqueue/" data-title="阻塞队列-双锁实现"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://shengtu0328.github.io/posts/blockingqueue/" data-title="阻塞队列-双锁实现"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://shengtu0328.github.io/posts/blockingqueue/" data-title="阻塞队列-双锁实现"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://shengtu0328.github.io/posts/blockingqueue/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://shengtu0328.github.io/posts/blockingqueue/" data-title="阻塞队列-双锁实现"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://shengtu0328.github.io/posts/blockingqueue/" data-title="阻塞队列-双锁实现"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@6.20.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://shengtu0328.github.io/posts/blockingqueue/" data-title="阻塞队列-双锁实现"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
             </div>
         </div>
     </div>
@@ -501,7 +504,7 @@
 </div>
 </article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.105.0-DEV">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.127.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
                 </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ricky</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>
@@ -511,5 +514,5 @@
             </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
                 <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
             </a>
-        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.1/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
 </html>
