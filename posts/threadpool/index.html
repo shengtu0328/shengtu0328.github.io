@@ -4,19 +4,16 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>线程池 - ricky的网站</title><meta name="Description" content="The best time to plant a tree was 10 years ago, the second is now"><meta property="og:url" content="https://shengtu0328.github.io/posts/threadpool/">
-  <meta property="og:site_name" content="ricky的网站">
-  <meta property="og:title" content="线程池">
-  <meta property="og:description" content="我是零.线程池的主要作用 降低资源消耗：创建线程（分配栈内存）和销毁线程都是消耗资源的，通过线程池可以重复利用已创建的线程，降低线程创建和销毁">
-  <meta property="og:locale" content="zh_CN">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2022-12-01T14:14:25+08:00">
-    <meta property="article:modified_time" content="2022-12-01T14:14:25+08:00">
+        <title>线程池 - ricky的网站</title><meta name="Description" content="The best time to plant a tree was 10 years ago, the second is now"><meta property="og:title" content="线程池" />
+<meta property="og:description" content="我是零.线程池的主要作用 降低资源消耗：创建线程（分配栈内存）和销毁线程都是消耗资源的，通过线程池可以重复利用已创建的线程，降低线程创建和销毁" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://shengtu0328.github.io/posts/threadpool/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-12-01T14:14:25+08:00" />
+<meta property="article:modified_time" content="2022-12-01T14:14:25+08:00" /><meta property="og:site_name" content="我的网站" />
 
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="线程池">
-  <meta name="twitter:description" content="我是零.线程池的主要作用 降低资源消耗：创建线程（分配栈内存）和销毁线程都是消耗资源的，通过线程池可以重复利用已创建的线程，降低线程创建和销毁">
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="线程池"/>
+<meta name="twitter:description" content="我是零.线程池的主要作用 降低资源消耗：创建线程（分配栈内存）和销毁线程都是消耗资源的，通过线程池可以重复利用已创建的线程，降低线程创建和销毁"/>
 <meta name="application-name" content="我的网站">
 <meta name="apple-mobile-web-app-title" content="我的网站"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -182,11 +179,11 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/threadpool/posts/threadpool/threadpool.png"
-        data-srcset="/posts/threadpool/posts/threadpool/threadpool.png, /posts/threadpool/posts/threadpool/threadpool.png 1.5x, /posts/threadpool/posts/threadpool/threadpool.png 2x"
+        data-src="threadpool.png"
+        data-srcset="threadpool.png, threadpool.png 1.5x, threadpool.png 2x"
         data-sizes="auto"
-        alt="/posts/threadpool/posts/threadpool/threadpool.png"
-        title="/posts/threadpool/posts/threadpool/threadpool.png" width="2454" height="1432" /></p>
+        alt="threadpool.png"
+        title="threadpool.png" /></p>
 <h4 id="需要以下组件">需要以下组件</h4>
 <ol>
 <li>
@@ -209,11 +206,11 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/threadpool/posts/threadpool/ThreadPool%E6%B5%81%E7%A8%8B%E5%9B%BE.png"
-        data-srcset="/posts/threadpool/posts/threadpool/ThreadPool%E6%B5%81%E7%A8%8B%E5%9B%BE.png, /posts/threadpool/posts/threadpool/ThreadPool%E6%B5%81%E7%A8%8B%E5%9B%BE.png 1.5x, /posts/threadpool/posts/threadpool/ThreadPool%E6%B5%81%E7%A8%8B%E5%9B%BE.png 2x"
+        data-src="ThreadPool%e6%b5%81%e7%a8%8b%e5%9b%be.png"
+        data-srcset="ThreadPool%e6%b5%81%e7%a8%8b%e5%9b%be.png, ThreadPool%e6%b5%81%e7%a8%8b%e5%9b%be.png 1.5x, ThreadPool%e6%b5%81%e7%a8%8b%e5%9b%be.png 2x"
         data-sizes="auto"
-        alt="/posts/threadpool/posts/threadpool/ThreadPool%E6%B5%81%E7%A8%8B%E5%9B%BE.png"
-        title="/posts/threadpool/posts/threadpool/ThreadPool%E6%B5%81%E7%A8%8B%E5%9B%BE.png" width="1060" height="1424" /></p>
+        alt="ThreadPool流程图.png"
+        title="ThreadPool流程图.png" /></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -481,149 +478,149 @@
 </span><span class="lnt">143
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="n">lombok</span><span class="o">.</span><span class="n">extern</span><span class="o">.</span><span class="n">slf4j</span><span class="o">.</span><span class="n">Slf4j</span><span class="p">;</span>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">import lombok.extern.slf4j.Slf4j;
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="n">java</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">ArrayDeque</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="n">java</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">Deque</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="n">java</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">concurrent</span><span class="o">.</span><span class="n">TimeUnit</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="n">java</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">concurrent</span><span class="o">.</span><span class="n">locks</span><span class="o">.</span><span class="n">Condition</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="n">java</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">concurrent</span><span class="o">.</span><span class="n">locks</span><span class="o">.</span><span class="n">ReentrantLock</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">import java.util.ArrayDeque;
+</span></span><span class="line"><span class="cl">import java.util.Deque;
+</span></span><span class="line"><span class="cl">import java.util.concurrent.TimeUnit;
+</span></span><span class="line"><span class="cl">import java.util.concurrent.locks.Condition;
+</span></span><span class="line"><span class="cl">import java.util.concurrent.locks.ReentrantLock;
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="o">/**</span>
-</span></span><span class="line"><span class="cl"> <span class="o">*</span> <span class="err">自定义的一个阻塞队列</span>
-</span></span><span class="line"><span class="cl"> <span class="o">*</span>
-</span></span><span class="line"><span class="cl"> <span class="o">*</span> <span class="err">@</span><span class="n">author</span> <span class="n">xrq</span>
-</span></span><span class="line"><span class="cl"> <span class="o">*/</span>
-</span></span><span class="line"><span class="cl"><span class="err">@</span><span class="n">Slf4j</span><span class="p">(</span><span class="n">topic</span> <span class="o">=</span> <span class="s2">&#34;c.MyBlockingQueue&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">public</span> <span class="k">class</span> <span class="n">MyBlockingQueue</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">/**
+</span></span><span class="line"><span class="cl"> * 自定义的一个阻塞队列
+</span></span><span class="line"><span class="cl"> *
+</span></span><span class="line"><span class="cl"> * @author xrq
+</span></span><span class="line"><span class="cl"> */
+</span></span><span class="line"><span class="cl">@Slf4j(topic = &#34;c.MyBlockingQueue&#34;)
+</span></span><span class="line"><span class="cl">public class MyBlockingQueue&lt;T&gt; {
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="o">/**</span>
-</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="mf">1.</span> <span class="err">任务队列</span> <span class="err">，队列先进先出</span> <span class="err">，</span><span class="n">Deque双向链表</span>
-</span></span><span class="line"><span class="cl">     <span class="o">*/</span>
-</span></span><span class="line"><span class="cl">    <span class="n">private</span> <span class="n">Deque</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">queue</span> <span class="o">=</span> <span class="n">new</span> <span class="n">ArrayDeque</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    /**
+</span></span><span class="line"><span class="cl">     * 1. 任务队列 ，队列先进先出 ，Deque双向链表
+</span></span><span class="line"><span class="cl">     */
+</span></span><span class="line"><span class="cl">    private Deque&lt;T&gt; queue = new ArrayDeque&lt;&gt;();
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="o">/**</span>
-</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="mf">2.</span> <span class="err">锁</span>  <span class="mi">1</span><span class="err">：锁的作用是防止一个任务被三个线程获取</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">     <span class="o">*</span>        <span class="mi">2</span><span class="err">：还有就是队列中没有元素时，可以通过</span><span class="n">reentrantLock</span><span class="o">.</span><span class="n">newCondition</span><span class="p">()</span> <span class="err">等待。</span>
-</span></span><span class="line"><span class="cl">     <span class="o">*/</span>
-</span></span><span class="line"><span class="cl">    <span class="n">private</span> <span class="n">ReentrantLock</span> <span class="n">lock</span> <span class="o">=</span> <span class="n">new</span> <span class="n">ReentrantLock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    /**
+</span></span><span class="line"><span class="cl">     * 2. 锁  1：锁的作用是防止一个任务被三个线程获取,
+</span></span><span class="line"><span class="cl">     *        2：还有就是队列中没有元素时，可以通过reentrantLock.newCondition() 等待。
+</span></span><span class="line"><span class="cl">     */
+</span></span><span class="line"><span class="cl">    private ReentrantLock lock = new ReentrantLock();
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="o">/**</span>
-</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="mf">3.</span> <span class="err">生产者条件变量：如果队列满了生产者线程去这个</span><span class="n">Condition个await</span><span class="p">(),</span><span class="err">等待队列不满时被消费者唤醒</span>
-</span></span><span class="line"><span class="cl">     <span class="o">*/</span>
-</span></span><span class="line"><span class="cl">    <span class="n">private</span> <span class="n">Condition</span> <span class="n">fullWaitSet</span> <span class="o">=</span> <span class="n">lock</span><span class="o">.</span><span class="n">newCondition</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    /**
+</span></span><span class="line"><span class="cl">     * 3. 生产者条件变量：如果队列满了生产者线程去这个Condition个await(),等待队列不满时被消费者唤醒
+</span></span><span class="line"><span class="cl">     */
+</span></span><span class="line"><span class="cl">    private Condition fullWaitSet = lock.newCondition();
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="o">/**</span>
-</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="mf">4.</span> <span class="err">消费者条件变量：如果队列空了消费者线程去这个</span><span class="n">Condition里await</span><span class="p">(),</span><span class="err">等待队列不空时被生产者唤醒</span>
-</span></span><span class="line"><span class="cl">     <span class="o">*/</span>
-</span></span><span class="line"><span class="cl">    <span class="n">private</span> <span class="n">Condition</span> <span class="n">emptyWaitSet</span> <span class="o">=</span> <span class="n">lock</span><span class="o">.</span><span class="n">newCondition</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    /**
+</span></span><span class="line"><span class="cl">     * 4. 消费者条件变量：如果队列空了消费者线程去这个Condition里await(),等待队列不空时被生产者唤醒
+</span></span><span class="line"><span class="cl">     */
+</span></span><span class="line"><span class="cl">    private Condition emptyWaitSet = lock.newCondition();
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="o">/**</span>
-</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="mf">5.</span> <span class="err">容量</span>
-</span></span><span class="line"><span class="cl">     <span class="o">*/</span>
-</span></span><span class="line"><span class="cl">    <span class="n">private</span> <span class="ne">int</span> <span class="n">capacity</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    /**
+</span></span><span class="line"><span class="cl">     * 5. 容量
+</span></span><span class="line"><span class="cl">     */
+</span></span><span class="line"><span class="cl">    private int capacity;
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="n">public</span> <span class="n">MyBlockingQueue</span><span class="p">(</span><span class="ne">int</span> <span class="n">capacity</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">this</span><span class="o">.</span><span class="n">capacity</span> <span class="o">=</span> <span class="n">capacity</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    public MyBlockingQueue(int capacity) {
+</span></span><span class="line"><span class="cl">        this.capacity = capacity;
+</span></span><span class="line"><span class="cl">    }
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="o">/**</span>
-</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="err">阻塞获取</span>
-</span></span><span class="line"><span class="cl">     <span class="o">*</span>
-</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="err">@</span><span class="k">return</span>
-</span></span><span class="line"><span class="cl">     <span class="o">*/</span>
-</span></span><span class="line"><span class="cl">    <span class="n">public</span> <span class="n">T</span> <span class="n">take</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">lock</span><span class="o">.</span><span class="n">lock</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">        <span class="n">try</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="k">while</span> <span class="p">(</span><span class="n">queue</span><span class="o">.</span><span class="n">isEmpty</span><span class="p">())</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="n">try</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                    <span class="n">emptyWaitSet</span><span class="o">.</span><span class="n">await</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">                <span class="p">}</span> <span class="n">catch</span> <span class="p">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                    <span class="n">e</span><span class="o">.</span><span class="n">printStackTrace</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">                <span class="p">}</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">            <span class="n">T</span> <span class="n">t</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">removeFirst</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">            <span class="n">fullWaitSet</span><span class="o">.</span><span class="k">signal</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">t</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="n">finally</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">lock</span><span class="o">.</span><span class="n">unlock</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    /**
+</span></span><span class="line"><span class="cl">     * 阻塞获取
+</span></span><span class="line"><span class="cl">     *
+</span></span><span class="line"><span class="cl">     * @return
+</span></span><span class="line"><span class="cl">     */
+</span></span><span class="line"><span class="cl">    public T take() {
+</span></span><span class="line"><span class="cl">        lock.lock();
+</span></span><span class="line"><span class="cl">        try {
+</span></span><span class="line"><span class="cl">            while (queue.isEmpty()) {
+</span></span><span class="line"><span class="cl">                try {
+</span></span><span class="line"><span class="cl">                    emptyWaitSet.await();
+</span></span><span class="line"><span class="cl">                } catch (InterruptedException e) {
+</span></span><span class="line"><span class="cl">                    e.printStackTrace();
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            T t = queue.removeFirst();
+</span></span><span class="line"><span class="cl">            fullWaitSet.signal();
+</span></span><span class="line"><span class="cl">            return t;
+</span></span><span class="line"><span class="cl">        } finally {
+</span></span><span class="line"><span class="cl">            lock.unlock();
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="o">/**</span>
-</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="err">带超时的阻塞获取</span>
-</span></span><span class="line"><span class="cl">     <span class="o">*</span>
-</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="err">@</span><span class="n">param</span> <span class="n">timeout</span> <span class="err">超时时间</span>
-</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="err">@</span><span class="n">param</span> <span class="n">unit</span>    <span class="err">时间单位</span>
-</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="err">@</span><span class="k">return</span>
-</span></span><span class="line"><span class="cl">     <span class="o">*/</span>
-</span></span><span class="line"><span class="cl">    <span class="n">public</span> <span class="n">T</span> <span class="n">poll</span><span class="p">(</span><span class="n">long</span> <span class="n">timeout</span><span class="p">,</span> <span class="n">TimeUnit</span> <span class="n">unit</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">lock</span><span class="o">.</span><span class="n">lock</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">        <span class="n">try</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="o">//</span> <span class="err">将</span> <span class="n">timeout</span> <span class="err">统一转换为</span> <span class="err">纳秒</span>
-</span></span><span class="line"><span class="cl">            <span class="n">long</span> <span class="n">nanos</span> <span class="o">=</span> <span class="n">unit</span><span class="o">.</span><span class="n">toNanos</span><span class="p">(</span><span class="n">timeout</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="k">while</span> <span class="p">(</span><span class="n">queue</span><span class="o">.</span><span class="n">isEmpty</span><span class="p">())</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="n">try</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                    <span class="o">//</span> <span class="err">等待时间过了队列还是空就结束</span>
-</span></span><span class="line"><span class="cl">                    <span class="k">if</span> <span class="p">(</span><span class="n">nanos</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                        <span class="k">return</span> <span class="n">null</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">                    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">                    <span class="o">//</span> <span class="err">返回值是剩余等待时间</span>
-</span></span><span class="line"><span class="cl">                    <span class="n">nanos</span> <span class="o">=</span> <span class="n">emptyWaitSet</span><span class="o">.</span><span class="n">awaitNanos</span><span class="p">(</span><span class="n">nanos</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">                <span class="p">}</span> <span class="n">catch</span> <span class="p">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                    <span class="n">e</span><span class="o">.</span><span class="n">printStackTrace</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">                <span class="p">}</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">            <span class="n">T</span> <span class="n">t</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">removeFirst</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">            <span class="n">fullWaitSet</span><span class="o">.</span><span class="k">signal</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">t</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="n">finally</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">lock</span><span class="o">.</span><span class="n">unlock</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="o">/**</span>
-</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="err">阻塞添加</span>
-</span></span><span class="line"><span class="cl">     <span class="o">*</span>
-</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="err">@</span><span class="n">param</span> <span class="n">task</span>
-</span></span><span class="line"><span class="cl">     <span class="o">*/</span>
-</span></span><span class="line"><span class="cl">    <span class="n">public</span> <span class="n">void</span> <span class="n">put</span><span class="p">(</span><span class="n">T</span> <span class="n">task</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">lock</span><span class="o">.</span><span class="n">lock</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">        <span class="n">try</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="k">while</span> <span class="p">(</span><span class="n">queue</span><span class="o">.</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="n">capacity</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="n">try</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                    <span class="nb">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&#34;等待加入任务队列 {} ...&#34;</span><span class="p">,</span> <span class="n">task</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">                    <span class="n">fullWaitSet</span><span class="o">.</span><span class="n">await</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">                <span class="p">}</span> <span class="n">catch</span> <span class="p">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                    <span class="n">e</span><span class="o">.</span><span class="n">printStackTrace</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">                <span class="p">}</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">            <span class="nb">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&#34;加入任务队列 {}&#34;</span><span class="p">,</span> <span class="n">task</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="n">queue</span><span class="o">.</span><span class="n">addLast</span><span class="p">(</span><span class="n">task</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="n">emptyWaitSet</span><span class="o">.</span><span class="k">signal</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="n">finally</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">lock</span><span class="o">.</span><span class="n">unlock</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    /**
+</span></span><span class="line"><span class="cl">     * 带超时的阻塞获取
+</span></span><span class="line"><span class="cl">     *
+</span></span><span class="line"><span class="cl">     * @param timeout 超时时间
+</span></span><span class="line"><span class="cl">     * @param unit    时间单位
+</span></span><span class="line"><span class="cl">     * @return
+</span></span><span class="line"><span class="cl">     */
+</span></span><span class="line"><span class="cl">    public T poll(long timeout, TimeUnit unit) {
+</span></span><span class="line"><span class="cl">        lock.lock();
+</span></span><span class="line"><span class="cl">        try {
+</span></span><span class="line"><span class="cl">            // 将 timeout 统一转换为 纳秒
+</span></span><span class="line"><span class="cl">            long nanos = unit.toNanos(timeout);
+</span></span><span class="line"><span class="cl">            while (queue.isEmpty()) {
+</span></span><span class="line"><span class="cl">                try {
+</span></span><span class="line"><span class="cl">                    // 等待时间过了队列还是空就结束
+</span></span><span class="line"><span class="cl">                    if (nanos &lt;= 0) {
+</span></span><span class="line"><span class="cl">                        return null;
+</span></span><span class="line"><span class="cl">                    }
+</span></span><span class="line"><span class="cl">                    // 返回值是剩余等待时间
+</span></span><span class="line"><span class="cl">                    nanos = emptyWaitSet.awaitNanos(nanos);
+</span></span><span class="line"><span class="cl">                } catch (InterruptedException e) {
+</span></span><span class="line"><span class="cl">                    e.printStackTrace();
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            T t = queue.removeFirst();
+</span></span><span class="line"><span class="cl">            fullWaitSet.signal();
+</span></span><span class="line"><span class="cl">            return t;
+</span></span><span class="line"><span class="cl">        } finally {
+</span></span><span class="line"><span class="cl">            lock.unlock();
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="o">/**</span>
-</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="err">获取队列大小</span>
-</span></span><span class="line"><span class="cl">     <span class="o">*</span>
-</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="err">@</span><span class="k">return</span>
-</span></span><span class="line"><span class="cl">     <span class="o">*/</span>
-</span></span><span class="line"><span class="cl">    <span class="n">public</span> <span class="ne">int</span> <span class="n">size</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">lock</span><span class="o">.</span><span class="n">lock</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">        <span class="n">try</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">queue</span><span class="o">.</span><span class="n">size</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="n">finally</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">lock</span><span class="o">.</span><span class="n">unlock</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    /**
+</span></span><span class="line"><span class="cl">     * 阻塞添加
+</span></span><span class="line"><span class="cl">     *
+</span></span><span class="line"><span class="cl">     * @param task
+</span></span><span class="line"><span class="cl">     */
+</span></span><span class="line"><span class="cl">    public void put(T task) {
+</span></span><span class="line"><span class="cl">        lock.lock();
+</span></span><span class="line"><span class="cl">        try {
+</span></span><span class="line"><span class="cl">            while (queue.size() == capacity) {
+</span></span><span class="line"><span class="cl">                try {
+</span></span><span class="line"><span class="cl">                    log.debug(&#34;等待加入任务队列 {} ...&#34;, task);
+</span></span><span class="line"><span class="cl">                    fullWaitSet.await();
+</span></span><span class="line"><span class="cl">                } catch (InterruptedException e) {
+</span></span><span class="line"><span class="cl">                    e.printStackTrace();
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            log.debug(&#34;加入任务队列 {}&#34;, task);
+</span></span><span class="line"><span class="cl">            queue.addLast(task);
+</span></span><span class="line"><span class="cl">            emptyWaitSet.signal();
+</span></span><span class="line"><span class="cl">        } finally {
+</span></span><span class="line"><span class="cl">            lock.unlock();
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    /**
+</span></span><span class="line"><span class="cl">     * 获取队列大小
+</span></span><span class="line"><span class="cl">     *
+</span></span><span class="line"><span class="cl">     * @return
+</span></span><span class="line"><span class="cl">     */
+</span></span><span class="line"><span class="cl">    public int size() {
+</span></span><span class="line"><span class="cl">        lock.lock();
+</span></span><span class="line"><span class="cl">        try {
+</span></span><span class="line"><span class="cl">            return queue.size();
+</span></span><span class="line"><span class="cl">        } finally {
+</span></span><span class="line"><span class="cl">            lock.unlock();
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">}
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h5 id="2自定义的工作线程">2）自定义的工作线程</h5>
@@ -661,36 +658,36 @@
 </span><span class="lnt">30
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">class</span> <span class="n">MyWorker</span> <span class="k">extends</span> <span class="ne">Thread</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">private</span> <span class="n">Runnable</span> <span class="n">task</span><span class="p">;</span>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">class MyWorker extends Thread {
+</span></span><span class="line"><span class="cl">    private Runnable task;
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="n">public</span> <span class="n">MyWorker</span><span class="p">(</span><span class="n">Runnable</span> <span class="n">task</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">this</span><span class="o">.</span><span class="n">task</span> <span class="o">=</span> <span class="n">task</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    public MyWorker(Runnable task) {
+</span></span><span class="line"><span class="cl">        this.task = task;
+</span></span><span class="line"><span class="cl">    }
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="err">@</span><span class="n">Override</span>
-</span></span><span class="line"><span class="cl">    <span class="n">public</span> <span class="n">void</span> <span class="n">run</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="o">//</span> <span class="err">执行任务，重用线程</span> <span class="n">taskQueue</span><span class="o">.</span><span class="n">take</span><span class="p">()</span><span class="err">是关键！！！</span>
-</span></span><span class="line"><span class="cl">        <span class="o">//</span> <span class="mi">1</span><span class="p">)</span> <span class="err">当</span> <span class="n">task</span> <span class="err">不为空，执行任务</span>
-</span></span><span class="line"><span class="cl">        <span class="o">//</span> <span class="mi">2</span><span class="p">)</span> <span class="err">当</span> <span class="n">task</span> <span class="err">执行完毕，再接着从任务队列获取任务并执行</span>
-</span></span><span class="line"><span class="cl">        <span class="o">//</span> <span class="k">while</span><span class="p">(</span><span class="n">task</span> <span class="o">!=</span> <span class="n">null</span> <span class="o">||</span> <span class="p">(</span><span class="n">task</span> <span class="o">=</span> <span class="n">taskQueue</span><span class="o">.</span><span class="n">poll</span><span class="p">(</span><span class="n">timeout</span><span class="p">,</span> <span class="n">timeUnit</span><span class="p">))</span> <span class="o">!=</span> <span class="n">null</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">while</span> <span class="p">(</span><span class="n">task</span> <span class="o">!=</span> <span class="n">null</span> <span class="o">||</span> <span class="p">(</span><span class="n">task</span> <span class="o">=</span> <span class="n">taskQueue</span><span class="o">.</span><span class="n">take</span><span class="p">())</span> <span class="o">!=</span> <span class="n">null</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">try</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="nb">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&#34;正在执行...{}&#34;</span><span class="p">,</span> <span class="n">task</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">                <span class="n">task</span><span class="o">.</span><span class="n">run</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="n">catch</span> <span class="p">(</span><span class="n">Exception</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="n">e</span><span class="o">.</span><span class="n">printStackTrace</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="n">finally</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="n">task</span> <span class="o">=</span> <span class="n">null</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="o">//</span><span class="err">能走到这一步只有带从队列获取超时时间的线程</span>
-</span></span><span class="line"><span class="cl">        <span class="n">synchronized</span> <span class="p">(</span><span class="n">workers</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="nb">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&#34;worker 被移除{}&#34;</span><span class="p">,</span> <span class="n">this</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="n">workers</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">    @Override
+</span></span><span class="line"><span class="cl">    public void run() {
+</span></span><span class="line"><span class="cl">        // 执行任务，重用线程 taskQueue.take()是关键！！！
+</span></span><span class="line"><span class="cl">        // 1) 当 task 不为空，执行任务
+</span></span><span class="line"><span class="cl">        // 2) 当 task 执行完毕，再接着从任务队列获取任务并执行
+</span></span><span class="line"><span class="cl">        // while(task != null || (task = taskQueue.poll(timeout, timeUnit)) != null) {
+</span></span><span class="line"><span class="cl">        while (task != null || (task = taskQueue.take()) != null) {
+</span></span><span class="line"><span class="cl">            try {
+</span></span><span class="line"><span class="cl">                log.debug(&#34;正在执行...{}&#34;, task);
+</span></span><span class="line"><span class="cl">                task.run();
+</span></span><span class="line"><span class="cl">            } catch (Exception e) {
+</span></span><span class="line"><span class="cl">                e.printStackTrace();
+</span></span><span class="line"><span class="cl">            } finally {
+</span></span><span class="line"><span class="cl">                task = null;
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        //能走到这一步只有带从队列获取超时时间的线程
+</span></span><span class="line"><span class="cl">        synchronized (workers) {
+</span></span><span class="line"><span class="cl">            log.debug(&#34;worker 被移除{}&#34;, this);
+</span></span><span class="line"><span class="cl">            workers.remove(this);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h5 id="3自定义的线程池">3）自定义的线程池</h5>
@@ -768,76 +765,76 @@
 </span><span class="lnt">70
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">import</span> <span class="n">lombok</span><span class="o">.</span><span class="n">extern</span><span class="o">.</span><span class="n">slf4j</span><span class="o">.</span><span class="n">Slf4j</span><span class="p">;</span>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">import lombok.extern.slf4j.Slf4j;
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="n">java</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">HashSet</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="n">java</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">concurrent</span><span class="o">.</span><span class="n">TimeUnit</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">import java.util.HashSet;
+</span></span><span class="line"><span class="cl">import java.util.concurrent.TimeUnit;
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="o">/**</span>
-</span></span><span class="line"><span class="cl"> <span class="o">*</span> <span class="err">@</span><span class="n">author</span> <span class="n">xrq</span>
-</span></span><span class="line"><span class="cl"> <span class="o">*/</span>
-</span></span><span class="line"><span class="cl"><span class="err">@</span><span class="n">Slf4j</span><span class="p">(</span><span class="n">topic</span> <span class="o">=</span> <span class="s2">&#34;c.MyThreadPool&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">public</span> <span class="k">class</span> <span class="n">MyThreadPool</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">/**
+</span></span><span class="line"><span class="cl"> * @author xrq
+</span></span><span class="line"><span class="cl"> */
+</span></span><span class="line"><span class="cl">@Slf4j(topic = &#34;c.MyThreadPool&#34;)
+</span></span><span class="line"><span class="cl">public class MyThreadPool {
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="o">/**</span>
-</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="err">任务队列</span>
-</span></span><span class="line"><span class="cl">     <span class="o">*/</span>
-</span></span><span class="line"><span class="cl">    <span class="n">private</span> <span class="n">MyBlockingQueue</span><span class="o">&lt;</span><span class="n">Runnable</span><span class="o">&gt;</span> <span class="n">taskQueue</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    /**
+</span></span><span class="line"><span class="cl">     * 任务队列
+</span></span><span class="line"><span class="cl">     */
+</span></span><span class="line"><span class="cl">    private MyBlockingQueue&lt;Runnable&gt; taskQueue;
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="o">/**</span>
-</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="err">线程集合</span>
-</span></span><span class="line"><span class="cl">     <span class="o">*/</span>
-</span></span><span class="line"><span class="cl">    <span class="n">private</span> <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">MyWorker</span><span class="o">&gt;</span> <span class="n">workers</span> <span class="o">=</span> <span class="n">new</span> <span class="n">HashSet</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    /**
+</span></span><span class="line"><span class="cl">     * 线程集合
+</span></span><span class="line"><span class="cl">     */
+</span></span><span class="line"><span class="cl">    private HashSet&lt;MyWorker&gt; workers = new HashSet&lt;&gt;();
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="o">/**</span>
-</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="err">核心线程数</span>
-</span></span><span class="line"><span class="cl">     <span class="o">*/</span>
-</span></span><span class="line"><span class="cl">    <span class="n">private</span> <span class="ne">int</span> <span class="n">coreSize</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    /**
+</span></span><span class="line"><span class="cl">     * 核心线程数
+</span></span><span class="line"><span class="cl">     */
+</span></span><span class="line"><span class="cl">    private int coreSize;
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="o">/**</span>
-</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="err">从队列获取任务时的超时时间</span>
-</span></span><span class="line"><span class="cl">     <span class="o">*/</span>
-</span></span><span class="line"><span class="cl">    <span class="n">private</span> <span class="n">long</span> <span class="n">timeout</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    /**
+</span></span><span class="line"><span class="cl">     * 从队列获取任务时的超时时间
+</span></span><span class="line"><span class="cl">     */
+</span></span><span class="line"><span class="cl">    private long timeout;
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="o">/**</span>
-</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="err">从队列获取任务时的超时时间</span> <span class="err">的</span> <span class="err">时间单位</span>
-</span></span><span class="line"><span class="cl">     <span class="o">*/</span>
-</span></span><span class="line"><span class="cl">    <span class="n">private</span> <span class="n">TimeUnit</span> <span class="n">timeUnit</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    /**
+</span></span><span class="line"><span class="cl">     * 从队列获取任务时的超时时间 的 时间单位
+</span></span><span class="line"><span class="cl">     */
+</span></span><span class="line"><span class="cl">    private TimeUnit timeUnit;
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="n">public</span> <span class="n">MyThreadPool</span><span class="p">(</span><span class="ne">int</span> <span class="n">coreSize</span><span class="p">,</span> <span class="n">long</span> <span class="n">timeout</span><span class="p">,</span> <span class="n">TimeUnit</span> <span class="n">timeUnit</span><span class="p">,</span> <span class="ne">int</span> <span class="n">queueCapacity</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">this</span><span class="o">.</span><span class="n">coreSize</span> <span class="o">=</span> <span class="n">coreSize</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">this</span><span class="o">.</span><span class="n">timeout</span> <span class="o">=</span> <span class="n">timeout</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">this</span><span class="o">.</span><span class="n">timeUnit</span> <span class="o">=</span> <span class="n">timeUnit</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">this</span><span class="o">.</span><span class="n">taskQueue</span> <span class="o">=</span> <span class="n">new</span> <span class="n">MyBlockingQueue</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">queueCapacity</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    public MyThreadPool(int coreSize, long timeout, TimeUnit timeUnit, int queueCapacity) {
+</span></span><span class="line"><span class="cl">        this.coreSize = coreSize;
+</span></span><span class="line"><span class="cl">        this.timeout = timeout;
+</span></span><span class="line"><span class="cl">        this.timeUnit = timeUnit;
+</span></span><span class="line"><span class="cl">        this.taskQueue = new MyBlockingQueue&lt;&gt;(queueCapacity);
+</span></span><span class="line"><span class="cl">    }
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="o">/**</span>
-</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="err">执行任务，生产任务提交线程池</span>
-</span></span><span class="line"><span class="cl">     <span class="o">*</span>
-</span></span><span class="line"><span class="cl">     <span class="o">*</span> <span class="err">@</span><span class="n">param</span> <span class="n">task</span>
-</span></span><span class="line"><span class="cl">     <span class="o">*/</span>
-</span></span><span class="line"><span class="cl">    <span class="n">public</span> <span class="n">void</span> <span class="n">execute</span><span class="p">(</span><span class="n">Runnable</span> <span class="n">task</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="o">//</span> <span class="err">当线程集合没满时，创建</span><span class="n">worker对象并交给他执行</span>
-</span></span><span class="line"><span class="cl">        <span class="o">//</span> <span class="err">当线程集合满了时，加入任务队列暂存</span>
-</span></span><span class="line"><span class="cl">        <span class="n">synchronized</span> <span class="p">(</span><span class="n">workers</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">workers</span><span class="o">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">coreSize</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="n">MyWorker</span> <span class="n">worker</span> <span class="o">=</span> <span class="n">new</span> <span class="n">MyWorker</span><span class="p">(</span><span class="n">task</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">                <span class="nb">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&#34;新增 worker{}, {}&#34;</span><span class="p">,</span> <span class="n">worker</span><span class="p">,</span> <span class="n">task</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">                <span class="n">workers</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">worker</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">                <span class="n">worker</span><span class="o">.</span><span class="n">start</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="n">taskQueue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">task</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    /**
+</span></span><span class="line"><span class="cl">     * 执行任务，生产任务提交线程池
+</span></span><span class="line"><span class="cl">     *
+</span></span><span class="line"><span class="cl">     * @param task
+</span></span><span class="line"><span class="cl">     */
+</span></span><span class="line"><span class="cl">    public void execute(Runnable task) {
+</span></span><span class="line"><span class="cl">        // 当线程集合没满时，创建worker对象并交给他执行
+</span></span><span class="line"><span class="cl">        // 当线程集合满了时，加入任务队列暂存
+</span></span><span class="line"><span class="cl">        synchronized (workers) {
+</span></span><span class="line"><span class="cl">            if (workers.size() &lt; coreSize) {
+</span></span><span class="line"><span class="cl">                MyWorker worker = new MyWorker(task);
+</span></span><span class="line"><span class="cl">                log.debug(&#34;新增 worker{}, {}&#34;, worker, task);
+</span></span><span class="line"><span class="cl">                workers.add(worker);
+</span></span><span class="line"><span class="cl">                worker.start();
+</span></span><span class="line"><span class="cl">            } else {
+</span></span><span class="line"><span class="cl">                taskQueue.put(task);
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="o">//</span><span class="err">工作线程</span>
-</span></span><span class="line"><span class="cl">    <span class="k">class</span> <span class="n">MyWorker</span> <span class="k">extends</span> <span class="ne">Thread</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">       <span class="o">//..........</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    //工作线程
+</span></span><span class="line"><span class="cl">    class MyWorker extends Thread {
+</span></span><span class="line"><span class="cl">       //..........
+</span></span><span class="line"><span class="cl">    }
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">}
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h5 id="4测试类">4）测试类</h5>
@@ -1089,37 +1086,37 @@
 </span><span class="lnt">31
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">/**</span>
-</span></span><span class="line"><span class="cl"> <span class="o">*</span> <span class="err">带超时时间的阻塞添加</span>
-</span></span><span class="line"><span class="cl"> <span class="o">*</span>
-</span></span><span class="line"><span class="cl"> <span class="o">*</span> <span class="err">@</span><span class="n">param</span> <span class="n">task</span>
-</span></span><span class="line"><span class="cl"> <span class="o">*</span> <span class="err">@</span><span class="n">param</span> <span class="n">timeout</span>
-</span></span><span class="line"><span class="cl"> <span class="o">*</span> <span class="err">@</span><span class="n">param</span> <span class="n">timeUnit</span>
-</span></span><span class="line"><span class="cl"> <span class="o">*</span> <span class="err">@</span><span class="k">return</span>
-</span></span><span class="line"><span class="cl"> <span class="o">*/</span>
-</span></span><span class="line"><span class="cl"><span class="n">public</span> <span class="n">boolean</span> <span class="n">offer</span><span class="p">(</span><span class="n">T</span> <span class="n">task</span><span class="p">,</span> <span class="n">long</span> <span class="n">timeout</span><span class="p">,</span> <span class="n">TimeUnit</span> <span class="n">timeUnit</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">lock</span><span class="o">.</span><span class="n">lock</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">    <span class="n">try</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">long</span> <span class="n">nanos</span> <span class="o">=</span> <span class="n">timeUnit</span><span class="o">.</span><span class="n">toNanos</span><span class="p">(</span><span class="n">timeout</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="k">while</span> <span class="p">(</span><span class="n">queue</span><span class="o">.</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="n">capacity</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">try</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">nanos</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                    <span class="k">return</span> <span class="bp">false</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">                <span class="p">}</span>
-</span></span><span class="line"><span class="cl">                <span class="nb">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&#34;等待加入任务队列 {} ...&#34;</span><span class="p">,</span> <span class="n">task</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">                <span class="n">nanos</span> <span class="o">=</span> <span class="n">fullWaitSet</span><span class="o">.</span><span class="n">awaitNanos</span><span class="p">(</span><span class="n">nanos</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="n">catch</span> <span class="p">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="n">e</span><span class="o">.</span><span class="n">printStackTrace</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="nb">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&#34;加入任务队列 {}&#34;</span><span class="p">,</span> <span class="n">task</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="n">queue</span><span class="o">.</span><span class="n">addLast</span><span class="p">(</span><span class="n">task</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="n">emptyWaitSet</span><span class="o">.</span><span class="k">signal</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="bp">true</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="n">finally</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">lock</span><span class="o">.</span><span class="n">unlock</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">/**
+</span></span><span class="line"><span class="cl"> * 带超时时间的阻塞添加
+</span></span><span class="line"><span class="cl"> *
+</span></span><span class="line"><span class="cl"> * @param task
+</span></span><span class="line"><span class="cl"> * @param timeout
+</span></span><span class="line"><span class="cl"> * @param timeUnit
+</span></span><span class="line"><span class="cl"> * @return
+</span></span><span class="line"><span class="cl"> */
+</span></span><span class="line"><span class="cl">public boolean offer(T task, long timeout, TimeUnit timeUnit) {
+</span></span><span class="line"><span class="cl">    lock.lock();
+</span></span><span class="line"><span class="cl">    try {
+</span></span><span class="line"><span class="cl">        long nanos = timeUnit.toNanos(timeout);
+</span></span><span class="line"><span class="cl">        while (queue.size() == capacity) {
+</span></span><span class="line"><span class="cl">            try {
+</span></span><span class="line"><span class="cl">                if (nanos &lt;= 0) {
+</span></span><span class="line"><span class="cl">                    return false;
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">                log.debug(&#34;等待加入任务队列 {} ...&#34;, task);
+</span></span><span class="line"><span class="cl">                nanos = fullWaitSet.awaitNanos(nanos);
+</span></span><span class="line"><span class="cl">            } catch (InterruptedException e) {
+</span></span><span class="line"><span class="cl">                e.printStackTrace();
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        log.debug(&#34;加入任务队列 {}&#34;, task);
+</span></span><span class="line"><span class="cl">        queue.addLast(task);
+</span></span><span class="line"><span class="cl">        emptyWaitSet.signal();
+</span></span><span class="line"><span class="cl">        return true;
+</span></span><span class="line"><span class="cl">    } finally {
+</span></span><span class="line"><span class="cl">        lock.unlock();
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h5 id="3不同的拒绝策略实现">3）不同的拒绝策略实现</h5>
@@ -1370,7 +1367,7 @@
 </div>
 </article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.127.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.105.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
                 </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ricky</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>

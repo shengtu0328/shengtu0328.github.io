@@ -4,19 +4,16 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>Springboot启动流程 - ricky的网站</title><meta name="Description" content="The best time to plant a tree was 10 years ago, the second is now"><meta property="og:url" content="https://shengtu0328.github.io/posts/springboot_startup_process/">
-  <meta property="og:site_name" content="ricky的网站">
-  <meta property="og:title" content="Springboot启动流程">
-  <meta property="og:description" content="几个重要的类 AnnotationConfigServletWebServerApplicationContext 包含了beanFactory beanFactory 包含了singletonObjects 总结springboot 启动流程 1 2 3 public static void main(String[] args) { SpringApplication.run(Application.class, args); } new">
-  <meta property="og:locale" content="zh_CN">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2023-05-24T10:38:27+08:00">
-    <meta property="article:modified_time" content="2023-05-24T10:38:27+08:00">
+        <title>Springboot启动流程 - ricky的网站</title><meta name="Description" content="The best time to plant a tree was 10 years ago, the second is now"><meta property="og:title" content="Springboot启动流程" />
+<meta property="og:description" content="几个重要的类 AnnotationConfigServletWebServerApplicationContext 包含了beanFactory beanFactory 包含了singletonObjects 总结springboot 启动流程 1 2 3 public static void main(String[] args) { SpringApplication.run(Application.class, args); } new" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://shengtu0328.github.io/posts/springboot_startup_process/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-05-24T10:38:27+08:00" />
+<meta property="article:modified_time" content="2023-05-24T10:38:27+08:00" /><meta property="og:site_name" content="我的网站" />
 
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Springboot启动流程">
-  <meta name="twitter:description" content="几个重要的类 AnnotationConfigServletWebServerApplicationContext 包含了beanFactory beanFactory 包含了singletonObjects 总结springboot 启动流程 1 2 3 public static void main(String[] args) { SpringApplication.run(Application.class, args); } new">
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Springboot启动流程"/>
+<meta name="twitter:description" content="几个重要的类 AnnotationConfigServletWebServerApplicationContext 包含了beanFactory beanFactory 包含了singletonObjects 总结springboot 启动流程 1 2 3 public static void main(String[] args) { SpringApplication.run(Application.class, args); } new"/>
 <meta name="application-name" content="我的网站">
 <meta name="apple-mobile-web-app-title" content="我的网站"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -244,11 +241,11 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/springboot_startup_process/deferredImportSelectorHandler.process%28%29.png"
-        data-srcset="/posts/springboot_startup_process/deferredImportSelectorHandler.process%28%29.png, /posts/springboot_startup_process/deferredImportSelectorHandler.process%28%29.png 1.5x, /posts/springboot_startup_process/deferredImportSelectorHandler.process%28%29.png 2x"
+        data-src="deferredImportSelectorHandler.process%28%29.png"
+        data-srcset="deferredImportSelectorHandler.process%28%29.png, deferredImportSelectorHandler.process%28%29.png 1.5x, deferredImportSelectorHandler.process%28%29.png 2x"
         data-sizes="auto"
-        alt="/posts/springboot_startup_process/deferredImportSelectorHandler.process().png"
-        title="img" width="1572" height="993" /></p>
+        alt="deferredImportSelectorHandler.process().png"
+        title="img" /></p>
 <p><strong>概括一下 就是  在ConfigurationClassPostProcessor 类中用   ConfigurationClassParser 解析启动类</strong></p>
 <p>3.1 <strong>ConfigurationClassPostProcessor</strong>.postProcessBeanDefinitionRegistry()</p>
 <p>3.1.1 ConfigurationClassUtils.checkConfigurationClassCandidate(beanDef, this.metadataReaderFactory))</p>
@@ -397,7 +394,7 @@
 </div>
 </article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.127.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.105.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
                 </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ricky</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>

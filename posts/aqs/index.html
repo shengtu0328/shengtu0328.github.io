@@ -4,19 +4,16 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>AQS - ricky的网站</title><meta name="Description" content="The best time to plant a tree was 10 years ago, the second is now"><meta property="og:url" content="https://shengtu0328.github.io/posts/aqs/">
-  <meta property="og:site_name" content="ricky的网站">
-  <meta property="og:title" content="AQS">
-  <meta property="og:description" content="CountDownLatch-&gt;AQS-&gt;Park-&gt;Unsfae 1. 概述 全称是 AbstractQueuedSynchronizer，是阻塞式锁和相关的同步器工具的框架 用 state 属性来表示资源的状态（分独占模式和">
-  <meta property="og:locale" content="zh_CN">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2022-10-27T14:29:43+08:00">
-    <meta property="article:modified_time" content="2022-10-27T14:29:43+08:00">
+        <title>AQS - ricky的网站</title><meta name="Description" content="The best time to plant a tree was 10 years ago, the second is now"><meta property="og:title" content="AQS" />
+<meta property="og:description" content="CountDownLatch-&gt;AQS-&gt;Park-&gt;Unsfae 1. 概述 全称是 AbstractQueuedSynchronizer，是阻塞式锁和相关的同步器工具的框架 用 state 属性来表示资源的状态（分独占模式和" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://shengtu0328.github.io/posts/aqs/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-10-27T14:29:43+08:00" />
+<meta property="article:modified_time" content="2022-10-27T14:29:43+08:00" /><meta property="og:site_name" content="我的网站" />
 
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="AQS">
-  <meta name="twitter:description" content="CountDownLatch-&gt;AQS-&gt;Park-&gt;Unsfae 1. 概述 全称是 AbstractQueuedSynchronizer，是阻塞式锁和相关的同步器工具的框架 用 state 属性来表示资源的状态（分独占模式和">
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="AQS"/>
+<meta name="twitter:description" content="CountDownLatch-&gt;AQS-&gt;Park-&gt;Unsfae 1. 概述 全称是 AbstractQueuedSynchronizer，是阻塞式锁和相关的同步器工具的框架 用 state 属性来表示资源的状态（分独占模式和"/>
 <meta name="application-name" content="我的网站">
 <meta name="apple-mobile-web-app-title" content="我的网站"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -293,106 +290,106 @@
 </span><span class="lnt">100
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">import</span> <span class="n">lombok</span><span class="o">.</span><span class="n">extern</span><span class="o">.</span><span class="n">slf4j</span><span class="o">.</span><span class="n">Slf4j</span><span class="p">;</span>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">import lombok.extern.slf4j.Slf4j;
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="n">java</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">concurrent</span><span class="o">.</span><span class="n">TimeUnit</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="n">java</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">concurrent</span><span class="o">.</span><span class="n">locks</span><span class="o">.</span><span class="n">AbstractQueuedSynchronizer</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="n">java</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">concurrent</span><span class="o">.</span><span class="n">locks</span><span class="o">.</span><span class="n">Condition</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="n">java</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">concurrent</span><span class="o">.</span><span class="n">locks</span><span class="o">.</span><span class="n">Lock</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">import java.util.concurrent.TimeUnit;
+</span></span><span class="line"><span class="cl">import java.util.concurrent.locks.AbstractQueuedSynchronizer;
+</span></span><span class="line"><span class="cl">import java.util.concurrent.locks.Condition;
+</span></span><span class="line"><span class="cl">import java.util.concurrent.locks.Lock;
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="k">static</span> <span class="n">cn</span><span class="o">.</span><span class="n">itcast</span><span class="o">.</span><span class="n">n2</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">Sleeper</span><span class="o">.</span><span class="n">sleep</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">import static cn.itcast.n2.util.Sleeper.sleep;
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="err">@</span><span class="n">Slf4j</span><span class="p">(</span><span class="n">topic</span> <span class="o">=</span> <span class="s2">&#34;c.TestAqs&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">public</span> <span class="k">class</span> <span class="n">TestAqs</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">public</span> <span class="k">static</span> <span class="n">void</span> <span class="n">main</span><span class="p">(</span><span class="ne">String</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">MyLock</span> <span class="n">lock</span> <span class="o">=</span> <span class="n">new</span> <span class="n">MyLock</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">        <span class="n">new</span> <span class="ne">Thread</span><span class="p">(()</span> <span class="o">-&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">lock</span><span class="o">.</span><span class="n">lock</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">            <span class="n">try</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="nb">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&#34;locking...&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">                <span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="n">finally</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="nb">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&#34;unlocking...&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">                <span class="n">lock</span><span class="o">.</span><span class="n">unlock</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="p">},</span><span class="s2">&#34;t1&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">start</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">@Slf4j(topic = &#34;c.TestAqs&#34;)
+</span></span><span class="line"><span class="cl">public class TestAqs {
+</span></span><span class="line"><span class="cl">    public static void main(String[] args) {
+</span></span><span class="line"><span class="cl">        MyLock lock = new MyLock();
+</span></span><span class="line"><span class="cl">        new Thread(() -&gt; {
+</span></span><span class="line"><span class="cl">            lock.lock();
+</span></span><span class="line"><span class="cl">            try {
+</span></span><span class="line"><span class="cl">                log.debug(&#34;locking...&#34;);
+</span></span><span class="line"><span class="cl">                sleep(1);
+</span></span><span class="line"><span class="cl">            } finally {
+</span></span><span class="line"><span class="cl">                log.debug(&#34;unlocking...&#34;);
+</span></span><span class="line"><span class="cl">                lock.unlock();
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        },&#34;t1&#34;).start();
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="n">new</span> <span class="ne">Thread</span><span class="p">(()</span> <span class="o">-&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">lock</span><span class="o">.</span><span class="n">lock</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">            <span class="n">try</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="nb">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&#34;locking...&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="n">finally</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="nb">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&#34;unlocking...&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">                <span class="n">lock</span><span class="o">.</span><span class="n">unlock</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="p">},</span><span class="s2">&#34;t2&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">start</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">        new Thread(() -&gt; {
+</span></span><span class="line"><span class="cl">            lock.lock();
+</span></span><span class="line"><span class="cl">            try {
+</span></span><span class="line"><span class="cl">                log.debug(&#34;locking...&#34;);
+</span></span><span class="line"><span class="cl">            } finally {
+</span></span><span class="line"><span class="cl">                log.debug(&#34;unlocking...&#34;);
+</span></span><span class="line"><span class="cl">                lock.unlock();
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        },&#34;t2&#34;).start();
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="err">自定义锁（不可重入锁）</span>
-</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="n">MyLock</span> <span class="n">implements</span> <span class="n">Lock</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">// 自定义锁（不可重入锁）
+</span></span><span class="line"><span class="cl">class MyLock implements Lock {
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="o">//</span> <span class="err">独占锁</span>  <span class="err">同步器类</span>
-</span></span><span class="line"><span class="cl">    <span class="k">class</span> <span class="n">MySync</span> <span class="k">extends</span> <span class="n">AbstractQueuedSynchronizer</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="err">@</span><span class="n">Override</span>
-</span></span><span class="line"><span class="cl">        <span class="n">protected</span> <span class="n">boolean</span> <span class="n">tryAcquire</span><span class="p">(</span><span class="ne">int</span> <span class="n">arg</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">compareAndSetState</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="o">//</span> <span class="err">加上了锁，并设置</span> <span class="n">owner</span> <span class="err">为当前线程</span>
-</span></span><span class="line"><span class="cl">                <span class="n">setExclusiveOwnerThread</span><span class="p">(</span><span class="ne">Thread</span><span class="o">.</span><span class="n">currentThread</span><span class="p">());</span>
-</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="bp">true</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="bp">false</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    // 独占锁  同步器类
+</span></span><span class="line"><span class="cl">    class MySync extends AbstractQueuedSynchronizer {
+</span></span><span class="line"><span class="cl">        @Override
+</span></span><span class="line"><span class="cl">        protected boolean tryAcquire(int arg) {
+</span></span><span class="line"><span class="cl">            if(compareAndSetState(0, 1)) {
+</span></span><span class="line"><span class="cl">                // 加上了锁，并设置 owner 为当前线程
+</span></span><span class="line"><span class="cl">                setExclusiveOwnerThread(Thread.currentThread());
+</span></span><span class="line"><span class="cl">                return true;
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            return false;
+</span></span><span class="line"><span class="cl">        }
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="err">@</span><span class="n">Override</span>
-</span></span><span class="line"><span class="cl">        <span class="n">protected</span> <span class="n">boolean</span> <span class="n">tryRelease</span><span class="p">(</span><span class="ne">int</span> <span class="n">arg</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">setExclusiveOwnerThread</span><span class="p">(</span><span class="n">null</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="n">setState</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="bp">true</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        @Override
+</span></span><span class="line"><span class="cl">        protected boolean tryRelease(int arg) {
+</span></span><span class="line"><span class="cl">            setExclusiveOwnerThread(null);
+</span></span><span class="line"><span class="cl">            setState(0);
+</span></span><span class="line"><span class="cl">            return true;
+</span></span><span class="line"><span class="cl">        }
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="err">@</span><span class="n">Override</span> <span class="o">//</span> <span class="err">是否持有独占锁</span>
-</span></span><span class="line"><span class="cl">        <span class="n">protected</span> <span class="n">boolean</span> <span class="n">isHeldExclusively</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">getState</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        @Override // 是否持有独占锁
+</span></span><span class="line"><span class="cl">        protected boolean isHeldExclusively() {
+</span></span><span class="line"><span class="cl">            return getState() == 1;
+</span></span><span class="line"><span class="cl">        }
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="n">public</span> <span class="n">Condition</span> <span class="n">newCondition</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">new</span> <span class="n">ConditionObject</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        public Condition newCondition() {
+</span></span><span class="line"><span class="cl">            return new ConditionObject();
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="n">private</span> <span class="n">MySync</span> <span class="n">sync</span> <span class="o">=</span> <span class="n">new</span> <span class="n">MySync</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    private MySync sync = new MySync();
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="err">@</span><span class="n">Override</span> <span class="o">//</span> <span class="err">加锁（不成功会进入等待队列）</span>
-</span></span><span class="line"><span class="cl">    <span class="n">public</span> <span class="n">void</span> <span class="n">lock</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">sync</span><span class="o">.</span><span class="n">acquire</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    @Override // 加锁（不成功会进入等待队列）
+</span></span><span class="line"><span class="cl">    public void lock() {
+</span></span><span class="line"><span class="cl">        sync.acquire(1);
+</span></span><span class="line"><span class="cl">    }
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="err">@</span><span class="n">Override</span> <span class="o">//</span> <span class="err">加锁，可打断</span>
-</span></span><span class="line"><span class="cl">    <span class="n">public</span> <span class="n">void</span> <span class="n">lockInterruptibly</span><span class="p">()</span> <span class="n">throws</span> <span class="n">InterruptedException</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">sync</span><span class="o">.</span><span class="n">acquireInterruptibly</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    @Override // 加锁，可打断
+</span></span><span class="line"><span class="cl">    public void lockInterruptibly() throws InterruptedException {
+</span></span><span class="line"><span class="cl">        sync.acquireInterruptibly(1);
+</span></span><span class="line"><span class="cl">    }
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="err">@</span><span class="n">Override</span> <span class="o">//</span> <span class="err">尝试加锁（一次）</span>
-</span></span><span class="line"><span class="cl">    <span class="n">public</span> <span class="n">boolean</span> <span class="n">tryLock</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">sync</span><span class="o">.</span><span class="n">tryAcquire</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    @Override // 尝试加锁（一次）
+</span></span><span class="line"><span class="cl">    public boolean tryLock() {
+</span></span><span class="line"><span class="cl">        return sync.tryAcquire(1);
+</span></span><span class="line"><span class="cl">    }
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="err">@</span><span class="n">Override</span> <span class="o">//</span> <span class="err">尝试加锁，带超时</span>
-</span></span><span class="line"><span class="cl">    <span class="n">public</span> <span class="n">boolean</span> <span class="n">tryLock</span><span class="p">(</span><span class="n">long</span> <span class="n">time</span><span class="p">,</span> <span class="n">TimeUnit</span> <span class="n">unit</span><span class="p">)</span> <span class="n">throws</span> <span class="n">InterruptedException</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">sync</span><span class="o">.</span><span class="n">tryAcquireNanos</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">unit</span><span class="o">.</span><span class="n">toNanos</span><span class="p">(</span><span class="n">time</span><span class="p">));</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    @Override // 尝试加锁，带超时
+</span></span><span class="line"><span class="cl">    public boolean tryLock(long time, TimeUnit unit) throws InterruptedException {
+</span></span><span class="line"><span class="cl">        return sync.tryAcquireNanos(1, unit.toNanos(time));
+</span></span><span class="line"><span class="cl">    }
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="err">@</span><span class="n">Override</span> <span class="o">//</span> <span class="err">解锁</span>
-</span></span><span class="line"><span class="cl">    <span class="n">public</span> <span class="n">void</span> <span class="n">unlock</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">sync</span><span class="o">.</span><span class="n">release</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    @Override // 解锁
+</span></span><span class="line"><span class="cl">    public void unlock() {
+</span></span><span class="line"><span class="cl">        sync.release(1);
+</span></span><span class="line"><span class="cl">    }
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="err">@</span><span class="n">Override</span> <span class="o">//</span> <span class="err">创建条件变量</span>
-</span></span><span class="line"><span class="cl">    <span class="n">public</span> <span class="n">Condition</span> <span class="n">newCondition</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">sync</span><span class="o">.</span><span class="n">newCondition</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">    @Override // 创建条件变量
+</span></span><span class="line"><span class="cl">    public Condition newCondition() {
+</span></span><span class="line"><span class="cl">        return sync.newCondition();
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="reentrantlock">ReentrantLock</h3>
@@ -424,7 +421,7 @@
 </div>
 </article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.127.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.105.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
                 </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ricky</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>

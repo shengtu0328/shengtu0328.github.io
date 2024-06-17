@@ -4,19 +4,16 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>Cap - ricky的网站</title><meta name="Description" content="The best time to plant a tree was 10 years ago, the second is now"><meta property="og:url" content="https://shengtu0328.github.io/posts/cap/">
-  <meta property="og:site_name" content="ricky的网站">
-  <meta property="og:title" content="Cap">
-  <meta property="og:description" content="CAP 理论： CAP 定理（CAP theorem）又被称作布鲁尔定理（Brewer’s theorem），是加州大学伯克利分校的计算机科学家埃">
-  <meta property="og:locale" content="zh_CN">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2023-07-20T08:41:06+08:00">
-    <meta property="article:modified_time" content="2023-07-20T08:41:06+08:00">
+        <title>Cap - ricky的网站</title><meta name="Description" content="The best time to plant a tree was 10 years ago, the second is now"><meta property="og:title" content="Cap" />
+<meta property="og:description" content="CAP 理论： CAP 定理（CAP theorem）又被称作布鲁尔定理（Brewer&rsquo;s theorem），是加州大学伯克利分校的计算机科学家埃" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://shengtu0328.github.io/posts/cap/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-07-20T08:41:06+08:00" />
+<meta property="article:modified_time" content="2023-07-20T08:41:06+08:00" /><meta property="og:site_name" content="我的网站" />
 
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Cap">
-  <meta name="twitter:description" content="CAP 理论： CAP 定理（CAP theorem）又被称作布鲁尔定理（Brewer’s theorem），是加州大学伯克利分校的计算机科学家埃">
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Cap"/>
+<meta name="twitter:description" content="CAP 理论： CAP 定理（CAP theorem）又被称作布鲁尔定理（Brewer&rsquo;s theorem），是加州大学伯克利分校的计算机科学家埃"/>
 <meta name="application-name" content="我的网站">
 <meta name="apple-mobile-web-app-title" content="我的网站"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -131,22 +128,22 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/cap/cp.png"
-        data-srcset="/posts/cap/cp.png, /posts/cap/cp.png 1.5x, /posts/cap/cp.png 2x"
+        data-src="cp.png"
+        data-srcset="cp.png, cp.png 1.5x, cp.png 2x"
         data-sizes="auto"
-        alt="/posts/cap/cp.png"
-        title="img" width="337" height="289" /></p>
+        alt="cp.png"
+        title="img" /></p>
 <ul>
 <li>AP：如下图所示，<code>为了保证可用性</code>，当发生分区现象后，N1 节点上的数据已经更新到 y，但由于 N1 和 N2 之间的复制通道中断，数据 y 无法同步到 N2，N2 节点上的数据还是 x。<code>这时客户端 C 访问 N2 时，N2 将当前自己拥有的数据 x 返回给客户端 C 了</code>，而实际上当前最新的数据已经是 y 了，这就<code>不满足一致性</code>（Consistency）的要求了，因此 CAP 三者只能满足 AP。注意：这里 N2 节点返回 x，虽然不是一个“正确”的结果，但是一个“合理”的结果，因为 x 是旧的数据，并不是一个错乱的值，只是不是最新的数据而已。</li>
 </ul>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/cap/ap.png"
-        data-srcset="/posts/cap/ap.png, /posts/cap/ap.png 1.5x, /posts/cap/ap.png 2x"
+        data-src="ap.png"
+        data-srcset="ap.png, ap.png 1.5x, ap.png 2x"
         data-sizes="auto"
-        alt="/posts/cap/ap.png"
-        title="img" width="334" height="287" /></p>
+        alt="ap.png"
+        title="img" /></p>
 </li>
 <li>
 <p>CAP 理论中的 <code>C 在实践中是不可能完美实现的</code>，在数据复制的过程中，节点N1 和节点 N2 的数据并不一致（强一致性）。即使无法做到<code>强一致性</code>，但应用可以采用适合的方式达到<code>最终一致性</code>。具有如下特点：</p>
@@ -185,7 +182,7 @@ Eureka 保证的则是 AP。 Eureka 在设计的时候就是优先保证 A （�
 </div>
 </article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.127.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.105.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
                 </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ricky</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>

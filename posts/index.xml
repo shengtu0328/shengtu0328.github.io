@@ -4,7 +4,7 @@
         <link>https://shengtu0328.github.io/posts/</link>
         <description>All Posts | ricky的网站</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1007@qq.com (ricky)</managingEditor>
-            <webMaster>1007@qq.com (ricky)</webMaster><lastBuildDate>Thu, 11 Apr 2024 15:18:11 &#43;0800</lastBuildDate><atom:link href="https://shengtu0328.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>1007@qq.com (ricky)</webMaster><lastBuildDate>Mon, 17 Jun 2024 09:32:16 &#43;0800</lastBuildDate><atom:link href="https://shengtu0328.github.io/posts/" rel="self" type="application/rss+xml" /><item>
     <title>线程池</title>
     <link>https://shengtu0328.github.io/posts/threadpool/</link>
     <pubDate>Thu, 01 Dec 2022 14:14:25 &#43;0800</pubDate>
@@ -35,6 +35,14 @@
     <author>ricky</author>
     <guid>https://shengtu0328.github.io/posts/english_writing/</guid>
     <description><![CDATA[Why i learned English I recently watched some interesting videos on bilibli which is about communicating with foreigners in English on website. The videos was so funny that it made me have the idea of relearning the skill of English language . You know，i recently started to practise my english from multiple aspects 。Literally,m]]></description>
+</item>
+<item>
+    <title>Mysql_lock</title>
+    <link>https://shengtu0328.github.io/posts/mysql_lock/</link>
+    <pubDate>Mon, 17 Jun 2024 09:32:16 &#43;0800</pubDate>
+    <author>ricky</author>
+    <guid>https://shengtu0328.github.io/posts/mysql_lock/</guid>
+    <description><![CDATA[5.锁 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 -- 测试数据 CREATE TABLE `a` ( `uid` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT &#39;&#39; COMMENT &#39;审核记录主表 guid&#39;, `approval_status` int(11) NULL]]></description>
 </item>
 <item>
     <title>MyBatis</title>
@@ -75,14 +83,6 @@
     <author>ricky</author>
     <guid>https://shengtu0328.github.io/posts/nacos/</guid>
     <description><![CDATA[Nacos 本身就是一个 springboot项目 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 nacos-1.4.2 |-- address |-- api |-- auth |-- client |-- cmdb |-- common |-- config |-- consistency |-- console #http://127.0.0.1:8848/nacos/index.html 打开的页面就是在]]></description>
-</item>
-<item>
-    <title>English_grammar_non_predicate_verbs</title>
-    <link>https://shengtu0328.github.io/posts/english_grammar_non_predicate_verbs/</link>
-    <pubDate>Fri, 15 Dec 2023 12:57:10 &#43;0800</pubDate>
-    <author>ricky</author>
-    <guid>https://shengtu0328.github.io/posts/english_grammar_non_predicate_verbs/</guid>
-    <description><![CDATA[非谓语动词本质 不定式 不定式做名词 例二： 考研英语一2014年阅读第三篇：For example, the Long Now Foundation has as its flagship project/a mechanical clockthatis designed to still be marking time thousands of yearshence. 【分析】1. the Long Now Foundationhas as]]></description>
 </item>
 </channel>
 </rss>

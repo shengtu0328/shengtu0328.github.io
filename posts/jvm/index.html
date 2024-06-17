@@ -4,23 +4,20 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>JVM学习 - ricky的网站</title><meta name="Description" content="The best time to plant a tree was 10 years ago, the second is now"><meta property="og:url" content="https://shengtu0328.github.io/posts/jvm/">
-  <meta property="og:site_name" content="ricky的网站">
-  <meta property="og:title" content="JVM学习">
-  <meta property="og:description" content="一、什么是JVM 定义 Java Virtual Machine，JAVA程序的运行环境（JAVA二进制字节码的运行环境） 功能 解释和运行 对字节码文件中的指令，实时的解">
-  <meta property="og:locale" content="zh_CN">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2022-10-11T18:23:30+08:00">
-    <meta property="article:modified_time" content="2022-10-11T18:23:30+08:00">
+        <title>JVM学习 - ricky的网站</title><meta name="Description" content="The best time to plant a tree was 10 years ago, the second is now"><meta property="og:title" content="JVM学习" />
+<meta property="og:description" content="一、什么是JVM 定义 Java Virtual Machine，JAVA程序的运行环境（JAVA二进制字节码的运行环境） 功能 解释和运行 对字节码文件中的指令，实时的解" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://shengtu0328.github.io/posts/jvm/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-10-11T18:23:30+08:00" />
+<meta property="article:modified_time" content="2022-10-11T18:23:30+08:00" /><meta property="og:site_name" content="我的网站" />
 
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="JVM学习">
-  <meta name="twitter:description" content="一、什么是JVM 定义 Java Virtual Machine，JAVA程序的运行环境（JAVA二进制字节码的运行环境） 功能 解释和运行 对字节码文件中的指令，实时的解">
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="JVM学习"/>
+<meta name="twitter:description" content="一、什么是JVM 定义 Java Virtual Machine，JAVA程序的运行环境（JAVA二进制字节码的运行环境） 功能 解释和运行 对字节码文件中的指令，实时的解"/>
 <meta name="application-name" content="我的网站">
 <meta name="apple-mobile-web-app-title" content="我的网站"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://shengtu0328.github.io/posts/jvm/" /><link rel="prev" href="https://shengtu0328.github.io/posts/mysql_lock/" /><link rel="next" href="https://shengtu0328.github.io/posts/spring/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://shengtu0328.github.io/posts/jvm/" /><link rel="prev" href="https://shengtu0328.github.io/posts/ffmpeg/" /><link rel="next" href="https://shengtu0328.github.io/posts/spring/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -104,7 +101,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">JVM学习</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a>
-</span>&nbsp;<span class="post-category">included in <a href="/categories/tech/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Tech</a></span></div>
+</span>&nbsp;<span class="post-category">included in <a href="/categories/tech/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>tech</a></span></div>
             <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-10-11">2022-10-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;13639 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;28 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
@@ -253,11 +250,11 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/jvm/jit.png"
-        data-srcset="/posts/jvm/jit.png, /posts/jvm/jit.png 1.5x, /posts/jvm/jit.png 2x"
+        data-src="jit.png"
+        data-srcset="jit.png, jit.png 1.5x, jit.png 2x"
         data-sizes="auto"
-        alt="/posts/jvm/jit.png"
-        title="/posts/jvm/jit.png" width="1011" height="426" /></p>
+        alt="jit.png"
+        title="jit.png" /></p>
 <h3 id="好处">好处</h3>
 <ul>
 <li>
@@ -276,11 +273,11 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/jvm/001.png"
-        data-srcset="/posts/jvm/001.png, /posts/jvm/001.png 1.5x, /posts/jvm/001.png 2x"
+        data-src="001.png"
+        data-srcset="001.png, 001.png 1.5x, 001.png 2x"
         data-sizes="auto"
-        alt="/posts/jvm/001.png"
-        title="/posts/jvm/001.png" width="1156" height="712" /></p>
+        alt="001.png"
+        title="001.png" /></p>
 <h3 id="jvm参数">jvm参数</h3>
 <ul>
 <li>
@@ -373,11 +370,11 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/jvm/002.png"
-        data-srcset="/posts/jvm/002.png, /posts/jvm/002.png 1.5x, /posts/jvm/002.png 2x"
+        data-src="002.png"
+        data-srcset="002.png, 002.png 1.5x, 002.png 2x"
         data-sizes="auto"
-        alt="/posts/jvm/002.png"
-        title="/posts/jvm/002.png" width="1336" height="754" /></p>
+        alt="002.png"
+        title="002.png" /></p>
 <ul>
 <li>
 <p>方法区:存放了类</p>
@@ -405,11 +402,11 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/jvm/005.png"
-        data-srcset="/posts/jvm/005.png, /posts/jvm/005.png 1.5x, /posts/jvm/005.png 2x"
+        data-src="005.png"
+        data-srcset="005.png, 005.png 1.5x, 005.png 2x"
         data-sizes="auto"
-        alt="/posts/jvm/005.png"
-        title="/posts/jvm/005.png" width="1726" height="920" /></p>
+        alt="005.png"
+        title="005.png" /></p>
 <h4 id="作用">作用</h4>
 <p>用于保存JVM中下一条所要执行的指令的地址</p>
 <h4 id="特点">特点</h4>
@@ -473,11 +470,11 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/jvm/008_stack.png"
-        data-srcset="/posts/jvm/008_stack.png, /posts/jvm/008_stack.png 1.5x, /posts/jvm/008_stack.png 2x"
+        data-src="008_stack.png"
+        data-srcset="008_stack.png, 008_stack.png 1.5x, 008_stack.png 2x"
         data-sizes="auto"
-        alt="/posts/jvm/008_stack.png"
-        title="/posts/jvm/008_stack.png" width="1338" height="1210" /></p>
+        alt="008_stack.png"
+        title="008_stack.png" /></p>
 <h4 id="问题辨析">问题辨析</h4>
 <ul>
 <li>
@@ -515,11 +512,11 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/jvm/012.png"
-        data-srcset="/posts/jvm/012.png, /posts/jvm/012.png 1.5x, /posts/jvm/012.png 2x"
+        data-src="012.png"
+        data-srcset="012.png, 012.png 1.5x, 012.png 2x"
         data-sizes="auto"
-        alt="/posts/jvm/012.png"
-        title="/posts/jvm/012.png" width="1426" height="696" /></p>
+        alt="012.png"
+        title="012.png" /></p>
 </li>
 </ul>
 <h4 id="线程运行诊断">线程运行诊断</h4>
@@ -548,22 +545,22 @@
 <p>​    <img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/jvm/016_nativeMethod.png"
-        data-srcset="/posts/jvm/016_nativeMethod.png, /posts/jvm/016_nativeMethod.png 1.5x, /posts/jvm/016_nativeMethod.png 2x"
+        data-src="016_nativeMethod.png"
+        data-srcset="016_nativeMethod.png, 016_nativeMethod.png 1.5x, 016_nativeMethod.png 2x"
         data-sizes="auto"
-        alt="/posts/jvm/016_nativeMethod.png"
-        title="/posts/jvm/016_nativeMethod.png" width="1390" height="840" /></p>
+        alt="016_nativeMethod.png"
+        title="016_nativeMethod.png" /></p>
 <p>一些带有<strong>native关键字</strong>的方法就是需要JAVA去调用本地的C或者C++方法，因为JAVA有时候没法直接和操作系统底层交互，所以需要用到本地方法</p>
 <h3 id="4堆">4、堆</h3>
 <p>Heap 堆</p>
 <p>​    <img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/jvm/017_%E5%A0%86.png"
-        data-srcset="/posts/jvm/017_%E5%A0%86.png, /posts/jvm/017_%E5%A0%86.png 1.5x, /posts/jvm/017_%E5%A0%86.png 2x"
+        data-src="017_%e5%a0%86.png"
+        data-srcset="017_%e5%a0%86.png, 017_%e5%a0%86.png 1.5x, 017_%e5%a0%86.png 2x"
         data-sizes="auto"
-        alt="/posts/jvm/017_%E5%A0%86.png"
-        title="/posts/jvm/017_%E5%A0%86.png" width="1374" height="740" /></p>
+        alt="017_堆.png"
+        title="017_堆.png" /></p>
 <h4 id="定义-2">定义</h4>
 <p>通过new关键字<strong>创建的对象</strong>都会被放在堆内存</p>
 <h4 id="特点-1">特点</h4>
@@ -610,11 +607,11 @@
 <p>​    <img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/jvm/020_jconsole.png"
-        data-srcset="/posts/jvm/020_jconsole.png, /posts/jvm/020_jconsole.png 1.5x, /posts/jvm/020_jconsole.png 2x"
+        data-src="020_jconsole.png"
+        data-srcset="020_jconsole.png, 020_jconsole.png 1.5x, 020_jconsole.png 2x"
         data-sizes="auto"
-        alt="/posts/jvm/020_jconsole.png"
-        title="/posts/jvm/020_jconsole.png" width="1766" height="1476" /></p>
+        alt="020_jconsole.png"
+        title="020_jconsole.png" /></p>
 </li>
 </ul>
 <ol start="4">
@@ -626,22 +623,22 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/jvm/021_jvisualvm.png"
-        data-srcset="/posts/jvm/021_jvisualvm.png, /posts/jvm/021_jvisualvm.png 1.5x, /posts/jvm/021_jvisualvm.png 2x"
+        data-src="021_jvisualvm.png"
+        data-srcset="021_jvisualvm.png, 021_jvisualvm.png 1.5x, 021_jvisualvm.png 2x"
         data-sizes="auto"
-        alt="/posts/jvm/021_jvisualvm.png"
-        title="/posts/jvm/021_jvisualvm.png" width="2830" height="1494" /></p>
+        alt="021_jvisualvm.png"
+        title="021_jvisualvm.png" /></p>
 </li>
 </ul>
 <h3 id="5方法区">5、方法区</h3>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/jvm/022_%E6%96%B9%E6%B3%95%E5%8C%BA.png"
-        data-srcset="/posts/jvm/022_%E6%96%B9%E6%B3%95%E5%8C%BA.png, /posts/jvm/022_%E6%96%B9%E6%B3%95%E5%8C%BA.png 1.5x, /posts/jvm/022_%E6%96%B9%E6%B3%95%E5%8C%BA.png 2x"
+        data-src="022_%e6%96%b9%e6%b3%95%e5%8c%ba.png"
+        data-srcset="022_%e6%96%b9%e6%b3%95%e5%8c%ba.png, 022_%e6%96%b9%e6%b3%95%e5%8c%ba.png 1.5x, 022_%e6%96%b9%e6%b3%95%e5%8c%ba.png 2x"
         data-sizes="auto"
-        alt="/posts/jvm/022_%E6%96%B9%E6%B3%95%E5%8C%BA.png"
-        title="/posts/jvm/022_%E6%96%B9%E6%B3%95%E5%8C%BA.png" width="1392" height="766" /></p>
+        alt="022_方法区.png"
+        title="022_方法区.png" /></p>
 <p><a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-2.html#jvms-2.5.4" target="_blank" rel="noopener noreffer">https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-2.html#jvms-2.5.4</a>
 </p>
 <p>The Java Virtual Machine has a <em><strong>method area</strong></em> that is <strong>shared among all Java Virtual Machine threads</strong>. The method area is analogous（相似的） to the storage area for compiled code of a conventional language or analogous to the &ldquo;text&rdquo; segment in an operating system process. It stores per-class structures such as the run-time constant pool（<strong>运行时常量池</strong>), field （ ）and method data, and the code for methods(<strong>方法</strong>) and constructors（<strong>构造方法</strong>）, including the special methods (<a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-2.html#jvms-2.9" target="_blank" rel="noopener noreffer">§2.9</a>
@@ -662,11 +659,11 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/jvm/022_%E6%96%B9%E6%B3%95%E5%8C%BA%E5%AE%9A%E4%B9%89.png"
-        data-srcset="/posts/jvm/022_%E6%96%B9%E6%B3%95%E5%8C%BA%E5%AE%9A%E4%B9%89.png, /posts/jvm/022_%E6%96%B9%E6%B3%95%E5%8C%BA%E5%AE%9A%E4%B9%89.png 1.5x, /posts/jvm/022_%E6%96%B9%E6%B3%95%E5%8C%BA%E5%AE%9A%E4%B9%89.png 2x"
+        data-src="022_%e6%96%b9%e6%b3%95%e5%8c%ba%e5%ae%9a%e4%b9%89.png"
+        data-srcset="022_%e6%96%b9%e6%b3%95%e5%8c%ba%e5%ae%9a%e4%b9%89.png, 022_%e6%96%b9%e6%b3%95%e5%8c%ba%e5%ae%9a%e4%b9%89.png 1.5x, 022_%e6%96%b9%e6%b3%95%e5%8c%ba%e5%ae%9a%e4%b9%89.png 2x"
         data-sizes="auto"
-        alt="/posts/jvm/022_%E6%96%B9%E6%B3%95%E5%8C%BA%E5%AE%9A%E4%B9%89.png"
-        title="/posts/jvm/022_%E6%96%B9%E6%B3%95%E5%8C%BA%E5%AE%9A%E4%B9%89.png" width="1282" height="946" /></p>
+        alt="022_方法区定义.png"
+        title="022_方法区定义.png" /></p>
 </li>
 </ul>
 <h4 id="内存溢出-1">内存溢出</h4>
@@ -714,31 +711,31 @@
 </span><span class="lnt">25
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">/**</span>
-</span></span><span class="line"><span class="cl"> <span class="o">*</span> <span class="err">演示元空间内存溢出</span> <span class="n">java</span><span class="o">.</span><span class="n">lang</span><span class="o">.</span><span class="n">OutOfMemoryError</span><span class="p">:</span> <span class="n">Metaspace</span>
-</span></span><span class="line"><span class="cl"> <span class="o">*</span> <span class="err">元空间</span> <span class="err">大小参数设置</span>
-</span></span><span class="line"><span class="cl"> <span class="o">*</span> <span class="o">-</span><span class="n">XX</span><span class="p">:</span><span class="n">MaxMetaspaceSize</span><span class="o">=</span><span class="mi">8</span><span class="n">m</span>
-</span></span><span class="line"><span class="cl"> <span class="o">*/</span>
-</span></span><span class="line"><span class="cl"><span class="n">public</span> <span class="k">class</span> <span class="n">Demo1_8</span> <span class="k">extends</span> <span class="n">ClassLoader</span> <span class="p">{</span> <span class="o">//</span> <span class="err">可以用来加载类的二进制字节码</span>
-</span></span><span class="line"><span class="cl">    <span class="n">public</span> <span class="k">static</span> <span class="n">void</span> <span class="n">main</span><span class="p">(</span><span class="ne">String</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="ne">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">try</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">Demo1_8</span> <span class="n">test</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Demo1_8</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="p">(</span><span class="ne">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10000</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">,</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="o">//</span> <span class="n">ClassWriter</span> <span class="err">作用是生成类的二进制字节码</span>
-</span></span><span class="line"><span class="cl">                <span class="n">ClassWriter</span> <span class="n">cw</span> <span class="o">=</span> <span class="n">new</span> <span class="n">ClassWriter</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">                <span class="o">//</span><span class="err">参数定义</span><span class="p">:</span> <span class="err">版本号，</span> <span class="n">public</span><span class="err">，</span> <span class="err">类名</span><span class="p">,</span> <span class="err">包名</span><span class="p">,</span> <span class="err">父类，</span> <span class="err">接口</span>
-</span></span><span class="line"><span class="cl">                <span class="n">cw</span><span class="o">.</span><span class="n">visit</span><span class="p">(</span><span class="n">Opcodes</span><span class="o">.</span><span class="n">V1_8</span><span class="p">,</span> <span class="n">Opcodes</span><span class="o">.</span><span class="n">ACC_PUBLIC</span><span class="p">,</span> <span class="s2">&#34;Class&#34;</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span> <span class="n">null</span><span class="p">,</span> <span class="s2">&#34;java/lang/Object&#34;</span><span class="p">,</span> <span class="n">null</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">                <span class="o">//</span> <span class="err">返回</span> <span class="n">byte</span><span class="p">[]</span>
-</span></span><span class="line"><span class="cl">                <span class="n">byte</span><span class="p">[]</span> <span class="n">code</span> <span class="o">=</span> <span class="n">cw</span><span class="o">.</span><span class="n">toByteArray</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">                <span class="o">//</span> <span class="err">执行了类的加载</span>
-</span></span><span class="line"><span class="cl">                <span class="n">test</span><span class="o">.</span><span class="n">defineClass</span><span class="p">(</span><span class="s2">&#34;Class&#34;</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span> <span class="n">code</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">code</span><span class="o">.</span><span class="n">length</span><span class="p">);</span> <span class="o">//</span> <span class="n">Class</span> <span class="err">对象</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="n">finally</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="n">j</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">/**
+</span></span><span class="line"><span class="cl"> * 演示元空间内存溢出 java.lang.OutOfMemoryError: Metaspace
+</span></span><span class="line"><span class="cl"> * 元空间 大小参数设置
+</span></span><span class="line"><span class="cl"> * -XX:MaxMetaspaceSize=8m
+</span></span><span class="line"><span class="cl"> */
+</span></span><span class="line"><span class="cl">public class Demo1_8 extends ClassLoader { // 可以用来加载类的二进制字节码
+</span></span><span class="line"><span class="cl">    public static void main(String[] args) {
+</span></span><span class="line"><span class="cl">        int j = 0;
+</span></span><span class="line"><span class="cl">        try {
+</span></span><span class="line"><span class="cl">            Demo1_8 test = new Demo1_8();
+</span></span><span class="line"><span class="cl">            for (int i = 0; i &lt; 10000; i++, j++) {
+</span></span><span class="line"><span class="cl">                // ClassWriter 作用是生成类的二进制字节码
+</span></span><span class="line"><span class="cl">                ClassWriter cw = new ClassWriter(0);
+</span></span><span class="line"><span class="cl">                //参数定义: 版本号， public， 类名, 包名, 父类， 接口
+</span></span><span class="line"><span class="cl">                cw.visit(Opcodes.V1_8, Opcodes.ACC_PUBLIC, &#34;Class&#34; + i, null, &#34;java/lang/Object&#34;, null);
+</span></span><span class="line"><span class="cl">                // 返回 byte[]
+</span></span><span class="line"><span class="cl">                byte[] code = cw.toByteArray();
+</span></span><span class="line"><span class="cl">                // 执行了类的加载
+</span></span><span class="line"><span class="cl">                test.defineClass(&#34;Class&#34; + i, code, 0, code.length); // Class 对象
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        } finally {
+</span></span><span class="line"><span class="cl">            System.out.println(j);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>工作中加载类的场景</p>
@@ -871,85 +868,85 @@
 </span><span class="lnt">79
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">========================</span><span class="err">类基本信息</span><span class="o">========================</span>
-</span></span><span class="line"><span class="cl">  <span class="n">Last</span> <span class="n">modified</span> <span class="mi">2022</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">14</span><span class="p">;</span> <span class="n">size</span> <span class="mi">567</span> <span class="n">bytes</span>
-</span></span><span class="line"><span class="cl">  <span class="n">MD5</span> <span class="n">checksum</span> <span class="mi">8</span><span class="n">efebdac91aa496515fa1c161184e354</span>
-</span></span><span class="line"><span class="cl">  <span class="n">Compiled</span> <span class="n">from</span> <span class="s2">&#34;HelloWorld.java&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="n">public</span> <span class="k">class</span> <span class="n">cn</span><span class="o">.</span><span class="n">itcast</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">t5</span><span class="o">.</span><span class="n">HelloWorld</span>
-</span></span><span class="line"><span class="cl">  <span class="n">minor</span> <span class="n">version</span><span class="p">:</span> <span class="mi">0</span>
-</span></span><span class="line"><span class="cl">  <span class="n">major</span> <span class="n">version</span><span class="p">:</span> <span class="mi">52</span>
-</span></span><span class="line"><span class="cl">  <span class="n">flags</span><span class="p">:</span> <span class="n">ACC_PUBLIC</span><span class="p">,</span> <span class="n">ACC_SUPER</span>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">========================类基本信息========================
+</span></span><span class="line"><span class="cl">  Last modified 2022-10-14; size 567 bytes
+</span></span><span class="line"><span class="cl">  MD5 checksum 8efebdac91aa496515fa1c161184e354
+</span></span><span class="line"><span class="cl">  Compiled from &#34;HelloWorld.java&#34;
+</span></span><span class="line"><span class="cl">public class cn.itcast.jvm.t5.HelloWorld
+</span></span><span class="line"><span class="cl">  minor version: 0
+</span></span><span class="line"><span class="cl">  major version: 52
+</span></span><span class="line"><span class="cl">  flags: ACC_PUBLIC, ACC_SUPER
 </span></span><span class="line"><span class="cl">  
-</span></span><span class="line"><span class="cl"><span class="o">========================</span><span class="err">常量池</span><span class="o">========================</span>
-</span></span><span class="line"><span class="cl"><span class="n">Constant</span> <span class="n">pool</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">   <span class="c1">#1 = Methodref          #6.#20         // java/lang/Object.&#34;&lt;init&gt;&#34;:()V</span>
-</span></span><span class="line"><span class="cl">   <span class="c1">#2 = Fieldref           #21.#22        // java/lang/System.out:Ljava/io/PrintStream;</span>
-</span></span><span class="line"><span class="cl">   <span class="c1">#3 = String             #23            // hello world</span>
-</span></span><span class="line"><span class="cl">   <span class="c1">#4 = Methodref          #24.#25        // java/io/PrintStream.println:(Ljava/lang/String;)V</span>
-</span></span><span class="line"><span class="cl">   <span class="c1">#5 = Class              #26            // cn/itcast/jvm/t5/HelloWorld</span>
-</span></span><span class="line"><span class="cl">   <span class="c1">#6 = Class              #27            // java/lang/Object</span>
-</span></span><span class="line"><span class="cl">   <span class="c1">#7 = Utf8               &lt;init&gt;</span>
-</span></span><span class="line"><span class="cl">   <span class="c1">#8 = Utf8               ()V</span>
-</span></span><span class="line"><span class="cl">   <span class="c1">#9 = Utf8               Code</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#10 = Utf8               LineNumberTable</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#11 = Utf8               LocalVariableTable</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#12 = Utf8               this</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#13 = Utf8               Lcn/itcast/jvm/t5/HelloWorld;</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#14 = Utf8               main</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#15 = Utf8               ([Ljava/lang/String;)V</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#16 = Utf8               args</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#17 = Utf8               [Ljava/lang/String;</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#18 = Utf8               SourceFile</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#19 = Utf8               HelloWorld.java</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#20 = NameAndType        #7:#8          // &#34;&lt;init&gt;&#34;:()V</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#21 = Class              #28            // java/lang/System</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#22 = NameAndType        #29:#30        // out:Ljava/io/PrintStream;</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#23 = Utf8               hello world</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#24 = Class              #31            // java/io/PrintStream</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#25 = NameAndType        #32:#33        // println:(Ljava/lang/String;)V</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#26 = Utf8               cn/itcast/jvm/t5/HelloWorld</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#27 = Utf8               java/lang/Object</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#28 = Utf8               java/lang/System</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#29 = Utf8               out</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#30 = Utf8               Ljava/io/PrintStream;</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#31 = Utf8               java/io/PrintStream</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#32 = Utf8               println</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#33 = Utf8               (Ljava/lang/String;)V</span>
+</span></span><span class="line"><span class="cl">========================常量池========================
+</span></span><span class="line"><span class="cl">Constant pool:
+</span></span><span class="line"><span class="cl">   #1 = Methodref          #6.#20         // java/lang/Object.&#34;&lt;init&gt;&#34;:()V
+</span></span><span class="line"><span class="cl">   #2 = Fieldref           #21.#22        // java/lang/System.out:Ljava/io/PrintStream;
+</span></span><span class="line"><span class="cl">   #3 = String             #23            // hello world
+</span></span><span class="line"><span class="cl">   #4 = Methodref          #24.#25        // java/io/PrintStream.println:(Ljava/lang/String;)V
+</span></span><span class="line"><span class="cl">   #5 = Class              #26            // cn/itcast/jvm/t5/HelloWorld
+</span></span><span class="line"><span class="cl">   #6 = Class              #27            // java/lang/Object
+</span></span><span class="line"><span class="cl">   #7 = Utf8               &lt;init&gt;
+</span></span><span class="line"><span class="cl">   #8 = Utf8               ()V
+</span></span><span class="line"><span class="cl">   #9 = Utf8               Code
+</span></span><span class="line"><span class="cl">  #10 = Utf8               LineNumberTable
+</span></span><span class="line"><span class="cl">  #11 = Utf8               LocalVariableTable
+</span></span><span class="line"><span class="cl">  #12 = Utf8               this
+</span></span><span class="line"><span class="cl">  #13 = Utf8               Lcn/itcast/jvm/t5/HelloWorld;
+</span></span><span class="line"><span class="cl">  #14 = Utf8               main
+</span></span><span class="line"><span class="cl">  #15 = Utf8               ([Ljava/lang/String;)V
+</span></span><span class="line"><span class="cl">  #16 = Utf8               args
+</span></span><span class="line"><span class="cl">  #17 = Utf8               [Ljava/lang/String;
+</span></span><span class="line"><span class="cl">  #18 = Utf8               SourceFile
+</span></span><span class="line"><span class="cl">  #19 = Utf8               HelloWorld.java
+</span></span><span class="line"><span class="cl">  #20 = NameAndType        #7:#8          // &#34;&lt;init&gt;&#34;:()V
+</span></span><span class="line"><span class="cl">  #21 = Class              #28            // java/lang/System
+</span></span><span class="line"><span class="cl">  #22 = NameAndType        #29:#30        // out:Ljava/io/PrintStream;
+</span></span><span class="line"><span class="cl">  #23 = Utf8               hello world
+</span></span><span class="line"><span class="cl">  #24 = Class              #31            // java/io/PrintStream
+</span></span><span class="line"><span class="cl">  #25 = NameAndType        #32:#33        // println:(Ljava/lang/String;)V
+</span></span><span class="line"><span class="cl">  #26 = Utf8               cn/itcast/jvm/t5/HelloWorld
+</span></span><span class="line"><span class="cl">  #27 = Utf8               java/lang/Object
+</span></span><span class="line"><span class="cl">  #28 = Utf8               java/lang/System
+</span></span><span class="line"><span class="cl">  #29 = Utf8               out
+</span></span><span class="line"><span class="cl">  #30 = Utf8               Ljava/io/PrintStream;
+</span></span><span class="line"><span class="cl">  #31 = Utf8               java/io/PrintStream
+</span></span><span class="line"><span class="cl">  #32 = Utf8               println
+</span></span><span class="line"><span class="cl">  #33 = Utf8               (Ljava/lang/String;)V
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl"><span class="o">========================</span><span class="err">类方法定义</span><span class="o">========================</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="n">public</span> <span class="n">cn</span><span class="o">.</span><span class="n">itcast</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">t5</span><span class="o">.</span><span class="n">HelloWorld</span><span class="p">();</span>       <span class="o">//</span><span class="err">构造方法</span>
-</span></span><span class="line"><span class="cl">    <span class="n">descriptor</span><span class="p">:</span> <span class="p">()</span><span class="n">V</span>
-</span></span><span class="line"><span class="cl">    <span class="n">flags</span><span class="p">:</span> <span class="n">ACC_PUBLIC</span>
-</span></span><span class="line"><span class="cl">    <span class="n">Code</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">      <span class="n">stack</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">locals</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">args_size</span><span class="o">=</span><span class="mi">1</span>
-</span></span><span class="line"><span class="cl">         <span class="mi">0</span><span class="p">:</span> <span class="n">aload_0</span>
-</span></span><span class="line"><span class="cl">         <span class="mi">1</span><span class="p">:</span> <span class="n">invokespecial</span> <span class="c1">#1                  // Method java/lang/Object.&#34;&lt;init&gt;&#34;:()V</span>
-</span></span><span class="line"><span class="cl">         <span class="mi">4</span><span class="p">:</span> <span class="k">return</span>
-</span></span><span class="line"><span class="cl">      <span class="n">LineNumberTable</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">        <span class="n">line</span> <span class="mi">4</span><span class="p">:</span> <span class="mi">0</span>
-</span></span><span class="line"><span class="cl">      <span class="n">LocalVariableTable</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">        <span class="n">Start</span>  <span class="n">Length</span>  <span class="n">Slot</span>  <span class="n">Name</span>   <span class="n">Signature</span>
-</span></span><span class="line"><span class="cl">            <span class="mi">0</span>       <span class="mi">5</span>     <span class="mi">0</span>  <span class="n">this</span>   <span class="n">Lcn</span><span class="o">/</span><span class="n">itcast</span><span class="o">/</span><span class="n">jvm</span><span class="o">/</span><span class="n">t5</span><span class="o">/</span><span class="n">HelloWorld</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">========================类方法定义========================
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">  public cn.itcast.jvm.t5.HelloWorld();       //构造方法
+</span></span><span class="line"><span class="cl">    descriptor: ()V
+</span></span><span class="line"><span class="cl">    flags: ACC_PUBLIC
+</span></span><span class="line"><span class="cl">    Code:
+</span></span><span class="line"><span class="cl">      stack=1, locals=1, args_size=1
+</span></span><span class="line"><span class="cl">         0: aload_0
+</span></span><span class="line"><span class="cl">         1: invokespecial #1                  // Method java/lang/Object.&#34;&lt;init&gt;&#34;:()V
+</span></span><span class="line"><span class="cl">         4: return
+</span></span><span class="line"><span class="cl">      LineNumberTable:
+</span></span><span class="line"><span class="cl">        line 4: 0
+</span></span><span class="line"><span class="cl">      LocalVariableTable:
+</span></span><span class="line"><span class="cl">        Start  Length  Slot  Name   Signature
+</span></span><span class="line"><span class="cl">            0       5     0  this   Lcn/itcast/jvm/t5/HelloWorld;
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="n">public</span> <span class="k">static</span> <span class="n">void</span> <span class="n">main</span><span class="p">(</span><span class="n">java</span><span class="o">.</span><span class="n">lang</span><span class="o">.</span><span class="n">String</span><span class="p">[]);</span>    <span class="o">//</span><span class="n">main</span> <span class="err">方法</span>
-</span></span><span class="line"><span class="cl">    <span class="n">descriptor</span><span class="p">:</span> <span class="p">([</span><span class="n">Ljava</span><span class="o">/</span><span class="n">lang</span><span class="o">/</span><span class="ne">String</span><span class="p">;)</span><span class="n">V</span>
-</span></span><span class="line"><span class="cl">    <span class="n">flags</span><span class="p">:</span> <span class="n">ACC_PUBLIC</span><span class="p">,</span> <span class="n">ACC_STATIC</span>
-</span></span><span class="line"><span class="cl">    <span class="n">Code</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">      <span class="n">stack</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">locals</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">args_size</span><span class="o">=</span><span class="mi">1</span>
-</span></span><span class="line"><span class="cl">         <span class="mi">0</span><span class="p">:</span> <span class="n">getstatic</span>     <span class="c1">#2                  // 获取System.out这个静态变量</span>
-</span></span><span class="line"><span class="cl">         <span class="mi">3</span><span class="p">:</span> <span class="n">ldc</span>           <span class="c1">#3                  // String hello world 加载一个参数</span>
-</span></span><span class="line"><span class="cl">         <span class="mi">5</span><span class="p">:</span> <span class="n">invokevirtual</span> <span class="c1">#4                  // Method java/io/PrintStream.println:(Ljava/lang/String;)V 虚方法调用</span>
-</span></span><span class="line"><span class="cl">         <span class="mi">8</span><span class="p">:</span> <span class="k">return</span>
-</span></span><span class="line"><span class="cl">      <span class="n">LineNumberTable</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">        <span class="n">line</span> <span class="mi">6</span><span class="p">:</span> <span class="mi">0</span>
-</span></span><span class="line"><span class="cl">        <span class="n">line</span> <span class="mi">7</span><span class="p">:</span> <span class="mi">8</span>
-</span></span><span class="line"><span class="cl">      <span class="n">LocalVariableTable</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">        <span class="n">Start</span>  <span class="n">Length</span>  <span class="n">Slot</span>  <span class="n">Name</span>   <span class="n">Signature</span>
-</span></span><span class="line"><span class="cl">            <span class="mi">0</span>       <span class="mi">9</span>     <span class="mi">0</span>  <span class="n">args</span>   <span class="p">[</span><span class="n">Ljava</span><span class="o">/</span><span class="n">lang</span><span class="o">/</span><span class="ne">String</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="n">SourceFile</span><span class="p">:</span> <span class="s2">&#34;HelloWorld.java&#34;</span>
+</span></span><span class="line"><span class="cl">  public static void main(java.lang.String[]);    //main 方法
+</span></span><span class="line"><span class="cl">    descriptor: ([Ljava/lang/String;)V
+</span></span><span class="line"><span class="cl">    flags: ACC_PUBLIC, ACC_STATIC
+</span></span><span class="line"><span class="cl">    Code:
+</span></span><span class="line"><span class="cl">      stack=2, locals=1, args_size=1
+</span></span><span class="line"><span class="cl">         0: getstatic     #2                  // 获取System.out这个静态变量
+</span></span><span class="line"><span class="cl">         3: ldc           #3                  // String hello world 加载一个参数
+</span></span><span class="line"><span class="cl">         5: invokevirtual #4                  // Method java/io/PrintStream.println:(Ljava/lang/String;)V 虚方法调用
+</span></span><span class="line"><span class="cl">         8: return
+</span></span><span class="line"><span class="cl">      LineNumberTable:
+</span></span><span class="line"><span class="cl">        line 6: 0
+</span></span><span class="line"><span class="cl">        line 7: 8
+</span></span><span class="line"><span class="cl">      LocalVariableTable:
+</span></span><span class="line"><span class="cl">        Start  Length  Slot  Name   Signature
+</span></span><span class="line"><span class="cl">            0       9     0  args   [Ljava/lang/String;
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">SourceFile: &#34;HelloWorld.java&#34;
 </span></span></code></pre></td></tr></table>
 </div>
 </div><table>
@@ -1250,164 +1247,164 @@
 </span><span class="lnt">158
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">Classfile</span> <span class="o">/</span><span class="n">G</span><span class="p">:</span><span class="o">/</span><span class="n">xrqProjects</span><span class="o">/</span><span class="n">jvm</span><span class="o">/</span><span class="err">代码</span><span class="o">/</span><span class="n">jvm</span><span class="o">/</span><span class="n">out</span><span class="o">/</span><span class="n">production</span><span class="o">/</span><span class="n">jvm</span><span class="o">/</span><span class="n">cn</span><span class="o">/</span><span class="n">itcast</span><span class="o">/</span><span class="n">jvm</span><span class="o">/</span><span class="n">t1</span><span class="o">/</span><span class="n">stringtable</span><span class="o">/</span><span class="n">Demo1_22</span><span class="o">.</span><span class="k">class</span>
-</span></span><span class="line"><span class="cl">  <span class="n">Last</span> <span class="n">modified</span> <span class="mi">2022</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">17</span><span class="p">;</span> <span class="n">size</span> <span class="mi">1057</span> <span class="n">bytes</span>
-</span></span><span class="line"><span class="cl">  <span class="n">MD5</span> <span class="n">checksum</span> <span class="n">b94bb46c9f03f10beb6d57556ca42557</span>
-</span></span><span class="line"><span class="cl">  <span class="n">Compiled</span> <span class="n">from</span> <span class="s2">&#34;Demo1_22.java&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="n">public</span> <span class="k">class</span> <span class="n">cn</span><span class="o">.</span><span class="n">itcast</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">t1</span><span class="o">.</span><span class="n">stringtable</span><span class="o">.</span><span class="n">Demo1_22</span>
-</span></span><span class="line"><span class="cl">  <span class="n">minor</span> <span class="n">version</span><span class="p">:</span> <span class="mi">0</span>
-</span></span><span class="line"><span class="cl">  <span class="n">major</span> <span class="n">version</span><span class="p">:</span> <span class="mi">52</span>
-</span></span><span class="line"><span class="cl">  <span class="n">flags</span><span class="p">:</span> <span class="n">ACC_PUBLIC</span><span class="p">,</span> <span class="n">ACC_SUPER</span>
-</span></span><span class="line"><span class="cl"><span class="n">Constant</span> <span class="n">pool</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">   <span class="c1">#1 = Methodref          #12.#36        // java/lang/Object.&#34;&lt;init&gt;&#34;:()V</span>
-</span></span><span class="line"><span class="cl">   <span class="c1">#2 = String             #37            // a</span>
-</span></span><span class="line"><span class="cl">   <span class="c1">#3 = String             #38            // b</span>
-</span></span><span class="line"><span class="cl">   <span class="c1">#4 = String             #39            // ab</span>
-</span></span><span class="line"><span class="cl">   <span class="c1">#5 = Class              #40            // java/lang/StringBuilder</span>
-</span></span><span class="line"><span class="cl">   <span class="c1">#6 = Methodref          #5.#36         // java/lang/StringBuilder.&#34;&lt;init&gt;&#34;:()V</span>
-</span></span><span class="line"><span class="cl">   <span class="c1">#7 = Methodref          #5.#41         // java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
-</span></span><span class="line"><span class="cl">   <span class="c1">#8 = Methodref          #5.#42         // java/lang/StringBuilder.toString:()Ljava/lang/String;</span>
-</span></span><span class="line"><span class="cl">   <span class="c1">#9 = Fieldref           #43.#44        // java/lang/System.out:Ljava/io/PrintStream;</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#10 = Methodref          #45.#46        // java/io/PrintStream.println:(Z)V</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#11 = Class              #47            // cn/itcast/jvm/t1/stringtable/Demo1_22</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#12 = Class              #48            // java/lang/Object</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#13 = Utf8               &lt;init&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#14 = Utf8               ()V</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#15 = Utf8               Code</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#16 = Utf8               LineNumberTable</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#17 = Utf8               LocalVariableTable</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#18 = Utf8               this</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#19 = Utf8               Lcn/itcast/jvm/t1/stringtable/Demo1_22;</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#20 = Utf8               main</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#21 = Utf8               ([Ljava/lang/String;)V</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#22 = Utf8               args</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#23 = Utf8               [Ljava/lang/String;</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#24 = Utf8               s1</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#25 = Utf8               Ljava/lang/String;</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#26 = Utf8               s2</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#27 = Utf8               s3</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#28 = Utf8               s4</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#29 = Utf8               s5</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#30 = Utf8               StackMapTable</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#31 = Class              #23            // &#34;[Ljava/lang/String;&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#32 = Class              #49            // java/lang/String</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#33 = Class              #50            // java/io/PrintStream</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#34 = Utf8               SourceFile</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#35 = Utf8               Demo1_22.java</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#36 = NameAndType        #13:#14        // &#34;&lt;init&gt;&#34;:()V</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#37 = Utf8               a</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#38 = Utf8               b</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#39 = Utf8               ab</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#40 = Utf8               java/lang/StringBuilder</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#41 = NameAndType        #51:#52        // append:(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#42 = NameAndType        #53:#54        // toString:()Ljava/lang/String;</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#43 = Class              #55            // java/lang/System</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#44 = NameAndType        #56:#57        // out:Ljava/io/PrintStream;</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#45 = Class              #50            // java/io/PrintStream</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#46 = NameAndType        #58:#59        // println:(Z)V</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#47 = Utf8               cn/itcast/jvm/t1/stringtable/Demo1_22</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#48 = Utf8               java/lang/Object</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#49 = Utf8               java/lang/String</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#50 = Utf8               java/io/PrintStream</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#51 = Utf8               append</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#52 = Utf8               (Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#53 = Utf8               toString</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#54 = Utf8               ()Ljava/lang/String;</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#55 = Utf8               java/lang/System</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#56 = Utf8               out</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#57 = Utf8               Ljava/io/PrintStream;</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#58 = Utf8               println</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">#59 = Utf8               (Z)V</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="n">public</span> <span class="n">cn</span><span class="o">.</span><span class="n">itcast</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">t1</span><span class="o">.</span><span class="n">stringtable</span><span class="o">.</span><span class="n">Demo1_22</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">    <span class="n">descriptor</span><span class="p">:</span> <span class="p">()</span><span class="n">V</span>
-</span></span><span class="line"><span class="cl">    <span class="n">flags</span><span class="p">:</span> <span class="n">ACC_PUBLIC</span>
-</span></span><span class="line"><span class="cl">    <span class="n">Code</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">      <span class="n">stack</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">locals</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">args_size</span><span class="o">=</span><span class="mi">1</span>
-</span></span><span class="line"><span class="cl">         <span class="mi">0</span><span class="p">:</span> <span class="n">aload_0</span>
-</span></span><span class="line"><span class="cl">         <span class="mi">1</span><span class="p">:</span> <span class="n">invokespecial</span> <span class="c1">#1                  // Method java/lang/Object.&#34;&lt;init&gt;&#34;:()V</span>
-</span></span><span class="line"><span class="cl">         <span class="mi">4</span><span class="p">:</span> <span class="k">return</span>
-</span></span><span class="line"><span class="cl">      <span class="n">LineNumberTable</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">        <span class="n">line</span> <span class="mi">4</span><span class="p">:</span> <span class="mi">0</span>
-</span></span><span class="line"><span class="cl">      <span class="n">LocalVariableTable</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">        <span class="n">Start</span>  <span class="n">Length</span>  <span class="n">Slot</span>  <span class="n">Name</span>   <span class="n">Signature</span>
-</span></span><span class="line"><span class="cl">            <span class="mi">0</span>       <span class="mi">5</span>     <span class="mi">0</span>  <span class="n">this</span>   <span class="n">Lcn</span><span class="o">/</span><span class="n">itcast</span><span class="o">/</span><span class="n">jvm</span><span class="o">/</span><span class="n">t1</span><span class="o">/</span><span class="n">stringtable</span><span class="o">/</span><span class="n">Demo1_22</span><span class="p">;</span>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Classfile /G:/xrqProjects/jvm/代码/jvm/out/production/jvm/cn/itcast/jvm/t1/stringtable/Demo1_22.class
+</span></span><span class="line"><span class="cl">  Last modified 2022-10-17; size 1057 bytes
+</span></span><span class="line"><span class="cl">  MD5 checksum b94bb46c9f03f10beb6d57556ca42557
+</span></span><span class="line"><span class="cl">  Compiled from &#34;Demo1_22.java&#34;
+</span></span><span class="line"><span class="cl">public class cn.itcast.jvm.t1.stringtable.Demo1_22
+</span></span><span class="line"><span class="cl">  minor version: 0
+</span></span><span class="line"><span class="cl">  major version: 52
+</span></span><span class="line"><span class="cl">  flags: ACC_PUBLIC, ACC_SUPER
+</span></span><span class="line"><span class="cl">Constant pool:
+</span></span><span class="line"><span class="cl">   #1 = Methodref          #12.#36        // java/lang/Object.&#34;&lt;init&gt;&#34;:()V
+</span></span><span class="line"><span class="cl">   #2 = String             #37            // a
+</span></span><span class="line"><span class="cl">   #3 = String             #38            // b
+</span></span><span class="line"><span class="cl">   #4 = String             #39            // ab
+</span></span><span class="line"><span class="cl">   #5 = Class              #40            // java/lang/StringBuilder
+</span></span><span class="line"><span class="cl">   #6 = Methodref          #5.#36         // java/lang/StringBuilder.&#34;&lt;init&gt;&#34;:()V
+</span></span><span class="line"><span class="cl">   #7 = Methodref          #5.#41         // java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+</span></span><span class="line"><span class="cl">   #8 = Methodref          #5.#42         // java/lang/StringBuilder.toString:()Ljava/lang/String;
+</span></span><span class="line"><span class="cl">   #9 = Fieldref           #43.#44        // java/lang/System.out:Ljava/io/PrintStream;
+</span></span><span class="line"><span class="cl">  #10 = Methodref          #45.#46        // java/io/PrintStream.println:(Z)V
+</span></span><span class="line"><span class="cl">  #11 = Class              #47            // cn/itcast/jvm/t1/stringtable/Demo1_22
+</span></span><span class="line"><span class="cl">  #12 = Class              #48            // java/lang/Object
+</span></span><span class="line"><span class="cl">  #13 = Utf8               &lt;init&gt;
+</span></span><span class="line"><span class="cl">  #14 = Utf8               ()V
+</span></span><span class="line"><span class="cl">  #15 = Utf8               Code
+</span></span><span class="line"><span class="cl">  #16 = Utf8               LineNumberTable
+</span></span><span class="line"><span class="cl">  #17 = Utf8               LocalVariableTable
+</span></span><span class="line"><span class="cl">  #18 = Utf8               this
+</span></span><span class="line"><span class="cl">  #19 = Utf8               Lcn/itcast/jvm/t1/stringtable/Demo1_22;
+</span></span><span class="line"><span class="cl">  #20 = Utf8               main
+</span></span><span class="line"><span class="cl">  #21 = Utf8               ([Ljava/lang/String;)V
+</span></span><span class="line"><span class="cl">  #22 = Utf8               args
+</span></span><span class="line"><span class="cl">  #23 = Utf8               [Ljava/lang/String;
+</span></span><span class="line"><span class="cl">  #24 = Utf8               s1
+</span></span><span class="line"><span class="cl">  #25 = Utf8               Ljava/lang/String;
+</span></span><span class="line"><span class="cl">  #26 = Utf8               s2
+</span></span><span class="line"><span class="cl">  #27 = Utf8               s3
+</span></span><span class="line"><span class="cl">  #28 = Utf8               s4
+</span></span><span class="line"><span class="cl">  #29 = Utf8               s5
+</span></span><span class="line"><span class="cl">  #30 = Utf8               StackMapTable
+</span></span><span class="line"><span class="cl">  #31 = Class              #23            // &#34;[Ljava/lang/String;&#34;
+</span></span><span class="line"><span class="cl">  #32 = Class              #49            // java/lang/String
+</span></span><span class="line"><span class="cl">  #33 = Class              #50            // java/io/PrintStream
+</span></span><span class="line"><span class="cl">  #34 = Utf8               SourceFile
+</span></span><span class="line"><span class="cl">  #35 = Utf8               Demo1_22.java
+</span></span><span class="line"><span class="cl">  #36 = NameAndType        #13:#14        // &#34;&lt;init&gt;&#34;:()V
+</span></span><span class="line"><span class="cl">  #37 = Utf8               a
+</span></span><span class="line"><span class="cl">  #38 = Utf8               b
+</span></span><span class="line"><span class="cl">  #39 = Utf8               ab
+</span></span><span class="line"><span class="cl">  #40 = Utf8               java/lang/StringBuilder
+</span></span><span class="line"><span class="cl">  #41 = NameAndType        #51:#52        // append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+</span></span><span class="line"><span class="cl">  #42 = NameAndType        #53:#54        // toString:()Ljava/lang/String;
+</span></span><span class="line"><span class="cl">  #43 = Class              #55            // java/lang/System
+</span></span><span class="line"><span class="cl">  #44 = NameAndType        #56:#57        // out:Ljava/io/PrintStream;
+</span></span><span class="line"><span class="cl">  #45 = Class              #50            // java/io/PrintStream
+</span></span><span class="line"><span class="cl">  #46 = NameAndType        #58:#59        // println:(Z)V
+</span></span><span class="line"><span class="cl">  #47 = Utf8               cn/itcast/jvm/t1/stringtable/Demo1_22
+</span></span><span class="line"><span class="cl">  #48 = Utf8               java/lang/Object
+</span></span><span class="line"><span class="cl">  #49 = Utf8               java/lang/String
+</span></span><span class="line"><span class="cl">  #50 = Utf8               java/io/PrintStream
+</span></span><span class="line"><span class="cl">  #51 = Utf8               append
+</span></span><span class="line"><span class="cl">  #52 = Utf8               (Ljava/lang/String;)Ljava/lang/StringBuilder;
+</span></span><span class="line"><span class="cl">  #53 = Utf8               toString
+</span></span><span class="line"><span class="cl">  #54 = Utf8               ()Ljava/lang/String;
+</span></span><span class="line"><span class="cl">  #55 = Utf8               java/lang/System
+</span></span><span class="line"><span class="cl">  #56 = Utf8               out
+</span></span><span class="line"><span class="cl">  #57 = Utf8               Ljava/io/PrintStream;
+</span></span><span class="line"><span class="cl">  #58 = Utf8               println
+</span></span><span class="line"><span class="cl">  #59 = Utf8               (Z)V
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">  public cn.itcast.jvm.t1.stringtable.Demo1_22();
+</span></span><span class="line"><span class="cl">    descriptor: ()V
+</span></span><span class="line"><span class="cl">    flags: ACC_PUBLIC
+</span></span><span class="line"><span class="cl">    Code:
+</span></span><span class="line"><span class="cl">      stack=1, locals=1, args_size=1
+</span></span><span class="line"><span class="cl">         0: aload_0
+</span></span><span class="line"><span class="cl">         1: invokespecial #1                  // Method java/lang/Object.&#34;&lt;init&gt;&#34;:()V
+</span></span><span class="line"><span class="cl">         4: return
+</span></span><span class="line"><span class="cl">      LineNumberTable:
+</span></span><span class="line"><span class="cl">        line 4: 0
+</span></span><span class="line"><span class="cl">      LocalVariableTable:
+</span></span><span class="line"><span class="cl">        Start  Length  Slot  Name   Signature
+</span></span><span class="line"><span class="cl">            0       5     0  this   Lcn/itcast/jvm/t1/stringtable/Demo1_22;
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="n">public</span> <span class="k">static</span> <span class="n">void</span> <span class="n">main</span><span class="p">(</span><span class="n">java</span><span class="o">.</span><span class="n">lang</span><span class="o">.</span><span class="n">String</span><span class="p">[]);</span>
-</span></span><span class="line"><span class="cl">    <span class="n">descriptor</span><span class="p">:</span> <span class="p">([</span><span class="n">Ljava</span><span class="o">/</span><span class="n">lang</span><span class="o">/</span><span class="ne">String</span><span class="p">;)</span><span class="n">V</span>
-</span></span><span class="line"><span class="cl">    <span class="n">flags</span><span class="p">:</span> <span class="n">ACC_PUBLIC</span><span class="p">,</span> <span class="n">ACC_STATIC</span>
-</span></span><span class="line"><span class="cl">    <span class="n">Code</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">      <span class="n">stack</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">locals</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">args_size</span><span class="o">=</span><span class="mi">1</span>
-</span></span><span class="line"><span class="cl">         <span class="mi">0</span><span class="p">:</span> <span class="n">ldc</span>           <span class="c1">#2                  // String a</span>
-</span></span><span class="line"><span class="cl">         <span class="mi">2</span><span class="p">:</span> <span class="n">astore_1</span>
-</span></span><span class="line"><span class="cl">         <span class="mi">3</span><span class="p">:</span> <span class="n">ldc</span>           <span class="c1">#3                  // String b</span>
-</span></span><span class="line"><span class="cl">         <span class="mi">5</span><span class="p">:</span> <span class="n">astore_2</span>
-</span></span><span class="line"><span class="cl">         <span class="mi">6</span><span class="p">:</span> <span class="n">ldc</span>           <span class="c1">#4                  // String ab  s3 == s5 为true!!!!!!!!!!!!!!!!!!!!!</span>
-</span></span><span class="line"><span class="cl">         <span class="mi">8</span><span class="p">:</span> <span class="n">astore_3</span>
-</span></span><span class="line"><span class="cl">         <span class="mi">9</span><span class="p">:</span> <span class="n">new</span>           <span class="c1">#5                  // class java/lang/StringBuilder</span>
-</span></span><span class="line"><span class="cl">        <span class="mi">12</span><span class="p">:</span> <span class="n">dup</span>
-</span></span><span class="line"><span class="cl">        <span class="mi">13</span><span class="p">:</span> <span class="n">invokespecial</span> <span class="c1">#6                  // Method java/lang/StringBuilder.&#34;&lt;init&gt;&#34;:()V</span>
-</span></span><span class="line"><span class="cl">        <span class="mi">16</span><span class="p">:</span> <span class="n">aload_1</span>
-</span></span><span class="line"><span class="cl">        <span class="mi">17</span><span class="p">:</span> <span class="n">invokevirtual</span> <span class="c1">#7                  // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
-</span></span><span class="line"><span class="cl">        <span class="mi">20</span><span class="p">:</span> <span class="n">aload_2</span>
-</span></span><span class="line"><span class="cl">        <span class="mi">21</span><span class="p">:</span> <span class="n">invokevirtual</span> <span class="c1">#7                  // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
-</span></span><span class="line"><span class="cl">        <span class="mi">24</span><span class="p">:</span> <span class="n">invokevirtual</span> <span class="c1">#8                  // Method java/lang/StringBuilder.toString:()Ljava/lang/String;</span>
-</span></span><span class="line"><span class="cl">        <span class="mi">27</span><span class="p">:</span> <span class="n">astore</span>        <span class="mi">4</span>
-</span></span><span class="line"><span class="cl">        <span class="mi">29</span><span class="p">:</span> <span class="n">getstatic</span>     <span class="c1">#9                  // Field java/lang/System.out:Ljava/io/PrintStream;</span>
-</span></span><span class="line"><span class="cl">        <span class="mi">32</span><span class="p">:</span> <span class="n">aload_3</span>
-</span></span><span class="line"><span class="cl">        <span class="mi">33</span><span class="p">:</span> <span class="n">aload</span>         <span class="mi">4</span>
-</span></span><span class="line"><span class="cl">        <span class="mi">35</span><span class="p">:</span> <span class="n">if_acmpne</span>     <span class="mi">42</span>
-</span></span><span class="line"><span class="cl">        <span class="mi">38</span><span class="p">:</span> <span class="n">iconst_1</span>
-</span></span><span class="line"><span class="cl">        <span class="mi">39</span><span class="p">:</span> <span class="n">goto</span>          <span class="mi">43</span>
-</span></span><span class="line"><span class="cl">        <span class="mi">42</span><span class="p">:</span> <span class="n">iconst_0</span>
-</span></span><span class="line"><span class="cl">        <span class="mi">43</span><span class="p">:</span> <span class="n">invokevirtual</span> <span class="c1">#10                 // Method java/io/PrintStream.println:(Z)V</span>
-</span></span><span class="line"><span class="cl">        <span class="mi">46</span><span class="p">:</span> <span class="n">ldc</span>           <span class="c1">#4                  // String ab    s3 == s5 为true!!!!!!!!!!!!!!!!!!!!!</span>
-</span></span><span class="line"><span class="cl">        <span class="mi">48</span><span class="p">:</span> <span class="n">astore</span>        <span class="mi">5</span>
-</span></span><span class="line"><span class="cl">        <span class="mi">50</span><span class="p">:</span> <span class="n">getstatic</span>     <span class="c1">#9                  // Field java/lang/System.out:Ljava/io/PrintStream;</span>
-</span></span><span class="line"><span class="cl">        <span class="mi">53</span><span class="p">:</span> <span class="n">aload_3</span>
-</span></span><span class="line"><span class="cl">        <span class="mi">54</span><span class="p">:</span> <span class="n">aload</span>         <span class="mi">5</span>
-</span></span><span class="line"><span class="cl">        <span class="mi">56</span><span class="p">:</span> <span class="n">if_acmpne</span>     <span class="mi">63</span>
-</span></span><span class="line"><span class="cl">        <span class="mi">59</span><span class="p">:</span> <span class="n">iconst_1</span>
-</span></span><span class="line"><span class="cl">        <span class="mi">60</span><span class="p">:</span> <span class="n">goto</span>          <span class="mi">64</span>
-</span></span><span class="line"><span class="cl">        <span class="mi">63</span><span class="p">:</span> <span class="n">iconst_0</span>
-</span></span><span class="line"><span class="cl">        <span class="mi">64</span><span class="p">:</span> <span class="n">invokevirtual</span> <span class="c1">#10                 // Method java/io/PrintStream.println:(Z)V</span>
-</span></span><span class="line"><span class="cl">        <span class="mi">67</span><span class="p">:</span> <span class="k">return</span>
-</span></span><span class="line"><span class="cl">      <span class="n">LineNumberTable</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">        <span class="n">line</span> <span class="mi">11</span><span class="p">:</span> <span class="mi">0</span>
-</span></span><span class="line"><span class="cl">        <span class="n">line</span> <span class="mi">12</span><span class="p">:</span> <span class="mi">3</span>
-</span></span><span class="line"><span class="cl">        <span class="n">line</span> <span class="mi">13</span><span class="p">:</span> <span class="mi">6</span>
-</span></span><span class="line"><span class="cl">        <span class="n">line</span> <span class="mi">14</span><span class="p">:</span> <span class="mi">9</span>
-</span></span><span class="line"><span class="cl">        <span class="n">line</span> <span class="mi">15</span><span class="p">:</span> <span class="mi">29</span>
-</span></span><span class="line"><span class="cl">        <span class="n">line</span> <span class="mi">16</span><span class="p">:</span> <span class="mi">46</span>
-</span></span><span class="line"><span class="cl">        <span class="n">line</span> <span class="mi">17</span><span class="p">:</span> <span class="mi">50</span>
-</span></span><span class="line"><span class="cl">        <span class="n">line</span> <span class="mi">19</span><span class="p">:</span> <span class="mi">67</span>
-</span></span><span class="line"><span class="cl">      <span class="n">LocalVariableTable</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">        <span class="n">Start</span>  <span class="n">Length</span>  <span class="n">Slot</span>  <span class="n">Name</span>   <span class="n">Signature</span>
-</span></span><span class="line"><span class="cl">            <span class="mi">0</span>      <span class="mi">68</span>     <span class="mi">0</span>  <span class="n">args</span>   <span class="p">[</span><span class="n">Ljava</span><span class="o">/</span><span class="n">lang</span><span class="o">/</span><span class="ne">String</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="mi">3</span>      <span class="mi">65</span>     <span class="mi">1</span>    <span class="n">s1</span>   <span class="n">Ljava</span><span class="o">/</span><span class="n">lang</span><span class="o">/</span><span class="ne">String</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="mi">6</span>      <span class="mi">62</span>     <span class="mi">2</span>    <span class="n">s2</span>   <span class="n">Ljava</span><span class="o">/</span><span class="n">lang</span><span class="o">/</span><span class="ne">String</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="mi">9</span>      <span class="mi">59</span>     <span class="mi">3</span>    <span class="n">s3</span>   <span class="n">Ljava</span><span class="o">/</span><span class="n">lang</span><span class="o">/</span><span class="ne">String</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">           <span class="mi">29</span>      <span class="mi">39</span>     <span class="mi">4</span>    <span class="n">s4</span>   <span class="n">Ljava</span><span class="o">/</span><span class="n">lang</span><span class="o">/</span><span class="ne">String</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">           <span class="mi">50</span>      <span class="mi">18</span>     <span class="mi">5</span>    <span class="n">s5</span>   <span class="n">Ljava</span><span class="o">/</span><span class="n">lang</span><span class="o">/</span><span class="ne">String</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">      <span class="n">StackMapTable</span><span class="p">:</span> <span class="n">number_of_entries</span> <span class="o">=</span> <span class="mi">4</span>
-</span></span><span class="line"><span class="cl">        <span class="n">frame_type</span> <span class="o">=</span> <span class="mi">255</span> <span class="o">/*</span> <span class="n">full_frame</span> <span class="o">*/</span>
-</span></span><span class="line"><span class="cl">          <span class="n">offset_delta</span> <span class="o">=</span> <span class="mi">42</span>
-</span></span><span class="line"><span class="cl">          <span class="n">locals</span> <span class="o">=</span> <span class="p">[</span> <span class="k">class</span> <span class="s2">&#34;[Ljava/lang/String;&#34;</span><span class="p">,</span> <span class="k">class</span> <span class="n">java</span><span class="o">/</span><span class="n">lang</span><span class="o">/</span><span class="ne">String</span><span class="p">,</span> <span class="k">class</span> <span class="n">java</span><span class="o">/</span><span class="n">lang</span><span class="o">/</span><span class="ne">String</span><span class="p">,</span> <span class="k">class</span> <span class="n">java</span><span class="o">/</span><span class="n">lang</span><span class="o">/</span><span class="ne">String</span><span class="p">,</span> <span class="k">class</span> <span class="n">java</span><span class="o">/</span><span class="n">lang</span><span class="o">/</span><span class="ne">String</span> <span class="p">]</span>
-</span></span><span class="line"><span class="cl">          <span class="n">stack</span> <span class="o">=</span> <span class="p">[</span> <span class="k">class</span> <span class="n">java</span><span class="o">/</span><span class="n">io</span><span class="o">/</span><span class="n">PrintStream</span> <span class="p">]</span>
-</span></span><span class="line"><span class="cl">        <span class="n">frame_type</span> <span class="o">=</span> <span class="mi">255</span> <span class="o">/*</span> <span class="n">full_frame</span> <span class="o">*/</span>
-</span></span><span class="line"><span class="cl">          <span class="n">offset_delta</span> <span class="o">=</span> <span class="mi">0</span>
-</span></span><span class="line"><span class="cl">          <span class="n">locals</span> <span class="o">=</span> <span class="p">[</span> <span class="k">class</span> <span class="s2">&#34;[Ljava/lang/String;&#34;</span><span class="p">,</span> <span class="k">class</span> <span class="n">java</span><span class="o">/</span><span class="n">lang</span><span class="o">/</span><span class="ne">String</span><span class="p">,</span> <span class="k">class</span> <span class="n">java</span><span class="o">/</span><span class="n">lang</span><span class="o">/</span><span class="ne">String</span><span class="p">,</span> <span class="k">class</span> <span class="n">java</span><span class="o">/</span><span class="n">lang</span><span class="o">/</span><span class="ne">String</span><span class="p">,</span> <span class="k">class</span> <span class="n">java</span><span class="o">/</span><span class="n">lang</span><span class="o">/</span><span class="ne">String</span> <span class="p">]</span>
-</span></span><span class="line"><span class="cl">          <span class="n">stack</span> <span class="o">=</span> <span class="p">[</span> <span class="k">class</span> <span class="n">java</span><span class="o">/</span><span class="n">io</span><span class="o">/</span><span class="n">PrintStream</span><span class="p">,</span> <span class="ne">int</span> <span class="p">]</span>
-</span></span><span class="line"><span class="cl">        <span class="n">frame_type</span> <span class="o">=</span> <span class="mi">255</span> <span class="o">/*</span> <span class="n">full_frame</span> <span class="o">*/</span>
-</span></span><span class="line"><span class="cl">          <span class="n">offset_delta</span> <span class="o">=</span> <span class="mi">19</span>
-</span></span><span class="line"><span class="cl">          <span class="n">locals</span> <span class="o">=</span> <span class="p">[</span> <span class="k">class</span> <span class="s2">&#34;[Ljava/lang/String;&#34;</span><span class="p">,</span> <span class="k">class</span> <span class="n">java</span><span class="o">/</span><span class="n">lang</span><span class="o">/</span><span class="ne">String</span><span class="p">,</span> <span class="k">class</span> <span class="n">java</span><span class="o">/</span><span class="n">lang</span><span class="o">/</span><span class="ne">String</span><span class="p">,</span> <span class="k">class</span> <span class="n">java</span><span class="o">/</span><span class="n">lang</span><span class="o">/</span><span class="ne">String</span><span class="p">,</span> <span class="k">class</span> <span class="n">java</span><span class="o">/</span><span class="n">lang</span><span class="o">/</span><span class="ne">String</span><span class="p">,</span> <span class="k">class</span> <span class="n">java</span><span class="o">/</span><span class="n">lang</span><span class="o">/</span><span class="ne">String</span> <span class="p">]</span>
-</span></span><span class="line"><span class="cl">          <span class="n">stack</span> <span class="o">=</span> <span class="p">[</span> <span class="k">class</span> <span class="n">java</span><span class="o">/</span><span class="n">io</span><span class="o">/</span><span class="n">PrintStream</span> <span class="p">]</span>
-</span></span><span class="line"><span class="cl">        <span class="n">frame_type</span> <span class="o">=</span> <span class="mi">255</span> <span class="o">/*</span> <span class="n">full_frame</span> <span class="o">*/</span>
-</span></span><span class="line"><span class="cl">          <span class="n">offset_delta</span> <span class="o">=</span> <span class="mi">0</span>
-</span></span><span class="line"><span class="cl">          <span class="n">locals</span> <span class="o">=</span> <span class="p">[</span> <span class="k">class</span> <span class="s2">&#34;[Ljava/lang/String;&#34;</span><span class="p">,</span> <span class="k">class</span> <span class="n">java</span><span class="o">/</span><span class="n">lang</span><span class="o">/</span><span class="ne">String</span><span class="p">,</span> <span class="k">class</span> <span class="n">java</span><span class="o">/</span><span class="n">lang</span><span class="o">/</span><span class="ne">String</span><span class="p">,</span> <span class="k">class</span> <span class="n">java</span><span class="o">/</span><span class="n">lang</span><span class="o">/</span><span class="ne">String</span><span class="p">,</span> <span class="k">class</span> <span class="n">java</span><span class="o">/</span><span class="n">lang</span><span class="o">/</span><span class="ne">String</span><span class="p">,</span> <span class="k">class</span> <span class="n">java</span><span class="o">/</span><span class="n">lang</span><span class="o">/</span><span class="ne">String</span> <span class="p">]</span>
-</span></span><span class="line"><span class="cl">          <span class="n">stack</span> <span class="o">=</span> <span class="p">[</span> <span class="k">class</span> <span class="n">java</span><span class="o">/</span><span class="n">io</span><span class="o">/</span><span class="n">PrintStream</span><span class="p">,</span> <span class="ne">int</span> <span class="p">]</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="n">SourceFile</span><span class="p">:</span> <span class="s2">&#34;Demo1_22.java&#34;</span>
+</span></span><span class="line"><span class="cl">  public static void main(java.lang.String[]);
+</span></span><span class="line"><span class="cl">    descriptor: ([Ljava/lang/String;)V
+</span></span><span class="line"><span class="cl">    flags: ACC_PUBLIC, ACC_STATIC
+</span></span><span class="line"><span class="cl">    Code:
+</span></span><span class="line"><span class="cl">      stack=3, locals=6, args_size=1
+</span></span><span class="line"><span class="cl">         0: ldc           #2                  // String a
+</span></span><span class="line"><span class="cl">         2: astore_1
+</span></span><span class="line"><span class="cl">         3: ldc           #3                  // String b
+</span></span><span class="line"><span class="cl">         5: astore_2
+</span></span><span class="line"><span class="cl">         6: ldc           #4                  // String ab  s3 == s5 为true!!!!!!!!!!!!!!!!!!!!!
+</span></span><span class="line"><span class="cl">         8: astore_3
+</span></span><span class="line"><span class="cl">         9: new           #5                  // class java/lang/StringBuilder
+</span></span><span class="line"><span class="cl">        12: dup
+</span></span><span class="line"><span class="cl">        13: invokespecial #6                  // Method java/lang/StringBuilder.&#34;&lt;init&gt;&#34;:()V
+</span></span><span class="line"><span class="cl">        16: aload_1
+</span></span><span class="line"><span class="cl">        17: invokevirtual #7                  // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+</span></span><span class="line"><span class="cl">        20: aload_2
+</span></span><span class="line"><span class="cl">        21: invokevirtual #7                  // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+</span></span><span class="line"><span class="cl">        24: invokevirtual #8                  // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+</span></span><span class="line"><span class="cl">        27: astore        4
+</span></span><span class="line"><span class="cl">        29: getstatic     #9                  // Field java/lang/System.out:Ljava/io/PrintStream;
+</span></span><span class="line"><span class="cl">        32: aload_3
+</span></span><span class="line"><span class="cl">        33: aload         4
+</span></span><span class="line"><span class="cl">        35: if_acmpne     42
+</span></span><span class="line"><span class="cl">        38: iconst_1
+</span></span><span class="line"><span class="cl">        39: goto          43
+</span></span><span class="line"><span class="cl">        42: iconst_0
+</span></span><span class="line"><span class="cl">        43: invokevirtual #10                 // Method java/io/PrintStream.println:(Z)V
+</span></span><span class="line"><span class="cl">        46: ldc           #4                  // String ab    s3 == s5 为true!!!!!!!!!!!!!!!!!!!!!
+</span></span><span class="line"><span class="cl">        48: astore        5
+</span></span><span class="line"><span class="cl">        50: getstatic     #9                  // Field java/lang/System.out:Ljava/io/PrintStream;
+</span></span><span class="line"><span class="cl">        53: aload_3
+</span></span><span class="line"><span class="cl">        54: aload         5
+</span></span><span class="line"><span class="cl">        56: if_acmpne     63
+</span></span><span class="line"><span class="cl">        59: iconst_1
+</span></span><span class="line"><span class="cl">        60: goto          64
+</span></span><span class="line"><span class="cl">        63: iconst_0
+</span></span><span class="line"><span class="cl">        64: invokevirtual #10                 // Method java/io/PrintStream.println:(Z)V
+</span></span><span class="line"><span class="cl">        67: return
+</span></span><span class="line"><span class="cl">      LineNumberTable:
+</span></span><span class="line"><span class="cl">        line 11: 0
+</span></span><span class="line"><span class="cl">        line 12: 3
+</span></span><span class="line"><span class="cl">        line 13: 6
+</span></span><span class="line"><span class="cl">        line 14: 9
+</span></span><span class="line"><span class="cl">        line 15: 29
+</span></span><span class="line"><span class="cl">        line 16: 46
+</span></span><span class="line"><span class="cl">        line 17: 50
+</span></span><span class="line"><span class="cl">        line 19: 67
+</span></span><span class="line"><span class="cl">      LocalVariableTable:
+</span></span><span class="line"><span class="cl">        Start  Length  Slot  Name   Signature
+</span></span><span class="line"><span class="cl">            0      68     0  args   [Ljava/lang/String;
+</span></span><span class="line"><span class="cl">            3      65     1    s1   Ljava/lang/String;
+</span></span><span class="line"><span class="cl">            6      62     2    s2   Ljava/lang/String;
+</span></span><span class="line"><span class="cl">            9      59     3    s3   Ljava/lang/String;
+</span></span><span class="line"><span class="cl">           29      39     4    s4   Ljava/lang/String;
+</span></span><span class="line"><span class="cl">           50      18     5    s5   Ljava/lang/String;
+</span></span><span class="line"><span class="cl">      StackMapTable: number_of_entries = 4
+</span></span><span class="line"><span class="cl">        frame_type = 255 /* full_frame */
+</span></span><span class="line"><span class="cl">          offset_delta = 42
+</span></span><span class="line"><span class="cl">          locals = [ class &#34;[Ljava/lang/String;&#34;, class java/lang/String, class java/lang/String, class java/lang/String, class java/lang/String ]
+</span></span><span class="line"><span class="cl">          stack = [ class java/io/PrintStream ]
+</span></span><span class="line"><span class="cl">        frame_type = 255 /* full_frame */
+</span></span><span class="line"><span class="cl">          offset_delta = 0
+</span></span><span class="line"><span class="cl">          locals = [ class &#34;[Ljava/lang/String;&#34;, class java/lang/String, class java/lang/String, class java/lang/String, class java/lang/String ]
+</span></span><span class="line"><span class="cl">          stack = [ class java/io/PrintStream, int ]
+</span></span><span class="line"><span class="cl">        frame_type = 255 /* full_frame */
+</span></span><span class="line"><span class="cl">          offset_delta = 19
+</span></span><span class="line"><span class="cl">          locals = [ class &#34;[Ljava/lang/String;&#34;, class java/lang/String, class java/lang/String, class java/lang/String, class java/lang/String, class java/lang/String ]
+</span></span><span class="line"><span class="cl">          stack = [ class java/io/PrintStream ]
+</span></span><span class="line"><span class="cl">        frame_type = 255 /* full_frame */
+</span></span><span class="line"><span class="cl">          offset_delta = 0
+</span></span><span class="line"><span class="cl">          locals = [ class &#34;[Ljava/lang/String;&#34;, class java/lang/String, class java/lang/String, class java/lang/String, class java/lang/String, class java/lang/String ]
+</span></span><span class="line"><span class="cl">          stack = [ class java/io/PrintStream, int ]
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">SourceFile: &#34;Demo1_22.java&#34;
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h5 id="特征">特征</h5>
@@ -1558,22 +1555,22 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/jvm/042_%E7%9B%B4%E6%8E%A5%E5%86%85%E5%AD%98_Io.png"
-        data-srcset="/posts/jvm/042_%E7%9B%B4%E6%8E%A5%E5%86%85%E5%AD%98_Io.png, /posts/jvm/042_%E7%9B%B4%E6%8E%A5%E5%86%85%E5%AD%98_Io.png 1.5x, /posts/jvm/042_%E7%9B%B4%E6%8E%A5%E5%86%85%E5%AD%98_Io.png 2x"
+        data-src="042_%e7%9b%b4%e6%8e%a5%e5%86%85%e5%ad%98_Io.png"
+        data-srcset="042_%e7%9b%b4%e6%8e%a5%e5%86%85%e5%ad%98_Io.png, 042_%e7%9b%b4%e6%8e%a5%e5%86%85%e5%ad%98_Io.png 1.5x, 042_%e7%9b%b4%e6%8e%a5%e5%86%85%e5%ad%98_Io.png 2x"
         data-sizes="auto"
-        alt="/posts/jvm/042_%E7%9B%B4%E6%8E%A5%E5%86%85%E5%AD%98_Io.png"
-        title="/posts/jvm/042_%E7%9B%B4%E6%8E%A5%E5%86%85%E5%AD%98_Io.png" width="978" height="720" /></p>
+        alt="042_直接内存_Io.png"
+        title="042_直接内存_Io.png" /></p>
 <ul>
 <li>直接内存是操作系统和Java代码都可以访问的一块区域，无需将代码从系统内存复制到Java堆内存，从而提高了效率。比如nio中的ByteBuffer.allocateDirect(16)。</li>
 </ul>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/jvm/042_%E7%9B%B4%E6%8E%A5%E5%86%85%E5%AE%B9_nio.png"
-        data-srcset="/posts/jvm/042_%E7%9B%B4%E6%8E%A5%E5%86%85%E5%AE%B9_nio.png, /posts/jvm/042_%E7%9B%B4%E6%8E%A5%E5%86%85%E5%AE%B9_nio.png 1.5x, /posts/jvm/042_%E7%9B%B4%E6%8E%A5%E5%86%85%E5%AE%B9_nio.png 2x"
+        data-src="042_%e7%9b%b4%e6%8e%a5%e5%86%85%e5%ae%b9_nio.png"
+        data-srcset="042_%e7%9b%b4%e6%8e%a5%e5%86%85%e5%ae%b9_nio.png, 042_%e7%9b%b4%e6%8e%a5%e5%86%85%e5%ae%b9_nio.png 1.5x, 042_%e7%9b%b4%e6%8e%a5%e5%86%85%e5%ae%b9_nio.png 2x"
         data-sizes="auto"
-        alt="/posts/jvm/042_%E7%9B%B4%E6%8E%A5%E5%86%85%E5%AE%B9_nio.png"
-        title="/posts/jvm/042_%E7%9B%B4%E6%8E%A5%E5%86%85%E5%AE%B9_nio.png" width="936" height="656" /></p>
+        alt="042_直接内容_nio.png"
+        title="042_直接内容_nio.png" /></p>
 <ul>
 <li>class java.nio.HeapByteBuffer          -java 堆内存，读写效率较低 ，就和普通javabean 对象一会受到GC影响</li>
 <li>class java.nio.DirectByteBuffer        -直接内存 ，读写效率高（少一次拷贝），不会受到java GC的影响，分配内存效率低,但是也会有内存溢出的限制。</li>
@@ -1629,37 +1626,37 @@
 </span><span class="lnt">31
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"> <span class="n">DirectByteBuffer</span><span class="p">(</span><span class="ne">int</span> <span class="n">cap</span><span class="p">)</span> <span class="p">{</span>                   <span class="o">//</span> <span class="n">package</span><span class="o">-</span><span class="n">private</span>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"> DirectByteBuffer(int cap) {                   // package-private
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="n">super</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">cap</span><span class="p">,</span> <span class="n">cap</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="n">boolean</span> <span class="n">pa</span> <span class="o">=</span> <span class="n">VM</span><span class="o">.</span><span class="n">isDirectMemoryPageAligned</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">        <span class="ne">int</span> <span class="n">ps</span> <span class="o">=</span> <span class="n">Bits</span><span class="o">.</span><span class="n">pageSize</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">        <span class="n">long</span> <span class="n">size</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="mi">1</span><span class="n">L</span><span class="p">,</span> <span class="p">(</span><span class="n">long</span><span class="p">)</span><span class="n">cap</span> <span class="o">+</span> <span class="p">(</span><span class="n">pa</span> <span class="err">?</span> <span class="n">ps</span> <span class="p">:</span> <span class="mi">0</span><span class="p">));</span>
-</span></span><span class="line"><span class="cl">        <span class="n">Bits</span><span class="o">.</span><span class="n">reserveMemory</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">cap</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        super(-1, 0, cap, cap);
+</span></span><span class="line"><span class="cl">        boolean pa = VM.isDirectMemoryPageAligned();
+</span></span><span class="line"><span class="cl">        int ps = Bits.pageSize();
+</span></span><span class="line"><span class="cl">        long size = Math.max(1L, (long)cap + (pa ? ps : 0));
+</span></span><span class="line"><span class="cl">        Bits.reserveMemory(size, cap);
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="n">long</span> <span class="n">base</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">try</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">base</span> <span class="o">=</span> <span class="n">unsafe</span><span class="o">.</span><span class="n">allocateMemory</span><span class="p">(</span><span class="n">size</span><span class="p">);</span><span class="o">//</span> <span class="err">分配了</span><span class="n">DirectByteBuffer对象的直接内存</span><span class="err">！！！！！！！！！！！！！！！</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="n">catch</span> <span class="p">(</span><span class="n">OutOfMemoryError</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">Bits</span><span class="o">.</span><span class="n">unreserveMemory</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">cap</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="n">throw</span> <span class="n">x</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="n">unsafe</span><span class="o">.</span><span class="n">setMemory</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="p">(</span><span class="n">byte</span><span class="p">)</span> <span class="mi">0</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">pa</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">base</span> <span class="o">%</span> <span class="n">ps</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">))</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="o">//</span> <span class="n">Round</span> <span class="n">up</span> <span class="n">to</span> <span class="n">page</span> <span class="n">boundary</span>
-</span></span><span class="line"><span class="cl">            <span class="n">address</span> <span class="o">=</span> <span class="n">base</span> <span class="o">+</span> <span class="n">ps</span> <span class="o">-</span> <span class="p">(</span><span class="n">base</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">ps</span> <span class="o">-</span> <span class="mi">1</span><span class="p">));</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">address</span> <span class="o">=</span> <span class="n">base</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="o">//</span><span class="n">Cleaner是个虚引用类型</span> <span class="n">Cleaner</span> <span class="k">extends</span> <span class="n">PhantomReference</span><span class="o">&lt;</span><span class="ne">Object</span><span class="o">&gt;</span><span class="err">，当它所关联的对象被</span><span class="n">gc时</span><span class="err">，会触发它的</span><span class="n">clean方法</span><span class="err">。也就是</span><span class="n">this对象触发gc时</span><span class="err">，会调用</span><span class="n">Cleaner</span> <span class="err">的</span><span class="n">clean方法</span><span class="err">。</span>
-</span></span><span class="line"><span class="cl">        <span class="o">//</span><span class="err">本例中就是调用</span><span class="n">Deallocator里的</span> <span class="n">run方法</span> <span class="err">用</span><span class="n">unsafe</span> <span class="err">方式进行直接内存的回收</span>
-</span></span><span class="line"><span class="cl">        <span class="o">//</span><span class="err">在后台有个专门检测虚引用对象的</span><span class="n">ReferenceHandler线程中</span> <span class="err">执行</span><span class="n">clean方法</span><span class="err">。</span>
-</span></span><span class="line"><span class="cl">        <span class="n">cleaner</span> <span class="o">=</span> <span class="n">Cleaner</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">this</span><span class="p">,</span> <span class="n">new</span> <span class="n">Deallocator</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">cap</span><span class="p">));</span><span class="o">//</span>
-</span></span><span class="line"><span class="cl">        <span class="n">att</span> <span class="o">=</span> <span class="n">null</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        long base = 0;
+</span></span><span class="line"><span class="cl">        try {
+</span></span><span class="line"><span class="cl">            base = unsafe.allocateMemory(size);// 分配了DirectByteBuffer对象的直接内存！！！！！！！！！！！！！！！
+</span></span><span class="line"><span class="cl">        } catch (OutOfMemoryError x) {
+</span></span><span class="line"><span class="cl">            Bits.unreserveMemory(size, cap);
+</span></span><span class="line"><span class="cl">            throw x;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        unsafe.setMemory(base, size, (byte) 0);
+</span></span><span class="line"><span class="cl">        if (pa &amp;&amp; (base % ps != 0)) {
+</span></span><span class="line"><span class="cl">            // Round up to page boundary
+</span></span><span class="line"><span class="cl">            address = base + ps - (base &amp; (ps - 1));
+</span></span><span class="line"><span class="cl">        } else {
+</span></span><span class="line"><span class="cl">            address = base;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        //Cleaner是个虚引用类型 Cleaner extends PhantomReference&lt;Object&gt;，当它所关联的对象被gc时，会触发它的clean方法。也就是this对象触发gc时，会调用Cleaner 的clean方法。
+</span></span><span class="line"><span class="cl">        //本例中就是调用Deallocator里的 run方法 用unsafe 方式进行直接内存的回收
+</span></span><span class="line"><span class="cl">        //在后台有个专门检测虚引用对象的ReferenceHandler线程中 执行clean方法。
+</span></span><span class="line"><span class="cl">        cleaner = Cleaner.create(this, new Deallocator(base, size, cap));//
+</span></span><span class="line"><span class="cl">        att = null;
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    }
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>回调任务对象Deallocator会释放DirectByteBuffer对象的直接内存！</p>
@@ -1761,11 +1758,11 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/jvm/054_5%E7%A7%8D%E5%BC%95%E7%94%A8.png"
-        data-srcset="/posts/jvm/054_5%E7%A7%8D%E5%BC%95%E7%94%A8.png, /posts/jvm/054_5%E7%A7%8D%E5%BC%95%E7%94%A8.png 1.5x, /posts/jvm/054_5%E7%A7%8D%E5%BC%95%E7%94%A8.png 2x"
+        data-src="054_5%e7%a7%8d%e5%bc%95%e7%94%a8.png"
+        data-srcset="054_5%e7%a7%8d%e5%bc%95%e7%94%a8.png, 054_5%e7%a7%8d%e5%bc%95%e7%94%a8.png 1.5x, 054_5%e7%a7%8d%e5%bc%95%e7%94%a8.png 2x"
         data-sizes="auto"
-        alt="/posts/jvm/054_5%E7%A7%8D%E5%BC%95%E7%94%A8.png"
-        title="/posts/jvm/054_5%E7%A7%8D%E5%BC%95%E7%94%A8.png" width="1502" height="762" /></p>
+        alt="054_5种引用.png"
+        title="054_5种引用.png" /></p>
 <h5 id="强引用">强引用</h5>
 <p>只有所有 GC Roots 对象都不通过【强引用】引用该对象，该对象才能被垃圾回收</p>
 <ul>
@@ -2003,48 +2000,48 @@
 </span><span class="lnt">42
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">import</span> <span class="n">java</span><span class="o">.</span><span class="n">lang</span><span class="o">.</span><span class="n">ref</span><span class="o">.</span><span class="n">Reference</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="n">java</span><span class="o">.</span><span class="n">lang</span><span class="o">.</span><span class="n">ref</span><span class="o">.</span><span class="n">ReferenceQueue</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="n">java</span><span class="o">.</span><span class="n">lang</span><span class="o">.</span><span class="n">ref</span><span class="o">.</span><span class="n">SoftReference</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="n">java</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">ArrayList</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="n">java</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">List</span><span class="p">;</span>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">import java.lang.ref.Reference;
+</span></span><span class="line"><span class="cl">import java.lang.ref.ReferenceQueue;
+</span></span><span class="line"><span class="cl">import java.lang.ref.SoftReference;
+</span></span><span class="line"><span class="cl">import java.util.ArrayList;
+</span></span><span class="line"><span class="cl">import java.util.List;
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="o">/**</span>
-</span></span><span class="line"><span class="cl"> <span class="o">*</span> <span class="err">演示软引用</span><span class="p">,</span> <span class="err">配合引用队列</span>
-</span></span><span class="line"><span class="cl"> <span class="o">*</span> 
-</span></span><span class="line"><span class="cl"> <span class="o">*</span> <span class="o">-</span><span class="n">Xmx20m</span>
-</span></span><span class="line"><span class="cl"> <span class="o">*/</span>
-</span></span><span class="line"><span class="cl"><span class="n">public</span> <span class="k">class</span> <span class="n">Demo2_4</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">private</span> <span class="k">static</span> <span class="n">final</span> <span class="ne">int</span> <span class="n">_4MB</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">/**
+</span></span><span class="line"><span class="cl"> * 演示软引用, 配合引用队列
+</span></span><span class="line"><span class="cl"> * 
+</span></span><span class="line"><span class="cl"> * -Xmx20m
+</span></span><span class="line"><span class="cl"> */
+</span></span><span class="line"><span class="cl">public class Demo2_4 {
+</span></span><span class="line"><span class="cl">    private static final int _4MB = 4 * 1024 * 1024;
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="n">public</span> <span class="k">static</span> <span class="n">void</span> <span class="n">main</span><span class="p">(</span><span class="ne">String</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">List</span><span class="o">&lt;</span><span class="n">SoftReference</span><span class="o">&lt;</span><span class="n">byte</span><span class="p">[]</span><span class="o">&gt;&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="n">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    public static void main(String[] args) {
+</span></span><span class="line"><span class="cl">        List&lt;SoftReference&lt;byte[]&gt;&gt; list = new ArrayList&lt;&gt;();
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="o">//</span> <span class="err">引用队列</span>
-</span></span><span class="line"><span class="cl">        <span class="n">ReferenceQueue</span><span class="o">&lt;</span><span class="n">byte</span><span class="p">[]</span><span class="o">&gt;</span> <span class="n">queue</span> <span class="o">=</span> <span class="n">new</span> <span class="n">ReferenceQueue</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        // 引用队列
+</span></span><span class="line"><span class="cl">        ReferenceQueue&lt;byte[]&gt; queue = new ReferenceQueue&lt;&gt;();
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="ne">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="o">//</span> <span class="err">关联了引用队列，</span> <span class="err">当软引用所关联的</span> <span class="n">byte</span><span class="p">[]</span><span class="err">被回收时，自动触发，软引用自己会加入到</span> <span class="n">queue</span> <span class="err">中去</span>
-</span></span><span class="line"><span class="cl">            <span class="n">SoftReference</span><span class="o">&lt;</span><span class="n">byte</span><span class="p">[]</span><span class="o">&gt;</span> <span class="n">ref</span> <span class="o">=</span> <span class="n">new</span> <span class="n">SoftReference</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">new</span> <span class="n">byte</span><span class="p">[</span><span class="n">_4MB</span><span class="p">],</span> <span class="n">queue</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="n">ref</span><span class="o">.</span><span class="n">get</span><span class="p">());</span>
-</span></span><span class="line"><span class="cl">            <span class="n">list</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">ref</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="n">list</span><span class="o">.</span><span class="n">size</span><span class="p">());</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        for (int i = 0; i &lt; 5; i++) {
+</span></span><span class="line"><span class="cl">            // 关联了引用队列， 当软引用所关联的 byte[]被回收时，自动触发，软引用自己会加入到 queue 中去
+</span></span><span class="line"><span class="cl">            SoftReference&lt;byte[]&gt; ref = new SoftReference&lt;&gt;(new byte[_4MB], queue);
+</span></span><span class="line"><span class="cl">            System.out.println(ref.get());
+</span></span><span class="line"><span class="cl">            list.add(ref);
+</span></span><span class="line"><span class="cl">            System.out.println(list.size());
+</span></span><span class="line"><span class="cl">        }
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="o">//</span> <span class="err">从队列中获取无用的</span> <span class="err">软引用对象，并手动移除</span>
-</span></span><span class="line"><span class="cl">        <span class="ne">Reference</span><span class="o">&lt;</span><span class="err">?</span> <span class="k">extends</span> <span class="n">byte</span><span class="p">[]</span><span class="o">&gt;</span> <span class="n">poll</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">poll</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span> <span class="n">poll</span> <span class="o">!=</span> <span class="n">null</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">list</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">poll</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="n">poll</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">poll</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        // 从队列中获取无用的 软引用对象，并手动移除
+</span></span><span class="line"><span class="cl">        Reference&lt;? extends byte[]&gt; poll = queue.poll();
+</span></span><span class="line"><span class="cl">        while( poll != null) {
+</span></span><span class="line"><span class="cl">            list.remove(poll);
+</span></span><span class="line"><span class="cl">            poll = queue.poll();
+</span></span><span class="line"><span class="cl">        }
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="s2">&#34;===========================&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="n">SoftReference</span><span class="o">&lt;</span><span class="n">byte</span><span class="p">[]</span><span class="o">&gt;</span> <span class="n">reference</span> <span class="p">:</span> <span class="n">list</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="n">reference</span><span class="o">.</span><span class="n">get</span><span class="p">());</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        System.out.println(&#34;===========================&#34;);
+</span></span><span class="line"><span class="cl">        for (SoftReference&lt;byte[]&gt; reference : list) {
+</span></span><span class="line"><span class="cl">            System.out.println(reference.get());
+</span></span><span class="line"><span class="cl">        }
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h5 id="弱引用">弱引用</h5>
@@ -2148,11 +2145,11 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/jvm/057_%E6%A0%87%E8%AE%B0%E6%B8%85%E9%99%A4.png"
-        data-srcset="/posts/jvm/057_%E6%A0%87%E8%AE%B0%E6%B8%85%E9%99%A4.png, /posts/jvm/057_%E6%A0%87%E8%AE%B0%E6%B8%85%E9%99%A4.png 1.5x, /posts/jvm/057_%E6%A0%87%E8%AE%B0%E6%B8%85%E9%99%A4.png 2x"
+        data-src="057_%e6%a0%87%e8%ae%b0%e6%b8%85%e9%99%a4.png"
+        data-srcset="057_%e6%a0%87%e8%ae%b0%e6%b8%85%e9%99%a4.png, 057_%e6%a0%87%e8%ae%b0%e6%b8%85%e9%99%a4.png 1.5x, 057_%e6%a0%87%e8%ae%b0%e6%b8%85%e9%99%a4.png 2x"
         data-sizes="auto"
-        alt="/posts/jvm/057_%E6%A0%87%E8%AE%B0%E6%B8%85%E9%99%A4.png"
-        title="/posts/jvm/057_%E6%A0%87%E8%AE%B0%E6%B8%85%E9%99%A4.png" width="1238" height="848" /></p>
+        alt="057_标记清除.png"
+        title="057_标记清除.png" /></p>
 <p><strong>定义</strong>：标记清除算法顾名思义，是指在虚拟机执行垃圾回收的过程中，先采用标记算法确定可回收对象，然后垃圾收集器根据标识清除相应的内容，给堆内存腾出相应的空间</p>
 <ul>
 <li>
@@ -2169,11 +2166,11 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/jvm/058_%E6%A0%87%E8%AE%B0%E6%95%B4%E7%90%86.png"
-        data-srcset="/posts/jvm/058_%E6%A0%87%E8%AE%B0%E6%95%B4%E7%90%86.png, /posts/jvm/058_%E6%A0%87%E8%AE%B0%E6%95%B4%E7%90%86.png 1.5x, /posts/jvm/058_%E6%A0%87%E8%AE%B0%E6%95%B4%E7%90%86.png 2x"
+        data-src="058_%e6%a0%87%e8%ae%b0%e6%95%b4%e7%90%86.png"
+        data-srcset="058_%e6%a0%87%e8%ae%b0%e6%95%b4%e7%90%86.png, 058_%e6%a0%87%e8%ae%b0%e6%95%b4%e7%90%86.png 1.5x, 058_%e6%a0%87%e8%ae%b0%e6%95%b4%e7%90%86.png 2x"
         data-sizes="auto"
-        alt="/posts/jvm/058_%E6%A0%87%E8%AE%B0%E6%95%B4%E7%90%86.png"
-        title="/posts/jvm/058_%E6%A0%87%E8%AE%B0%E6%95%B4%E7%90%86.png" width="1430" height="632" /></p>
+        alt="058_标记整理.png"
+        title="058_标记整理.png" /></p>
 <ul>
 <li><strong>优点</strong>：速度慢</li>
 <li><strong>缺点</strong>：不会有内存碎片</li>
@@ -2183,19 +2180,19 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/jvm/059_%E5%A4%8D%E5%88%B61.jpg"
-        data-srcset="/posts/jvm/059_%E5%A4%8D%E5%88%B61.jpg, /posts/jvm/059_%E5%A4%8D%E5%88%B61.jpg 1.5x, /posts/jvm/059_%E5%A4%8D%E5%88%B61.jpg 2x"
+        data-src="059_%e5%a4%8d%e5%88%b61.jpg"
+        data-srcset="059_%e5%a4%8d%e5%88%b61.jpg, 059_%e5%a4%8d%e5%88%b61.jpg 1.5x, 059_%e5%a4%8d%e5%88%b61.jpg 2x"
         data-sizes="auto"
-        alt="/posts/jvm/059_%E5%A4%8D%E5%88%B61.jpg"
-        title="/posts/jvm/059_%E5%A4%8D%E5%88%B61.jpg" width="1268" height="654" /></p>
+        alt="059_复制1.jpg"
+        title="059_复制1.jpg" /></p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/jvm/059_%E5%A4%8D%E5%88%B62.jpg"
-        data-srcset="/posts/jvm/059_%E5%A4%8D%E5%88%B62.jpg, /posts/jvm/059_%E5%A4%8D%E5%88%B62.jpg 1.5x, /posts/jvm/059_%E5%A4%8D%E5%88%B62.jpg 2x"
+        data-src="059_%e5%a4%8d%e5%88%b62.jpg"
+        data-srcset="059_%e5%a4%8d%e5%88%b62.jpg, 059_%e5%a4%8d%e5%88%b62.jpg 1.5x, 059_%e5%a4%8d%e5%88%b62.jpg 2x"
         data-sizes="auto"
-        alt="/posts/jvm/059_%E5%A4%8D%E5%88%B62.jpg"
-        title="/posts/jvm/059_%E5%A4%8D%E5%88%B62.jpg" width="1308" height="714" /></p>
+        alt="059_复制2.jpg"
+        title="059_复制2.jpg" /></p>
 <ul>
 <li>
 <p><strong>优点</strong>：不会有内存碎片</p>
@@ -2215,11 +2212,11 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/jvm/062_01.jpg"
-        data-srcset="/posts/jvm/062_01.jpg, /posts/jvm/062_01.jpg 1.5x, /posts/jvm/062_01.jpg 2x"
+        data-src="062_01.jpg"
+        data-srcset="062_01.jpg, 062_01.jpg 1.5x, 062_01.jpg 2x"
         data-sizes="auto"
-        alt="/posts/jvm/062_01.jpg"
-        title="/posts/jvm/062_01.jpg" width="1538" height="324" /></p>
+        alt="062_01.jpg"
+        title="062_01.jpg" /></p>
 <ol start="2">
 <li>
 <p>当新生代的内存不足时，就会进行一次垃圾回收，这时的回收叫做 <strong>Minor GC</strong>。Minor GC 会将<strong>伊甸园和幸存区FROM</strong>存活的对象<strong>用复制算法</strong>放入幸存区 TO中， 并让其寿命加1，再交换两个幸存区。</p>
@@ -2227,52 +2224,52 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/jvm/062_02.jpg"
-        data-srcset="/posts/jvm/062_02.jpg, /posts/jvm/062_02.jpg 1.5x, /posts/jvm/062_02.jpg 2x"
+        data-src="062_02.jpg"
+        data-srcset="062_02.jpg, 062_02.jpg 1.5x, 062_02.jpg 2x"
         data-sizes="auto"
-        alt="/posts/jvm/062_02.jpg"
-        title="/posts/jvm/062_02.jpg" width="1548" height="380" /></p>
+        alt="062_02.jpg"
+        title="062_02.jpg" /></p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/jvm/062_03.jpg"
-        data-srcset="/posts/jvm/062_03.jpg, /posts/jvm/062_03.jpg 1.5x, /posts/jvm/062_03.jpg 2x"
+        data-src="062_03.jpg"
+        data-srcset="062_03.jpg, 062_03.jpg 1.5x, 062_03.jpg 2x"
         data-sizes="auto"
-        alt="/posts/jvm/062_03.jpg"
-        title="/posts/jvm/062_03.jpg" width="1554" height="348" /></p>
+        alt="062_03.jpg"
+        title="062_03.jpg" /></p>
 </li>
 <li>
 <p>再次创建对象，若新生代的伊甸园又满了，则会<strong>再次触发 Minor GC</strong>，不仅会回收伊甸园中的垃圾，<strong>还会回收幸存区中的垃圾</strong>，再将活跃对象复制到幸存区TO中。回收以后会交换两个幸存区，并让幸存区中的对象<strong>寿命加1</strong></p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/jvm/062_05.jpg"
-        data-srcset="/posts/jvm/062_05.jpg, /posts/jvm/062_05.jpg 1.5x, /posts/jvm/062_05.jpg 2x"
+        data-src="062_05.jpg"
+        data-srcset="062_05.jpg, 062_05.jpg 1.5x, 062_05.jpg 2x"
         data-sizes="auto"
-        alt="/posts/jvm/062_05.jpg"
-        title="/posts/jvm/062_05.jpg" width="1550" height="378" /></p>
+        alt="062_05.jpg"
+        title="062_05.jpg" /></p>
 </li>
 <li>
 <p>当对象寿命超过阈值时，会晋升至老年代，最大寿命是15（4bit）</p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/jvm/062_06.jpg"
-        data-srcset="/posts/jvm/062_06.jpg, /posts/jvm/062_06.jpg 1.5x, /posts/jvm/062_06.jpg 2x"
+        data-src="062_06.jpg"
+        data-srcset="062_06.jpg, 062_06.jpg 1.5x, 062_06.jpg 2x"
         data-sizes="auto"
-        alt="/posts/jvm/062_06.jpg"
-        title="/posts/jvm/062_06.jpg" width="1566" height="356" /></p>
+        alt="062_06.jpg"
+        title="062_06.jpg" /></p>
 </li>
 <li>
 <p>当老年代空间不足，会先尝试触发 minor gc，如果之后空间仍不足，那么触发 full gcc，STW的时间更长。如果老年代的空也不够，就触发OutOfMemory</p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/jvm/062_07.jpg"
-        data-srcset="/posts/jvm/062_07.jpg, /posts/jvm/062_07.jpg 1.5x, /posts/jvm/062_07.jpg 2x"
+        data-src="062_07.jpg"
+        data-srcset="062_07.jpg, 062_07.jpg 1.5x, 062_07.jpg 2x"
         data-sizes="auto"
-        alt="/posts/jvm/062_07.jpg"
-        title="/posts/jvm/062_07.jpg" width="1568" height="364" /></p>
+        alt="062_07.jpg"
+        title="062_07.jpg" /></p>
 </li>
 </ol>
 <h3 id="4jvm参数">4、JVM参数</h3>
@@ -2335,11 +2332,11 @@
 <p>​    <img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/jvm/069_01_%E4%B8%B2%E8%A1%8C.jpg"
-        data-srcset="/posts/jvm/069_01_%E4%B8%B2%E8%A1%8C.jpg, /posts/jvm/069_01_%E4%B8%B2%E8%A1%8C.jpg 1.5x, /posts/jvm/069_01_%E4%B8%B2%E8%A1%8C.jpg 2x"
+        data-src="069_01_%e4%b8%b2%e8%a1%8c.jpg"
+        data-srcset="069_01_%e4%b8%b2%e8%a1%8c.jpg, 069_01_%e4%b8%b2%e8%a1%8c.jpg 1.5x, 069_01_%e4%b8%b2%e8%a1%8c.jpg 2x"
         data-sizes="auto"
-        alt="/posts/jvm/069_01_%E4%B8%B2%E8%A1%8C.jpg"
-        title="/posts/jvm/069_01_%E4%B8%B2%E8%A1%8C.jpg" width="1288" height="490" /></p>
+        alt="069_01_串行.jpg"
+        title="069_01_串行.jpg" /></p>
 <h4 id="吞吐量优先多线程的垃圾回收器">吞吐量优先(多线程的垃圾回收器)</h4>
 <p>java -server -XX:+ScavengeBeforeFullGC -XX:+PrintGCDetails -XX:+PrintTenuringDistribution -XX:+PrintGCTimeStamps -Dspring.profiles.active=prd -Dfile.encoding=utf-8 -Djava.net.preferIPv6Addresses=false -Djava.net.preferIPv4Stack=true -Duser.timezone=Asia/Shanghai -jar -Xms2048m -Xmx2048m -Xss512m -XX:SurvivorRatio=8 -XX:+UseCMSInitiatingOccupancyOnly -XX:CMSInitiatingOccupancyFraction=50 -XX:+UseParallelGC -XX:+UseParallelOldGC -XX:ParallelGCThreads=4 -XX:+UseAdaptiveSizePolicy -XX:MaxNewSize=128m -XX:NewSize=128m -Dnacos.config.server-addr=10.32.11.32:8849 -Dnacos.discovery.server-addr=10.32.11.32:8849 ${project.build.finalName}.jar</p>
 <div class="highlight"><div class="chroma">
@@ -2412,11 +2409,11 @@
 <p>​    <img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/jvm/069_02_%E5%90%9E%E5%90%90%E9%87%8F.jpg"
-        data-srcset="/posts/jvm/069_02_%E5%90%9E%E5%90%90%E9%87%8F.jpg, /posts/jvm/069_02_%E5%90%9E%E5%90%90%E9%87%8F.jpg 1.5x, /posts/jvm/069_02_%E5%90%9E%E5%90%90%E9%87%8F.jpg 2x"
+        data-src="069_02_%e5%90%9e%e5%90%90%e9%87%8f.jpg"
+        data-srcset="069_02_%e5%90%9e%e5%90%90%e9%87%8f.jpg, 069_02_%e5%90%9e%e5%90%90%e9%87%8f.jpg 1.5x, 069_02_%e5%90%9e%e5%90%90%e9%87%8f.jpg 2x"
         data-sizes="auto"
-        alt="/posts/jvm/069_02_%E5%90%9E%E5%90%90%E9%87%8F.jpg"
-        title="/posts/jvm/069_02_%E5%90%9E%E5%90%90%E9%87%8F.jpg" width="1364" height="750" /></p>
+        alt="069_02_吞吐量.jpg"
+        title="069_02_吞吐量.jpg" /></p>
 <p>-XX:+UseParallelGC ~ -XX:+UseParallelOldGC</p>
 <p>-XX:+UseAdaptiveSizePolicy    此参数代表 打开动态调整伊甸园与幸存区的比例的开关</p>
 <p>-XX:GCTimeRatio=ratio          默认值99，吞吐量  1/(1+99）（吞吐量 = 运行用户代码时间 / ( 运行用户代码时间 + 垃圾收集时间 )），也就是。例如：虚拟机共运行100分钟，垃圾收集器花掉1分钟，那么吞吐量就是99%，增大堆的大小，可以减少gc数量，增加吞吐量。</p>
@@ -2428,11 +2425,11 @@
 <p>​    <img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/jvm/071_cms.png"
-        data-srcset="/posts/jvm/071_cms.png, /posts/jvm/071_cms.png 1.5x, /posts/jvm/071_cms.png 2x"
+        data-src="071_cms.png"
+        data-srcset="071_cms.png, 071_cms.png 1.5x, 071_cms.png 2x"
         data-sizes="auto"
-        alt="/posts/jvm/071_cms.png"
-        title="/posts/jvm/071_cms.png" width="1320" height="758" /></p>
+        alt="071_cms.png"
+        title="071_cms.png" /></p>
 <p><strong>并行收集</strong>：指多条垃圾收集线程并行工作，但此时<strong>用户线程仍处于等待状态</strong>。</p>
 <p><strong>并发收集</strong>：指用户线程与垃圾收集线程<strong>同时工作</strong>（不一定是并行的可能会交替执行）。<strong>用户程序在继续运行</strong>，而垃圾收集程序运行在另一个CPU上，可以减少 STW。</p>
 <h5 id="cms-收集器">CMS 收集器</h5>
@@ -2500,37 +2497,37 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/jvm/073_g1.png"
-        data-srcset="/posts/jvm/073_g1.png, /posts/jvm/073_g1.png 1.5x, /posts/jvm/073_g1.png 2x"
+        data-src="073_g1.png"
+        data-srcset="073_g1.png, 073_g1.png 1.5x, 073_g1.png 2x"
         data-sizes="auto"
-        alt="/posts/jvm/073_g1.png"
-        title="/posts/jvm/073_g1.png" width="1240" height="1004" /></p>
+        alt="073_g1.png"
+        title="073_g1.png" /></p>
 <p>E：伊甸园 S：幸存区 O：老年代</p>
 <h5 id="1young-collection">1.Young Collection</h5>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/jvm/073_g1_01.png"
-        data-srcset="/posts/jvm/073_g1_01.png, /posts/jvm/073_g1_01.png 1.5x, /posts/jvm/073_g1_01.png 2x"
+        data-src="073_g1_01.png"
+        data-srcset="073_g1_01.png, 073_g1_01.png 1.5x, 073_g1_01.png 2x"
         data-sizes="auto"
-        alt="/posts/jvm/073_g1_01.png"
-        title="/posts/jvm/073_g1_01.png" width="1230" height="908" /></p>
+        alt="073_g1_01.png"
+        title="073_g1_01.png" /></p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/jvm/073_g1_02.png"
-        data-srcset="/posts/jvm/073_g1_02.png, /posts/jvm/073_g1_02.png 1.5x, /posts/jvm/073_g1_02.png 2x"
+        data-src="073_g1_02.png"
+        data-srcset="073_g1_02.png, 073_g1_02.png 1.5x, 073_g1_02.png 2x"
         data-sizes="auto"
-        alt="/posts/jvm/073_g1_02.png"
-        title="/posts/jvm/073_g1_02.png" width="1244" height="930" /></p>
+        alt="073_g1_02.png"
+        title="073_g1_02.png" /></p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/jvm/073_g1_03.png"
-        data-srcset="/posts/jvm/073_g1_03.png, /posts/jvm/073_g1_03.png 1.5x, /posts/jvm/073_g1_03.png 2x"
+        data-src="073_g1_03.png"
+        data-srcset="073_g1_03.png, 073_g1_03.png 1.5x, 073_g1_03.png 2x"
         data-sizes="auto"
-        alt="/posts/jvm/073_g1_03.png"
-        title="/posts/jvm/073_g1_03.png" width="1226" height="918" /></p>
+        alt="073_g1_03.png"
+        title="073_g1_03.png" /></p>
 <h5 id="2young-collection--cm">2.Young Collection + CM</h5>
 <p>CM：并发标记</p>
 <ul>
@@ -2540,30 +2537,30 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/jvm/076_g1_01.png"
-        data-srcset="/posts/jvm/076_g1_01.png, /posts/jvm/076_g1_01.png 1.5x, /posts/jvm/076_g1_01.png 2x"
+        data-src="076_g1_01.png"
+        data-srcset="076_g1_01.png, 076_g1_01.png 1.5x, 076_g1_01.png 2x"
         data-sizes="auto"
-        alt="/posts/jvm/076_g1_01.png"
-        title="/posts/jvm/076_g1_01.png" width="1236" height="934" /></p>
+        alt="076_g1_01.png"
+        title="076_g1_01.png" /></p>
 <p><a href="https://juejin.cn/post/7010034105165299725" target="_blank" rel="noopener noreffer">https://juejin.cn/post/7010034105165299725</a>
 </p>
 <h3 id="5直接内存">5、直接内存</h3>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/jvm/directbuff-io.png"
-        data-srcset="/posts/jvm/directbuff-io.png, /posts/jvm/directbuff-io.png 1.5x, /posts/jvm/directbuff-io.png 2x"
+        data-src="directbuff-io.png"
+        data-srcset="directbuff-io.png, directbuff-io.png 1.5x, directbuff-io.png 2x"
         data-sizes="auto"
-        alt="/posts/jvm/directbuff-io.png"
-        title="/posts/jvm/directbuff-io.png" width="947" height="467" /></p>
+        alt="directbuff-io.png"
+        title="directbuff-io.png" /></p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/jvm/directbuff-nio.png"
-        data-srcset="/posts/jvm/directbuff-nio.png, /posts/jvm/directbuff-nio.png 1.5x, /posts/jvm/directbuff-nio.png 2x"
+        data-src="directbuff-nio.png"
+        data-srcset="directbuff-nio.png, directbuff-nio.png 1.5x, directbuff-nio.png 2x"
         data-sizes="auto"
-        alt="/posts/jvm/directbuff-nio.png"
-        title="/posts/jvm/directbuff-nio.png" width="932" height="488" /></p>
+        alt="directbuff-nio.png"
+        title="directbuff-nio.png" /></p>
 <p>并不属于JVM中的内存结构，不由JVM进行管理。是虚拟机的系统内存</p>
 <p>常见于NIO操作时，用于数据缓冲区，分配回收成本较高，但读写性能高，不受JVM内存回收管理</p>
 </div><div class="post-footer" id="post-footer">
@@ -2587,12 +2584,12 @@
         </section>
     </div>
 
-    <div class="post-nav"><a href="/posts/mysql_lock/" class="prev" rel="prev" title=""><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i></a>
+    <div class="post-nav"><a href="/posts/ffmpeg/" class="prev" rel="prev" title="FFmpeg"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>FFmpeg</a>
             <a href="/posts/spring/" class="next" rel="next" title="Spring">Spring<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 </article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.127.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.105.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
                 </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ricky</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>

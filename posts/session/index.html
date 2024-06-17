@@ -4,19 +4,16 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>Session - ricky的网站</title><meta name="Description" content="The best time to plant a tree was 10 years ago, the second is now"><meta property="og:url" content="https://shengtu0328.github.io/posts/session/">
-  <meta property="og:site_name" content="ricky的网站">
-  <meta property="og:title" content="Session">
-  <meta property="og:description" content="servlet中 HttpSession是在tomcat中实现的。 StandardSession是HttpSession的默认实现Standa">
-  <meta property="og:locale" content="zh_CN">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2022-12-30T15:30:56+08:00">
-    <meta property="article:modified_time" content="2022-12-30T15:30:56+08:00">
+        <title>Session - ricky的网站</title><meta name="Description" content="The best time to plant a tree was 10 years ago, the second is now"><meta property="og:title" content="Session" />
+<meta property="og:description" content="servlet中 HttpSession是在tomcat中实现的。 StandardSession是HttpSession的默认实现Standa" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://shengtu0328.github.io/posts/session/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-12-30T15:30:56+08:00" />
+<meta property="article:modified_time" content="2022-12-30T15:30:56+08:00" /><meta property="og:site_name" content="我的网站" />
 
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Session">
-  <meta name="twitter:description" content="servlet中 HttpSession是在tomcat中实现的。 StandardSession是HttpSession的默认实现Standa">
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Session"/>
+<meta name="twitter:description" content="servlet中 HttpSession是在tomcat中实现的。 StandardSession是HttpSession的默认实现Standa"/>
 <meta name="application-name" content="我的网站">
 <meta name="apple-mobile-web-app-title" content="我的网站"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -119,29 +116,29 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/session/sessionsConcurrentHashMap.png"
-        data-srcset="/posts/session/sessionsConcurrentHashMap.png, /posts/session/sessionsConcurrentHashMap.png 1.5x, /posts/session/sessionsConcurrentHashMap.png 2x"
+        data-src="sessionsConcurrentHashMap.png"
+        data-srcset="sessionsConcurrentHashMap.png, sessionsConcurrentHashMap.png 1.5x, sessionsConcurrentHashMap.png 2x"
         data-sizes="auto"
-        alt="/posts/session/sessionsConcurrentHashMap.png"
-        title="/posts/session/sessionsConcurrentHashMap.png" width="2826" height="1442" /></p>
+        alt="sessionsConcurrentHashMap.png"
+        title="sessionsConcurrentHashMap.png" /></p>
 <p>Session1</p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/session/session1.png"
-        data-srcset="/posts/session/session1.png, /posts/session/session1.png 1.5x, /posts/session/session1.png 2x"
+        data-src="session1.png"
+        data-srcset="session1.png, session1.png 1.5x, session1.png 2x"
         data-sizes="auto"
-        alt="/posts/session/session1.png"
-        title="/posts/session/session1.png" width="2492" height="1352" /></p>
+        alt="session1.png"
+        title="session1.png" /></p>
 <p>Session2</p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/session/session2.png"
-        data-srcset="/posts/session/session2.png, /posts/session/session2.png 1.5x, /posts/session/session2.png 2x"
+        data-src="session2.png"
+        data-srcset="session2.png, session2.png 1.5x, session2.png 2x"
         data-sizes="auto"
-        alt="/posts/session/session2.png"
-        title="/posts/session/session2.png" width="2772" height="1226" /></p>
+        alt="session2.png"
+        title="session2.png" /></p>
 <p>所以说session 是保存在服务端这句话可以直白的理解为：默认是存储在服务端的一个map中，key是sessionId，value是Session。</p>
 <p>所以说使用session会有共享问题，是因为多台tomcat默认只保存自己这台接收的session，当请求切换到另一台tomcat时，用户a在tomcat1中登录了，但是第二个请求负载均衡到了tomcat2，tomcat2说用户没有登录，因为tomcat1的session只存在与tomcat1中。</p>
 <p>流程：由服务端生成sessionId，set进Cookie并传给浏览器，浏览器带着Cookie:sessionId访问服务端， 服务端去map中取得到当前用户的信息。</p>
@@ -171,7 +168,7 @@
 </div>
 </article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.127.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.105.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
                 </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ricky</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>

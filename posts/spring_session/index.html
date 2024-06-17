@@ -4,19 +4,16 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>Spring_session - ricky的网站</title><meta name="Description" content="The best time to plant a tree was 10 years ago, the second is now"><meta property="og:url" content="https://shengtu0328.github.io/posts/spring_session/">
-  <meta property="og:site_name" content="ricky的网站">
-  <meta property="og:title" content="Spring_session">
-  <meta property="og:description" content="没登录帐号，只是打开页面 10:36分创建 ，1692932760000 代表了 2023-08-25 11:06:00 差了正好半小时 localhost:0&gt;keys * \1) “spring:session:sessions:a10709ca-3f18-46b8-b69b-c0194e116ad9” \2) “spring:session:sessions:expires:a10709ca-3f18-46b8-b69b-c0194e116ad9” \3) “spring:session:expirations:1692932760000” hash结构 \1) “spring:session:sessions:a10709ca-3f18-46b8-b69b-c0194e116ad9” ​ 其中 creat">
-  <meta property="og:locale" content="zh_CN">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2023-08-25T10:15:37+08:00">
-    <meta property="article:modified_time" content="2023-08-25T10:15:37+08:00">
+        <title>Spring_session - ricky的网站</title><meta name="Description" content="The best time to plant a tree was 10 years ago, the second is now"><meta property="og:title" content="Spring_session" />
+<meta property="og:description" content="没登录帐号，只是打开页面 10:36分创建 ，1692932760000 代表了 2023-08-25 11:06:00 差了正好半小时 localhost:0&gt;keys * \1) &ldquo;spring:session:sessions:a10709ca-3f18-46b8-b69b-c0194e116ad9&rdquo; \2) &ldquo;spring:session:sessions:expires:a10709ca-3f18-46b8-b69b-c0194e116ad9&rdquo; \3) &ldquo;spring:session:expirations:1692932760000&rdquo; hash结构 \1) &ldquo;spring:session:sessions:a10709ca-3f18-46b8-b69b-c0194e116ad9&rdquo; ​ 其中 creat" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://shengtu0328.github.io/posts/spring_session/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-08-25T10:15:37+08:00" />
+<meta property="article:modified_time" content="2023-08-25T10:15:37+08:00" /><meta property="og:site_name" content="我的网站" />
 
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Spring_session">
-  <meta name="twitter:description" content="没登录帐号，只是打开页面 10:36分创建 ，1692932760000 代表了 2023-08-25 11:06:00 差了正好半小时 localhost:0&gt;keys * \1) “spring:session:sessions:a10709ca-3f18-46b8-b69b-c0194e116ad9” \2) “spring:session:sessions:expires:a10709ca-3f18-46b8-b69b-c0194e116ad9” \3) “spring:session:expirations:1692932760000” hash结构 \1) “spring:session:sessions:a10709ca-3f18-46b8-b69b-c0194e116ad9” ​ 其中 creat">
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Spring_session"/>
+<meta name="twitter:description" content="没登录帐号，只是打开页面 10:36分创建 ，1692932760000 代表了 2023-08-25 11:06:00 差了正好半小时 localhost:0&gt;keys * \1) &ldquo;spring:session:sessions:a10709ca-3f18-46b8-b69b-c0194e116ad9&rdquo; \2) &ldquo;spring:session:sessions:expires:a10709ca-3f18-46b8-b69b-c0194e116ad9&rdquo; \3) &ldquo;spring:session:expirations:1692932760000&rdquo; hash结构 \1) &ldquo;spring:session:sessions:a10709ca-3f18-46b8-b69b-c0194e116ad9&rdquo; ​ 其中 creat"/>
 <meta name="application-name" content="我的网站">
 <meta name="apple-mobile-web-app-title" content="我的网站"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -136,11 +133,11 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/spring_session/set_cookie.png"
-        data-srcset="/posts/spring_session/set_cookie.png, /posts/spring_session/set_cookie.png 1.5x, /posts/spring_session/set_cookie.png 2x"
+        data-src="set_cookie.png"
+        data-srcset="set_cookie.png, set_cookie.png 1.5x, set_cookie.png 2x"
         data-sizes="auto"
-        alt="/posts/spring_session/set_cookie.png"
-        title="/posts/spring_session/set_cookie.png" width="1689" height="941" /></p>
+        alt="set_cookie.png"
+        title="set_cookie.png" /></p>
 <p>原理简要总结
 当请求进来的时候，SessionRepositoryFilter 会先拦截到请求，将 request 和 response 对象转换成 SessionRepositoryRequestWrapper 和 SessionRepositoryResponseWrapper 。后续当第一次调用 request 的getSession方法时，会调用到 SessionRepositoryRequestWrapper 的getSession方法。这个方法是被从写过的，逻辑是先从 request 的属性中查找，如果找不到；再查找一个key值是&quot;SESSION&quot;的 Cookie，通过这个 Cookie 拿到 SessionId 去 Redis 中查找，如果查不到，就直接创建一个RedisSession 对象，同步到 Redis 中。</p>
 <h2 id="说的简单点就是拦截请求将之前在服务器内存中进行-session-创建销毁的动作改成在-redis-中创建">说的简单点就是：拦截请求，将之前在服务器内存中进行 Session 创建销毁的动作，改成在 Redis 中创建。</h2>
@@ -174,7 +171,7 @@ spring-session的使用及其原理——分布式session解决方案
 </div>
 </article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.127.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.105.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
                 </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ricky</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>

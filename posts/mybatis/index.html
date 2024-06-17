@@ -4,23 +4,20 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>MyBatis - ricky的网站</title><meta name="Description" content="The best time to plant a tree was 10 years ago, the second is now"><meta property="og:url" content="https://shengtu0328.github.io/posts/mybatis/">
-  <meta property="og:site_name" content="ricky的网站">
-  <meta property="og:title" content="MyBatis">
-  <meta property="og:description" content="MybatisAutoConfiguration 解析 xml文件 ![](SqlSessionFactoryBean .png) 在springboot启动阶段 ，在注册 mybatis的 mapperbean时， 是通过 一个实现了FactoryBean接口">
-  <meta property="og:locale" content="zh_CN">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2024-04-11T15:18:11+08:00">
-    <meta property="article:modified_time" content="2024-04-11T15:18:11+08:00">
+        <title>MyBatis - ricky的网站</title><meta name="Description" content="The best time to plant a tree was 10 years ago, the second is now"><meta property="og:title" content="MyBatis" />
+<meta property="og:description" content="MybatisAutoConfiguration 解析 xml文件 ![](SqlSessionFactoryBean .png) 在springboot启动阶段 ，在注册 mybatis的 mapperbean时， 是通过 一个实现了FactoryBean接口" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://shengtu0328.github.io/posts/mybatis/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-04-11T15:18:11+08:00" />
+<meta property="article:modified_time" content="2024-04-11T15:18:11+08:00" /><meta property="og:site_name" content="我的网站" />
 
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="MyBatis">
-  <meta name="twitter:description" content="MybatisAutoConfiguration 解析 xml文件 ![](SqlSessionFactoryBean .png) 在springboot启动阶段 ，在注册 mybatis的 mapperbean时， 是通过 一个实现了FactoryBean接口">
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="MyBatis"/>
+<meta name="twitter:description" content="MybatisAutoConfiguration 解析 xml文件 ![](SqlSessionFactoryBean .png) 在springboot启动阶段 ，在注册 mybatis的 mapperbean时， 是通过 一个实现了FactoryBean接口"/>
 <meta name="application-name" content="我的网站">
 <meta name="apple-mobile-web-app-title" content="我的网站"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://shengtu0328.github.io/posts/mybatis/" /><link rel="prev" href="https://shengtu0328.github.io/posts/english_new_concept_english3/" /><link rel="next" href="https://shengtu0328.github.io/posts/english_writing/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://shengtu0328.github.io/posts/mybatis/" /><link rel="prev" href="https://shengtu0328.github.io/posts/english_new_concept_english3/" /><link rel="next" href="https://shengtu0328.github.io/posts/mysql_lock/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -120,11 +117,11 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/mybatis/posts/mybatis/factorygetObject.png"
-        data-srcset="/posts/mybatis/posts/mybatis/factorygetObject.png, /posts/mybatis/posts/mybatis/factorygetObject.png 1.5x, /posts/mybatis/posts/mybatis/factorygetObject.png 2x"
+        data-src="factorygetObject.png"
+        data-srcset="factorygetObject.png, factorygetObject.png 1.5x, factorygetObject.png 2x"
         data-sizes="auto"
-        alt="/posts/mybatis/posts/mybatis/factorygetObject.png"
-        title="/posts/mybatis/posts/mybatis/factorygetObject.png" width="1646" height="939" /></p>
+        alt="factorygetObject.png"
+        title="factorygetObject.png" /></p>
 <p>然后再MapperProxyFactory 通过jdk的动态代理 创建动态代理的 dao代理实现类</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -193,19 +190,19 @@
 </div><p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/mybatis/posts/mybatis/mappermethodexecute.png"
-        data-srcset="/posts/mybatis/posts/mybatis/mappermethodexecute.png, /posts/mybatis/posts/mybatis/mappermethodexecute.png 1.5x, /posts/mybatis/posts/mybatis/mappermethodexecute.png 2x"
+        data-src="mappermethodexecute.png"
+        data-srcset="mappermethodexecute.png, mappermethodexecute.png 1.5x, mappermethodexecute.png 2x"
         data-sizes="auto"
-        alt="/posts/mybatis/posts/mybatis/mappermethodexecute.png"
-        title="/posts/mybatis/posts/mybatis/mappermethodexecute.png" width="1583" height="980" /></p>
+        alt="mappermethodexecute.png"
+        title="mappermethodexecute.png" /></p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/mybatis/posts/mybatis/sqlSessionProxy.png"
-        data-srcset="/posts/mybatis/posts/mybatis/sqlSessionProxy.png, /posts/mybatis/posts/mybatis/sqlSessionProxy.png 1.5x, /posts/mybatis/posts/mybatis/sqlSessionProxy.png 2x"
+        data-src="sqlSessionProxy.png"
+        data-srcset="sqlSessionProxy.png, sqlSessionProxy.png 1.5x, sqlSessionProxy.png 2x"
         data-sizes="auto"
-        alt="/posts/mybatis/posts/mybatis/sqlSessionProxy.png"
-        title="/posts/mybatis/posts/mybatis/sqlSessionProxy.png" width="1728" height="915" /></p>
+        alt="sqlSessionProxy.png"
+        title="sqlSessionProxy.png" /></p>
 <p>SqlSessionTemplate 里sqlSessionProxy也是个代理类</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -311,42 +308,42 @@
 </span><span class="lnt">36
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="err">@</span><span class="n">SuppressWarnings</span><span class="p">(</span><span class="s2">&#34;unchecked&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="err">@</span><span class="n">Override</span>
-</span></span><span class="line"><span class="cl"><span class="n">public</span> <span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">query</span><span class="p">(</span><span class="n">MappedStatement</span> <span class="n">ms</span><span class="p">,</span> <span class="ne">Object</span> <span class="n">parameter</span><span class="p">,</span> <span class="n">RowBounds</span> <span class="n">rowBounds</span><span class="p">,</span> <span class="n">ResultHandler</span> <span class="n">resultHandler</span><span class="p">,</span> <span class="n">CacheKey</span> <span class="n">key</span><span class="p">,</span> <span class="n">BoundSql</span> <span class="n">boundSql</span><span class="p">)</span> <span class="n">throws</span> <span class="n">SQLException</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="n">ErrorContext</span><span class="o">.</span><span class="n">instance</span><span class="p">()</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span><span class="n">ms</span><span class="o">.</span><span class="n">getResource</span><span class="p">())</span><span class="o">.</span><span class="n">activity</span><span class="p">(</span><span class="s2">&#34;executing a query&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">ms</span><span class="o">.</span><span class="n">getId</span><span class="p">());</span>
-</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="n">closed</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">throw</span> <span class="n">new</span> <span class="n">ExecutorException</span><span class="p">(</span><span class="s2">&#34;Executor was closed.&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="n">queryStack</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">ms</span><span class="o">.</span><span class="n">isFlushCacheRequired</span><span class="p">())</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">clearLocalCache</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="n">List</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">list</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="n">try</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">queryStack</span><span class="o">++</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">list</span> <span class="o">=</span> <span class="n">resultHandler</span> <span class="o">==</span> <span class="n">null</span> <span class="err">?</span> <span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span><span class="p">)</span> <span class="n">localCache</span><span class="o">.</span><span class="n">getObject</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="p">:</span> <span class="n">null</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">list</span> <span class="o">!=</span> <span class="n">null</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="n">handleLocallyCachedOutputParameters</span><span class="p">(</span><span class="n">ms</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">parameter</span><span class="p">,</span> <span class="n">boundSql</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="o">//=================================================</span><span class="err">查询数据库</span><span class="o">=================================================</span><span class="err">、</span>
-</span></span><span class="line"><span class="cl">      <span class="n">list</span> <span class="o">=</span> <span class="n">queryFromDatabase</span><span class="p">(</span><span class="n">ms</span><span class="p">,</span> <span class="n">parameter</span><span class="p">,</span> <span class="n">rowBounds</span><span class="p">,</span> <span class="n">resultHandler</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">boundSql</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="n">finally</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">queryStack</span><span class="o">--</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="n">queryStack</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="n">DeferredLoad</span> <span class="n">deferredLoad</span> <span class="p">:</span> <span class="n">deferredLoads</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="n">deferredLoad</span><span class="o">.</span><span class="n">load</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="o">//</span> <span class="n">issue</span> <span class="c1">#601</span>
-</span></span><span class="line"><span class="cl">    <span class="n">deferredLoads</span><span class="o">.</span><span class="n">clear</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">configuration</span><span class="o">.</span><span class="n">getLocalCacheScope</span><span class="p">()</span> <span class="o">==</span> <span class="n">LocalCacheScope</span><span class="o">.</span><span class="n">STATEMENT</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="o">//</span> <span class="n">issue</span> <span class="c1">#482</span>
-</span></span><span class="line"><span class="cl">      <span class="n">clearLocalCache</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">list</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">@SuppressWarnings(&#34;unchecked&#34;)
+</span></span><span class="line"><span class="cl">@Override
+</span></span><span class="line"><span class="cl">public &lt;E&gt; List&lt;E&gt; query(MappedStatement ms, Object parameter, RowBounds rowBounds, ResultHandler resultHandler, CacheKey key, BoundSql boundSql) throws SQLException {
+</span></span><span class="line"><span class="cl">  ErrorContext.instance().resource(ms.getResource()).activity(&#34;executing a query&#34;).object(ms.getId());
+</span></span><span class="line"><span class="cl">  if (closed) {
+</span></span><span class="line"><span class="cl">    throw new ExecutorException(&#34;Executor was closed.&#34;);
+</span></span><span class="line"><span class="cl">  }
+</span></span><span class="line"><span class="cl">  if (queryStack == 0 &amp;&amp; ms.isFlushCacheRequired()) {
+</span></span><span class="line"><span class="cl">    clearLocalCache();
+</span></span><span class="line"><span class="cl">  }
+</span></span><span class="line"><span class="cl">  List&lt;E&gt; list;
+</span></span><span class="line"><span class="cl">  try {
+</span></span><span class="line"><span class="cl">    queryStack++;
+</span></span><span class="line"><span class="cl">    list = resultHandler == null ? (List&lt;E&gt;) localCache.getObject(key) : null;
+</span></span><span class="line"><span class="cl">    if (list != null) {
+</span></span><span class="line"><span class="cl">      handleLocallyCachedOutputParameters(ms, key, parameter, boundSql);
+</span></span><span class="line"><span class="cl">    } else {
+</span></span><span class="line"><span class="cl">      //=================================================查询数据库=================================================、
+</span></span><span class="line"><span class="cl">      list = queryFromDatabase(ms, parameter, rowBounds, resultHandler, key, boundSql);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">  } finally {
+</span></span><span class="line"><span class="cl">    queryStack--;
+</span></span><span class="line"><span class="cl">  }
+</span></span><span class="line"><span class="cl">  if (queryStack == 0) {
+</span></span><span class="line"><span class="cl">    for (DeferredLoad deferredLoad : deferredLoads) {
+</span></span><span class="line"><span class="cl">      deferredLoad.load();
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    // issue #601
+</span></span><span class="line"><span class="cl">    deferredLoads.clear();
+</span></span><span class="line"><span class="cl">    if (configuration.getLocalCacheScope() == LocalCacheScope.STATEMENT) {
+</span></span><span class="line"><span class="cl">      // issue #482
+</span></span><span class="line"><span class="cl">      clearLocalCache();
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">  }
+</span></span><span class="line"><span class="cl">  return list;
+</span></span><span class="line"><span class="cl">}
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>最终会调用 PreparedStatementHandler ，使用jdbc进行数据库查询</p>
@@ -390,11 +387,11 @@
     </div>
 
     <div class="post-nav"><a href="/posts/english_new_concept_english3/" class="prev" rel="prev" title="english_new_concept_english3"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>english_new_concept_english3</a>
-            <a href="/posts/english_writing/" class="next" rel="next" title="Learing English is not a rocket science.">Learing English is not a rocket science.<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+            <a href="/posts/mysql_lock/" class="next" rel="next" title="Mysql_lock">Mysql_lock<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 </article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.127.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.105.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
                 </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ricky</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>

@@ -4,19 +4,16 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>学习SpringSecurity - ricky的网站</title><meta name="Description" content="The best time to plant a tree was 10 years ago, the second is now"><meta property="og:url" content="https://shengtu0328.github.io/posts/learnspringsecurity/">
-  <meta property="og:site_name" content="ricky的网站">
-  <meta property="og:title" content="学习SpringSecurity">
-  <meta property="og:description" content="SpringSecurity概览 在日常工作中，web应用的用户登录，用户认证，用户授权等都是常用到的功能，而与Spring相结合的Sprin">
-  <meta property="og:locale" content="zh_CN">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2022-11-03T14:22:04+08:00">
-    <meta property="article:modified_time" content="2022-11-03T14:22:04+08:00">
+        <title>学习SpringSecurity - ricky的网站</title><meta name="Description" content="The best time to plant a tree was 10 years ago, the second is now"><meta property="og:title" content="学习SpringSecurity" />
+<meta property="og:description" content="SpringSecurity概览 在日常工作中，web应用的用户登录，用户认证，用户授权等都是常用到的功能，而与Spring相结合的Sprin" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://shengtu0328.github.io/posts/learnspringsecurity/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-11-03T14:22:04+08:00" />
+<meta property="article:modified_time" content="2022-11-03T14:22:04+08:00" /><meta property="og:site_name" content="我的网站" />
 
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="学习SpringSecurity">
-  <meta name="twitter:description" content="SpringSecurity概览 在日常工作中，web应用的用户登录，用户认证，用户授权等都是常用到的功能，而与Spring相结合的Sprin">
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="学习SpringSecurity"/>
+<meta name="twitter:description" content="SpringSecurity概览 在日常工作中，web应用的用户登录，用户认证，用户授权等都是常用到的功能，而与Spring相结合的Sprin"/>
 <meta name="application-name" content="我的网站">
 <meta name="apple-mobile-web-app-title" content="我的网站"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -301,20 +298,20 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/learnspringsecurity/posts/learnspringsecurity/ApplicationFilterChain.png"
-        data-srcset="/posts/learnspringsecurity/posts/learnspringsecurity/ApplicationFilterChain.png, /posts/learnspringsecurity/posts/learnspringsecurity/ApplicationFilterChain.png 1.5x, /posts/learnspringsecurity/posts/learnspringsecurity/ApplicationFilterChain.png 2x"
+        data-src="ApplicationFilterChain.png"
+        data-srcset="ApplicationFilterChain.png, ApplicationFilterChain.png 1.5x, ApplicationFilterChain.png 2x"
         data-sizes="auto"
-        alt="/posts/learnspringsecurity/posts/learnspringsecurity/ApplicationFilterChain.png"
-        title="/posts/learnspringsecurity/posts/learnspringsecurity/ApplicationFilterChain.png" width="2356" height="1438" /></p>
+        alt="ApplicationFilterChain.png"
+        title="ApplicationFilterChain.png" /></p>
 <p>FilterChainProxy$VirtualFilterChain 过滤器链 （也就是 SpringSecurityFilterChain）</p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/learnspringsecurity/posts/learnspringsecurity/FilterChainProxy$VirtualFilterChain.png"
-        data-srcset="/posts/learnspringsecurity/posts/learnspringsecurity/FilterChainProxy$VirtualFilterChain.png, /posts/learnspringsecurity/posts/learnspringsecurity/FilterChainProxy$VirtualFilterChain.png 1.5x, /posts/learnspringsecurity/posts/learnspringsecurity/FilterChainProxy$VirtualFilterChain.png 2x"
+        data-src="FilterChainProxy$VirtualFilterChain.png"
+        data-srcset="FilterChainProxy$VirtualFilterChain.png, FilterChainProxy$VirtualFilterChain.png 1.5x, FilterChainProxy$VirtualFilterChain.png 2x"
         data-sizes="auto"
-        alt="/posts/learnspringsecurity/posts/learnspringsecurity/FilterChainProxy$VirtualFilterChain.png"
-        title="/posts/learnspringsecurity/posts/learnspringsecurity/FilterChainProxy$VirtualFilterChain.png" width="2572" height="1372" /></p>
+        alt="FilterChainProxy$VirtualFilterChain.png"
+        title="FilterChainProxy$VirtualFilterChain.png" /></p>
 <p><a href="https://docs.spring.io/spring-security/reference/servlet/architecture.html" target="_blank" rel="noopener noreffer">https://docs.spring.io/spring-security/reference/servlet/architecture.html</a>
 </p>
 <hr>
@@ -360,23 +357,23 @@
 </span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="c1">#SecurityContextPersistenceFilter</span>
-</span></span><span class="line"><span class="cl"><span class="n">private</span> <span class="n">void</span> <span class="n">doFilter</span><span class="p">(</span><span class="n">HttpServletRequest</span> <span class="n">request</span><span class="p">,</span> <span class="n">HttpServletResponse</span> <span class="n">response</span><span class="p">,</span> <span class="n">FilterChain</span> <span class="n">chain</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="n">throws</span> <span class="n">IOException</span><span class="p">,</span> <span class="n">ServletException</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">   <span class="o">//</span> <span class="n">ensure</span> <span class="n">that</span> <span class="n">filter</span> <span class="n">is</span> <span class="n">only</span> <span class="n">applied</span> <span class="n">once</span> <span class="n">per</span> <span class="n">request</span>
-</span></span><span class="line"><span class="cl">   <span class="k">if</span> <span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">getAttribute</span><span class="p">(</span><span class="n">FILTER_APPLIED</span><span class="p">)</span> <span class="o">!=</span> <span class="n">null</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="n">chain</span><span class="o">.</span><span class="n">doFilter</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">      <span class="k">return</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">   <span class="p">}</span>
-</span></span><span class="line"><span class="cl">   <span class="n">request</span><span class="o">.</span><span class="n">setAttribute</span><span class="p">(</span><span class="n">FILTER_APPLIED</span><span class="p">,</span> <span class="n">Boolean</span><span class="o">.</span><span class="n">TRUE</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">   <span class="k">if</span> <span class="p">(</span><span class="n">this</span><span class="o">.</span><span class="n">forceEagerSessionCreation</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="n">HttpSession</span> <span class="n">session</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">getSession</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="n">this</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">isDebugEnabled</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">session</span><span class="o">.</span><span class="n">isNew</span><span class="p">())</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">         <span class="n">this</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">LogMessage</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&#34;Created session </span><span class="si">%s</span><span class="s2"> eagerly&#34;</span><span class="p">,</span> <span class="n">session</span><span class="o">.</span><span class="n">getId</span><span class="p">()));</span>
-</span></span><span class="line"><span class="cl">      <span class="p">}</span>
-</span></span><span class="line"><span class="cl">   <span class="p">}</span>
-</span></span><span class="line"><span class="cl">   <span class="n">HttpRequestResponseHolder</span> <span class="n">holder</span> <span class="o">=</span> <span class="n">new</span> <span class="n">HttpRequestResponseHolder</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">   <span class="n">SecurityContext</span> <span class="n">contextBeforeChainExecution</span> <span class="o">=</span> <span class="n">this</span><span class="o">.</span><span class="n">repo</span><span class="o">.</span><span class="n">loadContext</span><span class="p">(</span><span class="n">holder</span><span class="p">);</span>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">#SecurityContextPersistenceFilter
+</span></span><span class="line"><span class="cl">private void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
+</span></span><span class="line"><span class="cl">      throws IOException, ServletException {
+</span></span><span class="line"><span class="cl">   // ensure that filter is only applied once per request
+</span></span><span class="line"><span class="cl">   if (request.getAttribute(FILTER_APPLIED) != null) {
+</span></span><span class="line"><span class="cl">      chain.doFilter(request, response);
+</span></span><span class="line"><span class="cl">      return;
+</span></span><span class="line"><span class="cl">   }
+</span></span><span class="line"><span class="cl">   request.setAttribute(FILTER_APPLIED, Boolean.TRUE);
+</span></span><span class="line"><span class="cl">   if (this.forceEagerSessionCreation) {
+</span></span><span class="line"><span class="cl">      HttpSession session = request.getSession();
+</span></span><span class="line"><span class="cl">      if (this.logger.isDebugEnabled() &amp;&amp; session.isNew()) {
+</span></span><span class="line"><span class="cl">         this.logger.debug(LogMessage.format(&#34;Created session %s eagerly&#34;, session.getId()));
+</span></span><span class="line"><span class="cl">      }
+</span></span><span class="line"><span class="cl">   }
+</span></span><span class="line"><span class="cl">   HttpRequestResponseHolder holder = new HttpRequestResponseHolder(request, response);
+</span></span><span class="line"><span class="cl">   SecurityContext contextBeforeChainExecution = this.repo.loadContext(holder);
 </span></span></code></pre></td></tr></table>
 </div>
 </div><hr>
@@ -385,31 +382,31 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/learnspringsecurity/posts/learnspringsecurity/ThreadLocalSecurityContextHolderStrategy.png"
-        data-srcset="/posts/learnspringsecurity/posts/learnspringsecurity/ThreadLocalSecurityContextHolderStrategy.png, /posts/learnspringsecurity/posts/learnspringsecurity/ThreadLocalSecurityContextHolderStrategy.png 1.5x, /posts/learnspringsecurity/posts/learnspringsecurity/ThreadLocalSecurityContextHolderStrategy.png 2x"
+        data-src="ThreadLocalSecurityContextHolderStrategy.png"
+        data-srcset="ThreadLocalSecurityContextHolderStrategy.png, ThreadLocalSecurityContextHolderStrategy.png 1.5x, ThreadLocalSecurityContextHolderStrategy.png 2x"
         data-sizes="auto"
-        alt="/posts/learnspringsecurity/posts/learnspringsecurity/ThreadLocalSecurityContextHolderStrategy.png"
-        title="/posts/learnspringsecurity/posts/learnspringsecurity/ThreadLocalSecurityContextHolderStrategy.png" width="1620" height="935" /></p>
+        alt="ThreadLocalSecurityContextHolderStrategy.png"
+        title="ThreadLocalSecurityContextHolderStrategy.png" /></p>
 <p>并且在外层的 SecurityContextPersistenceFilter里 ，会及时手动清理threadlocal 对象</p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/learnspringsecurity/posts/learnspringsecurity/SecurityContextPersistenceFilter_ThreadLocal.png"
-        data-srcset="/posts/learnspringsecurity/posts/learnspringsecurity/SecurityContextPersistenceFilter_ThreadLocal.png, /posts/learnspringsecurity/posts/learnspringsecurity/SecurityContextPersistenceFilter_ThreadLocal.png 1.5x, /posts/learnspringsecurity/posts/learnspringsecurity/SecurityContextPersistenceFilter_ThreadLocal.png 2x"
+        data-src="SecurityContextPersistenceFilter_ThreadLocal.png"
+        data-srcset="SecurityContextPersistenceFilter_ThreadLocal.png, SecurityContextPersistenceFilter_ThreadLocal.png 1.5x, SecurityContextPersistenceFilter_ThreadLocal.png 2x"
         data-sizes="auto"
-        alt="/posts/learnspringsecurity/posts/learnspringsecurity/SecurityContextPersistenceFilter_ThreadLocal.png"
-        title="/posts/learnspringsecurity/posts/learnspringsecurity/SecurityContextPersistenceFilter_ThreadLocal.png" width="1645" height="958" /></p>
+        alt="SecurityContextPersistenceFilter_ThreadLocal.png"
+        title="SecurityContextPersistenceFilter_ThreadLocal.png" /></p>
 <hr>
 <h2 id="session和cookie">Session和Cookie</h2>
 <p>servlet中 HttpSession是在tomcat中实现的。生成sessionId，并将sessionId set进cookie，用来区分不同的用户请求。</p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/learnspringsecurity/posts/learnspringsecurity/doGetSession.png"
-        data-srcset="/posts/learnspringsecurity/posts/learnspringsecurity/doGetSession.png, /posts/learnspringsecurity/posts/learnspringsecurity/doGetSession.png 1.5x, /posts/learnspringsecurity/posts/learnspringsecurity/doGetSession.png 2x"
+        data-src="doGetSession.png"
+        data-srcset="doGetSession.png, doGetSession.png 1.5x, doGetSession.png 2x"
         data-sizes="auto"
-        alt="/posts/learnspringsecurity/posts/learnspringsecurity/doGetSession.png"
-        title="/posts/learnspringsecurity/posts/learnspringsecurity/doGetSession.png" width="2692" height="1380" /></p>
+        alt="doGetSession.png"
+        title="doGetSession.png" /></p>
 <hr>
 <h2 id="logoutfilter">LogoutFilter</h2>
 <p>处理注销操作的LogoutFilter 只会处理注销请求，其余放行</p>
@@ -429,11 +426,11 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/learnspringsecurity/posts/learnspringsecurity/FormLogin.png"
-        data-srcset="/posts/learnspringsecurity/posts/learnspringsecurity/FormLogin.png, /posts/learnspringsecurity/posts/learnspringsecurity/FormLogin.png 1.5x, /posts/learnspringsecurity/posts/learnspringsecurity/FormLogin.png 2x"
+        data-src="FormLogin.png"
+        data-srcset="FormLogin.png, FormLogin.png 1.5x, FormLogin.png 2x"
         data-sizes="auto"
-        alt="/posts/learnspringsecurity/posts/learnspringsecurity/FormLogin.png"
-        title="/posts/learnspringsecurity/posts/learnspringsecurity/FormLogin.png" width="1988" height="772" /></p>
+        alt="FormLogin.png"
+        title="FormLogin.png" /></p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -559,11 +556,11 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/learnspringsecurity/posts/learnspringsecurity/AccessDecisionManager2.png"
-        data-srcset="/posts/learnspringsecurity/posts/learnspringsecurity/AccessDecisionManager2.png, /posts/learnspringsecurity/posts/learnspringsecurity/AccessDecisionManager2.png 1.5x, /posts/learnspringsecurity/posts/learnspringsecurity/AccessDecisionManager2.png 2x"
+        data-src="AccessDecisionManager2.png"
+        data-srcset="AccessDecisionManager2.png, AccessDecisionManager2.png 1.5x, AccessDecisionManager2.png 2x"
         data-sizes="auto"
-        alt="/posts/learnspringsecurity/posts/learnspringsecurity/AccessDecisionManager2.png"
-        title="/posts/learnspringsecurity/posts/learnspringsecurity/AccessDecisionManager2.png" width="2278" height="1334" /></p>
+        alt="AccessDecisionManager2.png"
+        title="AccessDecisionManager2.png" /></p>
 <hr>
 <h3 id="请求g">请求/g</h3>
 <div class="highlight"><div class="chroma">
@@ -586,22 +583,22 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/learnspringsecurity/posts/learnspringsecurity/AccessDecisionManager.png"
-        data-srcset="/posts/learnspringsecurity/posts/learnspringsecurity/AccessDecisionManager.png, /posts/learnspringsecurity/posts/learnspringsecurity/AccessDecisionManager.png 1.5x, /posts/learnspringsecurity/posts/learnspringsecurity/AccessDecisionManager.png 2x"
+        data-src="AccessDecisionManager.png"
+        data-srcset="AccessDecisionManager.png, AccessDecisionManager.png 1.5x, AccessDecisionManager.png 2x"
         data-sizes="auto"
-        alt="/posts/learnspringsecurity/posts/learnspringsecurity/AccessDecisionManager.png"
-        title="/posts/learnspringsecurity/posts/learnspringsecurity/AccessDecisionManager.png" width="2280" height="1294" /></p>
+        alt="AccessDecisionManager.png"
+        title="AccessDecisionManager.png" /></p>
 <p>FilterSecurityInterceptor 和  MethodSecurityInterceptor都实现了AbstractSecurityInterceptor，AbstractSecurityInterceptor其实也设计了只执行一次的过滤逻辑</p>
 <hr>
 <h2 id="exceptiontranslationfilter">ExceptionTranslationFilter</h2>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/learnspringsecurity/posts/learnspringsecurity/ExceptionTranslationFilter.png"
-        data-srcset="/posts/learnspringsecurity/posts/learnspringsecurity/ExceptionTranslationFilter.png, /posts/learnspringsecurity/posts/learnspringsecurity/ExceptionTranslationFilter.png 1.5x, /posts/learnspringsecurity/posts/learnspringsecurity/ExceptionTranslationFilter.png 2x"
+        data-src="ExceptionTranslationFilter.png"
+        data-srcset="ExceptionTranslationFilter.png, ExceptionTranslationFilter.png 1.5x, ExceptionTranslationFilter.png 2x"
         data-sizes="auto"
-        alt="/posts/learnspringsecurity/posts/learnspringsecurity/ExceptionTranslationFilter.png"
-        title="/posts/learnspringsecurity/posts/learnspringsecurity/ExceptionTranslationFilter.png" width="1826" height="1376" /></p>
+        alt="ExceptionTranslationFilter.png"
+        title="ExceptionTranslationFilter.png" /></p>
 <p>ExceptionTranslationFilter作用：</p>
 <p>FilterSecurityInterceptor 是处理 do认证授权的地方</p>
 <p>处理 FilterSecurityInterceptor 抛出的异常；判断是认证异常，还是授权异常，分别进行处理。，也就是对 FilterSecurityInterceptor 认证授权的结果  进行最终处理.</p>
@@ -671,11 +668,11 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/learnspringsecurity/posts/learnspringsecurity/SecurityContextPersistenceFilter.png"
-        data-srcset="/posts/learnspringsecurity/posts/learnspringsecurity/SecurityContextPersistenceFilter.png, /posts/learnspringsecurity/posts/learnspringsecurity/SecurityContextPersistenceFilter.png 1.5x, /posts/learnspringsecurity/posts/learnspringsecurity/SecurityContextPersistenceFilter.png 2x"
+        data-src="SecurityContextPersistenceFilter.png"
+        data-srcset="SecurityContextPersistenceFilter.png, SecurityContextPersistenceFilter.png 1.5x, SecurityContextPersistenceFilter.png 2x"
         data-sizes="auto"
-        alt="/posts/learnspringsecurity/posts/learnspringsecurity/SecurityContextPersistenceFilter.png"
-        title="/posts/learnspringsecurity/posts/learnspringsecurity/SecurityContextPersistenceFilter.png" width="2580" height="1410" /></p>
+        alt="SecurityContextPersistenceFilter.png"
+        title="SecurityContextPersistenceFilter.png" /></p>
 <hr>
 <h2 id="preauthorizehasauthorityauthorityg-是怎么处理的">@PreAuthorize(&ldquo;hasAuthority(&lsquo;authorityg&rsquo;)&rdquo;) 是怎么处理的？</h2>
 <p>猜测：</p>
@@ -687,85 +684,85 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/learnspringsecurity/posts/learnspringsecurity/FilterSecurityInterceptor.png"
-        data-srcset="/posts/learnspringsecurity/posts/learnspringsecurity/FilterSecurityInterceptor.png, /posts/learnspringsecurity/posts/learnspringsecurity/FilterSecurityInterceptor.png 1.5x, /posts/learnspringsecurity/posts/learnspringsecurity/FilterSecurityInterceptor.png 2x"
+        data-src="FilterSecurityInterceptor.png"
+        data-srcset="FilterSecurityInterceptor.png, FilterSecurityInterceptor.png 1.5x, FilterSecurityInterceptor.png 2x"
         data-sizes="auto"
-        alt="/posts/learnspringsecurity/posts/learnspringsecurity/FilterSecurityInterceptor.png"
-        title="/posts/learnspringsecurity/posts/learnspringsecurity/FilterSecurityInterceptor.png" width="2142" height="1288" /></p>
+        alt="FilterSecurityInterceptor.png"
+        title="FilterSecurityInterceptor.png" /></p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/learnspringsecurity/posts/learnspringsecurity/MethodSecurityInterceptor.png"
-        data-srcset="/posts/learnspringsecurity/posts/learnspringsecurity/MethodSecurityInterceptor.png, /posts/learnspringsecurity/posts/learnspringsecurity/MethodSecurityInterceptor.png 1.5x, /posts/learnspringsecurity/posts/learnspringsecurity/MethodSecurityInterceptor.png 2x"
+        data-src="MethodSecurityInterceptor.png"
+        data-srcset="MethodSecurityInterceptor.png, MethodSecurityInterceptor.png 1.5x, MethodSecurityInterceptor.png 2x"
         data-sizes="auto"
-        alt="/posts/learnspringsecurity/posts/learnspringsecurity/MethodSecurityInterceptor.png"
-        title="/posts/learnspringsecurity/posts/learnspringsecurity/MethodSecurityInterceptor.png" width="2146" height="1480" /></p>
+        alt="MethodSecurityInterceptor.png"
+        title="MethodSecurityInterceptor.png" /></p>
 <hr>
 <h2 id="permissionevaluator-是什么">PermissionEvaluator 是什么？</h2>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/learnspringsecurity/posts/learnspringsecurity/PermissionEvaluator.png"
-        data-srcset="/posts/learnspringsecurity/posts/learnspringsecurity/PermissionEvaluator.png, /posts/learnspringsecurity/posts/learnspringsecurity/PermissionEvaluator.png 1.5x, /posts/learnspringsecurity/posts/learnspringsecurity/PermissionEvaluator.png 2x"
+        data-src="PermissionEvaluator.png"
+        data-srcset="PermissionEvaluator.png, PermissionEvaluator.png 1.5x, PermissionEvaluator.png 2x"
         data-sizes="auto"
-        alt="/posts/learnspringsecurity/posts/learnspringsecurity/PermissionEvaluator.png"
-        title="/posts/learnspringsecurity/posts/learnspringsecurity/PermissionEvaluator.png" width="2690" height="1390" /></p>
+        alt="PermissionEvaluator.png"
+        title="PermissionEvaluator.png" /></p>
 <p>PermissionEvaluator 还是在MethodSecurityInterceptor 中里被调用的。</p>
 <p>hasPermission()和   hasAuthority()相比较 ， hasPermission()是可以自定义实现判断规则， hasAuthority()只能用默认的实现</p>
 <p>根据SecurityExpressionRoot 中</p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/learnspringsecurity/posts/learnspringsecurity/SecurityExpressionRoot.png"
-        data-srcset="/posts/learnspringsecurity/posts/learnspringsecurity/SecurityExpressionRoot.png, /posts/learnspringsecurity/posts/learnspringsecurity/SecurityExpressionRoot.png 1.5x, /posts/learnspringsecurity/posts/learnspringsecurity/SecurityExpressionRoot.png 2x"
+        data-src="SecurityExpressionRoot.png"
+        data-srcset="SecurityExpressionRoot.png, SecurityExpressionRoot.png 1.5x, SecurityExpressionRoot.png 2x"
         data-sizes="auto"
-        alt="/posts/learnspringsecurity/posts/learnspringsecurity/SecurityExpressionRoot.png"
-        title="/posts/learnspringsecurity/posts/learnspringsecurity/SecurityExpressionRoot.png" width="2136" height="1324" /></p>
+        alt="SecurityExpressionRoot.png"
+        title="SecurityExpressionRoot.png" /></p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/learnspringsecurity/posts/learnspringsecurity/SecurityExpressionRoot2.png"
-        data-srcset="/posts/learnspringsecurity/posts/learnspringsecurity/SecurityExpressionRoot2.png, /posts/learnspringsecurity/posts/learnspringsecurity/SecurityExpressionRoot2.png 1.5x, /posts/learnspringsecurity/posts/learnspringsecurity/SecurityExpressionRoot2.png 2x"
+        data-src="SecurityExpressionRoot2.png"
+        data-srcset="SecurityExpressionRoot2.png, SecurityExpressionRoot2.png 1.5x, SecurityExpressionRoot2.png 2x"
         data-sizes="auto"
-        alt="/posts/learnspringsecurity/posts/learnspringsecurity/SecurityExpressionRoot2.png"
-        title="/posts/learnspringsecurity/posts/learnspringsecurity/SecurityExpressionRoot2.png" width="1770" height="1378" /></p>
+        alt="SecurityExpressionRoot2.png"
+        title="SecurityExpressionRoot2.png" /></p>
 <hr>
 <h2 id="如果usernamepasswordauthenticationfilter的userdetailsservice中验证失败抛出了自定义异常是怎么处理的">如果UsernamePasswordAuthenticationFilter的UserDetailsService中验证失败，抛出了自定义异常，是怎么处理的？</h2>
 <p>UserDetailService.loadUserByUsername 抛异常</p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/learnspringsecurity/posts/learnspringsecurity/loadUserByUsername.png"
-        data-srcset="/posts/learnspringsecurity/posts/learnspringsecurity/loadUserByUsername.png, /posts/learnspringsecurity/posts/learnspringsecurity/loadUserByUsername.png 1.5x, /posts/learnspringsecurity/posts/learnspringsecurity/loadUserByUsername.png 2x"
+        data-src="loadUserByUsername.png"
+        data-srcset="loadUserByUsername.png, loadUserByUsername.png 1.5x, loadUserByUsername.png 2x"
         data-sizes="auto"
-        alt="/posts/learnspringsecurity/posts/learnspringsecurity/loadUserByUsername.png"
-        title="/posts/learnspringsecurity/posts/learnspringsecurity/loadUserByUsername.png" width="1986" height="1208" /></p>
+        alt="loadUserByUsername.png"
+        title="loadUserByUsername.png" /></p>
 <p>并且 AuthenticationProvier 也不会处理异常，也只会继续抛异常</p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/learnspringsecurity/posts/learnspringsecurity/DaoAuthenticationProvider.png"
-        data-srcset="/posts/learnspringsecurity/posts/learnspringsecurity/DaoAuthenticationProvider.png, /posts/learnspringsecurity/posts/learnspringsecurity/DaoAuthenticationProvider.png 1.5x, /posts/learnspringsecurity/posts/learnspringsecurity/DaoAuthenticationProvider.png 2x"
+        data-src="DaoAuthenticationProvider.png"
+        data-srcset="DaoAuthenticationProvider.png, DaoAuthenticationProvider.png 1.5x, DaoAuthenticationProvider.png 2x"
         data-sizes="auto"
-        alt="/posts/learnspringsecurity/posts/learnspringsecurity/DaoAuthenticationProvider.png"
-        title="/posts/learnspringsecurity/posts/learnspringsecurity/DaoAuthenticationProvider.png" width="1868" height="1452" /></p>
+        alt="DaoAuthenticationProvider.png"
+        title="DaoAuthenticationProvider.png" /></p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/learnspringsecurity/posts/learnspringsecurity/ProviderManager.png"
-        data-srcset="/posts/learnspringsecurity/posts/learnspringsecurity/ProviderManager.png, /posts/learnspringsecurity/posts/learnspringsecurity/ProviderManager.png 1.5x, /posts/learnspringsecurity/posts/learnspringsecurity/ProviderManager.png 2x"
+        data-src="ProviderManager.png"
+        data-srcset="ProviderManager.png, ProviderManager.png 1.5x, ProviderManager.png 2x"
         data-sizes="auto"
-        alt="/posts/learnspringsecurity/posts/learnspringsecurity/ProviderManager.png"
-        title="/posts/learnspringsecurity/posts/learnspringsecurity/ProviderManager.png" width="2044" height="1386" /></p>
+        alt="ProviderManager.png"
+        title="ProviderManager.png" /></p>
 <p>直到 UsernamePasswordAuthenticationFilter中catch住，交给AuthenticationFailureHandler 处理。比如AuthenticationFailureHandler会重定向或者其他。</p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/learnspringsecurity/posts/learnspringsecurity/BasicAuthenticationFilter.png"
-        data-srcset="/posts/learnspringsecurity/posts/learnspringsecurity/BasicAuthenticationFilter.png, /posts/learnspringsecurity/posts/learnspringsecurity/BasicAuthenticationFilter.png 1.5x, /posts/learnspringsecurity/posts/learnspringsecurity/BasicAuthenticationFilter.png 2x"
+        data-src="BasicAuthenticationFilter.png"
+        data-srcset="BasicAuthenticationFilter.png, BasicAuthenticationFilter.png 1.5x, BasicAuthenticationFilter.png 2x"
         data-sizes="auto"
-        alt="/posts/learnspringsecurity/posts/learnspringsecurity/BasicAuthenticationFilter.png"
-        title="/posts/learnspringsecurity/posts/learnspringsecurity/BasicAuthenticationFilter.png" width="1586" height="1412" /></p>
+        alt="BasicAuthenticationFilter.png"
+        title="BasicAuthenticationFilter.png" /></p>
 <p>UsernamePasswordAuthenticationFilter</p>
 <p>doFilter()-&gt;attemptAuthentication()-&gt;</p>
 <p>AuthenticationManager</p>
@@ -784,11 +781,11 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/learnspringsecurity/posts/learnspringsecurity/AuthenticationEntryPoint.png"
-        data-srcset="/posts/learnspringsecurity/posts/learnspringsecurity/AuthenticationEntryPoint.png, /posts/learnspringsecurity/posts/learnspringsecurity/AuthenticationEntryPoint.png 1.5x, /posts/learnspringsecurity/posts/learnspringsecurity/AuthenticationEntryPoint.png 2x"
+        data-src="AuthenticationEntryPoint.png"
+        data-srcset="AuthenticationEntryPoint.png, AuthenticationEntryPoint.png 1.5x, AuthenticationEntryPoint.png 2x"
         data-sizes="auto"
-        alt="/posts/learnspringsecurity/posts/learnspringsecurity/AuthenticationEntryPoint.png"
-        title="/posts/learnspringsecurity/posts/learnspringsecurity/AuthenticationEntryPoint.png" width="2746" height="1480" /></p>
+        alt="AuthenticationEntryPoint.png"
+        title="AuthenticationEntryPoint.png" /></p>
 <hr>
 <h2 id="未登录的状态取访问需要登录的资源时是在哪里处理的">未登录的状态取访问需要登录的资源时，是在哪里处理的</h2>
 <p>还是在MethodSecurityInterceptor的attemptAuthorization 方法中，会返回 AccessDeniedException ，然后交给</p>
@@ -920,11 +917,11 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/learnspringsecurity/posts/learnspringsecurity/makeTokenSignature.png"
-        data-srcset="/posts/learnspringsecurity/posts/learnspringsecurity/makeTokenSignature.png, /posts/learnspringsecurity/posts/learnspringsecurity/makeTokenSignature.png 1.5x, /posts/learnspringsecurity/posts/learnspringsecurity/makeTokenSignature.png 2x"
+        data-src="makeTokenSignature.png"
+        data-srcset="makeTokenSignature.png, makeTokenSignature.png 1.5x, makeTokenSignature.png 2x"
         data-sizes="auto"
-        alt="/posts/learnspringsecurity/posts/learnspringsecurity/makeTokenSignature.png"
-        title="/posts/learnspringsecurity/posts/learnspringsecurity/makeTokenSignature.png" width="2664" height="1312" /></p>
+        alt="makeTokenSignature.png"
+        title="makeTokenSignature.png" /></p>
 </li>
 <li>
 <p>RememberMeAuthenticationFilter 发现如果session为空，但是session中的   remember-me属性不为空时，就再base64decode，</p>
@@ -934,40 +931,40 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/learnspringsecurity/posts/learnspringsecurity/RememberMeAuthenticationFilter.png"
-        data-srcset="/posts/learnspringsecurity/posts/learnspringsecurity/RememberMeAuthenticationFilter.png, /posts/learnspringsecurity/posts/learnspringsecurity/RememberMeAuthenticationFilter.png 1.5x, /posts/learnspringsecurity/posts/learnspringsecurity/RememberMeAuthenticationFilter.png 2x"
+        data-src="RememberMeAuthenticationFilter.png"
+        data-srcset="RememberMeAuthenticationFilter.png, RememberMeAuthenticationFilter.png 1.5x, RememberMeAuthenticationFilter.png 2x"
         data-sizes="auto"
-        alt="/posts/learnspringsecurity/posts/learnspringsecurity/RememberMeAuthenticationFilter.png"
-        title="/posts/learnspringsecurity/posts/learnspringsecurity/RememberMeAuthenticationFilter.png" width="1742" height="798" /></p>
+        alt="RememberMeAuthenticationFilter.png"
+        title="RememberMeAuthenticationFilter.png" /></p>
 <hr>
 <h2 id="访问a提示登录登陆成功后自动跳转到a页面是怎么实现的">访问/a，提示登录，登陆成功后，自动跳转到a页面是怎么实现的？</h2>
 <p>HttpSessionRequestCache 实现的 ，在session中存了上一次的request信息</p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/learnspringsecurity/posts/learnspringsecurity/HttpSessionRequestCache.png"
-        data-srcset="/posts/learnspringsecurity/posts/learnspringsecurity/HttpSessionRequestCache.png, /posts/learnspringsecurity/posts/learnspringsecurity/HttpSessionRequestCache.png 1.5x, /posts/learnspringsecurity/posts/learnspringsecurity/HttpSessionRequestCache.png 2x"
+        data-src="HttpSessionRequestCache.png"
+        data-srcset="HttpSessionRequestCache.png, HttpSessionRequestCache.png 1.5x, HttpSessionRequestCache.png 2x"
         data-sizes="auto"
-        alt="/posts/learnspringsecurity/posts/learnspringsecurity/HttpSessionRequestCache.png"
-        title="/posts/learnspringsecurity/posts/learnspringsecurity/HttpSessionRequestCache.png" width="1750" height="1358" /></p>
+        alt="HttpSessionRequestCache.png"
+        title="HttpSessionRequestCache.png" /></p>
 <h2 id="表单登录验证码登陆登陆成功后在哪里执行securitycontextholdergetcontextsetauthenticationauthresult">表单登录，验证码登陆，登陆成功后在哪里执行SecurityContextHolder.getContext().setAuthentication(authResult);</h2>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/learnspringsecurity/posts/learnspringsecurity/SecurityContextHolder.getContext%28%29.setAuthentication.png"
-        data-srcset="/posts/learnspringsecurity/posts/learnspringsecurity/SecurityContextHolder.getContext%28%29.setAuthentication.png, /posts/learnspringsecurity/posts/learnspringsecurity/SecurityContextHolder.getContext%28%29.setAuthentication.png 1.5x, /posts/learnspringsecurity/posts/learnspringsecurity/SecurityContextHolder.getContext%28%29.setAuthentication.png 2x"
+        data-src="SecurityContextHolder.getContext%28%29.setAuthentication.png"
+        data-srcset="SecurityContextHolder.getContext%28%29.setAuthentication.png, SecurityContextHolder.getContext%28%29.setAuthentication.png 1.5x, SecurityContextHolder.getContext%28%29.setAuthentication.png 2x"
         data-sizes="auto"
-        alt="/posts/learnspringsecurity/posts/learnspringsecurity/SecurityContextHolder.getContext().setAuthentication.png"
-        title="/posts/learnspringsecurity/posts/learnspringsecurity/SecurityContextHolder.getContext().setAuthentication.png" width="2752" height="1398" /></p>
+        alt="SecurityContextHolder.getContext().setAuthentication.png"
+        title="SecurityContextHolder.getContext().setAuthentication.png" /></p>
 <h2 id="tokenenhancer配置了后什么时候调用">TokenEnhancer配置了后什么时候调用</h2>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/learnspringsecurity/posts/learnspringsecurity/TokenEnhance.png"
-        data-srcset="/posts/learnspringsecurity/posts/learnspringsecurity/TokenEnhance.png, /posts/learnspringsecurity/posts/learnspringsecurity/TokenEnhance.png 1.5x, /posts/learnspringsecurity/posts/learnspringsecurity/TokenEnhance.png 2x"
+        data-src="TokenEnhance.png"
+        data-srcset="TokenEnhance.png, TokenEnhance.png 1.5x, TokenEnhance.png 2x"
         data-sizes="auto"
-        alt="/posts/learnspringsecurity/posts/learnspringsecurity/TokenEnhance.png"
-        title="/posts/learnspringsecurity/posts/learnspringsecurity/TokenEnhance.png" width="2772" height="1310" /></p>
+        alt="TokenEnhance.png"
+        title="TokenEnhance.png" /></p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
@@ -994,7 +991,7 @@
 </div>
 </article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.127.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.105.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
                 </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ricky</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>
