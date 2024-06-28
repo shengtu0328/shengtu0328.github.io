@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Spring_transaction - ricky的网站</title><meta name="Description" content="The best time to plant a tree was 10 years ago, the second is now"><meta property="og:title" content="Spring_transaction" />
+<meta property="og:description" content="1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://shengtu0328.github.io/posts/spring_transaction/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-06-26T14:04:56+08:00" />
+<meta property="article:modified_time" content="2024-06-26T14:04:56+08:00" /><meta property="og:site_name" content="我的网站" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Spring_transaction"/>
+<meta name="twitter:description" content="1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70"/>
+<meta name="application-name" content="我的网站">
+<meta name="apple-mobile-web-app-title" content="我的网站"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://shengtu0328.github.io/posts/spring_transaction/" /><link rel="prev" href="https://shengtu0328.github.io/posts/vue/" /><link rel="next" href="https://shengtu0328.github.io/posts/back_myth_wukong/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Spring_transaction",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/shengtu0328.github.io\/posts\/spring_transaction\/"
+        },"genre": "posts","wordcount":  611 ,
+        "url": "https:\/\/shengtu0328.github.io\/posts\/spring_transaction\/","datePublished": "2024-06-26T14:04:56+08:00","dateModified": "2024-06-26T14:04:56+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "ricky"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="ricky的网站">Ricky’s blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="ricky的网站">Ricky’s blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Spring_transaction</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a>
+</span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-26">2024-06-26</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;611 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
+            </div><div class="content" id="content"><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">TransactionAspectSupport.java
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">protected Object invokeWithinTransaction(Method method, @Nullable Class&lt;?&gt; targetClass,
+</span></span><span class="line"><span class="cl">			final InvocationCallback invocation) throws Throwable {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		// If the transaction attribute is null, the method is non-transactional.
+</span></span><span class="line"><span class="cl">		TransactionAttributeSource tas = getTransactionAttributeSource();
+</span></span><span class="line"><span class="cl">		final TransactionAttribute txAttr = (tas != null ? tas.getTransactionAttribute(method, targetClass) : null);
+</span></span><span class="line"><span class="cl">		final TransactionManager tm = determineTransactionManager(txAttr);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		if (this.reactiveAdapterRegistry != null &amp;&amp; tm instanceof ReactiveTransactionManager) {
+</span></span><span class="line"><span class="cl">			ReactiveTransactionSupport txSupport = this.transactionSupportCache.computeIfAbsent(method, key -&gt; {
+</span></span><span class="line"><span class="cl">				if (KotlinDetector.isKotlinType(method.getDeclaringClass()) &amp;&amp; KotlinDelegate.isSuspend(method)) {
+</span></span><span class="line"><span class="cl">					throw new TransactionUsageException(
+</span></span><span class="line"><span class="cl">							&#34;Unsupported annotated transaction on suspending function detected: &#34; + method +
+</span></span><span class="line"><span class="cl">							&#34;. Use TransactionalOperator.transactional extensions instead.&#34;);
+</span></span><span class="line"><span class="cl">				}
+</span></span><span class="line"><span class="cl">				ReactiveAdapter adapter = this.reactiveAdapterRegistry.getAdapter(method.getReturnType());
+</span></span><span class="line"><span class="cl">				if (adapter == null) {
+</span></span><span class="line"><span class="cl">					throw new IllegalStateException(&#34;Cannot apply reactive transaction to non-reactive return type: &#34; +
+</span></span><span class="line"><span class="cl">							method.getReturnType());
+</span></span><span class="line"><span class="cl">				}
+</span></span><span class="line"><span class="cl">				return new ReactiveTransactionSupport(adapter);
+</span></span><span class="line"><span class="cl">			});
+</span></span><span class="line"><span class="cl">			return txSupport.invokeWithinTransaction(
+</span></span><span class="line"><span class="cl">					method, targetClass, invocation, txAttr, (ReactiveTransactionManager) tm);
+</span></span><span class="line"><span class="cl">		}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		PlatformTransactionManager ptm = asPlatformTransactionManager(tm);
+</span></span><span class="line"><span class="cl">		final String joinpointIdentification = methodIdentification(method, targetClass, txAttr);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		if (txAttr == null || !(ptm instanceof CallbackPreferringPlatformTransactionManager)) {
+</span></span><span class="line"><span class="cl">			// Standard transaction demarcation with getTransaction and commit/rollback calls.        
+</span></span><span class="line"><span class="cl">			//============开启事务 dobegin
+</span></span><span class="line"><span class="cl">			TransactionInfo txInfo = createTransactionIfNecessary(ptm, txAttr, joinpointIdentification);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">			Object retVal;
+</span></span><span class="line"><span class="cl">			try {
+</span></span><span class="line"><span class="cl">				// This is an around advice: Invoke the next interceptor in the chain.
+</span></span><span class="line"><span class="cl">				// This will normally result in a target object being invoked.
+</span></span><span class="line"><span class="cl">				retVal = invocation.proceedWithInvocation();
+</span></span><span class="line"><span class="cl">			}
+</span></span><span class="line"><span class="cl">			catch (Throwable ex) {
+</span></span><span class="line"><span class="cl">				// target invocation exception
+</span></span><span class="line"><span class="cl">				completeTransactionAfterThrowing(txInfo, ex);
+</span></span><span class="line"><span class="cl">				throw ex;
+</span></span><span class="line"><span class="cl">			}
+</span></span><span class="line"><span class="cl">			finally {
+</span></span><span class="line"><span class="cl">				cleanupTransactionInfo(txInfo);
+</span></span><span class="line"><span class="cl">			}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">			if (retVal != null &amp;&amp; vavrPresent &amp;&amp; VavrDelegate.isVavrTry(retVal)) {
+</span></span><span class="line"><span class="cl">				// Set rollback-only in case of Vavr failure matching our rollback rules...
+</span></span><span class="line"><span class="cl">				TransactionStatus status = txInfo.getTransactionStatus();
+</span></span><span class="line"><span class="cl">				if (status != null &amp;&amp; txAttr != null) {
+</span></span><span class="line"><span class="cl">					retVal = VavrDelegate.evaluateTryFailure(retVal, txAttr, status);
+</span></span><span class="line"><span class="cl">				}
+</span></span><span class="line"><span class="cl">			}
+</span></span><span class="line"><span class="cl">              //============提交事务 doCommit
+</span></span><span class="line"><span class="cl">			commitTransactionAfterReturning(txInfo);
+</span></span><span class="line"><span class="cl">			return retVal;
+</span></span><span class="line"><span class="cl">		}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		else {
+</span></span><span class="line"><span class="cl">			Object result;
+</span></span><span class="line"><span class="cl">			final ThrowableHolder throwableHolder = new ThrowableHolder();
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">			// It&#39;s a CallbackPreferringPlatformTransactionManager: pass a TransactionCallback in.
+</span></span><span class="line"><span class="cl">			try {
+</span></span><span class="line"><span class="cl">				result = ((CallbackPreferringPlatformTransactionManager) ptm).execute(txAttr, status -&gt; {
+</span></span><span class="line"><span class="cl">					TransactionInfo txInfo = prepareTransactionInfo(ptm, txAttr, joinpointIdentification, status);
+</span></span><span class="line"><span class="cl">					try {
+</span></span><span class="line"><span class="cl">						Object retVal = invocation.proceedWithInvocation();
+</span></span><span class="line"><span class="cl">						if (retVal != null &amp;&amp; vavrPresent &amp;&amp; VavrDelegate.isVavrTry(retVal)) {
+</span></span><span class="line"><span class="cl">							// Set rollback-only in case of Vavr failure matching our rollback rules...
+</span></span><span class="line"><span class="cl">							retVal = VavrDelegate.evaluateTryFailure(retVal, txAttr, status);
+</span></span><span class="line"><span class="cl">						}
+</span></span><span class="line"><span class="cl">						return retVal;
+</span></span><span class="line"><span class="cl">					}
+</span></span><span class="line"><span class="cl">					catch (Throwable ex) {
+</span></span><span class="line"><span class="cl">						if (txAttr.rollbackOn(ex)) {
+</span></span><span class="line"><span class="cl">							// A RuntimeException: will lead to a rollback.
+</span></span><span class="line"><span class="cl">							if (ex instanceof RuntimeException) {
+</span></span><span class="line"><span class="cl">								throw (RuntimeException) ex;
+</span></span><span class="line"><span class="cl">							}
+</span></span><span class="line"><span class="cl">							else {
+</span></span><span class="line"><span class="cl">								throw new ThrowableHolderException(ex);
+</span></span><span class="line"><span class="cl">							}
+</span></span><span class="line"><span class="cl">						}
+</span></span><span class="line"><span class="cl">						else {
+</span></span><span class="line"><span class="cl">							// A normal return value: will lead to a commit.
+</span></span><span class="line"><span class="cl">							throwableHolder.throwable = ex;
+</span></span><span class="line"><span class="cl">							return null;
+</span></span><span class="line"><span class="cl">						}
+</span></span><span class="line"><span class="cl">					}
+</span></span><span class="line"><span class="cl">					finally {
+</span></span><span class="line"><span class="cl">						cleanupTransactionInfo(txInfo);
+</span></span><span class="line"><span class="cl">					}
+</span></span><span class="line"><span class="cl">				});
+</span></span><span class="line"><span class="cl">			}
+</span></span><span class="line"><span class="cl">			catch (ThrowableHolderException ex) {
+</span></span><span class="line"><span class="cl">				throw ex.getCause();
+</span></span><span class="line"><span class="cl">			}
+</span></span><span class="line"><span class="cl">			catch (TransactionSystemException ex2) {
+</span></span><span class="line"><span class="cl">				if (throwableHolder.throwable != null) {
+</span></span><span class="line"><span class="cl">					logger.error(&#34;Application exception overridden by commit exception&#34;, throwableHolder.throwable);
+</span></span><span class="line"><span class="cl">					ex2.initApplicationException(throwableHolder.throwable);
+</span></span><span class="line"><span class="cl">				}
+</span></span><span class="line"><span class="cl">				throw ex2;
+</span></span><span class="line"><span class="cl">			}
+</span></span><span class="line"><span class="cl">			catch (Throwable ex2) {
+</span></span><span class="line"><span class="cl">				if (throwableHolder.throwable != null) {
+</span></span><span class="line"><span class="cl">					logger.error(&#34;Application exception overridden by commit exception&#34;, throwableHolder.throwable);
+</span></span><span class="line"><span class="cl">				}
+</span></span><span class="line"><span class="cl">				throw ex2;
+</span></span><span class="line"><span class="cl">			}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">			// Check result state: It might indicate a Throwable to rethrow.
+</span></span><span class="line"><span class="cl">			if (throwableHolder.throwable != null) {
+</span></span><span class="line"><span class="cl">				throw throwableHolder.throwable;
+</span></span><span class="line"><span class="cl">			}
+</span></span><span class="line"><span class="cl">			return result;
+</span></span><span class="line"><span class="cl">		}
+</span></span><span class="line"><span class="cl">	}
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2024-06-26</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://shengtu0328.github.io/posts/spring_transaction/" data-title="Spring_transaction"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://shengtu0328.github.io/posts/spring_transaction/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://shengtu0328.github.io/posts/spring_transaction/" data-title="Spring_transaction"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://shengtu0328.github.io/posts/spring_transaction/" data-title="Spring_transaction"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@6.20.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://shengtu0328.github.io/posts/spring_transaction/" data-title="Spring_transaction"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/vue/" class="prev" rel="prev" title="Vue"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Vue</a>
+            <a href="/posts/back_myth_wukong/" class="next" rel="next" title="Back_myth_wukong">Back_myth_wukong<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.105.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ricky</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.1/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
