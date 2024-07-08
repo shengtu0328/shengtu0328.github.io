@@ -26,7 +26,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/shengtu0328.github.io\/posts\/mysql_lock\/"
-        },"genre": "posts","wordcount":  5040 ,
+        },"genre": "posts","wordcount":  5057 ,
         "url": "https:\/\/shengtu0328.github.io\/posts\/mysql_lock\/","datePublished": "2024-06-17T09:32:16+08:00","dateModified": "2024-06-17T09:32:16+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -102,7 +102,7 @@
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Mysql_lock</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ricky</a>
 </span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-17">2024-06-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;5040 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-17">2024-06-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;5057 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;11 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -224,12 +224,18 @@
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">-- mysql连接语句 用了mysql8数据库
 </span></span><span class="line"><span class="cl">mysql -uroot –proot wifi 
 </span></span><span class="line"><span class="cl">mysql -h 127.0.0.1 -P 3308 -uroot –proot wifi 
 </span></span><span class="line"><span class="cl">mysql -h 10.18.5.103 -P 3306 -uroot –pG3H8HnwHmA wifi 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">mysql -h 127.0.0.1 -P 3308 -uroot –proot testbase
 </span></span></code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
@@ -246,7 +252,7 @@
 </span></span><span class="line"><span class="cl">select object_schema,object_name,index_name,lock_type,lock_mode,lock_data from
 </span></span><span class="line"><span class="cl">performance_schema.data_locks;
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">--mysql5
+</span></span><span class="line"><span class="cl">-- mysql5
 </span></span><span class="line"><span class="cl">select * from information_schema.innodb_locks;
 </span></span></code></pre></td></tr></table>
 </div>
